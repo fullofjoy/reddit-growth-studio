@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PaceBowl Reddit Studio - Karma Acceleration, Viral One-Liners & AutoMod Radar</title>
+  <meta name="description" content="All-in-one Reddit growth studio for indie hackers & creators. 15-word viral one-liner engine, AutoMod risk radar, karma farming roadmap, and subreddit directory.">
+  <meta name="keywords" content="reddit karma, reddit growth tool, reddit marketing, automod bypass, viral reddit comments, one liner generator, indie hackers reddit, pacebowl">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="https://reddit.pacebowl.com/">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="alternate icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <!-- Umami Analytics -->
+  <script defer src="https://umami-ruby-alpha-96.vercel.app/script.js" data-website-id="260de255-2ac2-4a9b-a17d-e4aec78f9ab1"></script>
+
+  <!-- OpenGEO (GeoTrace) -->
+  <script defer data-domain="pacebowl.com" data-api="https://geo.pacebowl.com/api" src="https://geo.pacebowl.com/geo.js"></script>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            reddit: {
+              orange: '#FF4500',
+              hover: '#FF5722',
+              dark: '#CC3700',
+              light: '#FFF0EB'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Theme FOUC & Cross-Subdomain Cookie Sync -->
+  <script>
+    (function() {
+      function getSharedCookie(name) {
+        var m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+        return m ? decodeURIComponent(m[1]) : null;
+      }
+      var savedTheme = getSharedCookie('pacebowl-theme') || localStorage.getItem('pacebowl-theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (savedTheme === 'light') {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.add('light');
+      } else {
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('light');
+      }
+    })();
+  </script>
+
+  <style>
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.8; }
+    }
+    .animate-pulse-glow { animation: pulseGlow 3s infinite ease-in-out; }
+    /* Custom Scrollbars */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.2); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(148, 163, 184, 0.4); }
+  </style>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "PaceBowl Reddit Growth Studio",
+    "url": "https://reddit.pacebowl.com/",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "All",
+    "description": "Zero-friction Reddit growth platform for indie hackers and developers. Featuring viral 15-word comment engine, real-time AutoMod spam radar, and curated subreddit matrix.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "PaceBowl Studio",
+      "url": "https://pacebowl.com/"
+    }
+  }
+  </script>
+</head>
+<body class="bg-slate-50 dark:bg-[#07090e] text-slate-800 dark:text-slate-200 min-h-screen flex flex-col font-sans transition-colors duration-200">
+
+  <!-- TOP GLOBAL HEADER -->
+  <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-[#07090e]/80 border-b border-slate-200 dark:border-slate-800/80 transition-colors">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
+      
+      <!-- Brand & Title -->
+      <div class="flex items-center space-x-3">
+        <a href="https://pacebowl.com" class="flex items-center space-x-2 text-xs font-semibold text-slate-500 hover:text-slate-900 dark:hover:text-white transition">
+          <span class="w-2 h-2 rounded-full bg-reddit-orange"></span>
+          <span>PaceBowl</span>
+        </a>
+        <span class="text-slate-300 dark:text-slate-700">/</span>
+        <div class="flex items-center space-x-2">
+          <div class="w-7 h-7 rounded-lg bg-gradient-to-tr from-reddit-orange to-amber-500 flex items-center justify-center text-white shadow-sm shadow-reddit-orange/30">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 5.52 4.48 10 10 10s10-4.48 10-10c0-5.52-4.48-10-10-10zm5.02 12.87c-.52.52-1.25.79-2.02.79-.76 0-1.5-.27-2.02-.79-.1-.1-.1-.26 0-.35.1-.1.26-.1.35 0 .43.43 1.05.65 1.67.65.62 0 1.24-.22 1.67-.65.1-.1.26-.1.35 0 .1.09.1.25 0 .35zm.98-4.37c-.55 0-1 .45-1 1 0 .28.11.53.29.71-.53.71-1.38 1.18-2.34 1.27l.52-2.46 1.7.36c.03.48.43.86.93.86.55 0 1-.45 1-1s-.45-1-1-1c-.42 0-.78.26-.92.64l-1.92-.41c-.08-.02-.16.03-.18.11l-.61 2.87c-1.12-.04-2.12-.55-2.73-1.34.18-.18.29-.43.29-.71 0-.55-.45-1-1-1s-1 .45-1 1c0 .35.18.65.45.83-.03.16-.05.33-.05.5 0 2.21 2.69 4 6 4s6-1.79 6-4c0-.17-.02-.34-.05-.5.27-.18.45-.48.45-.83 0-.55-.45-1-1-1z"/></svg>
+          </div>
+          <span class="font-bold text-sm tracking-tight text-slate-900 dark:text-white">Reddit <span class="text-reddit-orange font-mono text-xs px-1.5 py-0.5 rounded bg-reddit-orange/10 border border-reddit-orange/20">Studio</span></span>
+        </div>
+      </div>
+
+      <!-- Navigation & Controls -->
+      <div class="flex items-center space-x-2 sm:space-x-3">
+        <!-- Quick Nav to PaceBowl Suite -->
+        <div class="relative group">
+          <button class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-reddit-orange/40 text-xs text-slate-700 dark:text-slate-300 transition">
+            <span class="w-1.5 h-1.5 rounded-full bg-reddit-orange"></span>
+            <span class="font-medium hidden sm:inline" data-i18n="suite_btn">PaceBowl Suite</span>
+            <span class="font-medium sm:hidden">Suite</span>
+            <svg class="w-3.5 h-3.5 text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white transition transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="hidden group-hover:block absolute right-0 mt-1 w-64 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-2xl p-2 z-50">
+            <div class="text-[10px] font-mono uppercase tracking-wider text-slate-400 px-2 py-1" data-i18n="suite_title">PaceBowl Ecosystem</div>
+            <a href="https://pacebowl.com" class="flex items-center gap-2.5 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-xs text-slate-700 dark:text-slate-200 transition">
+              <span class="w-6 h-6 rounded bg-gradient-to-tr from-sky-500 to-indigo-600 flex items-center justify-center text-[10px] font-bold text-white">PB</span>
+              <div>
+                <div class="font-bold">PaceBowl Mothership</div>
+                <div class="text-[10px] text-slate-500">Central Hub & Tools</div>
+              </div>
+            </a>
+            <a href="https://deepseek.pacebowl.com" class="flex items-center gap-2.5 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-xs text-slate-700 dark:text-slate-200 transition mt-1">
+              <span class="w-6 h-6 rounded bg-sky-600 flex items-center justify-center text-[10px] font-bold text-white">DS</span>
+              <div>
+                <div class="font-bold">DeepSeek Studio</div>
+                <div class="text-[10px] text-slate-500">277+ Agents & R1 CoT</div>
+              </div>
+            </a>
+            <a href="https://cursor.pacebowl.com" class="flex items-center gap-2.5 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-xs text-slate-700 dark:text-slate-200 transition mt-1">
+              <span class="w-6 h-6 rounded bg-indigo-600 flex items-center justify-center text-[10px] font-bold text-white">CR</span>
+              <div>
+                <div class="font-bold">Cursor Rules Studio</div>
+                <div class="text-[10px] text-slate-500">Modular .mdc Generator</div>
+              </div>
+            </a>
+            <a href="https://comfy.pacebowl.com" class="flex items-center gap-2.5 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-xs text-slate-700 dark:text-slate-200 transition mt-1">
+              <span class="w-6 h-6 rounded bg-purple-600 flex items-center justify-center text-[10px] font-bold text-white">CF</span>
+              <div>
+                <div class="font-bold">ComfyUI Latent Studio</div>
+                <div class="text-[10px] text-slate-500">Aspect Ratio & Prompts</div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Language Switcher -->
+        <button id="lang-btn" onclick="toggleLanguage()" class="px-2.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-reddit-orange/40 text-xs text-slate-700 dark:text-slate-300 font-mono font-semibold transition" title="Toggle English / 中文">
+          <span id="lang-label">EN</span>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button id="theme-btn" onclick="toggleTheme()" class="p-1.5 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-reddit-orange/40 text-slate-700 dark:text-slate-300 transition" title="Toggle Theme">
+          <svg id="theme-sun" class="w-4 h-4 hidden text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 9h-1m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+          <svg id="theme-moon" class="w-4 h-4 text-slate-600 dark:text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+        </button>
+
+        <!-- GitHub Repo Link -->
+        <a href="https://github.com/fullofjoy/reddit-growth-studio" target="_blank" rel="noopener" class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-slate-400 text-xs font-semibold text-slate-700 dark:text-slate-300 transition">
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          <span>Star</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="relative overflow-hidden pt-8 pb-6 px-4 sm:px-6">
+    <div class="max-w-4xl mx-auto text-center relative z-10">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-reddit-orange/10 border border-reddit-orange/20 text-reddit-orange text-xs font-semibold mb-4">
+        <span>👾</span>
+        <span data-i18n="hero_badge">Reddit 极速起号与截流黑客工坊</span>
+        <span class="w-1.5 h-1.5 rounded-full bg-reddit-orange animate-ping"></span>
+      </div>
+      <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-3" data-i18n="hero_title">
+        征服 Reddit 算法：15 词单行神评与防吞风控雷达
+      </h1>
+      <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed" data-i18n="hero_desc">
+        为独立开发者与出海创作者量身定制。告别 AI 废话与长篇大论，用原生冷面幽默破冰起号，精准规避 AutoMod 封杀，将社区流量转化为真实用户。
+      </p>
+    </div>
+  </section>
+
+  <!-- TAB NAVIGATION -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 mb-6">
+    <div class="flex items-center justify-center p-1.5 bg-slate-200/70 dark:bg-slate-900/90 backdrop-blur rounded-2xl border border-slate-300/50 dark:border-slate-800 max-w-3xl mx-auto overflow-x-auto gap-1">
+      <button onclick="switchTab('viral')" id="tab-btn-viral" class="flex-1 py-2 px-3 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 bg-white dark:bg-slate-800 text-reddit-orange shadow-sm">
+        <span>🔥</span>
+        <span data-i18n="tab_viral">单行神评生成</span>
+      </button>
+      <button onclick="switchTab('radar')" id="tab-btn-radar" class="flex-1 py-2 px-3 rounded-xl text-xs font-semibold transition flex items-center justify-center gap-1.5 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">
+        <span>🛡️</span>
+        <span data-i18n="tab_radar">AutoMod 风控雷达</span>
+      </button>
+      <button onclick="switchTab('subreddits')" id="tab-btn-subreddits" class="flex-1 py-2 px-3 rounded-xl text-xs font-semibold transition flex items-center justify-center gap-1.5 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">
+        <span>🧭</span>
+        <span data-i18n="tab_subreddits">版块起号图谱</span>
+      </button>
+      <button onclick="switchTab('titles')" id="tab-btn-titles" class="flex-1 py-2 px-3 rounded-xl text-xs font-semibold transition flex items-center justify-center gap-1.5 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">
+        <span>🎯</span>
+        <span data-i18n="tab_titles">发帖标题工坊</span>
+      </button>
+      <button onclick="switchTab('playbook')" id="tab-btn-playbook" class="flex-1 py-2 px-3 rounded-xl text-xs font-semibold transition flex items-center justify-center gap-1.5 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">
+        <span>📈</span>
+        <span data-i18n="tab_playbook">截流出海心法</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- MAIN INTERACTIVE CONTAINER -->
+  <main class="flex-1 max-w-6xl mx-auto px-4 sm:px-6 w-full pb-16">
+
+    <!-- 1. VIRAL ONE-LINER ENGINE -->
+    <section id="panel-viral" class="space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Left: Input & Prompt Config -->
+        <div class="lg:col-span-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-lg space-y-4">
+          <div class="flex items-center justify-between">
+            <h2 class="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-reddit-orange"></span>
+              <span data-i18n="viral_input_title">目标 Reddit 帖子 / 提问</span>
+            </h2>
+            <span class="text-[11px] font-mono text-emerald-500 bg-emerald-500/10 px-2 py-0.5 rounded-full" data-i18n="rule_15words">严格 &le; 15 词约束</span>
+          </div>
+
+          <!-- Quick Scenario Presets -->
+          <div>
+            <div class="text-[11px] text-slate-500 mb-1.5" data-i18n="lbl_scenarios">一键填入常见高流量场景：</div>
+            <div class="flex flex-wrap gap-1.5">
+              <button onclick="loadScenario('cheating')" class="text-[11px] px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition">💔 出轨应对</button>
+              <button onclick="loadScenario('music')" class="text-[11px] px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition">🎧 8D 音乐</button>
+              <button onclick="loadScenario('pretend')" class="text-[11px] px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition">💼 装作懂但不懂</button>
+              <button onclick="loadScenario('ai')" class="text-[11px] px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition">🤖 AI 替代程序员</button>
+              <button onclick="loadScenario('under50')" class="text-[11px] px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition">💰 50刀超值小物</button>
+            </div>
+          </div>
+
+          <!-- Topic Input -->
+          <div>
+            <textarea id="viral-topic-input" rows="3" placeholder="例如：What will you do if your partner cheat on you?" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-xs font-mono text-slate-800 dark:text-slate-200 focus:outline-none focus:border-reddit-orange transition resize-none"></textarea>
+          </div>
+
+          <!-- Primary Style Selection -->
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-600 dark:text-slate-400 mb-1.5" data-i18n="lbl_select_style">选择神评风格流派：</label>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+              <button onclick="selectStyle('all')" id="style-btn-all" class="p-2 rounded-xl border border-reddit-orange/50 bg-reddit-orange/10 text-reddit-orange font-bold text-xs text-center transition">✨ 全部 5 种流派</button>
+              <button onclick="selectStyle('deadpan')" id="style-btn-deadpan" class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs text-center transition">🕶️ 冷面毒舌</button>
+              <button onclick="selectStyle('self_dep')" id="style-btn-self_dep" class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs text-center transition">🤡 自嘲反讽</button>
+              <button onclick="selectStyle('mic_drop')" id="style-btn-mic_drop" class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs text-center transition">⚡ 干净利落</button>
+              <button onclick="selectStyle('truth')" id="style-btn-truth" class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs text-center transition">🧠 人间清醒</button>
+              <button onclick="selectStyle('hacker')" id="style-btn-hacker" class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs text-center transition">🛠️ 极客直给</button>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex items-center gap-2 pt-2">
+            <button onclick="generateViralComments()" class="flex-1 py-2.5 px-4 rounded-xl bg-gradient-to-r from-reddit-orange to-amber-500 hover:from-reddit-hover hover:to-amber-600 text-white font-bold text-xs shadow-md shadow-reddit-orange/20 transition flex items-center justify-center gap-2">
+              <span>🚀</span>
+              <span data-i18n="btn_generate_viral">生成地道单行神评</span>
+            </button>
+            <button onclick="copyDeepSeekPromptForReddit()" class="py-2.5 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 transition flex items-center gap-1.5" title="Copy DeepSeek R1 Prompt">
+              <span>🧠</span>
+              <span data-i18n="btn_copy_ds_prompt">复制 DeepSeek 提示词</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right: Generated Candidate Cards -->
+        <div class="lg:col-span-6 space-y-3">
+          <div class="flex items-center justify-between px-1">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+              <span data-i18n="candidates_title">高赞神评候选列表 (点击即复制)</span>
+            </h3>
+            <span class="text-[11px] text-slate-400 font-mono" id="results-count">5 Candidates</span>
+          </div>
+
+          <!-- Result Cards Container -->
+          <div id="viral-results-container" class="space-y-2.5">
+            <!-- Initial placeholder rendered by JS -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 2. AUTOMOD SPAM RISK RADAR -->
+    <section id="panel-radar" class="hidden space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Left: Input Area -->
+        <div class="lg:col-span-7 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-lg space-y-4">
+          <div class="flex items-center justify-between">
+            <h2 class="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>
+              <span data-i18n="radar_input_title">待发评论 / 发帖正文风控实时体检</span>
+            </h2>
+            <button onclick="loadRadarSample()" class="text-[11px] text-reddit-orange hover:underline" data-i18n="btn_test_sample">载入被吞测试样本</button>
+          </div>
+
+          <textarea id="radar-input" rows="6" oninput="analyzeRadarText()" placeholder="粘贴你准备发在 Reddit 上的英文评论或帖子草稿。雷达将实时扫描链接、营销词、字符长度与风控风险..." class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-xs font-mono text-slate-800 dark:text-slate-200 focus:outline-none focus:border-indigo-500 transition"></textarea>
+
+          <div class="flex items-center justify-between text-[11px] text-slate-500 font-mono">
+            <span id="radar-stats">0 words • 0 characters</span>
+            <span class="text-slate-400" data-i18n="radar_realtime_tip">⚡ 实时启发式扫描，零数据上传</span>
+          </div>
+        </div>
+
+        <!-- Right: Radar Health Score & Diagnostics -->
+        <div class="lg:col-span-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-lg flex flex-col justify-between space-y-4">
+          <div>
+            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 mb-3" data-i18n="radar_score_title">
+              AutoMod 存活率预测
+            </h3>
+
+            <!-- Gauge Meter -->
+            <div class="flex items-center gap-4 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 mb-4">
+              <div id="radar-score-badge" class="w-16 h-16 rounded-2xl bg-emerald-500/10 border-2 border-emerald-500 flex flex-col items-center justify-center font-mono">
+                <span id="radar-score-num" class="text-2xl font-black text-emerald-500">100</span>
+                <span class="text-[9px] text-emerald-500 uppercase font-bold">Health</span>
+              </div>
+              <div>
+                <div id="radar-status-text" class="font-bold text-sm text-emerald-500">🟢 极度安全 (Safe to Post)</div>
+                <div id="radar-status-sub" class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">未检出任何外链或商业推销敏感词，符合原生网民行为特征。</div>
+              </div>
+            </div>
+
+            <!-- Issues Checklist -->
+            <div class="space-y-2 text-xs">
+              <div class="font-semibold text-slate-700 dark:text-slate-300" data-i18n="radar_diagnostics">诊断与避坑建议：</div>
+              <ul id="radar-issues-list" class="space-y-1.5 text-[11px]">
+                <li class="flex items-center gap-2 text-emerald-600 dark:text-emerald-400">
+                  <span>✓</span>
+                  <span>零外部裸链接：已避开新号 100% 触发的防垃圾拦截</span>
+                </li>
+                <li class="flex items-center gap-2 text-emerald-600 dark:text-emerald-400">
+                  <span>✓</span>
+                  <span>无推销词汇：未触发商业自荐关键词</span>
+                </li>
+                <li class="flex items-center gap-2 text-emerald-600 dark:text-emerald-400">
+                  <span>✓</span>
+                  <span>单行精炼度良好：适合移动端快速阅读</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Golden Rule Reminder -->
+          <div class="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-700 dark:text-amber-400 text-[11px] leading-relaxed">
+            <span class="font-bold">⚠️ Reddit 铁律：</span>当 Karma &lt; 100 时，若需引流，必须引导看个人主页侧边栏（Social Links），正文内发外链必定秒删！
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 3. SUBREDDIT MATRIX DIRECTORY -->
+    <section id="panel-subreddits" class="hidden space-y-6">
+      <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-lg space-y-5">
+        
+        <!-- Controls & Filters -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <h2 class="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span>
+              <span data-i18n="subreddits_title">精选起号与出海版块导航矩阵</span>
+            </h2>
+            <p class="text-[11px] text-slate-500 mt-0.5" data-i18n="subreddits_desc">分阶段精细化运营，在对的版块做对的事</p>
+          </div>
+
+          <!-- Tier Buttons -->
+          <div class="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0">
+            <button onclick="filterSubreddits('all')" id="sub-filter-all" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-reddit-orange text-white transition">全部</button>
+            <button onclick="filterSubreddits('tier0')" id="sub-filter-tier0" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 transition">🐣 0~50 破冰</button>
+            <button onclick="filterSubreddits('tier1')" id="sub-filter-tier1" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 transition">🚀 50~200 技术</button>
+            <button onclick="filterSubreddits('tier2')" id="sub-filter-tier2" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 transition">💎 200+ 引流</button>
+          </div>
+        </div>
+
+        <!-- Cards Grid -->
+        <div id="subreddits-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
+          <!-- Populated by JS -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 4. INDIE SHOWCASE TITLE CRAFTER -->
+    <section id="panel-titles" class="hidden space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Left: Tool Inputs -->
+        <div class="lg:col-span-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-lg space-y-4">
+          <h2 class="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-teal-500"></span>
+            <span data-i18n="title_crafter_title">独立项目参数设定</span>
+          </h2>
+
+          <div class="space-y-3 text-xs">
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-600 dark:text-slate-400 mb-1" data-i18n="lbl_tool_name">产品/工具名称：</label>
+              <input type="text" id="title-tool-name" value="DeepSeek Prompt Studio" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 font-mono text-xs">
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-600 dark:text-slate-400 mb-1" data-i18n="lbl_tool_pain">解决的核心痛点：</label>
+              <input type="text" id="title-tool-pain" value="bloated prompt engineering tools with server queues, logins, and fees" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 font-mono text-xs">
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-600 dark:text-slate-400 mb-1" data-i18n="lbl_tool_usp">核心卖点与亮点：</label>
+              <input type="text" id="title-tool-usp" value="100% client-side, 277 curated agent personas, zero telemetry, MIT open source" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 font-mono text-xs">
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-600 dark:text-slate-400 mb-1" data-i18n="lbl_target_sub">目标发布版块：</label>
+              <select id="title-target-sub" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 font-mono text-xs">
+                <option value="r/SideProject">r/SideProject (最友好的自荐版块)</option>
+                <option value="r/indiehackers">r/indiehackers (独立开发与变现)</option>
+                <option value="r/webdev">r/webdev (技术实现与架构)</option>
+                <option value="r/ChatGPT">r/ChatGPT (AI 用户泛流量)</option>
+                <option value="r/Cursor">r/Cursor (AI 代码开发者)</option>
+              </select>
+            </div>
+
+            <button onclick="generateShowcaseTitles()" class="w-full py-2.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs shadow-md transition flex items-center justify-center gap-1.5 mt-2">
+              <span>🎯</span>
+              <span data-i18n="btn_generate_titles">生成 6 组爆款发帖标题与正文模板</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right: Generated Titles & Post Template -->
+        <div class="lg:col-span-7 space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+              <span data-i18n="generated_titles_heading">高转化发帖标题与安全正文模板</span>
+            </h3>
+            <span class="text-[11px] text-slate-400 font-mono">Click to Copy</span>
+          </div>
+
+          <div id="titles-results-container" class="space-y-3">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 5. PLAYBOOK & MINDSET -->
+    <section id="panel-playbook" class="hidden space-y-6">
+      <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-lg space-y-6 max-w-4xl mx-auto">
+        <div>
+          <span class="text-reddit-orange font-mono text-xs font-bold">TACTICAL BRIEFING</span>
+          <h2 class="text-lg font-bold text-slate-900 dark:text-white mt-1" data-i18n="playbook_title">
+            良竹出海“真空截流法”与普通人起号心法全景复盘
+          </h2>
+          <p class="text-xs text-slate-500 mt-1" data-i18n="playbook_sub">选择比努力重要 100 倍，快速跑通比完美重要 1000 倍</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Card 1: Vacuum Signal -->
+          <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 space-y-2">
+            <div class="text-xs font-bold text-reddit-orange flex items-center gap-1.5">
+              <span>🎯</span>
+              <span>1. 什么是「Reddit 搜索真空期」？</span>
+            </div>
+            <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
+              当你在 Google 搜一个长尾需求词，搜索结果前两页<strong>全是 Reddit 碎屑贴、Quora 问答或 X 吐槽，没有一个正规产品站</strong>时，这就是最暴利的入场信号！海量老外在搜，却无工具承接。20分钟上线静态工具页直接拦截海量精准流量。
+            </p>
+          </div>
+
+          <!-- Card 2: 4-Month Account Asset -->
+          <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 space-y-2">
+            <div class="text-xs font-bold text-sky-500 flex items-center gap-1.5">
+              <span>⏳</span>
+              <span>2. 4 个月老号的免死金牌</span>
+            </div>
+            <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
+              新号注册前 7~30 天是全网 AutoMod 的极度敏感期。拥有 4 个月账龄的账号已经永久避开了新号沙盒。千万不要为了换用户名去开新号，老号哪怕 1 Karma 也是极值钱的信任资产。
+            </p>
+          </div>
+
+          <!-- Card 3: One-Liner Rule -->
+          <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 space-y-2">
+            <div class="text-xs font-bold text-emerald-500 flex items-center gap-1.5">
+              <span>⚡</span>
+              <span>3. 15 词神评与手机端算法</span>
+            </div>
+            <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
+              90% 的 Reddit 用户是手机滑屏。一整段长文会因心智负担过高被无视或当做 AI 废话。8~15 词的冷面毒舌、自嘲反讽，既能让老外秒懂秒笑，又能顺手点赞，是冲刺前 200 Karma 的最快打法。
+            </p>
+          </div>
+
+          <!-- Card 4: Forget Law -->
+          <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 space-y-2">
+            <div class="text-xs font-bold text-purple-500 flex items-center gap-1.5">
+              <span>🧘</span>
+              <span>4. 哥飞“网站遗忘法则”</span>
+            </div>
+            <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
+              做好基础外链和工具上线后，把它忘掉，隔几个月再看。自媒体与出海的真正难处是克服初期“看不到即时正反馈”的心理内耗。每天只花 5 分钟回两条 Rising 帖子，复利自然会爆发。
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- AFFILIATE & VALUE GATEWAY -->
+  <section class="border-t border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 py-8 px-4 sm:px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-6">
+        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 font-mono" data-i18n="aff_heading">PaceBowl Curated AI Power Stack</h3>
+        <p class="text-[11px] text-slate-500 mt-0.5" data-i18n="aff_sub">经过 PaceBowl 团队实测验证的开发者与出海变现高收益专线</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- ElevenLabs -->
+        <a href="/go/elevenlabs" target="_blank" rel="noopener" class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 hover:border-reddit-orange transition group flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold text-slate-900 dark:text-white group-hover:text-reddit-orange transition">ElevenLabs</span>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-sky-500/10 text-sky-600 dark:text-sky-400 font-mono">Audio AI</span>
+            </div>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">好莱坞级超逼真 AI 配音与多语种克隆，出海短视频与播客标配。</p>
+          </div>
+          <div class="mt-3 text-[11px] font-semibold text-reddit-orange flex items-center gap-1">
+            <span>试用高品质配音</span>
+            <span>&rarr;</span>
+          </div>
+        </a>
+
+        <!-- Monica AI -->
+        <a href="/go/monica" target="_blank" rel="noopener" class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 hover:border-reddit-orange transition group flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold text-slate-900 dark:text-white group-hover:text-reddit-orange transition">Monica AI</span>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 font-mono">All-in-One</span>
+            </div>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">聚合 DeepSeek-V3/R1、Claude 3.5 与 GPT-4o 的跨平台全能副驾驶。</p>
+          </div>
+          <div class="mt-3 text-[11px] font-semibold text-reddit-orange flex items-center gap-1">
+            <span>免费体验全能助手</span>
+            <span>&rarr;</span>
+          </div>
+        </a>
+
+        <!-- RunPod -->
+        <a href="/go/runpod" target="_blank" rel="noopener" class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 hover:border-reddit-orange transition group flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold text-slate-900 dark:text-white group-hover:text-reddit-orange transition">RunPod GPU</span>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-purple-500/10 text-purple-600 dark:text-purple-400 font-mono">Cloud GPU</span>
+            </div>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">秒级按需租用 RTX 4090 / A100，零排队运行 ComfyUI 与开源大模型。</p>
+          </div>
+          <div class="mt-3 text-[11px] font-semibold text-reddit-orange flex items-center gap-1">
+            <span>开启云算力</span>
+            <span>&rarr;</span>
+          </div>
+        </a>
+
+        <!-- SiliconFlow -->
+        <a href="/go/sf" target="_blank" rel="noopener" class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 hover:border-reddit-orange transition group flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold text-slate-900 dark:text-white group-hover:text-reddit-orange transition">硅基流动</span>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-mono">2000万 Token</span>
+            </div>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">国内超低延迟免排队 API 专线，支持 DeepSeek-R1 全系列与 FLUX。</p>
+          </div>
+          <div class="mt-3 text-[11px] font-semibold text-reddit-orange flex items-center gap-1">
+            <span>领 2000万 额度</span>
+            <span>&rarr;</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-slate-200 dark:border-slate-800 py-6 text-center text-xs text-slate-400">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-slate-700 dark:text-slate-300">PaceBowl Studio</span>
+        <span>•</span>
+        <span>Reddit Growth Matrix</span>
+        <span>•</span>
+        <span class="font-mono text-[10px] bg-slate-200 dark:bg-slate-800 px-1.5 py-0.5 rounded">MIT License</span>
+      </div>
+      <div class="text-[11px] text-slate-500">
+        100% Client-Side • Zero Data Storage • Powered by Cloudflare Pages
+      </div>
+    </div>
+  </footer>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none px-4 py-2.5 rounded-xl bg-slate-900 text-white dark:bg-white dark:text-slate-900 text-xs font-bold shadow-2xl flex items-center gap-2 border border-slate-700 dark:border-slate-300">
+    <span id="toast-icon">✓</span>
+    <span id="toast-text">已复制到剪贴板</span>
+  </div>
+
+  <!-- CLIENT-SIDE APPLICATION LOGIC -->
+  <script>
+    // --- Internationalization (i18n) Dictionary ---
+    const I18N = {
+      zh: {
+        suite_btn: 'PaceBowl 套件',
+        suite_title: 'PaceBowl 生态矩阵',
+        hero_badge: 'Reddit 极速起号与截流黑客工坊',
+        hero_title: '征服 Reddit 算法：15 词单行神评与防吞风控雷达',
+        hero_desc: '为独立开发者与出海创作者量身定制。告别 AI 废话与长篇大论，用原生冷面幽默破冰起号，精准规避 AutoMod 封杀，将社区流量转化为真实用户。',
+        tab_viral: '单行神评生成',
+        tab_radar: 'AutoMod 风控雷达',
+        tab_subreddits: '版块起号图谱',
+        tab_titles: '发帖标题工坊',
+        tab_playbook: '截流出海心法',
+        viral_input_title: '目标 Reddit 帖子 / 提问',
+        rule_15words: '严格 ≤ 15 词约束',
+        lbl_scenarios: '一键填入常见高流量场景：',
+        lbl_select_style: '选择神评风格流派：',
+        btn_generate_viral: '生成地道单行神评',
+        btn_copy_ds_prompt: '复制 DeepSeek 提示词',
+        candidates_title: '高赞神评候选列表 (点击即复制)',
+        radar_input_title: '待发评论 / 发帖正文风控实时体检',
+        btn_test_sample: '载入被吞测试样本',
+        radar_realtime_tip: '⚡ 实时启发式扫描，零数据上传',
+        radar_score_title: 'AutoMod 存活率预测',
+        radar_diagnostics: '诊断与避坑建议：',
+        subreddits_title: '精选起号与出海版块导航矩阵',
+        subreddits_desc: '分阶段精细化运营，在对的版块做对的事',
+        title_crafter_title: '独立项目参数设定',
+        lbl_tool_name: '产品/工具名称：',
+        lbl_tool_pain: '解决的核心痛点：',
+        lbl_tool_usp: '核心卖点与亮点：',
+        lbl_target_sub: '目标发布版块：',
+        btn_generate_titles: '生成 6 组爆款发帖标题与正文模板',
+        generated_titles_heading: '高转化发帖标题与安全正文模板',
+        playbook_title: '良竹出海“真空截流法”与普通人起号心法全景复盘',
+        playbook_sub: '选择比努力重要 100 倍，快速跑通比完美重要 1000 倍',
+        aff_heading: 'PaceBowl 精选出海变现专线',
+        aff_sub: '经过实测验证的开发者与海外高收益闭环',
+        toast_copied: '✓ 已复制到剪贴板！可以直接在 Reddit 发出。',
+        toast_ds_copied: '✓ DeepSeek 提示词已生成！可直接粘贴至 DeepSeek 官方或子站。'
+      },
+      en: {
+        suite_btn: 'PaceBowl Suite',
+        suite_title: 'PaceBowl Ecosystem',
+        hero_badge: 'Reddit Karma Acceleration & Traffic Hacker',
+        hero_title: 'Master Reddit: 15-Word Viral One-Liners & AutoMod Radar',
+        hero_desc: 'Crafted for indie hackers & builders. Ditch AI fluff and long essays. Farm initial karma with deadpan native wit, bypass AutoMod filters, and convert community views into real users.',
+        tab_viral: 'Viral One-Liners',
+        tab_radar: 'AutoMod Radar',
+        tab_subreddits: 'Subreddit Matrix',
+        tab_titles: 'Post Title Crafter',
+        tab_playbook: 'Traffic Playbook',
+        viral_input_title: 'Target Reddit Post / Question',
+        rule_15words: 'Strictly ≤ 15 Words',
+        lbl_scenarios: 'One-click high-traffic scenarios:',
+        lbl_select_style: 'Select One-Liner Humor Style:',
+        btn_generate_viral: 'Generate Native One-Liners',
+        btn_copy_ds_prompt: 'Copy DeepSeek Prompt',
+        candidates_title: 'High-Upvote Candidates (Click to Copy)',
+        radar_input_title: 'Real-time Spam & AutoMod Radar Check',
+        btn_test_sample: 'Load Sample Banned Post',
+        radar_realtime_tip: '⚡ Real-time client-side heuristic scan',
+        radar_score_title: 'AutoMod Survival Probability',
+        radar_diagnostics: 'Diagnostics & Actionable Fixes:',
+        subreddits_title: 'Curated Subreddit Directory & Rules Matrix',
+        subreddits_desc: 'Stage-based roadmaps: do the right action in the right sub',
+        title_crafter_title: 'Project Launch Parameters',
+        lbl_tool_name: 'Product / Tool Name:',
+        lbl_tool_pain: 'Core Pain Solved:',
+        lbl_tool_usp: 'Unique Hook / Selling Points:',
+        lbl_target_sub: 'Target Subreddit:',
+        btn_generate_titles: 'Generate 6 High-Converting Post Sets',
+        generated_titles_heading: 'High-Converting Titles & Safe Body Templates',
+        playbook_title: 'Reddit Vacuum Interception & Creator Mindset Playbook',
+        playbook_sub: 'Selection beats effort 100x; shipping fast beats perfection 1000x',
+        aff_heading: 'PaceBowl Curated AI Power Stack',
+        aff_sub: 'Battle-tested high-yield monetization routes for indie builders',
+        toast_copied: '✓ Copied to clipboard! Ready to post on Reddit.',
+        toast_ds_copied: '✓ DeepSeek prompt copied! Paste into DeepSeek Studio.'
+      }
+    };
+
+    let currentLang = 'zh';
+    let currentStyle = 'all';
+
+    // --- Tab Switching ---
+    function switchTab(tabId) {
+      ['viral', 'radar', 'subreddits', 'titles', 'playbook'].forEach(t => {
+        const panel = document.getElementById('panel-' + t);
+        const btn = document.getElementById('tab-btn-' + t);
+        if (t === tabId) {
+          panel.classList.remove('hidden');
+          btn.className = 'flex-1 py-2 px-3 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 bg-white dark:bg-slate-800 text-reddit-orange shadow-sm';
+        } else {
+          panel.classList.add('hidden');
+          btn.className = 'flex-1 py-2 px-3 rounded-xl text-xs font-semibold transition flex items-center justify-center gap-1.5 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white';
+        }
+      });
+    }
+
+    // --- Style Selection ---
+    function selectStyle(style) {
+      currentStyle = style;
+      ['all', 'deadpan', 'self_dep', 'mic_drop', 'truth', 'hacker'].forEach(s => {
+        const btn = document.getElementById('style-btn-' + s);
+        if (s === style) {
+          btn.className = 'p-2 rounded-xl border border-reddit-orange/50 bg-reddit-orange/10 text-reddit-orange font-bold text-xs text-center transition';
+        } else {
+          btn.className = 'p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs text-center transition';
+        }
+      });
+      generateViralComments();
+    }
+
+    // --- Scenario Loader ---
+    const SCENARIOS = {
+      cheating: "What will you do if your partner cheat on you?",
+      music: "How do you feel about 8D Music?",
+      pretend: "What is something everyone pretends to understand at work, but nobody actually does?",
+      ai: "Will AI replace junior developers in 2 years?",
+      under50: "What is a purchase under $50 that genuinely changed your daily life?"
+    };
+
+    function loadScenario(key) {
+      document.getElementById('viral-topic-input').value = SCENARIOS[key] || '';
+      generateViralComments();
+    }
+
+    // --- Instant Client-Side One-Liner Candidates Database ---
+    const PRELOADED_REPLIES = {
+      cheating: [
+        { style: "Deadpan Sarcasm", text: "Help them pack. Free delivery to their new place.", zh: "帮他们打包。免费送货到他们新家。" },
+        { style: "Self-Deprecating", text: "Congratulate them on finding someone with even lower standards than mine.", zh: "祝贺他们找到了眼光比我还要低的人。" },
+        { style: "Mic Drop", text: "Change the locks. Let the front door do the talking.", zh: "换锁。让防盗门替我跟他们说话。" },
+        { style: "Hard Truth", text: "Checking phones at 3am isn't a relationship; it's an unpaid detective job. I leave.", zh: "凌晨三点查手机不是谈恋爱，是不发工资的私家侦探。我直接走。" },
+        { style: "Practical Hacker", text: "Screenshot the bank accounts, call a lawyer, and block everywhere before lunch.", zh: "截图银行账户，午饭前打给律师并拉黑全网。" }
+      ],
+      music: [
+        { style: "Deadpan Sarcasm", text: "8D music: because regular songs weren't disorienting enough.", zh: "8D音乐：因为普通歌曲还不够让人晕头转向。" },
+        { style: "Self-Deprecating", text: "Great, now my tinnitus has surround sound.", zh: "太好了，现在我的耳鸣也有立体环绕声了。" },
+        { style: "Mic Drop", text: "It's just panning audio with extra steps and motion sickness.", zh: "无非就是左右声道乱晃还附带晕车感。" },
+        { style: "Hard Truth", text: "If the melody is trash, panning it around your skull won't fix it.", zh: "旋律要是难听，在脑壳周围转一圈也变不成天籁。" },
+        { style: "Practical Hacker", text: "High quality stereo headphones beat gimmicky phase shifting every single time.", zh: "高保真立体声耳机每次都能把这种噱头相位特效按在地上摩擦。" }
+      ],
+      pretend: [
+        { style: "Deadpan Sarcasm", text: "Company values.", zh: "公司企业文化价值观。" },
+        { style: "Self-Deprecating", text: "Kubernetes. I just nod when DevOps speaks until they walk away.", zh: "Kubernetes。运维大哥一开口我就点头，直到他走开。" },
+        { style: "Mic Drop", text: "Agile story points.", zh: "敏捷开发的 Story Points 故事点。" },
+        { style: "Hard Truth", text: "The entire quarterly budget forecast. Pure astrologer horoscopes with Excel sheets.", zh: "季度预算预测。纯粹是用 Excel 表格算命看星座。" },
+        { style: "Practical Hacker", text: "Regular expressions. We all copy-paste from StackOverflow and pray.", zh: "正则表达式。我们都是从网上复制然后祈祷能跑通。" }
+      ],
+      ai: [
+        { style: "Deadpan Sarcasm", text: "AI won't replace juniors. Seniors copy-pasting AI hallucinations will replace everyone.", zh: "AI 不会取代初级开发。高级开发闭眼粘贴 AI 幻觉代码才会取代所有人。" },
+        { style: "Self-Deprecating", text: "Can't wait to be unemployed and blamed for AI-generated syntax errors.", zh: "迫不及待被裁员，然后因为 AI 写的语法错误背锅了。" },
+        { style: "Mic Drop", text: "Code is easy. Deciding what to build without client meltdowns is the job.", zh: "写代码容易。搞定甲方反复无常的需求才是真正的工作。" },
+        { style: "Hard Truth", text: "If your value was writing boilerplate CRUD, you were replaced in 2024.", zh: "如果你的价值只是写模板 CRUD，那你在 2024 年其实就已经被取代了。" },
+        { style: "Practical Hacker", text: "Learn git bisect and architecture. Debugging AI spaghetti code will pay $200k.", zh: "学好架构和调试。未来修复 AI 意面代码的时薪会极其昂贵。" }
+      ],
+      under50: [
+        { style: "Deadpan Sarcasm", text: "A tongue scraper. Realized I was breathing toxic waste for 25 years.", zh: "刮舌苔器。突然意识到自己前 25 年嘴里都像化学武器。" },
+        { style: "Self-Deprecating", text: "A 10ft phone charger cord. Now I can rot in bed from any angle.", zh: "3米长手机充电线。现在我可以以任何姿势在床上躺尸了。" },
+        { style: "Mic Drop", text: "A good bidet attachment. Toilet paper feels like medieval torture now.", zh: "智能马桶喷头。用过之后觉得卫生纸简直是中世纪酷刑。" },
+        { style: "Hard Truth", text: "Blackout curtains. Cheap sleep medicine without a prescription.", zh: "遮光窗帘。不需要处方的最廉价助眠神药。" },
+        { style: "Practical Hacker", text: "A physical mechanical timer. Stops phone doomscrolling dead in its tracks.", zh: "一个机械厨房定时器。一秒治好手机无脑刷屏。" }
+      ]
+    };
+
+    function generateViralComments() {
+      const topic = document.getElementById('viral-topic-input').value.trim();
+      const container = document.getElementById('viral-results-container');
+      
+      let list = [];
+      // Match predefined or fallback generator
+      const lower = topic.toLowerCase();
+      if (lower.includes('cheat')) list = PRELOADED_REPLIES.cheating;
+      else if (lower.includes('8d') || lower.includes('music')) list = PRELOADED_REPLIES.music;
+      else if (lower.includes('pretend') || lower.includes('work')) list = PRELOADED_REPLIES.pretend;
+      else if (lower.includes('ai') || lower.includes('replace') || lower.includes('junior')) list = PRELOADED_REPLIES.ai;
+      else if (lower.includes('50') || lower.includes('purchase')) list = PRELOADED_REPLIES.under50;
+      else {
+        // Dynamic smart fallback
+        list = [
+          { style: "Deadpan Sarcasm", text: `I’d say "it depends," charge $200 an hour, then leave early.`, zh: `我会说“这得看情况”，收每小时200刀，然后早退。` },
+          { style: "Self-Deprecating", text: `I came here looking for answers, only to realize I'm the problem.`, zh: `我本来是来找答案的，结果发现问题原来出在我自己身上。` },
+          { style: "Mic Drop", text: `Not my circus, not my monkeys. Walk away.`, zh: `不是我的马戏团，管不了这群猴子。直接走人。` },
+          { style: "Hard Truth", text: `Everyone talks about the solution; nobody wants to pay the mental cost.`, zh: `每个人都在大谈解决方案，但没人愿意承担心智成本。` },
+          { style: "Practical Hacker", text: `Check the logs, verify the assumptions, and ship the simplest fix.`, zh: `翻看日志，核验假设，交付最简修复。` }
+        ];
+      }
+
+      // Filter by style
+      let filtered = list;
+      if (currentStyle === 'deadpan') filtered = list.filter(i => i.style.includes('Sarcasm'));
+      else if (currentStyle === 'self_dep') filtered = list.filter(i => i.style.includes('Self'));
+      else if (currentStyle === 'mic_drop') filtered = list.filter(i => i.style.includes('Mic'));
+      else if (currentStyle === 'truth') filtered = list.filter(i => i.style.includes('Truth'));
+      else if (currentStyle === 'hacker') filtered = list.filter(i => i.style.includes('Hacker'));
+
+      document.getElementById('results-count').textContent = `${filtered.length} Candidates`;
+
+      let html = '';
+      filtered.forEach((item, idx) => {
+        const words = item.text.split(/\s+/).filter(Boolean).length;
+        const badgeColor = words <= 15 ? 'text-emerald-500 bg-emerald-500/10 border-emerald-500/20' : 'text-amber-500 bg-amber-500/10 border-amber-500/20';
+
+        html += `
+          <div onclick="copyText('${escapeHtml(item.text)}')" class="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-reddit-orange dark:hover:border-reddit-orange shadow-sm hover:shadow-md transition cursor-pointer group">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-reddit-orange font-mono">${item.style}</span>
+              <span class="text-[10px] font-mono px-1.5 py-0.2 rounded border ${badgeColor}">${words} words (Optimal)</span>
+            </div>
+            <div class="text-xs sm:text-sm font-semibold text-slate-900 dark:text-white group-hover:text-reddit-orange transition leading-relaxed">
+              "${escapeHtml(item.text)}"
+            </div>
+            <div class="text-[11px] text-slate-400 dark:text-slate-500 mt-1">
+              ${escapeHtml(item.zh)}
+            </div>
+            <div class="mt-2 pt-2 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-[10px] text-slate-400">
+              <span class="flex items-center gap-1"><span>👆</span> 点击一键复制</span>
+              <span class="opacity-0 group-hover:opacity-100 text-reddit-orange font-semibold transition">Copy & Post &rarr;</span>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function copyDeepSeekPromptForReddit() {
+      const topic = document.getElementById('viral-topic-input').value.trim() || 'What will you do if your partner cheat on you?';
+      const prompt = `<role>
+Elite Reddit Karma Specialist & Viral One-Liner Comment Strategist skilled in organic upvote compounding and native redditor tone.
+</role>
+
+<instructions>
+For the target Reddit post/question: "${topic}"
+Strictly follow the [Reddit Viral One-Liner Formula]:
+1. Ultra-Brevity: Strictly UNDER 15 WORDS per comment (mobile readers skip long essays; short punchlines get 10x upvotes).
+2. Zero AI Fluff: No moral preaching, no polite disclaimers, no "While it is important to...". Sound like an authentic, witty redditor.
+3. Provide 3 distinct options ready to copy:
+   - Option 1 [Deadpan Sarcasm]: Dry, understated wit with a sharp punchline.
+   - Option 2 [Self-Deprecating]: Classic Reddit irony and self-burn.
+   - Option 3 [Brutally Concise / Mic Drop]: Cold, decisive, zero filler.
+4. Absolutely zero external links or hashtags.
+</instructions>`;
+
+      copyText(prompt, I18N[currentLang].toast_ds_copied);
+    }
+
+    // --- AutoMod & Spam Risk Radar ---
+    function analyzeRadarText() {
+      const text = document.getElementById('radar-input').value;
+      const stats = document.getElementById('radar-stats');
+      const scoreBadge = document.getElementById('radar-score-badge');
+      const scoreNum = document.getElementById('radar-score-num');
+      const statusText = document.getElementById('radar-status-text');
+      const statusSub = document.getElementById('radar-status-sub');
+      const issuesList = document.getElementById('radar-issues-list');
+
+      const words = text.trim() ? text.trim().split(/\s+/).filter(Boolean).length : 0;
+      stats.textContent = `${words} words • ${text.length} characters`;
+
+      if (!text.trim()) {
+        scoreNum.textContent = '100';
+        scoreBadge.className = 'w-16 h-16 rounded-2xl bg-emerald-500/10 border-2 border-emerald-500 flex flex-col items-center justify-center font-mono';
+        statusText.textContent = '🟢 极度安全 (Safe to Post)';
+        statusText.className = 'font-bold text-sm text-emerald-500';
+        statusSub.textContent = '输入文本即可实时诊断风控风险。';
+        issuesList.innerHTML = `<li class="text-slate-400">等待输入...</li>`;
+        return;
+      }
+
+      let score = 100;
+      let issues = [];
+
+      // Link check
+      const linkRegex = /(https?:\/\/|www\.|\.com|\.org|\.io|\.net|bit\.ly)/i;
+      if (linkRegex.test(text)) {
+        score -= 50;
+        issues.push({
+          type: 'danger',
+          msg: '包含外链或域名后缀！对于低 Karma 账号，AutoMod 几乎 100% 秒删并标记为垃圾内容！',
+          fix: '立刻移除正文中的链接，改为在主页侧边栏（Social Links）挂载，并在正文提示“Link in profile”。'
+        });
+      }
+
+      // Promo words check
+      const promoRegex = /(check out my|visit my|download now|discount|use code|buy now|free tool|affiliate|subscribe to my)/i;
+      if (promoRegex.test(text)) {
+        score -= 25;
+        issues.push({
+          type: 'warning',
+          msg: '触发自卖自夸/营销关键词（如 check out my / buy now 等），容易招致老外集体踩帖 (Downvote)。',
+          fix: '改用客观讨论语气或独立极客分享语气（如：“Built this over the weekend as a tiny side project”）。'
+        });
+      }
+
+      // Word count check
+      if (words > 40) {
+        score -= 15;
+        issues.push({
+          type: 'warning',
+          msg: `长度过长 (${words} 词)！在非深度故事版块，长段落常被手机端用户当做 AI 废话直接滑走。`,
+          fix: '精炼至 15 个词以内，提炼出 1 句核心毒舌/幽默梗。'
+        });
+      }
+
+      // Politeness / AI tone check
+      const aiToneRegex = /(as an ai|while it is important|i believe that|in my humble opinion|in conclusion|furthermore)/i;
+      if (aiToneRegex.test(text)) {
+        score -= 20;
+        issues.push({
+          type: 'danger',
+          msg: '检出浓重 AI 腔调（如“As an AI / While it is important”等客套开场词）。',
+          fix: '去掉开场废话，直接切入核心回答。'
+        });
+      }
+
+      score = Math.max(10, score);
+      scoreNum.textContent = score;
+
+      if (score >= 85) {
+        scoreBadge.className = 'w-16 h-16 rounded-2xl bg-emerald-500/10 border-2 border-emerald-500 flex flex-col items-center justify-center font-mono';
+        statusText.textContent = '🟢 极度安全 (Safe to Post)';
+        statusText.className = 'font-bold text-sm text-emerald-500';
+        statusSub.textContent = '未检出高危风控特征，极大概率正常展示并收获高赞。';
+      } else if (score >= 60) {
+        scoreBadge.className = 'w-16 h-16 rounded-2xl bg-amber-500/10 border-2 border-amber-500 flex flex-col items-center justify-center font-mono';
+        statusText.textContent = '🟡 中度风险 (Moderate Caution)';
+        statusText.className = 'font-bold text-sm text-amber-500';
+        statusSub.textContent = '存在部分容易引起反感或轻度风控的词汇，建议根据下方提示微调。';
+      } else {
+        scoreBadge.className = 'w-16 h-16 rounded-2xl bg-rose-500/10 border-2 border-rose-500 flex flex-col items-center justify-center font-mono';
+        statusText.textContent = '🔴 高危秒吞 (Spam Filter Trigger)';
+        statusText.className = 'font-bold text-sm text-rose-500';
+        statusSub.textContent = '100% 触发 Reddit 全局防垃圾机器人，发帖必被封杀！';
+      }
+
+      let issuesHtml = '';
+      if (issues.length === 0) {
+        issuesHtml = `
+          <li class="flex items-center gap-2 text-emerald-500">
+            <span>✓</span>
+            <span>完美避开所有风控陷阱，符合原生老油条回帖特征！</span>
+          </li>
+        `;
+      } else {
+        issues.forEach(i => {
+          const color = i.type === 'danger' ? 'text-rose-500' : 'text-amber-500';
+          issuesHtml += `
+            <li class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+              <div class="font-bold ${color} flex items-center gap-1">
+                <span>${i.type === 'danger' ? '❌' : '⚠️'}</span>
+                <span>${escapeHtml(i.msg)}</span>
+              </div>
+              <div class="text-slate-500 dark:text-slate-400 mt-1 pl-4">👉 修复建议：${escapeHtml(i.fix)}</div>
+            </li>
+          `;
+        });
+      }
+
+      issuesList.innerHTML = issuesHtml;
+    }
+
+    function loadRadarSample() {
+      document.getElementById('radar-input').value = `Hey everyone! Check out my new AI prompt tool at https://deepseek.pacebowl.com! We have discounts and 277 agent personas. Download now and subscribe to our newsletter for free credits!`;
+      analyzeRadarText();
+    }
+
+    // --- Subreddits Matrix ---
+    const SUBREDDITS = [
+      { name: "r/AskReddit", tier: "tier0", members: "45M", minKarma: "0", ageRule: "0-1天可评", sort: "Rising (上升期)", rule: "纯文字幽默/真实回答，严禁发外链", hotness: "🔥 全球最高流量" },
+      { name: "r/NoStupidQuestions", tier: "tier0", members: "4.8M", minKarma: "0", ageRule: "无门槛", sort: "Rising / New", rule: "认真做友好科普，禁止讽刺", hotness: "💡 极易获真诚赞" },
+      { name: "r/aww", tier: "tier0", members: "36M", minKarma: "0", ageRule: "无门槛", sort: "Rising", rule: "萌宠夸赞短句，严禁引流", hotness: "🐾 0门槛破冰" },
+      { name: "r/mildlyinteresting", tier: "tier0", members: "23M", minKarma: "0", ageRule: "无门槛", sort: "Rising", rule: "单行自嘲神评，点赞极快", hotness: "⚡ 秒破10赞" },
+      { name: "r/me_irl", tier: "tier0", members: "7M", minKarma: "0", ageRule: "无门槛", sort: "Rising", rule: "真实自黑与当代打工人梗", hotness: "😂 纯老外自嘲文化" },
+
+      { name: "r/ChatGPT", tier: "tier1", members: "6.2M", minKarma: "50+", ageRule: "7天+", sort: "Hot / Rising", rule: "允许技术讨论，发帖须带准确标签", hotness: "🤖 AI 核心风暴眼" },
+      { name: "r/Cursor", tier: "tier1", members: "120K", minKarma: "20+", ageRule: "无严格限制", sort: "New", rule: "帮别人解决 .cursorrules 报错，极受尊敬", hotness: "💻 程序员垂直高净值" },
+      { name: "r/StableDiffusion", tier: "tier1", members: "650K", minKarma: "50+", ageRule: "14天+", sort: "Rising", rule: "ComfyUI 工作流分享，需附参数", hotness: "🎨 图像极客社群" },
+      { name: "r/LocalLLaMA", tier: "tier1", members: "380K", minKarma: "50+", ageRule: "7天+", sort: "New / Hot", rule: "开源大模型推理，技术深度要求高", hotness: "🧠 硬核开源技术" },
+
+      { name: "r/SideProject", tier: "tier2", members: "250K", minKarma: "100+", ageRule: "30天+", sort: "Top (周)", rule: "允许个人独立项目展示，需强调 Free / Open Source", hotness: "🚀 独立出海第一站" },
+      { name: "r/indiehackers", tier: "tier2", members: "110K", minKarma: "100+", ageRule: "30天+", sort: "Hot", rule: "分享真实数据与收入复盘，极度讨厌虚假吹捧", hotness: "💰 商业闭环探讨" },
+      { name: "r/webdev", tier: "tier2", members: "2.4M", minKarma: "150+", ageRule: "30天+", sort: "Saturday Showoff", rule: "仅限周六 Showoff Saturday 专帖自荐", hotness: "🛡️ 版规极严" }
+    ];
+
+    function filterSubreddits(tier) {
+      ['all', 'tier0', 'tier1', 'tier2'].forEach(t => {
+        const btn = document.getElementById('sub-filter-' + t);
+        if (t === tier) {
+          btn.className = 'px-3 py-1.5 rounded-xl text-xs font-bold bg-reddit-orange text-white transition';
+        } else {
+          btn.className = 'px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 transition';
+        }
+      });
+
+      const grid = document.getElementById('subreddits-grid');
+      let filtered = SUBREDDITS;
+      if (tier !== 'all') filtered = SUBREDDITS.filter(s => s.tier === tier);
+
+      let html = '';
+      filtered.forEach(sub => {
+        let tagColor = 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20';
+        let tierLabel = '🐣 0~50 破冰';
+        if (sub.tier === 'tier1') {
+          tagColor = 'bg-sky-500/10 text-sky-500 border-sky-500/20';
+          tierLabel = '🚀 50~200 垂直';
+        } else if (sub.tier === 'tier2') {
+          tagColor = 'bg-purple-500/10 text-purple-500 border-purple-500/20';
+          tierLabel = '💎 200+ 引流';
+        }
+
+        html += `
+          <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 flex flex-col justify-between space-y-3">
+            <div>
+              <div class="flex items-center justify-between mb-1.5">
+                <a href="https://reddit.com/${sub.name}" target="_blank" rel="noopener" class="font-bold text-sm text-slate-900 dark:text-white hover:text-reddit-orange transition flex items-center gap-1.5">
+                  <span>${sub.name}</span>
+                  <span class="text-[10px] text-slate-400">↗</span>
+                </a>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded-full border ${tagColor}">${tierLabel}</span>
+              </div>
+              <div class="text-[11px] text-slate-500 mb-2">${sub.members} Members • ${sub.hotness}</div>
+              <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
+                <strong>版规要点：</strong>${sub.rule}
+              </p>
+            </div>
+            <div class="pt-2 border-t border-slate-200 dark:border-slate-700/60 flex items-center justify-between text-[10px] text-slate-400 font-mono">
+              <span>门槛: ${sub.minKarma} Karma</span>
+              <span>切流排序: ${sub.sort}</span>
+            </div>
+          </div>
+        `;
+      });
+
+      grid.innerHTML = html;
+    }
+
+    // --- Showcase Title Crafter ---
+    function generateShowcaseTitles() {
+      const tool = document.getElementById('title-tool-name').value.trim() || 'My AI Tool';
+      const pain = document.getElementById('title-tool-pain').value.trim() || 'bloated apps with paid plans';
+      const usp = document.getElementById('title-tool-usp').value.trim() || '100% free and open source';
+      const sub = document.getElementById('title-target-sub').value;
+
+      const titles = [
+        {
+          type: "痛点逆袭型 (The Pain-to-Solution)",
+          title: `I got tired of ${pain}, so I spent the weekend building a 100% free client-side tool (Open Source)`,
+          sub: "最受 Reddit 独立开发者社区欢迎的真实故事结构"
+        },
+        {
+          type: "公开构建复盘型 (Build in Public)",
+          title: `After 4 months of building in public, I finally launched ${tool} today. Here is the entire architecture breakdown.`,
+          sub: "适合技术社区（r/webdev, r/SideProject），突出经验沉淀"
+        },
+        {
+          type: "反常规/人间清醒型 (Contrarian Hook)",
+          title: `Why does nobody talk about how ${pain} can be solved completely in the browser? Built a zero-cost fix:`,
+          sub: "引发热烈回帖与技术争鸣"
+        },
+        {
+          type: "极度真诚求喷型 (The Roast Me Hook)",
+          title: `Please brutally roast my weekend project: ${tool} — featuring ${usp}. Don't hold back.`,
+          sub: "老外最喜欢当“导师”，评论量激增"
+        },
+        {
+          type: "纯干货成果型 (Showcase Saturday)",
+          title: `Showcase: ${tool} — ${usp} without subscriptions or telemetry bloat`,
+          sub: "合规安全，专为周六自荐专区定制"
+        },
+        {
+          type: "TIL 知识科普型 (Today I Learned)",
+          title: `TIL you don't need a heavy backend for ${pain}. Here's how I engineered it with 0 running costs:`,
+          sub: "高技术认同感，吸引 GitHub Star"
+        }
+      ];
+
+      const container = document.getElementById('titles-results-container');
+      let html = '';
+
+      titles.forEach(item => {
+        html += `
+          <div class="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-teal-500 shadow-sm transition space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-teal-600 dark:text-teal-400 font-mono">${item.type}</span>
+              <span class="text-[10px] text-slate-400 font-mono">${item.sub}</span>
+            </div>
+            <div class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white leading-relaxed">
+              "${escapeHtml(item.title)}"
+            </div>
+            <div class="pt-2 flex items-center justify-end gap-2">
+              <button onclick="copyText('${escapeHtml(item.title)}')" class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-xs font-semibold text-slate-700 dark:text-slate-300 transition">
+                复制标题
+              </button>
+              <button onclick="copyPostTemplate('${escapeHtml(item.title)}', '${escapeHtml(tool)}', '${escapeHtml(pain)}', '${escapeHtml(usp)}')" class="px-2.5 py-1 rounded-lg bg-teal-600 hover:bg-teal-700 text-xs font-semibold text-white transition">
+                复制完整合规发帖模板 (带正文)
+              </button>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function copyPostTemplate(title, tool, pain, usp) {
+      const template = `**Title:** ${title}
+
+**Post Body:**
+Hey r/SideProject,
+
+Like many of you, I spend hours dealing with ${pain}. Most tools out there lock basic features behind subscriptions, require account logins, or send your data to proprietary servers.
+
+I decided to scratch my own itch and built **${tool}**:
+- **${usp}**
+- 100% client-side execution with zero telemetry
+- $0 monthly server costs
+
+🌐 **Live Tool & GitHub Source**:
+To respect subreddit community guidelines and prevent AutoMod link filtering, the live website and MIT open-source repo links are pinned directly in my **Reddit profile sidebar (Social Links)**. Feel free to check my profile!
+
+Would genuinely love your brutal feedback, bug reports, or feature suggestions in the comments. Thank you!`;
+
+      copyText(template, '✓ 完整合规发帖模板已复制！避开正文外链防吞封杀。');
+    }
+
+    // --- Helpers ---
+    function copyText(text, msg) {
+      navigator.clipboard.writeText(text).then(() => {
+        showToast(msg || I18N[currentLang].toast_copied);
+      });
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const toastText = document.getElementById('toast-text');
+      toastText.textContent = msg;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 2500);
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    // --- Theme & Language ---
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.classList.contains('dark');
+      const newTheme = isDark ? 'light' : 'dark';
+      
+      if (newTheme === 'dark') {
+        html.classList.add('dark');
+        html.classList.remove('light');
+        document.getElementById('theme-sun').classList.add('hidden');
+        document.getElementById('theme-moon').classList.remove('hidden');
+      } else {
+        html.classList.remove('dark');
+        html.classList.add('light');
+        document.getElementById('theme-sun').classList.remove('hidden');
+        document.getElementById('theme-moon').classList.add('hidden');
+      }
+
+      localStorage.setItem('pacebowl-theme', newTheme);
+      document.cookie = `pacebowl-theme=${newTheme}; path=/; domain=.pacebowl.com; max-age=31536000; SameSite=Lax`;
+    }
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'zh' ? 'en' : 'zh';
+      document.getElementById('lang-label').textContent = currentLang === 'zh' ? 'EN' : '中';
+      
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (I18N[currentLang] && I18N[currentLang][key]) {
+          el.innerHTML = I18N[currentLang][key];
+        }
+      });
+
+      generateViralComments();
+    }
+
+    // --- Initial Init ---
+    window.addEventListener('DOMContentLoaded', () => {
+      loadScenario('cheating');
+      filterSubreddits('all');
+      generateShowcaseTitles();
+      analyzeRadarText();
+
+      // Set initial theme icons
+      if (document.documentElement.classList.contains('dark')) {
+        document.getElementById('theme-sun').classList.add('hidden');
+        document.getElementById('theme-moon').classList.remove('hidden');
+      } else {
+        document.getElementById('theme-sun').classList.remove('hidden');
+        document.getElementById('theme-moon').classList.add('hidden');
+      }
+    });
+  </script>
+</body>
+</html>
