@@ -1509,6 +1509,10 @@
     }
 
     // --- Cloudflare Turnstile & Google Identity Auth ---
+    try {
+      const urlSiteKey = new URLSearchParams(window.location.search).get('cf_sitekey');
+      if (urlSiteKey) localStorage.setItem('cf_turnstile_sitekey', urlSiteKey);
+    } catch (e) {}
     const CF_TURNSTILE_SITEKEY = window.CF_TURNSTILE_SITEKEY || localStorage.getItem('cf_turnstile_sitekey') || '1x00000000000000000000AA';
     const GOOGLE_CLIENT_ID = window.GOOGLE_CLIENT_ID || localStorage.getItem('pacebowl_google_client_id') || '407408718192-k2o09689e4726m0c0qg7n9p3ekl8v720.apps.googleusercontent.com';
     let authTurnstileWidgetId = null;
