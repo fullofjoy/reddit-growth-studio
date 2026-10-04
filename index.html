@@ -241,15 +241,34 @@
             <div class="flex flex-wrap gap-1.5">
               <button onclick="loadScenario('cheating')" class="text-[11px] px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition">💔 出轨应对</button>
               <button onclick="loadScenario('music')" class="text-[11px] px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition">🎧 8D 音乐</button>
-              <button onclick="loadScenario('pretend')" class="text-[11px] px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition">💼 装作懂但不懂</button>
-              <button onclick="loadScenario('ai')" class="text-[11px] px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition">🤖 AI 替代程序员</button>
-              <button onclick="loadScenario('under50')" class="text-[11px] px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition">💰 50刀超值小物</button>
+              <button onclick="loadScenario('pretend')" class="text-[11px] px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition">💼 装懂职场</button>
+              <button onclick="loadScenario('ai')" class="text-[11px] px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition">🤖 AI 程序员</button>
+              <button onclick="loadScenario('under50')" class="text-[11px] px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition">💰 50刀好物</button>
+              <button onclick="loadScenario('saas')" class="text-[11px] px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition">🚀 独立获客</button>
+              <button onclick="loadScenario('overtime')" class="text-[11px] px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition">☕ 拒绝内卷</button>
+              <button onclick="loadScenario('debt')" class="text-[11px] px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition">💻 祖传代码</button>
             </div>
+          </div>
+
+          <!-- Engine Switcher & API Settings -->
+          <div class="flex items-center justify-between p-2 rounded-xl bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800/80">
+            <div class="flex items-center gap-1.5">
+              <span class="text-[11px] text-slate-500 font-medium" data-i18n="lbl_engine_mode">生成引擎:</span>
+              <button id="mode-btn-local" onclick="setEngineMode('local')" class="px-2 py-1 rounded-lg text-[11px] font-bold bg-white dark:bg-slate-800 text-reddit-orange shadow-sm border border-slate-200 dark:border-slate-700 transition" data-i18n="engine_local">
+                ⚡ 智能本地即时 (免Key)
+              </button>
+              <button id="mode-btn-ai" onclick="setEngineMode('ai')" class="px-2 py-1 rounded-lg text-[11px] font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition flex items-center gap-1" data-i18n="engine_ai">
+                🤖 DeepSeek AI 直出
+              </button>
+            </div>
+            <button onclick="openApiModal()" class="text-[11px] text-slate-500 hover:text-reddit-orange flex items-center gap-1 transition px-1.5 py-0.5 rounded hover:bg-slate-100 dark:hover:bg-slate-800" title="配置 API Key">
+              <span>⚙️</span> <span data-i18n="btn_api_cfg">API 配置</span>
+            </button>
           </div>
 
           <!-- Topic Input -->
           <div>
-            <textarea id="viral-topic-input" rows="3" placeholder="例如：What will you do if your partner cheat on you?" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-xs font-mono text-slate-800 dark:text-slate-200 focus:outline-none focus:border-reddit-orange transition resize-none"></textarea>
+            <textarea id="viral-topic-input" rows="3" placeholder="例如：What will you do if your partner cheat on you? 或输入中文/英文任意发帖话题" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-xs font-mono text-slate-800 dark:text-slate-200 focus:outline-none focus:border-reddit-orange transition resize-none"></textarea>
           </div>
 
           <!-- Primary Style Selection -->
@@ -267,13 +286,17 @@
 
           <!-- Action Buttons -->
           <div class="flex items-center gap-2 pt-2">
-            <button onclick="generateViralComments()" class="flex-1 py-2.5 px-4 rounded-xl bg-gradient-to-r from-reddit-orange to-amber-500 hover:from-reddit-hover hover:to-amber-600 text-white font-bold text-xs shadow-md shadow-reddit-orange/20 transition flex items-center justify-center gap-2">
-              <span>🚀</span>
-              <span data-i18n="btn_generate_viral">生成地道单行神评</span>
+            <button id="btn-generate-viral" onclick="generateViralComments()" class="flex-1 py-2.5 px-4 rounded-xl bg-gradient-to-r from-reddit-orange to-amber-500 hover:from-reddit-hover hover:to-amber-600 text-white font-bold text-xs shadow-md shadow-reddit-orange/20 transition flex items-center justify-center gap-2 active:scale-[0.99]">
+              <span id="gen-btn-icon">🚀</span>
+              <span id="gen-btn-text" data-i18n="btn_generate_viral">生成地道单行神评</span>
+            </button>
+            <button onclick="shuffleViralComments()" class="py-2.5 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 transition flex items-center gap-1.5" title="换一批神评">
+              <span>🎲</span>
+              <span data-i18n="btn_shuffle">换一批</span>
             </button>
             <button onclick="copyDeepSeekPromptForReddit()" class="py-2.5 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 transition flex items-center gap-1.5" title="Copy DeepSeek R1 Prompt">
               <span>🧠</span>
-              <span data-i18n="btn_copy_ds_prompt">复制 DeepSeek 提示词</span>
+              <span data-i18n="btn_copy_ds_prompt">复制提示词</span>
             </button>
           </div>
         </div>
@@ -617,6 +640,56 @@
     <span id="toast-text">已复制到剪贴板</span>
   </div>
 
+  <!-- API SETTINGS MODAL -->
+  <div id="api-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-800">
+        <h3 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <span>⚙️</span> <span data-i18n="modal_api_title">AI 引擎直出配置 (可选)</span>
+        </h3>
+        <button onclick="closeApiModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white text-lg leading-none">&times;</button>
+      </div>
+
+      <div class="text-xs text-slate-500 leading-relaxed" data-i18n="modal_api_desc">
+        支持直接调用 <b>SiliconFlow (硅基流动)</b> 免费额度或 <b>DeepSeek 官方 API</b>。API Key 仅保存在您本地浏览器的 LocalStorage 中，0 服务端中转，100% 隐私安全。
+      </div>
+
+      <div class="space-y-3">
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-700 dark:text-slate-300 mb-1" data-i18n="lbl_api_provider">API 服务商：</label>
+          <select id="api-provider-select" onchange="onApiProviderChange()" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl p-2.5 text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-reddit-orange">
+            <option value="siliconflow">SiliconFlow 硅基流动 (推荐，赠送代金券/免费额度)</option>
+            <option value="deepseek">DeepSeek 官方 API (api.deepseek.com)</option>
+            <option value="custom">自定义兼容 OpenAI 的端点</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-700 dark:text-slate-300 mb-1">API Key：</label>
+          <input type="password" id="api-key-input" placeholder="sk-..." class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl p-2.5 text-xs font-mono text-slate-800 dark:text-slate-200 focus:outline-none focus:border-reddit-orange">
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-700 dark:text-slate-300 mb-1">API Base URL：</label>
+          <input type="text" id="api-base-input" value="https://api.siliconflow.cn/v1" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl p-2.5 text-xs font-mono text-slate-800 dark:text-slate-200 focus:outline-none focus:border-reddit-orange">
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-700 dark:text-slate-300 mb-1">模型代号 (Model ID)：</label>
+          <input type="text" id="api-model-input" value="deepseek-ai/DeepSeek-V3" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl p-2.5 text-xs font-mono text-slate-800 dark:text-slate-200 focus:outline-none focus:border-reddit-orange">
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between pt-2">
+        <button onclick="clearApiConfig()" class="text-xs text-rose-500 hover:underline">清除本地 Key</button>
+        <div class="flex items-center gap-2">
+          <button onclick="closeApiModal()" class="px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">取消</button>
+          <button onclick="saveApiConfig()" class="px-4 py-1.5 rounded-xl bg-reddit-orange hover:bg-reddit-hover text-white text-xs font-bold shadow-md transition">保存配置</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- CLIENT-SIDE APPLICATION LOGIC -->
   <script>
     // --- Internationalization (i18n) Dictionary ---
@@ -657,8 +730,18 @@
         playbook_sub: '选择比努力重要 100 倍，快速跑通比完美重要 1000 倍',
         aff_heading: 'PaceBowl 精选出海变现专线',
         aff_sub: '经过实测验证的开发者与海外高收益闭环',
+        lbl_engine_mode: '生成引擎:',
+        engine_local: '⚡ 智能本地即时 (免Key)',
+        engine_ai: '🤖 DeepSeek AI 直出',
+        btn_api_cfg: 'API 配置',
+        btn_shuffle: '换一批',
+        modal_api_title: 'AI 引擎直出配置 (可选)',
+        modal_api_desc: '支持直接调用 SiliconFlow (硅基流动) 免费额度或 DeepSeek 官方 API。API Key 仅保存在您本地浏览器的 LocalStorage 中，0 服务端中转，100% 隐私安全。',
+        lbl_api_provider: 'API 服务商：',
         toast_copied: '✓ 已复制到剪贴板！可以直接在 Reddit 发出。',
-        toast_ds_copied: '✓ DeepSeek 提示词已生成！可直接粘贴至 DeepSeek 官方或子站。'
+        toast_ds_copied: '✓ DeepSeek 提示词已生成！可直接粘贴至 DeepSeek 官方或子站。',
+        toast_gen_success: '✓ 已生成 5 条地道单行神评！点击卡片即可一键复制。',
+        toast_ai_fallback: '⚠️ AI 调用未就绪或未配 Key，已自动为您启用本地智能引擎生成！'
       },
       en: {
         suite_btn: 'PaceBowl Suite',
@@ -675,6 +758,14 @@
         rule_15words: 'Strictly ≤ 15 Words',
         lbl_scenarios: 'One-click high-traffic scenarios:',
         lbl_select_style: 'Select One-Liner Humor Style:',
+        lbl_engine_mode: 'Engine:',
+        engine_local: '⚡ Local Instant (No Key)',
+        engine_ai: '🤖 DeepSeek AI Direct',
+        btn_api_cfg: 'API Settings',
+        btn_shuffle: 'Shuffle',
+        modal_api_title: 'AI Direct Engine Configuration (Optional)',
+        modal_api_desc: 'Call SiliconFlow free tier or DeepSeek official API directly. Your API Key is stored only in your local browser LocalStorage, zero telemetry, 100% private.',
+        lbl_api_provider: 'API Provider:',
         btn_generate_viral: 'Generate Native One-Liners',
         btn_copy_ds_prompt: 'Copy DeepSeek Prompt',
         candidates_title: 'High-Upvote Candidates (Click to Copy)',
@@ -697,7 +788,9 @@
         aff_heading: 'PaceBowl Curated AI Power Stack',
         aff_sub: 'Battle-tested high-yield monetization routes for indie builders',
         toast_copied: '✓ Copied to clipboard! Ready to post on Reddit.',
-        toast_ds_copied: '✓ DeepSeek prompt copied! Paste into DeepSeek Studio.'
+        toast_ds_copied: '✓ DeepSeek prompt copied! Paste into DeepSeek Studio.',
+        toast_gen_success: '✓ Generated 5 native one-liners! Click any card to copy.',
+        toast_ai_fallback: '⚠️ AI call not ready or key unconfigured. Switched to local smart engine!'
       }
     };
 
@@ -724,6 +817,7 @@
       currentStyle = style;
       ['all', 'deadpan', 'self_dep', 'mic_drop', 'truth', 'hacker'].forEach(s => {
         const btn = document.getElementById('style-btn-' + s);
+        if (!btn) return;
         if (s === style) {
           btn.className = 'p-2 rounded-xl border border-reddit-orange/50 bg-reddit-orange/10 text-reddit-orange font-bold text-xs text-center transition';
         } else {
@@ -733,28 +827,150 @@
       generateViralComments();
     }
 
-    // --- Scenario Loader ---
+    // --- Scenario Presets ---
     const SCENARIOS = {
       cheating: "What will you do if your partner cheat on you?",
       music: "How do you feel about 8D Music?",
       pretend: "What is something everyone pretends to understand at work, but nobody actually does?",
       ai: "Will AI replace junior developers in 2 years?",
-      under50: "What is a purchase under $50 that genuinely changed your daily life?"
+      under50: "What is a purchase under $50 that genuinely changed your daily life?",
+      saas: "How to get the first 100 paying customers for a B2B SaaS?",
+      overtime: "How to stop being pressured into unpaid weekend overtime?",
+      debt: "How do you survive a 10-year-old legacy codebase with no tests?"
     };
 
     function loadScenario(key) {
-      document.getElementById('viral-topic-input').value = SCENARIOS[key] || '';
+      const input = document.getElementById('viral-topic-input');
+      if (input) input.value = SCENARIOS[key] || '';
       generateViralComments();
     }
 
-    // --- Instant Client-Side One-Liner Candidates Database ---
-    const PRELOADED_REPLIES = {
-      cheating: [
-        { style: "Deadpan Sarcasm", text: "Help them pack. Free delivery to their new place.", zh: "帮他们打包。免费送货到他们新家。" },
+    // --- Engine & API State Management ---
+    let currentEngineMode = localStorage.getItem('reddit_engine_mode') || 'local';
+
+    function initEngineMode() {
+      setEngineMode(currentEngineMode, false);
+    }
+
+    function setEngineMode(mode, triggerGen = true) {
+      currentEngineMode = mode;
+      localStorage.setItem('reddit_engine_mode', mode);
+      const localBtn = document.getElementById('mode-btn-local');
+      const aiBtn = document.getElementById('mode-btn-ai');
+      if (localBtn && aiBtn) {
+        if (mode === 'local') {
+          localBtn.className = 'px-2 py-1 rounded-lg text-[11px] font-bold bg-white dark:bg-slate-800 text-reddit-orange shadow-sm border border-slate-200 dark:border-slate-700 transition';
+          aiBtn.className = 'px-2 py-1 rounded-lg text-[11px] font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition flex items-center gap-1';
+        } else {
+          aiBtn.className = 'px-2 py-1 rounded-lg text-[11px] font-bold bg-white dark:bg-slate-800 text-indigo-500 shadow-sm border border-slate-200 dark:border-slate-700 transition flex items-center gap-1';
+          localBtn.className = 'px-2 py-1 rounded-lg text-[11px] font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition';
+          
+          const key = localStorage.getItem('reddit_api_key');
+          if (!key) {
+            openApiModal();
+          }
+        }
+      }
+      if (triggerGen) generateViralComments();
+    }
+
+    function openApiModal() {
+      const modal = document.getElementById('api-modal');
+      if (!modal) return;
+      document.getElementById('api-provider-select').value = localStorage.getItem('reddit_api_provider') || 'siliconflow';
+      document.getElementById('api-key-input').value = localStorage.getItem('reddit_api_key') || '';
+      document.getElementById('api-base-input').value = localStorage.getItem('reddit_api_base') || 'https://api.siliconflow.cn/v1';
+      document.getElementById('api-model-input').value = localStorage.getItem('reddit_api_model') || 'deepseek-ai/DeepSeek-V3';
+      modal.classList.remove('hidden');
+    }
+
+    function closeApiModal() {
+      const modal = document.getElementById('api-modal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function onApiProviderChange() {
+      const prov = document.getElementById('api-provider-select').value;
+      const baseEl = document.getElementById('api-base-input');
+      const modelEl = document.getElementById('api-model-input');
+      if (prov === 'deepseek') {
+        baseEl.value = 'https://api.deepseek.com';
+        modelEl.value = 'deepseek-chat';
+      } else if (prov === 'siliconflow') {
+        baseEl.value = 'https://api.siliconflow.cn/v1';
+        modelEl.value = 'deepseek-ai/DeepSeek-V3';
+      }
+    }
+
+    function saveApiConfig() {
+      const prov = document.getElementById('api-provider-select').value;
+      const key = document.getElementById('api-key-input').value.trim();
+      const base = document.getElementById('api-base-input').value.trim();
+      const model = document.getElementById('api-model-input').value.trim();
+
+      localStorage.setItem('reddit_api_provider', prov);
+      localStorage.setItem('reddit_api_key', key);
+      localStorage.setItem('reddit_api_base', base);
+      localStorage.setItem('reddit_api_model', model);
+
+      closeApiModal();
+      showToast('✓ API 配置已保存至本机浏览器！');
+      if (key && currentEngineMode === 'ai') {
+        generateViralComments();
+      }
+    }
+
+    function clearApiConfig() {
+      localStorage.removeItem('reddit_api_key');
+      document.getElementById('api-key-input').value = '';
+      showToast('已清除本地存储的 API Key');
+    }
+
+    // --- Rich Multi-Domain Knowledge Base for Client Synthesizer ---
+    const KNOWLEDGE_BASE = {
+      dating: [
+        { style: "Deadpan Sarcasm", text: "Help them pack. Free doorstep delivery to their new place.", zh: "帮他们打包。免费送货上门到他们新家。" },
         { style: "Self-Deprecating", text: "Congratulate them on finding someone with even lower standards than mine.", zh: "祝贺他们找到了眼光比我还要低的人。" },
         { style: "Mic Drop", text: "Change the locks. Let the front door do the talking.", zh: "换锁。让防盗门替我跟他们说话。" },
-        { style: "Hard Truth", text: "Checking phones at 3am isn't a relationship; it's an unpaid detective job. I leave.", zh: "凌晨三点查手机不是谈恋爱，是不发工资的私家侦探。我直接走。" },
-        { style: "Practical Hacker", text: "Screenshot the bank accounts, call a lawyer, and block everywhere before lunch.", zh: "截图银行账户，午饭前打给律师并拉黑全网。" }
+        { style: "Hard Truth", text: "Checking phones at 3am isn't a relationship; it's an unpaid detective job. Walk away.", zh: "凌晨三点查手机不是谈恋爱，是不发工资的私家侦探。直接走人。" },
+        { style: "Practical Hacker", text: "Screenshot the bank accounts, call a lawyer, and block everywhere before lunch.", zh: "截图银行账户，午饭前打给律师并全网拉黑。" },
+        { style: "Deadpan Sarcasm", text: "Send a thank-you note to the third party for taking out the trash.", zh: "给第三者发封感谢信，感谢他们主动清理垃圾。" },
+        { style: "Mic Drop", text: "Block, delete, and upgrade. Never look back.", zh: "拉黑，删除，换更好的。绝不回头。" },
+        { style: "Self-Deprecating", text: "I'm just relieved I don't have to pretend to like their family anymore.", zh: "我只是松了口气，终于不用假装喜欢他们一大家子人了。" }
+      ],
+      work: [
+        { style: "Deadpan Sarcasm", text: "Schedule a meeting to discuss why we have so many useless meetings.", zh: "发起一个新会议，专门讨论为什么我们有这么多无用的会议。" },
+        { style: "Self-Deprecating", text: "I just nod vigorously on Zoom calls until someone asks me a direct question.", zh: "在 Zoom 会议上我只负责拼命点头，直到有人直接点我名字。" },
+        { style: "Mic Drop", text: "Act your wage. If overtime isn't paid, your laptop closes at 5pm.", zh: "拿多少钱干多少事。不付加班费，下午五点电脑准时合盖。" },
+        { style: "Hard Truth", text: "HR exists to protect the company from lawsuits, not to protect you.", zh: "HR 的存在是为了保护公司免遭起诉，不是为了保护你。" },
+        { style: "Practical Hacker", text: "Document every instruction in email. Verbal promises don't survive layoffs.", zh: "把所有指令留存邮件备份。口头承诺在裁员名单面前一文不值。" },
+        { style: "Deadpan Sarcasm", text: "Another round of 'culture building' to distract from frozen compensation.", zh: "又一轮企业文化建设，纯粹用来掩盖薪资冻结的尴尬。" },
+        { style: "Mic Drop", text: "Your company loyalty is a one-way street. Polish your resume quarterly.", zh: "对公司的忠诚只是单行道。每季度更新一次简历保平安。" }
+      ],
+      dev: [
+        { style: "Deadpan Sarcasm", text: "AI won't replace developers. Seniors copy-pasting AI hallucinations will crash production.", zh: "AI 不会取代程序员。高级开发盲目粘贴 AI 幻觉代码才会搞崩生产环境。" },
+        { style: "Self-Deprecating", text: "Can't wait to be unemployed and blamed for AI-generated syntax errors.", zh: "迫不及待被裁员，然后因为 AI 写的语法错误背锅了。" },
+        { style: "Mic Drop", text: "Code is easy. Deciding what to build without client meltdowns is the job.", zh: "写代码容易。搞定甲方反复无常的需求才是真正的工作。" },
+        { style: "Hard Truth", text: "If your value was writing boilerplate CRUD, you were replaced in 2024.", zh: "如果你的价值只是写模板 CRUD，那你在 2024 年其实就已经被取代了。" },
+        { style: "Practical Hacker", text: "Learn git bisect and architecture. Debugging AI spaghetti code will pay $200k.", zh: "学好架构和调试。未来修复 AI 意面代码的时薪会极其昂贵。" },
+        { style: "Deadpan Sarcasm", text: "It works on my machine, so ship my machine to AWS.", zh: "我机器上能跑，直接把我电脑打包寄给 AWS 部署算了。" },
+        { style: "Mic Drop", text: "No tests, no deploy on Friday. Golden rule.", zh: "没单元测试，周五绝不上线。黄金铁律。" }
+      ],
+      saas: [
+        { style: "Deadpan Sarcasm", text: "Another AI wrapper built in a weekend looking for 1,000 paying users.", zh: "又一个周末搓出来的 AI 套壳，四处寻找一千个付费韭菜。" },
+        { style: "Self-Deprecating", text: "Spent 3 months building dark mode before talking to a single customer.", zh: "还没跟任何客户聊过，我先花三个月写了个夜间模式。" },
+        { style: "Mic Drop", text: "If nobody pays you upfront, you built a hobby, not a business.", zh: "如果没人预付费，那你做的是业余爱好，不是商业产品。" },
+        { style: "Hard Truth", text: "Distribution eats product for breakfast. 90% marketing, 10% coding.", zh: "渠道能力把产品本身当早餐吃。90% 在营销，10% 在写代码。" },
+        { style: "Practical Hacker", text: "Cold DM 50 people on Reddit experiencing the exact pain. Zero ad budget.", zh: "去 Reddit 顺着痛点精准私信 50 个真实发帖者。零广告预算获客。" },
+        { style: "Deadpan Sarcasm", text: "Pivot to an AI agent directory. It's the new dropshipping.", zh: "转型做 AI 导航站吧，这就是新时代的无货源跨境电商。" },
+        { style: "Mic Drop", text: "Talk to users until they cry or swipe their credit card.", zh: "跟用户死磕聊痛点，直到他们破防或者掏出信用卡。" }
+      ],
+      money: [
+        { style: "Deadpan Sarcasm", text: "A budget is just a mathematical confession of bad financial decisions.", zh: "预算只是对一系列愚蠢财务决策的数学忏悔录。" },
+        { style: "Self-Deprecating", text: "I skipped a $5 coffee today and still can't afford a mortgage.", zh: "今天省了 5 块钱拿铁，然后发现自己依然买不起房。" },
+        { style: "Mic Drop", text: "Buy nice or buy twice. Cheap stuff charges mental tax.", zh: "要么买好的，要么买两次。廉价货在暗中收心智税。" },
+        { style: "Hard Truth", text: "Lifestyle creep is silent murder. Keep your overhead below 40%.", zh: "消费主义膨胀是无声的谋杀。把你的固定开销压在 40% 以下。" },
+        { style: "Practical Hacker", text: "Automate index fund investments on payday before you even see the money.", zh: "发薪日秒设指数基金定投，在钱进眼帘前自动扣款。" }
       ],
       music: [
         { style: "Deadpan Sarcasm", text: "8D music: because regular songs weren't disorienting enough.", zh: "8D音乐：因为普通歌曲还不够让人晕头转向。" },
@@ -763,72 +979,198 @@
         { style: "Hard Truth", text: "If the melody is trash, panning it around your skull won't fix it.", zh: "旋律要是难听，在脑壳周围转一圈也变不成天籁。" },
         { style: "Practical Hacker", text: "High quality stereo headphones beat gimmicky phase shifting every single time.", zh: "高保真立体声耳机每次都能把这种噱头相位特效按在地上摩擦。" }
       ],
-      pretend: [
-        { style: "Deadpan Sarcasm", text: "Company values.", zh: "公司企业文化价值观。" },
-        { style: "Self-Deprecating", text: "Kubernetes. I just nod when DevOps speaks until they walk away.", zh: "Kubernetes。运维大哥一开口我就点头，直到他走开。" },
-        { style: "Mic Drop", text: "Agile story points.", zh: "敏捷开发的 Story Points 故事点。" },
-        { style: "Hard Truth", text: "The entire quarterly budget forecast. Pure astrologer horoscopes with Excel sheets.", zh: "季度预算预测。纯粹是用 Excel 表格算命看星座。" },
-        { style: "Practical Hacker", text: "Regular expressions. We all copy-paste from StackOverflow and pray.", zh: "正则表达式。我们都是从网上复制然后祈祷能跑通。" }
+      habits: [
+        { style: "Deadpan Sarcasm", text: "Procrastination is just making future-me suffer for present-me's luxury.", zh: "拖延症不过是让未来的自己，替现在的奢靡挥霍买单。" },
+        { style: "Self-Deprecating", text: "I set 6 alarms every morning just to ignore them in harmony.", zh: "我每天早上定 6 个闹钟，只为了心平气和地挨个点掉。" },
+        { style: "Mic Drop", text: "The secret is starting ugly. Action cures overthinking.", zh: "秘诀是硬着头皮丑陋开局。行动是一切过度内耗的解药。" },
+        { style: "Hard Truth", text: "Motivation is fickle. Discipline and environment design run the show.", zh: "动力虚无缥缈，自律与环境闭环才能掌控全局。" },
+        { style: "Practical Hacker", text: "Put your phone in another room at 10pm. Instant sleep upgrade.", zh: "晚上十点把手机锁在另一个房间。睡眠质量立刻指数级暴涨。" }
       ],
-      ai: [
-        { style: "Deadpan Sarcasm", text: "AI won't replace juniors. Seniors copy-pasting AI hallucinations will replace everyone.", zh: "AI 不会取代初级开发。高级开发闭眼粘贴 AI 幻觉代码才会取代所有人。" },
-        { style: "Self-Deprecating", text: "Can't wait to be unemployed and blamed for AI-generated syntax errors.", zh: "迫不及待被裁员，然后因为 AI 写的语法错误背锅了。" },
-        { style: "Mic Drop", text: "Code is easy. Deciding what to build without client meltdowns is the job.", zh: "写代码容易。搞定甲方反复无常的需求才是真正的工作。" },
-        { style: "Hard Truth", text: "If your value was writing boilerplate CRUD, you were replaced in 2024.", zh: "如果你的价值只是写模板 CRUD，那你在 2024 年其实就已经被取代了。" },
-        { style: "Practical Hacker", text: "Learn git bisect and architecture. Debugging AI spaghetti code will pay $200k.", zh: "学好架构和调试。未来修复 AI 意面代码的时薪会极其昂贵。" }
-      ],
-      under50: [
-        { style: "Deadpan Sarcasm", text: "A tongue scraper. Realized I was breathing toxic waste for 25 years.", zh: "刮舌苔器。突然意识到自己前 25 年嘴里都像化学武器。" },
-        { style: "Self-Deprecating", text: "A 10ft phone charger cord. Now I can rot in bed from any angle.", zh: "3米长手机充电线。现在我可以以任何姿势在床上躺尸了。" },
-        { style: "Mic Drop", text: "A good bidet attachment. Toilet paper feels like medieval torture now.", zh: "智能马桶喷头。用过之后觉得卫生纸简直是中世纪酷刑。" },
-        { style: "Hard Truth", text: "Blackout curtains. Cheap sleep medicine without a prescription.", zh: "遮光窗帘。不需要处方的最廉价助眠神药。" },
-        { style: "Practical Hacker", text: "A physical mechanical timer. Stops phone doomscrolling dead in its tracks.", zh: "一个机械厨房定时器。一秒治好手机无脑刷屏。" }
+      general: [
+        { style: "Deadpan Sarcasm", text: "I’d say 'it depends,' bill $200 an hour, and leave early.", zh: "我会说“这得看情况”，收每小时200刀，然后早退。" },
+        { style: "Self-Deprecating", text: "I came here looking for answers, only to realize I'm the problem.", zh: "我本来是来找答案的，结果发现问题原来出在我自己身上。" },
+        { style: "Mic Drop", text: "Not my circus, not my monkeys. Walk away peacefully.", zh: "不是我的马戏团，管不了这群猴子。安静走人。" },
+        { style: "Hard Truth", text: "Everyone preaches solutions; nobody wants to absorb the emotional friction.", zh: "每个人都在大谈解决方案，但没人愿意吞下情绪摩擦成本。" },
+        { style: "Practical Hacker", text: "Check the raw logs, eliminate the hype, and ship the simplest fix.", zh: "翻看原始日志，挤出所有虚头巴脑，交付最简解决方案。" },
+        { style: "Deadpan Sarcasm", text: "Sir, this is a Wendy's.", zh: "先生，这里是温蒂汉堡收银台。" },
+        { style: "Mic Drop", text: "Sleep on it for 24 hours. Most emergencies solve themselves.", zh: "先睡一觉放个24小时。绝大多数突发事件都会自己消失。" },
+        { style: "Hard Truth", text: "Comparison is the thief of joy, especially on social media.", zh: "盲目对比是吞噬快乐的窃贼，在社交媒体上尤其如此。" }
       ]
     };
 
-    function generateViralComments() {
-      const topic = document.getElementById('viral-topic-input').value.trim();
-      const container = document.getElementById('viral-results-container');
-      
-      let list = [];
-      // Match predefined or fallback generator
-      const lower = topic.toLowerCase();
-      if (lower.includes('cheat')) list = PRELOADED_REPLIES.cheating;
-      else if (lower.includes('8d') || lower.includes('music')) list = PRELOADED_REPLIES.music;
-      else if (lower.includes('pretend') || lower.includes('work')) list = PRELOADED_REPLIES.pretend;
-      else if (lower.includes('ai') || lower.includes('replace') || lower.includes('junior')) list = PRELOADED_REPLIES.ai;
-      else if (lower.includes('50') || lower.includes('purchase')) list = PRELOADED_REPLIES.under50;
-      else {
-        // Dynamic smart fallback
-        list = [
-          { style: "Deadpan Sarcasm", text: `I’d say "it depends," charge $200 an hour, then leave early.`, zh: `我会说“这得看情况”，收每小时200刀，然后早退。` },
-          { style: "Self-Deprecating", text: `I came here looking for answers, only to realize I'm the problem.`, zh: `我本来是来找答案的，结果发现问题原来出在我自己身上。` },
-          { style: "Mic Drop", text: `Not my circus, not my monkeys. Walk away.`, zh: `不是我的马戏团，管不了这群猴子。直接走人。` },
-          { style: "Hard Truth", text: `Everyone talks about the solution; nobody wants to pay the mental cost.`, zh: `每个人都在大谈解决方案，但没人愿意承担心智成本。` },
-          { style: "Practical Hacker", text: `Check the logs, verify the assumptions, and ship the simplest fix.`, zh: `翻看日志，核验假设，交付最简修复。` }
-        ];
+    function detectDomain(topic) {
+      const t = (topic || '').toLowerCase();
+      if (/cheat|partner|ex|girlfriend|boyfriend|tinder|breakup|marriage|divorce|出轨|伴侣|对象|恋爱|分手|结婚|渣男|渣女/.test(t)) return 'dating';
+      if (/work|job|boss|interview|salary|layoff|manager|agile|overtime|burnout|职场|老板|同事|加班|内卷|工资|薪水|离职|面试/.test(t)) return 'work';
+      if (/code|python|rust|javascript|react|ai|replace|junior|senior|dev|bug|docker|github|deploy|程序员|代码|架构|报错|开发|祖传/.test(t)) return 'dev';
+      if (/saas|mrr|stripe|launch|first 100|marketing|indie|product|users|client|独立开发|获客|推广|出海|出单|转化|变现/.test(t)) return 'saas';
+      if (/money|dollar|\$50|purchase|cheap|expensive|cost|budget|crypto|stock|invest|省钱|花钱|购买|投资|物有所值|平替/.test(t)) return 'money';
+      if (/8d|music|audio|headphone|sound|song|earbud|音乐|耳机|音质|旋律/.test(t)) return 'music';
+      if (/pretend|habit|sleep|advice|procrastinat|regret|burnout|routine|习惯|拖延|熬夜|自律|建议|人生/.test(t)) return 'habits';
+      return 'general';
+    }
+
+    function synthesizeSmartReplies(topic, style = 'all') {
+      const domain = detectDomain(topic);
+      let pool = [...(KNOWLEDGE_BASE[domain] || KNOWLEDGE_BASE.general)];
+      if (domain !== 'general') {
+        pool = pool.concat(KNOWLEDGE_BASE.general.slice(0, 3));
+      }
+      pool.sort(() => Math.random() - 0.5);
+
+      let filtered = pool;
+      if (style === 'deadpan') filtered = pool.filter(i => i.style.includes('Sarcasm'));
+      else if (style === 'self_dep') filtered = pool.filter(i => i.style.includes('Self'));
+      else if (style === 'mic_drop') filtered = pool.filter(i => i.style.includes('Mic'));
+      else if (style === 'truth') filtered = pool.filter(i => i.style.includes('Truth'));
+      else if (style === 'hacker') filtered = pool.filter(i => i.style.includes('Hacker'));
+
+      if (style === 'all') {
+        const targetStyles = ['Deadpan Sarcasm', 'Self-Deprecating', 'Mic Drop', 'Hard Truth', 'Practical Hacker'];
+        const chosen = [];
+        targetStyles.forEach(s => {
+          const match = pool.find(item => item.style === s && !chosen.includes(item));
+          if (match) chosen.push(match);
+        });
+        filtered = chosen.length >= 4 ? chosen : filtered.slice(0, 5);
       }
 
-      // Filter by style
-      let filtered = list;
-      if (currentStyle === 'deadpan') filtered = list.filter(i => i.style.includes('Sarcasm'));
-      else if (currentStyle === 'self_dep') filtered = list.filter(i => i.style.includes('Self'));
-      else if (currentStyle === 'mic_drop') filtered = list.filter(i => i.style.includes('Mic'));
-      else if (currentStyle === 'truth') filtered = list.filter(i => i.style.includes('Truth'));
-      else if (currentStyle === 'hacker') filtered = list.filter(i => i.style.includes('Hacker'));
+      return filtered.slice(0, 5);
+    }
 
-      document.getElementById('results-count').textContent = `${filtered.length} Candidates`;
+    // --- AI Direct API Caller ---
+    async function fetchAiOneLiners(topic) {
+      const provider = localStorage.getItem('reddit_api_provider') || 'siliconflow';
+      const apiKey = localStorage.getItem('reddit_api_key') || '';
+      const apiBase = localStorage.getItem('reddit_api_base') || (provider === 'deepseek' ? 'https://api.deepseek.com' : 'https://api.siliconflow.cn/v1');
+      const model = localStorage.getItem('reddit_api_model') || (provider === 'deepseek' ? 'deepseek-chat' : 'deepseek-ai/DeepSeek-V3');
+
+      const systemPrompt = `You are an elite Reddit Viral One-Liner Strategist.
+Given a Reddit post title or discussion topic, output 5 ultra-punchy, high-upvote comments following these strict rules:
+1. BREVITY: Strictly UNDER 15 WORDS per comment (mobile readers skip long essays; short punchlines get 10x upvotes).
+2. TONE: Zero AI throat-clearing, zero lecturing, no disclaimers. Authentic Reddit humor and native slang.
+3. ZERO LINKS: Absolutely no external links or hashtags.
+4. Output STRICTLY a valid JSON array of 5 objects, with NO markdown formatting:
+[
+  {"style": "Deadpan Sarcasm", "text": "English one-liner under 15 words", "zh": "地道中文意译"},
+  {"style": "Self-Deprecating", "text": "English one-liner under 15 words", "zh": "地道中文意译"},
+  {"style": "Mic Drop", "text": "English one-liner under 15 words", "zh": "地道中文意译"},
+  {"style": "Hard Truth", "text": "English one-liner under 15 words", "zh": "地道中文意译"},
+  {"style": "Practical Hacker", "text": "English one-liner under 15 words", "zh": "地道中文意译"}
+]`;
+
+      const resp = await fetch(`${apiBase.replace(/\/+$/, '')}/chat/completions`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`
+        },
+        body: JSON.stringify({
+          model: model,
+          messages: [
+            { role: 'system', content: systemPrompt },
+            { role: 'user', content: `Reddit topic: "${topic}"` }
+          ],
+          temperature: 0.85,
+          max_tokens: 600
+        })
+      });
+
+      if (!resp.ok) {
+        const errText = await resp.text();
+        throw new Error(`API error ${resp.status}: ${errText}`);
+      }
+
+      const data = await resp.json();
+      const rawContent = data.choices && data.choices[0] && data.choices[0].message ? data.choices[0].message.content : '';
+      let cleaned = rawContent.trim();
+      const jsonMatch = cleaned.match(/\[[\s\S]*\]/);
+      if (jsonMatch) cleaned = jsonMatch[0];
+      const parsed = JSON.parse(cleaned);
+      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      throw new Error('Invalid JSON format');
+    }
+
+    // --- Core Viral Generator ---
+    window.currentViralCandidates = [];
+
+    async function generateViralComments() {
+      const topicInput = document.getElementById('viral-topic-input');
+      const topic = (topicInput ? topicInput.value.trim() : '') || 'What will you do if your partner cheat on you?';
+      const genBtn = document.getElementById('btn-generate-viral');
+      const btnIcon = document.getElementById('gen-btn-icon');
+      const btnText = document.getElementById('gen-btn-text');
+
+      if (genBtn) {
+        genBtn.disabled = true;
+        if (btnIcon) btnIcon.innerHTML = `<svg class="animate-spin -ml-1 mr-1 h-3.5 w-3.5 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg>`;
+        if (btnText) btnText.textContent = currentLang === 'zh' ? '神评生成中...' : 'Generating...';
+      }
+
+      try {
+        if (currentEngineMode === 'ai') {
+          const apiKey = localStorage.getItem('reddit_api_key');
+          if (!apiKey) {
+            openApiModal();
+            throw new Error('No API Key');
+          }
+          const rawCandidates = await fetchAiOneLiners(topic);
+          let candidates = rawCandidates;
+          if (currentStyle === 'deadpan') candidates = rawCandidates.filter(i => i.style.includes('Sarcasm'));
+          else if (currentStyle === 'self_dep') candidates = rawCandidates.filter(i => i.style.includes('Self'));
+          else if (currentStyle === 'mic_drop') candidates = rawCandidates.filter(i => i.style.includes('Mic'));
+          else if (currentStyle === 'truth') candidates = rawCandidates.filter(i => i.style.includes('Truth'));
+          else if (currentStyle === 'hacker') candidates = rawCandidates.filter(i => i.style.includes('Hacker'));
+          renderViralCandidates(candidates.length ? candidates : rawCandidates);
+          showToast(I18N[currentLang].toast_gen_success || '✓ 已成功生成专属神评！');
+        } else {
+          await new Promise(r => setTimeout(r, 160));
+          const candidates = synthesizeSmartReplies(topic, currentStyle);
+          renderViralCandidates(candidates);
+          showToast(I18N[currentLang].toast_gen_success || '✓ 已生成 5 条地道单行神评！');
+        }
+      } catch (err) {
+        console.warn('AI fallback to local synthesizer:', err);
+        const candidates = synthesizeSmartReplies(topic, currentStyle);
+        renderViralCandidates(candidates);
+        if (currentEngineMode === 'ai') {
+          showToast(I18N[currentLang].toast_ai_fallback || '⚠️ 已启用本地智能引擎生成神评');
+        }
+      } finally {
+        if (genBtn) {
+          genBtn.disabled = false;
+          if (btnIcon) btnIcon.textContent = '🚀';
+          if (btnText) btnText.textContent = I18N[currentLang].btn_generate_viral;
+        }
+      }
+    }
+
+    function shuffleViralComments() {
+      generateViralComments();
+    }
+
+    function renderViralCandidates(list) {
+      window.currentViralCandidates = list || [];
+      const container = document.getElementById('viral-results-container');
+      const countEl = document.getElementById('results-count');
+      if (countEl) countEl.textContent = `${window.currentViralCandidates.length} Candidates`;
+
+      if (!container) return;
+      if (!list || list.length === 0) {
+        container.innerHTML = `<div class="p-6 text-center text-slate-400 text-xs">暂无候选评论，请在左侧输入话题并点击生成。</div>`;
+        return;
+      }
 
       let html = '';
-      filtered.forEach((item, idx) => {
+      window.currentViralCandidates.forEach((item, idx) => {
         const words = item.text.split(/\s+/).filter(Boolean).length;
         const badgeColor = words <= 15 ? 'text-emerald-500 bg-emerald-500/10 border-emerald-500/20' : 'text-amber-500 bg-amber-500/10 border-amber-500/20';
 
         html += `
-          <div onclick="copyText('${escapeHtml(item.text)}')" class="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-reddit-orange dark:hover:border-reddit-orange shadow-sm hover:shadow-md transition cursor-pointer group">
+          <div onclick="copyViralCandidate(${idx})" id="card-candidate-${idx}" class="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-reddit-orange dark:hover:border-reddit-orange shadow-sm hover:shadow-md transition cursor-pointer group active:scale-[0.99]">
             <div class="flex items-center justify-between mb-1.5">
-              <span class="text-[10px] font-bold uppercase tracking-wider text-reddit-orange font-mono">${item.style}</span>
-              <span class="text-[10px] font-mono px-1.5 py-0.2 rounded border ${badgeColor}">${words} words (Optimal)</span>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-reddit-orange font-mono">${escapeHtml(item.style)}</span>
+              <span class="text-[10px] font-mono px-1.5 py-0.5 rounded border ${badgeColor}">${words} words (Optimal)</span>
             </div>
             <div class="text-xs sm:text-sm font-semibold text-slate-900 dark:text-white group-hover:text-reddit-orange transition leading-relaxed">
               "${escapeHtml(item.text)}"
@@ -837,7 +1179,7 @@
               ${escapeHtml(item.zh)}
             </div>
             <div class="mt-2 pt-2 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-[10px] text-slate-400">
-              <span class="flex items-center gap-1"><span>👆</span> 点击一键复制</span>
+              <span class="flex items-center gap-1"><span id="copy-icon-${idx}">👆</span> <span id="copy-label-${idx}">点击一键复制</span></span>
               <span class="opacity-0 group-hover:opacity-100 text-reddit-orange font-semibold transition">Copy & Post &rarr;</span>
             </div>
           </div>
@@ -845,6 +1187,23 @@
       });
 
       container.innerHTML = html;
+    }
+
+    function copyViralCandidate(idx) {
+      const item = window.currentViralCandidates[idx];
+      if (!item) return;
+      copyText(item.text, I18N[currentLang].toast_copied);
+
+      const label = document.getElementById('copy-label-' + idx);
+      const icon = document.getElementById('copy-icon-' + idx);
+      if (label && icon) {
+        label.textContent = '已复制！';
+        icon.textContent = '✓';
+        setTimeout(() => {
+          label.textContent = '点击一键复制';
+          icon.textContent = '👆';
+        }, 1500);
+      }
     }
 
     function copyDeepSeekPromptForReddit() {
@@ -1098,36 +1457,9 @@ Strictly follow the [Reddit Viral One-Liner Formula]:
         }
       ];
 
-      const container = document.getElementById('titles-results-container');
-      let html = '';
-
-      titles.forEach(item => {
-        html += `
-          <div class="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-teal-500 shadow-sm transition space-y-2">
-            <div class="flex items-center justify-between">
-              <span class="text-[10px] font-bold uppercase tracking-wider text-teal-600 dark:text-teal-400 font-mono">${item.type}</span>
-              <span class="text-[10px] text-slate-400 font-mono">${item.sub}</span>
-            </div>
-            <div class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white leading-relaxed">
-              "${escapeHtml(item.title)}"
-            </div>
-            <div class="pt-2 flex items-center justify-end gap-2">
-              <button onclick="copyText('${escapeHtml(item.title)}')" class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-xs font-semibold text-slate-700 dark:text-slate-300 transition">
-                复制标题
-              </button>
-              <button onclick="copyPostTemplate('${escapeHtml(item.title)}', '${escapeHtml(tool)}', '${escapeHtml(pain)}', '${escapeHtml(usp)}')" class="px-2.5 py-1 rounded-lg bg-teal-600 hover:bg-teal-700 text-xs font-semibold text-white transition">
-                复制完整合规发帖模板 (带正文)
-              </button>
-            </div>
-          </div>
-        `;
-      });
-
-      container.innerHTML = html;
-    }
-
-    function copyPostTemplate(title, tool, pain, usp) {
-      const template = `**Title:** ${title}
+      window.currentShowcaseItems = titles.map(item => ({
+        ...item,
+        template: `**Title:** ${item.title}
 
 **Post Body:**
 Hey r/SideProject,
@@ -1142,16 +1474,78 @@ I decided to scratch my own itch and built **${tool}**:
 🌐 **Live Tool & GitHub Source**:
 To respect subreddit community guidelines and prevent AutoMod link filtering, the live website and MIT open-source repo links are pinned directly in my **Reddit profile sidebar (Social Links)**. Feel free to check my profile!
 
-Would genuinely love your brutal feedback, bug reports, or feature suggestions in the comments. Thank you!`;
+Would genuinely love your brutal feedback, bug reports, or feature suggestions in the comments. Thank you!`
+      }));
 
-      copyText(template, '✓ 完整合规发帖模板已复制！避开正文外链防吞封杀。');
+      const container = document.getElementById('titles-results-container');
+      let html = '';
+
+      window.currentShowcaseItems.forEach((item, idx) => {
+        html += `
+          <div class="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-teal-500 shadow-sm transition space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-teal-600 dark:text-teal-400 font-mono">${escapeHtml(item.type)}</span>
+              <span class="text-[10px] text-slate-400 font-mono">${escapeHtml(item.sub)}</span>
+            </div>
+            <div class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white leading-relaxed">
+              "${escapeHtml(item.title)}"
+            </div>
+            <div class="pt-2 flex items-center justify-end gap-2">
+              <button onclick="copyShowcaseTitle(${idx})" class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-xs font-semibold text-slate-700 dark:text-slate-300 transition">
+                复制标题
+              </button>
+              <button onclick="copyShowcaseTemplate(${idx})" class="px-2.5 py-1 rounded-lg bg-teal-600 hover:bg-teal-700 text-xs font-semibold text-white transition">
+                复制完整合规发帖模板 (带正文)
+              </button>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function copyShowcaseTitle(idx) {
+      const item = window.currentShowcaseItems[idx];
+      if (!item) return;
+      copyText(item.title, '✓ 标题已复制！');
+    }
+
+    function copyShowcaseTemplate(idx) {
+      const item = window.currentShowcaseItems[idx];
+      if (!item) return;
+      copyText(item.template, '✓ 完整合规发帖模板已复制！避开正文外链防吞封杀。');
     }
 
     // --- Helpers ---
     function copyText(text, msg) {
-      navigator.clipboard.writeText(text).then(() => {
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast(msg || I18N[currentLang].toast_copied);
+        }).catch(() => {
+          fallbackCopyText(text, msg);
+        });
+      } else {
+        fallbackCopyText(text, msg);
+      }
+    }
+
+    function fallbackCopyText(text, msg) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      ta.style.top = '-9999px';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      try {
+        document.execCommand('copy');
         showToast(msg || I18N[currentLang].toast_copied);
-      });
+      } catch (err) {
+        showToast('请手动复制选中内容');
+      }
+      document.body.removeChild(ta);
     }
 
     function showToast(msg) {
@@ -1213,6 +1607,7 @@ Would genuinely love your brutal feedback, bug reports, or feature suggestions i
 
     // --- Initial Init ---
     window.addEventListener('DOMContentLoaded', () => {
+      initEngineMode();
       loadScenario('cheating');
       filterSubreddits('all');
       generateShowcaseTitles();
