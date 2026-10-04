@@ -1578,22 +1578,55 @@
       openApiModal();
     }
 
+    const STRIPE_PACK_LINK = 'https://buy.stripe.com/5kQ4gz1Q7fBIcJD7Zd93y01';
+    const STRIPE_PRO_LINK = 'https://buy.stripe.com/28E28r1Q72OW6lf7Zd93y02';
+
     function checkoutStripe(type) {
       const email = currentUser ? encodeURIComponent(currentUser.email) : '';
-      const packLink = localStorage.getItem('stripe_pack_link') || '';
-      const proLink = localStorage.getItem('stripe_pro_link') || '';
+      const packLink = localStorage.getItem('stripe_pack_link') || STRIPE_PACK_LINK;
+      const proLink = localStorage.getItem('stripe_pro_link') || STRIPE_PRO_LINK;
       let targetUrl = type === 'pro' ? proLink : packLink;
 
       if (targetUrl) {
         if (email) {
-          targetUrl += (targetUrl.includes('?') ? '&' : '?') + 'prefilled_email=' + email + '&client_reference_id=' + (currentUser ? currentUser.token : 'guest');
+          targetUrl += (targetUrl.includes('?') ? '&' : '?') + 'prefilled_email=' + email + '&client_reference_id=' + (currentUser ? encodeURIComponent(currentUser.token) : 'guest');
         }
         window.open(targetUrl, '_blank');
-      } else {
-        // Fallback guidance if links are not yet configured in Stripe dashboard
-        const planName = type === 'pro' ? '出海 Pro 会员 ($9.90/月)' : '算力加油包 ($4.99/100点)';
-        const promptMsg = `💡 正在接入 Stripe ${planName} 支付通道！\n\n如果您是管理员，可在浏览器控制台或直接输入 Stripe Payment Link 配置生效。\n\n当前您也可以：\n1. 免费注册/登录账号立享 10 点/天；\n2. 使用卡密兑换码 REDDIT2026 免费领 20 点；\n3. 自备 API Key 自由无限使用！`;
-        alert(promptMsg);
+      }
+    }
+
+    function checkPaymentReturn() {
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const payment = urlParams.get('payment');
+        const plan = urlParams.get('plan');
+        const sessionId = urlParams.get('session_id');
+
+        if (payment === 'success' || sessionId) {
+          if (plan === 'pro') {
+            if (currentUser) {
+              currentUser.tier = 'pro';
+              currentUser.credits = Math.max(currentUser.credits || 0, 100);
+              saveUserSession(currentUser);
+            }
+            showToast('🎉 恭喜开通出海 Pro 会员！已为您解锁每日 100 点专属算力与高级特权！');
+          } else {
+            // Default 100 credits pack
+            if (currentUser) {
+              currentUser.credits = (currentUser.credits || 0) + 100;
+              saveUserSession(currentUser);
+            } else {
+              setGuestQuota(getGuestQuota() + 100);
+            }
+            showToast('🎉 支付成功！已为您充值 +100 点专属算力，立即可用！');
+          }
+
+          // Clean query params so refreshing doesn't re-trigger
+          const newUrl = window.location.pathname + window.location.hash;
+          window.history.replaceState({}, document.title, newUrl);
+        }
+      } catch (e) {
+        console.warn('Payment return check failed:', e);
       }
     }
 
@@ -2654,6 +2687,7 @@ Curious to hear your perspective — are you also feeling fatigued by bloated su
     // --- Initial Init ---
     window.addEventListener('DOMContentLoaded', () => {
       loadUserSession();
+      checkPaymentReturn();
       loadScenario('cheating');
       filterSubreddits('all');
       generateShowcaseTitles();
