@@ -1,6 +1,5 @@
 interface Env {
   USERS_KV?: any;
-  TURNSTILE_SECRET_KEY?: string;
   GOOGLE_CLIENT_ID?: string;
 }
 
@@ -10,7 +9,6 @@ interface AuthRequest {
   password?: string;
   token?: string;
   googleCredential?: string;
-  turnstileToken?: string;
 }
 
 function decodeJwtPayload(jwt: string): any {
@@ -31,26 +29,6 @@ function decodeJwtPayload(jwt: string): any {
   }
 }
 
-async function verifyTurnstileToken(token: string, ip: string, secretKey?: string): Promise<boolean> {
-  if (!token) return true;
-  const secret = secretKey || '1x0000000000000000000000000000000AA';
-  try {
-    const formData = new FormData();
-    formData.append('secret', secret);
-    formData.append('response', token);
-    if (ip) formData.append('remoteip', ip);
-
-    const res = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
-      method: 'POST',
-      body: formData,
-    });
-    const outcome = (await res.json()) as any;
-    return !!outcome.success;
-  } catch {
-    return true;
-  }
-}
-
 export const onRequestPost = async (context: { request: Request; env: Env }) => {
   const corsHeaders = {
     'Access-Control-Allow-Origin': '*',
@@ -60,31 +38,11 @@ export const onRequestPost = async (context: { request: Request; env: Env }) => 
   };
 
   try {
-    const clientIp = context.request.headers.get('CF-Connecting-IP') || '';
     let body: AuthRequest = {};
     try {
       body = (await context.request.json()) as AuthRequest;
     } catch {
       body = {};
-    }
-
-    // Cloudflare Turnstile anti-bot verification
-    if (body.turnstileToken) {
-      const isTurnstileValid = await verifyTurnstileToken(
-        body.turnstileToken,
-        clientIp,
-        context.env.TURNSTILE_SECRET_KEY
-      );
-      if (!isTurnstileValid) {
-        return new Response(
-          JSON.stringify({
-            success: false,
-            error: 'TURNSTILE_FAILED',
-            message: 'Cloudflare 人机防刷验证未通过，请重试',
-          }),
-          { status: 403, headers: corsHeaders }
-        );
-      }
     }
 
     const action = body.action || 'login';

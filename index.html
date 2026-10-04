@@ -23,9 +23,6 @@
   <!-- Google Identity Services (1-Click Fast Sign-In) -->
   <script src="https://accounts.google.com/gsi/client" async defer></script>
 
-  <!-- Cloudflare Turnstile (Anti-Bot Verification) -->
-  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
-
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -363,10 +360,7 @@
             </div>
           </div>
 
-          <!-- Cloudflare Turnstile Verification Container -->
-          <div class="flex flex-col items-center justify-center pt-1">
-            <div id="cf-turnstile-engine" class="min-h-[65px] flex items-center justify-center"></div>
-          </div>
+
 
           <!-- Action Buttons -->
           <div class="flex items-center gap-2 pt-2">
@@ -923,14 +917,7 @@
           <input type="password" id="auth-password-input" required minlength="6" placeholder="输入您的安全密码" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl p-2.5 text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-reddit-orange">
         </div>
 
-        <!-- Cloudflare Turnstile Anti-bot Protection -->
-        <div class="flex flex-col items-center justify-center pt-1">
-          <div id="cf-turnstile-auth" class="min-h-[65px] flex items-center justify-center"></div>
-          <div class="flex items-center gap-1.5 text-[10px] text-slate-400 mt-1">
-            <svg class="w-3 h-3 text-emerald-500 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
-            <span>Cloudflare Turnstile 智能反爬防刷验证保护</span>
-          </div>
-        </div>
+
 
         <div class="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-[11px] text-amber-700 dark:text-amber-400 flex items-start gap-2">
           <span class="text-sm">🎁</span>
@@ -1508,62 +1495,8 @@
       }
     }
 
-    // --- Cloudflare Turnstile & Google Identity Auth ---
-    try {
-      const urlSiteKey = new URLSearchParams(window.location.search).get('cf_sitekey');
-      if (urlSiteKey) localStorage.setItem('cf_turnstile_sitekey', urlSiteKey);
-    } catch (e) {}
-    const CF_TURNSTILE_SITEKEY = window.CF_TURNSTILE_SITEKEY || localStorage.getItem('cf_turnstile_sitekey') || '1x00000000000000000000AA';
+    // --- Google Identity Auth ---
     const GOOGLE_CLIENT_ID = window.GOOGLE_CLIENT_ID || localStorage.getItem('pacebowl_google_client_id') || '407408718192-k2o09689e4726m0c0qg7n9p3ekl8v720.apps.googleusercontent.com';
-    let authTurnstileWidgetId = null;
-    let engineTurnstileWidgetId = null;
-    window.currentTurnstileToken = '';
-
-    function initTurnstile() {
-      if (typeof turnstile === 'undefined') return;
-
-      const engineContainer = document.getElementById('cf-turnstile-engine');
-      if (engineContainer && engineTurnstileWidgetId === null) {
-        try {
-          engineTurnstileWidgetId = turnstile.render('#cf-turnstile-engine', {
-            sitekey: CF_TURNSTILE_SITEKEY,
-            theme: document.documentElement.classList.contains('dark') ? 'dark' : 'light',
-            callback: function(token) {
-              window.currentTurnstileToken = token;
-            },
-            'expired-callback': function() {
-              window.currentTurnstileToken = '';
-            },
-            'error-callback': function() {
-              console.warn('Turnstile engine notice');
-            }
-          });
-        } catch (e) {
-          console.warn('Turnstile engine init error:', e);
-        }
-      }
-
-      const authContainer = document.getElementById('cf-turnstile-auth');
-      if (authContainer && authTurnstileWidgetId === null) {
-        try {
-          authTurnstileWidgetId = turnstile.render('#cf-turnstile-auth', {
-            sitekey: CF_TURNSTILE_SITEKEY,
-            theme: document.documentElement.classList.contains('dark') ? 'dark' : 'light',
-            callback: function(token) {
-              window.currentTurnstileToken = token;
-            },
-            'expired-callback': function() {
-              window.currentTurnstileToken = '';
-            },
-            'error-callback': function() {
-              console.warn('Turnstile auth notice');
-            }
-          });
-        } catch (e) {
-          console.warn('Turnstile auth init error:', e);
-        }
-      }
-    }
 
     function initGoogleAuth() {
       if (typeof google === 'undefined' || !google.accounts || !google.accounts.id) {
@@ -1637,8 +1570,7 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             action: 'google',
-            email: email,
-            turnstileToken: window.currentTurnstileToken || ''
+            email: email
           })
         });
         const data = await resp.json();
@@ -1684,8 +1616,7 @@
           body: JSON.stringify({
             action: 'google',
             googleCredential: credential,
-            email: decoded?.email,
-            turnstileToken: window.currentTurnstileToken || ''
+            email: decoded?.email
           })
         });
         const data = await resp.json();
@@ -1745,8 +1676,7 @@
       switchAuthTab(tab);
       const modal = document.getElementById('auth-modal');
       if (modal) modal.classList.remove('hidden');
-      setTimeout(initTurnstile, 80);
-      setTimeout(initGoogleAuth, 120);
+      setTimeout(initGoogleAuth, 80);
     }
 
     function closeAuthModal() {
@@ -1783,18 +1713,10 @@
           body: JSON.stringify({
             action: currentAuthTab,
             email,
-            password: pass,
-            turnstileToken: window.currentTurnstileToken || ''
+            password: pass
           })
         });
         const data = await resp.json();
-        if (data.error === 'TURNSTILE_FAILED') {
-          showToast('⚠️ Cloudflare 防刷人机验证失败，请重试');
-          if (typeof turnstile !== 'undefined' && authTurnstileWidgetId !== null) {
-            try { turnstile.reset(authTurnstileWidgetId); } catch(e){}
-          }
-          return;
-        }
         if (data.success && data.user) {
           saveUserSession(data.user);
           closeAuthModal();
@@ -1828,9 +1750,6 @@
         if (submitBtn) {
           submitBtn.disabled = false;
           submitBtn.textContent = currentAuthTab === 'register' ? '立即注册立享 10 点算力' : '立即登录';
-        }
-        if (typeof turnstile !== 'undefined' && authTurnstileWidgetId !== null) {
-          try { turnstile.reset(authTurnstileWidgetId); } catch(e){}
         }
       }
     }
@@ -1967,28 +1886,17 @@
         },
         body: JSON.stringify({
           topic: topic,
-          userEmail: currentUser ? currentUser.email : 'guest',
-          turnstileToken: window.currentTurnstileToken || ''
+          userEmail: currentUser ? currentUser.email : 'guest'
         })
       });
 
       if (!resp.ok) {
         const errJson = await resp.json().catch(() => ({}));
-        if (errJson.error === 'TURNSTILE_FAILED') {
-          showToast('⚠️ Cloudflare 人机防刷验证未通过，请完成人机验证后再试');
-          if (typeof turnstile !== 'undefined' && engineTurnstileWidgetId !== null) {
-            try { turnstile.reset(engineTurnstileWidgetId); } catch(e){}
-          }
-        }
         throw new Error(errJson.message || `API error ${resp.status}`);
       }
 
       const data = await resp.json();
       if (data.candidates && Array.isArray(data.candidates) && data.candidates.length > 0) {
-        // Reset turnstile token for next request
-        if (typeof turnstile !== 'undefined' && engineTurnstileWidgetId !== null) {
-          try { turnstile.reset(engineTurnstileWidgetId); } catch(e){}
-        }
         // Deduct 1 credit if using official quota
         if (currentUser) {
           currentUser.credits = Math.max(0, (currentUser.credits || 1) - 1);
@@ -2930,9 +2838,8 @@ Curious to hear your perspective — are you also feeling fatigued by bloated su
         document.getElementById('theme-moon')?.classList.add('hidden');
       }
 
-      // Initialize Cloudflare Turnstile and Google Auth
-      setTimeout(initTurnstile, 300);
-      setTimeout(initGoogleAuth, 500);
+      // Initialize Google Auth
+      setTimeout(initGoogleAuth, 300);
     });
   </script>
 </body>
