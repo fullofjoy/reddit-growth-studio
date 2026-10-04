@@ -324,9 +324,12 @@
             <div id="ai-quota-bar-container" class="flex items-center justify-between text-[10px] text-slate-500 pt-1.5 border-t border-slate-200/60 dark:border-slate-800/60">
               <span class="flex items-center gap-1.5">
                 <span class="text-amber-500">●</span>
-                <span>注册用户每日享 5 点免费出海算力 (每日 00:00 自动补满)</span>
+                <span id="ai-quota-notice">免登录每日送 5 点，登录立享 10 点/天 (每日 00:00 自动补满)</span>
               </span>
-              <button onclick="openCreditModal()" class="text-reddit-orange hover:underline font-bold">算力充值 / 升级 Pro &rarr;</button>
+              <button onclick="openCreditModal()" class="text-reddit-orange hover:underline font-bold flex items-center gap-1">
+                <span>算力充值 / 升级 Pro</span>
+                <span>&rarr;</span>
+              </button>
             </div>
           </div>
 
@@ -962,16 +965,30 @@
         <button onclick="closeCreditModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white text-lg leading-none">&times;</button>
       </div>
 
+      <!-- Guest Upsell Banner (Shown only for guests) -->
+      <div id="modal-guest-upsell-banner" class="hidden p-3.5 rounded-xl bg-gradient-to-r from-reddit-orange/15 to-amber-500/15 border border-reddit-orange/30 flex items-center justify-between gap-3">
+        <div>
+          <div class="text-xs font-bold text-reddit-orange flex items-center gap-1.5">
+            <span>🎁 免费翻倍特权</span>
+            <span class="text-[10px] px-1.5 py-0.2 bg-reddit-orange text-white rounded font-mono font-bold">10点/天</span>
+          </div>
+          <p class="text-[11px] text-slate-600 dark:text-slate-300 mt-0.5">游客每日 5 点已用完？免费注册/登录账号，额度立即永久提升至 10 点/天！</p>
+        </div>
+        <button onclick="closeCreditModal(); openAuthModal('register');" class="px-3.5 py-2 rounded-lg bg-reddit-orange hover:bg-reddit-hover text-white text-xs font-bold flex-shrink-0 shadow-sm transition active:scale-95">
+          立即登录翻倍 &rarr;
+        </button>
+      </div>
+
       <!-- Current Quota Card -->
       <div class="p-4 rounded-xl bg-gradient-to-r from-amber-500/10 via-orange-500/5 to-transparent border border-amber-500/20 flex items-center justify-between">
         <div>
           <div class="text-[11px] text-amber-600 dark:text-amber-400 font-bold uppercase tracking-wider flex items-center gap-1.5">
-            <span>当前登录账号：</span>
+            <span>当前身份：</span>
             <span id="modal-user-email" class="font-mono text-slate-700 dark:text-slate-300 font-normal">未登录</span>
           </div>
           <div class="text-2xl font-black text-slate-900 dark:text-white mt-1 flex items-baseline gap-1.5">
             <span id="modal-credits-remaining" class="text-amber-500 font-mono">5</span>
-            <span class="text-xs text-slate-400 font-normal">/ 5 点今日额度</span>
+            <span id="modal-credits-total" class="text-xs text-slate-400 font-normal">/ 5 点今日额度</span>
           </div>
         </div>
         <div class="text-right">
@@ -986,14 +1003,14 @@
         <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 bg-slate-50/50 dark:bg-slate-800/40 transition space-y-2.5 flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between">
-              <span class="text-xs font-bold text-slate-900 dark:text-white">⚡ 单次加油包</span>
-              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-500 font-mono font-bold">$4.99</span>
+              <span class="text-xs font-bold text-slate-900 dark:text-white">⚡ 算力加油包</span>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-500 font-mono font-bold">$4.99 (一次性)</span>
             </div>
-            <p class="text-[11px] text-slate-500 leading-relaxed mt-1">立享 200 点出海大模型高速神评额度，永久有效不过期，单条成本仅 $0.02。</p>
+            <p class="text-[11px] text-slate-500 leading-relaxed mt-1">立享 100 点出海大模型专属神评算力，永久有效不过期，单条成本仅 $0.05。</p>
           </div>
-          <a href="https://pacebowl.com/pricing" target="_blank" rel="noopener" class="w-full py-2 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs text-center transition block shadow-sm">
-            充值加油包 ($4.99)
-          </a>
+          <button onclick="checkoutStripe('pack')" class="w-full py-2.5 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs text-center transition flex items-center justify-center gap-1.5 shadow-sm active:scale-95">
+            <span>充值 100 点 ($4.99)</span>
+          </button>
         </div>
 
         <!-- Plan 2: Pro Plan -->
@@ -1002,13 +1019,13 @@
           <div>
             <div class="flex items-center justify-between">
               <span class="text-xs font-bold text-slate-900 dark:text-white">👑 出海 Pro 会员</span>
-              <span class="text-[10px] px-1.5 py-0.5 rounded bg-reddit-orange/10 text-reddit-orange font-mono font-bold">$9.99/月</span>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-reddit-orange/10 text-reddit-orange font-mono font-bold">$9.90/月</span>
             </div>
-            <p class="text-[11px] text-slate-500 leading-relaxed mt-1">每日 100 点专属算力，解锁长篇发帖深度润色与优先并发通道。</p>
+            <p class="text-[11px] text-slate-500 leading-relaxed mt-1">每日 100 次神评额度 + AutoMod 敏感词深度防吞雷达 + 专线高速并发。</p>
           </div>
-          <a href="https://pacebowl.com/pricing" target="_blank" rel="noopener" class="w-full py-2 rounded-lg bg-gradient-to-r from-reddit-orange to-amber-500 hover:from-reddit-hover text-white font-bold text-xs text-center transition block shadow-sm">
-            订阅出海 Pro
-          </a>
+          <button onclick="checkoutStripe('pro')" class="w-full py-2.5 rounded-lg bg-gradient-to-r from-reddit-orange to-amber-500 hover:from-reddit-hover text-white font-bold text-xs text-center transition flex items-center justify-center gap-1.5 shadow-sm active:scale-95">
+            <span>开通 Pro 会员 ($9.90/月)</span>
+          </button>
         </div>
       </div>
 
@@ -1336,7 +1353,31 @@
 
     // --- User Authentication & Daily Credit Management ---
     const AUTH_USER_KEY = 'pacebowl_reddit_user';
+    const GUEST_QUOTA_KEY = 'pacebowl_guest_quota';
     let currentUser = null;
+
+    function getGuestQuota() {
+      const today = new Date().toISOString().slice(0, 10);
+      try {
+        const raw = localStorage.getItem(GUEST_QUOTA_KEY);
+        if (raw) {
+          const data = JSON.parse(raw);
+          if (data.date === today) {
+            return Math.max(0, typeof data.credits === 'number' ? data.credits : 5);
+          }
+        }
+      } catch (e) {}
+      const fresh = { credits: 5, date: today };
+      localStorage.setItem(GUEST_QUOTA_KEY, JSON.stringify(fresh));
+      return 5;
+    }
+
+    function setGuestQuota(credits) {
+      const today = new Date().toISOString().slice(0, 10);
+      const data = { credits: Math.max(0, credits), date: today };
+      localStorage.setItem(GUEST_QUOTA_KEY, JSON.stringify(data));
+      updateUserUI();
+    }
 
     function loadUserSession() {
       try {
@@ -1345,7 +1386,7 @@
           currentUser = JSON.parse(raw);
           const today = new Date().toISOString().slice(0, 10);
           if (currentUser.lastResetDate !== today) {
-            const dailyCap = currentUser.tier === 'pro' ? 100 : 5;
+            const dailyCap = currentUser.tier === 'pro' ? 100 : 10;
             if (currentUser.credits < dailyCap) {
               currentUser.credits = dailyCap;
             }
@@ -1379,25 +1420,39 @@
       const headerEmail = document.getElementById('header-user-email');
       const engineBadge = document.getElementById('engine-credits-badge');
       const modalCredits = document.getElementById('modal-credits-remaining');
+      const modalTotalCredits = document.getElementById('modal-credits-total');
       const modalUserEmail = document.getElementById('modal-user-email');
       const modalAuthBtnLabel = document.getElementById('modal-auth-btn-label');
+      const guestUpsellBanner = document.getElementById('modal-guest-upsell-banner');
+      const aiQuotaNotice = document.getElementById('ai-quota-notice');
 
       if (currentUser) {
+        const maxCap = currentUser.tier === 'pro' ? 100 : 10;
         if (navLoginBtn) navLoginBtn.classList.add('hidden');
         if (navUserContainer) navUserContainer.classList.remove('hidden');
-        if (headerCredits) headerCredits.textContent = `${currentUser.credits}/5 点`;
+        if (headerCredits) headerCredits.textContent = `${currentUser.credits}/${maxCap} 点`;
         if (headerEmail) headerEmail.textContent = currentUser.email.split('@')[0];
-        if (engineBadge) engineBadge.textContent = `剩余: ${currentUser.credits}/5 点`;
+        if (engineBadge) engineBadge.textContent = `剩余: ${currentUser.credits}/${maxCap} 点`;
         if (modalCredits) modalCredits.textContent = currentUser.credits;
-        if (modalUserEmail) modalUserEmail.textContent = currentUser.email;
+        if (modalTotalCredits) modalTotalCredits.textContent = `/ ${maxCap} 点今日额度`;
+        if (modalUserEmail) modalUserEmail.textContent = currentUser.email + (currentUser.tier === 'pro' ? ' (👑 Pro)' : '');
         if (modalAuthBtnLabel) modalAuthBtnLabel.textContent = '切换登录账号';
+        if (guestUpsellBanner) guestUpsellBanner.classList.add('hidden');
+        if (aiQuotaNotice) aiQuotaNotice.textContent = `已登录尊享 ${maxCap} 点/天官方出海算力 (每日 00:00 自动补满)`;
       } else {
-        if (navLoginBtn) navLoginBtn.classList.remove('hidden');
+        const guestQuota = getGuestQuota();
+        if (navLoginBtn) {
+          navLoginBtn.classList.remove('hidden');
+          navLoginBtn.innerHTML = `<span>⚡</span><span>免登录 ${guestQuota}/5 点</span><span class="ml-1 px-1.5 py-0.5 bg-white/20 rounded-md font-bold text-[10px] hidden sm:inline">登录翻倍(10点)</span>`;
+        }
         if (navUserContainer) navUserContainer.classList.add('hidden');
-        if (engineBadge) engineBadge.textContent = '登录领 5 点额度';
-        if (modalCredits) modalCredits.textContent = '0 (未登录)';
-        if (modalUserEmail) modalUserEmail.textContent = '未登录 (点击下方登录)';
+        if (engineBadge) engineBadge.textContent = `免登录: ${guestQuota}/5 点 (登录翻倍)`;
+        if (modalCredits) modalCredits.textContent = guestQuota;
+        if (modalTotalCredits) modalTotalCredits.textContent = `/ 5 点游客体验额度`;
+        if (modalUserEmail) modalUserEmail.textContent = '未登录游客 (建议登录升级)';
         if (modalAuthBtnLabel) modalAuthBtnLabel.textContent = '立即登录 / 注册';
+        if (guestUpsellBanner) guestUpsellBanner.classList.remove('hidden');
+        if (aiQuotaNotice) aiQuotaNotice.textContent = '免登录每日送 5 点，登录立享 10 点/天 (每日 00:00 自动补满)';
       }
     }
 
@@ -1414,13 +1469,13 @@
         if (tabReg) tabReg.className = 'py-1.5 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm font-bold transition';
         if (tabLogin) tabLogin.className = 'py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition';
         if (title) title.textContent = '注册 PaceBowl 账号';
-        if (sub) sub.textContent = '立即领取今日 5 点 PaceBowl AI 官方出海大模型专属算力';
-        if (btn) btn.textContent = '立即注册并领取 5 点算力';
+        if (sub) sub.textContent = '立即升级今日 10 点专属出海算力（免登录仅 5 点，登录立享翻倍！）';
+        if (btn) btn.textContent = '立即注册立享 10 点算力';
       } else {
         if (tabLogin) tabLogin.className = 'py-1.5 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm font-bold transition';
         if (tabReg) tabReg.className = 'py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition';
         if (title) title.textContent = '登录 PaceBowl 账号';
-        if (sub) sub.textContent = '解锁今日 5 点出海大模型专属神评算力';
+        if (sub) sub.textContent = '登录立享今日 10 点出海大模型专属神评算力';
         if (btn) btn.textContent = '立即登录';
       }
     }
@@ -1468,36 +1523,36 @@
         if (data.success && data.user) {
           saveUserSession(data.user);
           closeAuthModal();
-          showToast(data.message || (currentAuthTab === 'register' ? '🎉 注册成功！已获得 5 点出海算力！' : '🎉 登录成功！欢迎回来'));
+          showToast(data.message || (currentAuthTab === 'register' ? '🎉 注册成功！已解锁今日 10 点出海算力！' : '🎉 登录成功！欢迎回来'));
         } else {
           const fallbackUser = {
             email,
             token: `pb_${Date.now()}`,
-            credits: 5,
+            credits: 10,
             tier: 'free',
             lastResetDate: new Date().toISOString().slice(0, 10),
             createdAt: new Date().toISOString()
           };
           saveUserSession(fallbackUser);
           closeAuthModal();
-          showToast('🎉 欢迎使用 PaceBowl 出海神评工坊！已注入 5 点额度！');
+          showToast('🎉 欢迎使用 PaceBowl 出海神评工坊！已注入 10 点额度！');
         }
       } catch (err) {
         const fallbackUser = {
           email,
           token: `pb_${Date.now()}`,
-          credits: 5,
+          credits: 10,
           tier: 'free',
           lastResetDate: new Date().toISOString().slice(0, 10),
           createdAt: new Date().toISOString()
         };
         saveUserSession(fallbackUser);
         closeAuthModal();
-        showToast('🎉 登录成功！已为您同步 5 点出海大模型算力！');
+        showToast('🎉 登录成功！已为您同步 10 点出海大模型算力！');
       } finally {
         if (submitBtn) {
           submitBtn.disabled = false;
-          submitBtn.textContent = currentAuthTab === 'register' ? '立即注册并领取 5 点算力' : '立即登录';
+          submitBtn.textContent = currentAuthTab === 'register' ? '立即注册立享 10 点算力' : '立即登录';
         }
       }
     }
@@ -1521,6 +1576,25 @@
     function switchToByokFromModal() {
       closeCreditModal();
       openApiModal();
+    }
+
+    function checkoutStripe(type) {
+      const email = currentUser ? encodeURIComponent(currentUser.email) : '';
+      const packLink = localStorage.getItem('stripe_pack_link') || '';
+      const proLink = localStorage.getItem('stripe_pro_link') || '';
+      let targetUrl = type === 'pro' ? proLink : packLink;
+
+      if (targetUrl) {
+        if (email) {
+          targetUrl += (targetUrl.includes('?') ? '&' : '?') + 'prefilled_email=' + email + '&client_reference_id=' + (currentUser ? currentUser.token : 'guest');
+        }
+        window.open(targetUrl, '_blank');
+      } else {
+        // Fallback guidance if links are not yet configured in Stripe dashboard
+        const planName = type === 'pro' ? '出海 Pro 会员 ($9.90/月)' : '算力加油包 ($4.99/100点)';
+        const promptMsg = `💡 正在接入 Stripe ${planName} 支付通道！\n\n如果您是管理员，可在浏览器控制台或直接输入 Stripe Payment Link 配置生效。\n\n当前您也可以：\n1. 免费注册/登录账号立享 10 点/天；\n2. 使用卡密兑换码 REDDIT2026 免费领 20 点；\n3. 自备 API Key 自由无限使用！`;
+        alert(promptMsg);
+      }
     }
 
     function redeemCreditCode() {
@@ -1622,18 +1696,21 @@
       const provider = localStorage.getItem('reddit_api_provider') || 'pacebowl';
       const userKey = (localStorage.getItem('reddit_api_key') || '').trim();
 
-      // If user has not provided their own key, enforce login and credit quota
+      // If user has not provided their own key, enforce guest or login quota
       if (!userKey) {
-        if (!currentUser) {
-          openAuthModal('register');
-          showToast('✨ 请先登录或免费注册账号，即可免费领取今日 5 点出海大模型算力！');
-          throw new Error('AUTH_REQUIRED');
-        }
-
-        if (currentUser.credits <= 0) {
-          openCreditModal();
-          showToast(I18N[currentLang].toast_quota_exhausted || '⚠️ 今日免费 5 点 AI 额度已用尽！');
-          throw new Error('QUOTA_EXHAUSTED');
+        if (currentUser) {
+          if (currentUser.credits <= 0) {
+            openCreditModal();
+            showToast('⚠️ 今日 10 点额度已用尽！可充值加油包或开通 Pro 会员。');
+            throw new Error('QUOTA_EXHAUSTED');
+          }
+        } else {
+          const guestQuota = getGuestQuota();
+          if (guestQuota <= 0) {
+            openAuthModal('register');
+            showToast('⚠️ 今日免登录 5 点体验额度已用尽！立即免费登录，每日额度翻倍至 10 点/天！');
+            throw new Error('GUEST_QUOTA_EXHAUSTED');
+          }
         }
       }
 
@@ -1654,7 +1731,7 @@
           topic: topic,
           apiKey: userKey,
           provider: provider,
-          userEmail: currentUser ? currentUser.email : ''
+          userEmail: currentUser ? currentUser.email : 'guest'
         })
       });
 
@@ -1665,10 +1742,14 @@
 
       const data = await resp.json();
       if (data.candidates && Array.isArray(data.candidates) && data.candidates.length > 0) {
-        // Deduct 1 credit if using public quota
-        if (!userKey && currentUser) {
-          currentUser.credits = Math.max(0, (currentUser.credits || 1) - 1);
-          saveUserSession(currentUser);
+        // Deduct 1 credit if using official quota
+        if (!userKey) {
+          if (currentUser) {
+            currentUser.credits = Math.max(0, (currentUser.credits || 1) - 1);
+            saveUserSession(currentUser);
+          } else {
+            setGuestQuota(getGuestQuota() - 1);
+          }
         }
         return data.candidates;
       }
@@ -1730,17 +1811,21 @@ Given a Reddit post title or discussion topic, output 5 ultra-punchy, high-upvot
       const topic = (topicInput ? topicInput.value.trim() : '') || 'What will you do if your partner cheat on you?';
       const userKey = (localStorage.getItem('reddit_api_key') || '').trim();
 
-      // Check auth before initiating request
-      if (!userKey && !currentUser) {
-        openAuthModal('register');
-        showToast('✨ 请先登录或免费注册账号，即可立即获得今日 5 点大模型算力！');
-        return;
-      }
-
-      if (!userKey && currentUser && currentUser.credits <= 0) {
-        openCreditModal();
-        showToast(I18N[currentLang].toast_quota_exhausted || '⚠️ 今日免费 5 点 AI 额度已用尽！');
-        return;
+      // Check auth & quota before initiating request
+      if (!userKey) {
+        if (currentUser) {
+          if (currentUser.credits <= 0) {
+            openCreditModal();
+            showToast('⚠️ 今日 10 点额度已用尽！可充值加油包或开通 Pro 会员。');
+            return;
+          }
+        } else {
+          if (getGuestQuota() <= 0) {
+            openAuthModal('register');
+            showToast('⚠️ 今日免登录 5 点体验额度已用尽！立即免费登录，每日额度翻倍至 10 点/天！');
+            return;
+          }
+        }
       }
 
       const genBtn = document.getElementById('btn-generate-viral');
@@ -1765,7 +1850,7 @@ Given a Reddit post title or discussion topic, output 5 ultra-punchy, high-upvot
         showToast(I18N[currentLang].toast_ai_success || '✓ 官方大模型已生成 5 条地道神评！已消耗 1 点额度。');
       } catch (err) {
         console.warn('AI generation error:', err);
-        if (err && (err.message === 'AUTH_REQUIRED' || err.message === 'QUOTA_EXHAUSTED')) {
+        if (err && (err.message === 'GUEST_QUOTA_EXHAUSTED' || err.message === 'QUOTA_EXHAUSTED')) {
           // Modal already opened
         } else {
           showToast(I18N[currentLang].toast_ai_fallback || '⚠️ 算力通道响应异常，请稍后重试或使用自备 Key！');

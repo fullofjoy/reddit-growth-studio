@@ -49,7 +49,7 @@ export const onRequestPost = async (context: { request: Request; env: Env }) => 
     const user = {
       email,
       token,
-      credits: 5,
+      credits: 10,
       tier: 'free',
       lastResetDate: now.slice(0, 10),
       createdAt: now,
@@ -59,7 +59,7 @@ export const onRequestPost = async (context: { request: Request; env: Env }) => 
       JSON.stringify({
         success: true,
         user,
-        message: action === 'register' ? '注册成功！已为您注入今日 5 点专属出海算力。' : '登录成功！',
+        message: action === 'register' ? '🎉 注册成功！已为您解锁今日 10 点专属出海算力（权益翻倍）！' : '🎉 登录成功！已为您同步今日 10 点算力。',
       }),
       { headers: corsHeaders }
     );
