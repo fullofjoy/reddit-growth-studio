@@ -89,13 +89,13 @@ Given a Reddit post title or discussion topic, output 5 ultra-punchy, high-upvot
 2. TONE: Zero AI throat-clearing, zero lecturing, no disclaimers. Authentic Reddit humor, deadpan sarcasm, and native redditor slang.
 3. BANNED PHRASES: Never use "in this comprehensive guide", "delve into", "it's worth noting", "in conclusion", "let's explore", "game-changer", "without further ado".
 4. ZERO LINKS: Absolutely no external links or hashtags.
-5. Output STRICTLY a valid JSON array of 5 objects, with NO markdown formatting:
+5. Output STRICTLY a valid JSON array of 5 objects, with NO markdown formatting, including realistic estimated upvote counts (e.g. '2.8k', '1.6k', '940') and positive upvote rates (85-98):
 [
-  {"style": "Deadpan Sarcasm", "text": "English one-liner under 15 words", "zh": "地道中文意译"},
-  {"style": "Self-Deprecating", "text": "English one-liner under 15 words", "zh": "地道中文意译"},
-  {"style": "Mic Drop", "text": "English one-liner under 15 words", "zh": "地道中文意译"},
-  {"style": "Hard Truth", "text": "English one-liner under 15 words", "zh": "地道中文意译"},
-  {"style": "Practical Hacker", "text": "English one-liner under 15 words", "zh": "地道中文意译"}
+  {"style": "Deadpan Sarcasm", "text": "English one-liner under 15 words", "zh": "地道中文意译", "upvotes": "2.1k", "rate": 95},
+  {"style": "Self-Deprecating", "text": "English one-liner under 15 words", "zh": "地道中文意译", "upvotes": "1.1k", "rate": 91},
+  {"style": "Mic Drop", "text": "English one-liner under 15 words", "zh": "地道中文意译", "upvotes": "3.4k", "rate": 98},
+  {"style": "Hard Truth", "text": "English one-liner under 15 words", "zh": "地道中文意译", "upvotes": "1.7k", "rate": 93},
+  {"style": "Practical Hacker", "text": "English one-liner under 15 words", "zh": "地道中文意译", "upvotes": "780", "rate": 88}
 ]`;
 
     let resp = await fetch(PRIMARY_ENDPOINT, {

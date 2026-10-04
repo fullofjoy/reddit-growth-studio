@@ -1190,27 +1190,37 @@
       {
         style: "Deadpan Sarcasm",
         text: "Thank them for saving me 50% in the future divorce.",
-        zh: "感谢对方提前为我未来的离婚省下了 50% 的财产。"
+        zh: "感谢对方提前为我未来的离婚省下了 50% 的财产。",
+        upvotes: "2.4k",
+        rate: 96
       },
       {
         style: "Self-Deprecating",
         text: "Honestly impressed they found someone who could tolerate my existence twice.",
-        zh: "居然能找到两个能忍受我存在的人，我甚至有点佩服。"
+        zh: "居然能找到两个能忍受我存在的人，我甚至有点佩服。",
+        upvotes: "1.1k",
+        rate: 91
       },
       {
         style: "Mic Drop",
         text: "Change the Netflix password. Silence speaks volumes.",
-        zh: "直接把 Netflix 密码改掉。沉默就是最好的绝杀。"
+        zh: "直接把 Netflix 密码改掉。沉默就是最好的绝杀。",
+        upvotes: "3.2k",
+        rate: 98
       },
       {
         style: "Hard Truth",
         text: "Trash took itself to the curb. Don't chase the garbage truck.",
-        zh: "垃圾自己倒出去了，别追着垃圾车跑。"
+        zh: "垃圾自己倒出去了，别追着垃圾车跑。",
+        upvotes: "1.6k",
+        rate: 94
       },
       {
         style: "Practical Hacker",
         text: "Block, delete, hit the gym, and ship that SaaS feature.",
-        zh: "拉黑、删除、去健身房，然后连夜把你的出海功能上线。"
+        zh: "拉黑、删除、去健身房，然后连夜把你的出海功能上线。",
+        upvotes: "890",
+        rate: 88
       }
     ];
     window.allGeneratedCandidates = DEFAULT_DEMO_CANDIDATES;
@@ -2067,6 +2077,71 @@
       generateViralComments();
     }
 
+    function getCandidateUpvoteStats(item, idx) {
+      if (item && item.upvotes && item.rate) {
+        return { upvotes: item.upvotes, rate: item.rate };
+      }
+
+      // Hash text to make it consistent and deterministic for the same comment
+      let hash = 0;
+      const str = (item.text || '') + (item.style || '') + idx;
+      for (let i = 0; i < str.length; i++) {
+        hash = (hash << 5) - hash + str.charCodeAt(i);
+        hash |= 0;
+      }
+      hash = Math.abs(hash);
+
+      const style = (item.style || '').toLowerCase();
+      let baseVotes = 1500;
+      let spreadVotes = 800;
+      let baseRate = 93;
+      let spreadRate = 4;
+
+      if (style.includes('mic') || style.includes('绝杀') || style.includes('drop')) {
+        baseVotes = 2500;
+        spreadVotes = 1200;
+        baseRate = 96;
+        spreadRate = 3;
+      } else if (style.includes('sarcasm') || style.includes('毒舌') || style.includes('deadpan')) {
+        baseVotes = 1900;
+        spreadVotes = 900;
+        baseRate = 94;
+        spreadRate = 4;
+      } else if (style.includes('truth') || style.includes('清醒') || style.includes('hard')) {
+        baseVotes = 1400;
+        spreadVotes = 700;
+        baseRate = 92;
+        spreadRate = 5;
+      } else if (style.includes('self') || style.includes('自嘲') || style.includes('dep')) {
+        baseVotes = 950;
+        spreadVotes = 500;
+        baseRate = 89;
+        spreadRate = 5;
+      } else if (style.includes('hacker') || style.includes('极客') || style.includes('practical')) {
+        baseVotes = 680;
+        spreadVotes = 400;
+        baseRate = 86;
+        spreadRate = 6;
+      }
+
+      const rankMultiplier = Math.max(0.65, 1 - (idx * 0.08));
+      const rawVotes = Math.round((baseVotes + (hash % spreadVotes)) * rankMultiplier);
+      const rate = Math.min(99, Math.max(83, baseRate + (hash % spreadRate) - Math.floor(idx * 1.2)));
+
+      let formattedVotes = '';
+      if (rawVotes >= 1000) {
+        formattedVotes = (rawVotes / 1000).toFixed(1) + 'k';
+      } else {
+        formattedVotes = rawVotes.toString();
+      }
+
+      return {
+        upvotes: formattedVotes,
+        rawVotes: rawVotes,
+        rate: rate
+      };
+    }
+
     function renderViralCandidates(list) {
       window.currentViralCandidates = list || [];
       const container = document.getElementById('viral-results-container');
@@ -2083,6 +2158,8 @@
       window.currentViralCandidates.forEach((item, idx) => {
         const words = item.text.split(/\s+/).filter(Boolean).length;
         const badgeColor = words <= 15 ? 'text-emerald-500 bg-emerald-500/10 border-emerald-500/20' : 'text-amber-500 bg-amber-500/10 border-amber-500/20';
+        const stats = getCandidateUpvoteStats(item, idx);
+        const rateLabel = currentLang === 'zh' ? '赞率' : 'upvote';
 
         html += `
           <div onclick="copyViralCandidate(${idx})" id="card-candidate-${idx}" class="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-reddit-orange dark:hover:border-reddit-orange shadow-sm hover:shadow-md transition cursor-pointer group active:scale-[0.99]">
@@ -2090,7 +2167,10 @@
               <span class="text-[10px] font-bold uppercase tracking-wider text-reddit-orange font-mono">${escapeHtml(item.style)}</span>
               <div class="flex items-center gap-1.5">
                 <span class="text-[10px] font-mono px-1.5 py-0.5 rounded border ${badgeColor}">${words} words (Optimal)</span>
-                <span class="text-[10px] font-mono text-purple-500 bg-purple-500/10 px-1.5 py-0.5 rounded border border-purple-500/20">🔥 98% Upvote</span>
+                <span class="text-[10px] font-mono text-purple-600 dark:text-purple-400 bg-purple-500/10 px-1.5 py-0.5 rounded border border-purple-500/20 font-semibold flex items-center gap-1" title="预估高赞数与好评赞率">
+                  <span class="text-reddit-orange">▲ ${stats.upvotes}</span>
+                  <span class="text-purple-500/80">(${stats.rate}% ${rateLabel})</span>
+                </span>
               </div>
             </div>
             <div class="text-xs sm:text-sm font-semibold text-slate-900 dark:text-white group-hover:text-reddit-orange transition leading-relaxed">
