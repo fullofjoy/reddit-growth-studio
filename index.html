@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN" class="dark scroll-smooth">
+<html lang="zh-CN" class="dark scroll-smooth overflow-x-hidden">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -93,7 +93,7 @@
   }
   </script>
 </head>
-<body class="bg-slate-50 dark:bg-[#07090e] text-slate-800 dark:text-slate-200 min-h-screen flex flex-col font-sans transition-colors duration-200">
+<body class="bg-slate-50 dark:bg-[#07090e] text-slate-800 dark:text-slate-200 min-h-screen flex flex-col font-sans transition-colors duration-200 overflow-x-hidden w-full max-w-full">
 
   <!-- TOP GLOBAL HEADER -->
   <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-[#07090e]/80 border-b border-slate-200 dark:border-slate-800/80 transition-colors">
@@ -236,7 +236,7 @@
   </section>
 
   <!-- TAB NAVIGATION -->
-  <div class="max-w-6xl mx-auto px-3 sm:px-6 mb-6">
+  <div class="max-w-6xl mx-auto px-3 sm:px-6 mb-6 w-full max-w-full overflow-hidden">
     <div class="flex items-center justify-start sm:justify-center p-1.5 bg-slate-200/70 dark:bg-slate-900/90 backdrop-blur rounded-2xl border border-slate-300/50 dark:border-slate-800 max-w-3xl mx-auto overflow-x-auto whitespace-nowrap gap-1.5 scrollbar-none">
       <button onclick="switchTab('viral')" id="tab-btn-viral" class="flex-shrink-0 sm:flex-1 py-2 px-3.5 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 bg-white dark:bg-slate-800 text-reddit-orange shadow-sm">
         <span>🔥</span>
@@ -262,21 +262,21 @@
   </div>
 
   <!-- MAIN INTERACTIVE CONTAINER -->
-  <main class="flex-1 max-w-6xl mx-auto px-4 sm:px-6 w-full pb-16">
+  <main class="flex-1 max-w-6xl mx-auto px-3 sm:px-6 w-full pb-16 min-w-0 overflow-x-hidden">
 
     <!-- 1. VIRAL ONE-LINER ENGINE -->
-    <section id="panel-viral" class="space-y-6">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+    <section id="panel-viral" class="space-y-6 min-w-0 max-w-full">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 min-w-0 max-w-full">
         
         <!-- Left: Input & Prompt Config -->
-        <div class="lg:col-span-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-lg space-y-4">
-          <div class="flex items-center justify-between">
-            <h2 class="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 flex items-center gap-2">
-              <span class="w-2.5 h-2.5 rounded-full bg-reddit-orange"></span>
-              <span data-i18n="viral_input_title">目标 Reddit 帖子 / 提问</span>
+        <div class="lg:col-span-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-3.5 sm:p-5 shadow-lg space-y-4 min-w-0 max-w-full overflow-hidden">
+          <div class="flex flex-wrap items-center justify-between gap-2 min-w-0">
+            <h2 class="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 flex items-center gap-1.5 min-w-0">
+              <span class="w-2.5 h-2.5 rounded-full bg-reddit-orange shrink-0"></span>
+              <span data-i18n="viral_input_title" class="truncate">目标 Reddit 帖子 / 提问</span>
             </h2>
-            <div class="flex items-center gap-2">
-              <span class="text-[11px] font-mono text-emerald-500 bg-emerald-500/10 px-2 py-0.5 rounded-full" data-i18n="rule_15words">严格 &le; 15 词约束</span>
+            <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+              <span class="text-[10px] sm:text-[11px] font-mono text-emerald-500 bg-emerald-500/10 px-2 py-0.5 rounded-full" data-i18n="rule_15words">严格 &le; 15 词约束</span>
               <button onclick="pickRandomViralTopic()" class="text-[11px] font-bold text-reddit-orange hover:text-reddit-hover flex items-center gap-1 transition" data-i18n-title="btn_random_topic_title" title="随机抽取真实热门帖">
                 <span>🎲</span> <span data-i18n="btn_random_post">换个热门帖</span>
               </button>
@@ -284,12 +284,12 @@
           </div>
 
           <!-- Quick Scenario Presets -->
-          <div>
+          <div class="min-w-0 max-w-full">
             <div class="text-[11px] text-slate-500 mb-1.5 flex items-center justify-between">
               <span data-i18n="lbl_scenarios">高流量话题预设：</span>
               <span class="text-[10px] text-slate-400" data-i18n="lbl_scenarios_tip">支持中英文输入，自动识别实体</span>
             </div>
-            <div class="flex items-center gap-1.5 overflow-x-auto whitespace-nowrap pb-1.5 scrollbar-none sm:flex-wrap">
+            <div class="flex items-center gap-1.5 overflow-x-auto whitespace-nowrap pb-1.5 scrollbar-none sm:flex-wrap max-w-full">
               <button onclick="loadScenario('cheating')" data-i18n="sc_cheating" class="text-[11px] px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition flex-shrink-0">💔 出轨应对</button>
               <button onclick="loadScenario('cat_zoom')" data-i18n="sc_cat_zoom" class="text-[11px] px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition flex-shrink-0">🐱 猫翻屏幕</button>
               <button onclick="loadScenario('cybertruck')" data-i18n="sc_cybertruck" class="text-[11px] px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition flex-shrink-0">🚗 赛博皮卡</button>
@@ -303,18 +303,18 @@
           </div>
 
           <!-- Direct LLM Engine Bar -->
-          <div class="space-y-2 p-2.5 rounded-xl bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800/80">
+          <div class="space-y-2 p-2.5 rounded-xl bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800/80 min-w-0 max-w-full">
             <div class="flex flex-wrap items-center justify-between gap-2">
-              <div class="flex items-center gap-2">
-                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-reddit-orange/10 border border-reddit-orange/20 text-reddit-orange text-xs font-bold shadow-sm">
+              <div class="flex items-center gap-1.5 min-w-0">
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-reddit-orange/10 border border-reddit-orange/20 text-reddit-orange text-xs font-bold shadow-sm shrink-0">
                   <span class="w-2 h-2 rounded-full bg-reddit-orange animate-pulse"></span>
                   <span data-i18n="engine_ai">🤖 PaceBowl AI 官方出海大模型</span>
                 </span>
-                <span class="text-[10px] text-emerald-500 font-mono hidden sm:inline-flex items-center gap-1">
+                <span class="text-[10px] text-emerald-500 font-mono hidden sm:inline-flex items-center gap-1 shrink-0">
                   <span>●</span> <span data-i18n="engine_ready">出海神评专线就绪</span>
                 </span>
               </div>
-              <div class="flex items-center gap-2">
+              <div class="flex items-center gap-2 shrink-0">
                 <button onclick="openCreditModal()" class="text-[11px] text-amber-500 hover:text-amber-600 dark:hover:text-amber-400 flex items-center gap-1 transition px-2.5 py-1 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/20 font-mono font-bold" data-i18n-title="nav_credits_title" title="点击查看积分余额与充值">
                   <span>⚡</span> <span id="engine-credits-badge">剩余: 5/5 点</span>
                 </button>
@@ -322,12 +322,12 @@
             </div>
 
             <!-- Quota Mini Indicator -->
-            <div id="ai-quota-bar-container" class="flex items-center justify-between text-[10px] text-slate-500 pt-1.5 border-t border-slate-200/60 dark:border-slate-800/60">
-              <span class="flex items-center gap-1.5">
-                <span class="text-amber-500">●</span>
-                <span id="ai-quota-notice">免登录每日送 5 点，登录立享 10 点/天 (每日 00:00 自动补满)</span>
+            <div id="ai-quota-bar-container" class="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 text-[10px] text-slate-500 pt-1.5 border-t border-slate-200/60 dark:border-slate-800/60 min-w-0">
+              <span class="flex items-center gap-1.5 min-w-0">
+                <span class="text-amber-500 shrink-0">●</span>
+                <span id="ai-quota-notice" class="truncate sm:whitespace-normal">免登录每日送 5 点，登录立享 10 点/天 (每日 00:00 自动补满)</span>
               </span>
-              <button onclick="openCreditModal()" class="text-reddit-orange hover:underline font-bold flex items-center gap-1">
+              <button onclick="openCreditModal()" class="text-reddit-orange hover:underline font-bold flex items-center gap-1 shrink-0 self-start sm:self-auto">
                 <span data-i18n="btn_topup_pro">算力充值 / 升级 Pro</span>
                 <span>&rarr;</span>
               </button>
@@ -335,52 +335,52 @@
           </div>
 
           <!-- Topic Input & Live Detected Entities -->
-          <div class="space-y-1.5">
-            <textarea id="viral-topic-input" rows="3" oninput="updateDetectedEntities()" data-i18n-placeholder="topic_input_placeholder" placeholder="输入目标 Reddit 帖子标题或讨论话题（中英文皆可，例如：My cat knocked over my monitor during a Zoom call with the CEO，或 室友半夜打游戏连麦大叫）" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-xs font-mono text-slate-800 dark:text-slate-200 focus:outline-none focus:border-reddit-orange transition resize-none"></textarea>
+          <div class="space-y-1.5 min-w-0 max-w-full">
+            <textarea id="viral-topic-input" rows="3" oninput="updateDetectedEntities()" data-i18n-placeholder="topic_input_placeholder" placeholder="输入目标 Reddit 帖子标题或讨论话题（中英文皆可，例如：My cat knocked over my monitor during a Zoom call with the CEO，或 室友半夜打游戏连麦大叫）" class="w-full max-w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-xs font-mono text-slate-800 dark:text-slate-200 focus:outline-none focus:border-reddit-orange transition resize-none"></textarea>
             
-            <div id="detected-entities-bar" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 flex items-center justify-between text-[11px]">
-              <div class="flex items-center gap-1.5 overflow-hidden truncate">
-                <span class="text-slate-400" data-i18n="detected_entities_lbl">🎯 识别实体:</span>
+            <div id="detected-entities-bar" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 flex items-center justify-between text-[11px] min-w-0 max-w-full">
+              <div class="flex items-center gap-1.5 overflow-hidden truncate min-w-0">
+                <span class="text-slate-400 shrink-0" data-i18n="detected_entities_lbl">🎯 识别实体:</span>
                 <span id="detected-entities-text" class="font-mono text-reddit-orange font-semibold truncate">partner, cheat</span>
               </div>
-              <span id="detected-domain-tag" class="px-2 py-0.5 rounded text-[10px] font-mono bg-purple-500/10 text-purple-500 border border-purple-500/20 flex-shrink-0">Dating & Ex</span>
+              <span id="detected-domain-tag" class="px-2 py-0.5 rounded text-[10px] font-mono bg-purple-500/10 text-purple-500 border border-purple-500/20 shrink-0 ml-2">Dating & Ex</span>
             </div>
           </div>
 
           <!-- Primary Style Selection -->
-          <div>
+          <div class="min-w-0 max-w-full">
             <label class="block text-[11px] font-semibold text-slate-600 dark:text-slate-400 mb-1.5" data-i18n="lbl_select_style">选择神评风格流派：</label>
-            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
-              <button onclick="selectStyle('all')" id="style-btn-all" data-i18n="style_all" class="p-2 rounded-xl border border-reddit-orange/50 bg-reddit-orange/10 text-reddit-orange font-bold text-xs text-center transition">✨ 全部 5 种流派</button>
-              <button onclick="selectStyle('deadpan')" id="style-btn-deadpan" data-i18n="style_deadpan" class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs text-center transition">🕶️ 冷面毒舌</button>
-              <button onclick="selectStyle('self_dep')" id="style-btn-self_dep" data-i18n="style_self_dep" class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs text-center transition">🤡 自嘲反讽</button>
-              <button onclick="selectStyle('mic_drop')" id="style-btn-mic_drop" data-i18n="style_mic_drop" class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs text-center transition">⚡ 干净利落</button>
-              <button onclick="selectStyle('truth')" id="style-btn-truth" data-i18n="style_truth" class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs text-center transition">🧠 人间清醒</button>
-              <button onclick="selectStyle('hacker')" id="style-btn-hacker" data-i18n="style_hacker" class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs text-center transition">🛠️ 极客直给</button>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 min-w-0">
+              <button onclick="selectStyle('all')" id="style-btn-all" data-i18n="style_all" class="p-2 rounded-xl border border-reddit-orange/50 bg-reddit-orange/10 text-reddit-orange font-bold text-xs text-center transition truncate">✨ 全部 5 种流派</button>
+              <button onclick="selectStyle('deadpan')" id="style-btn-deadpan" data-i18n="style_deadpan" class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs text-center transition truncate">🕶️ 冷面毒舌</button>
+              <button onclick="selectStyle('self_dep')" id="style-btn-self_dep" data-i18n="style_self_dep" class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs text-center transition truncate">🤡 自嘲反讽</button>
+              <button onclick="selectStyle('mic_drop')" id="style-btn-mic_drop" data-i18n="style_mic_drop" class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs text-center transition truncate">⚡ 干净利落</button>
+              <button onclick="selectStyle('truth')" id="style-btn-truth" data-i18n="style_truth" class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs text-center transition truncate">🧠 人间清醒</button>
+              <button onclick="selectStyle('hacker')" id="style-btn-hacker" data-i18n="style_hacker" class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs text-center transition truncate">🛠️ 极客直给</button>
             </div>
           </div>
 
-
-
           <!-- Action Buttons -->
-          <div class="flex items-center gap-2 pt-2">
-            <button id="btn-generate-viral" onclick="generateViralComments()" class="flex-1 py-2.5 px-4 rounded-xl bg-gradient-to-r from-reddit-orange to-amber-500 hover:from-reddit-hover hover:to-amber-600 text-white font-bold text-xs shadow-md shadow-reddit-orange/20 transition flex items-center justify-center gap-2 active:scale-[0.99]">
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 pt-2 min-w-0 max-w-full">
+            <button id="btn-generate-viral" onclick="generateViralComments()" class="w-full sm:flex-1 py-2.5 px-4 rounded-xl bg-gradient-to-r from-reddit-orange to-amber-500 hover:from-reddit-hover hover:to-amber-600 text-white font-bold text-xs shadow-md shadow-reddit-orange/20 transition flex items-center justify-center gap-2 active:scale-[0.99]">
               <span id="gen-btn-icon">🚀</span>
               <span id="gen-btn-text" data-i18n="btn_generate_viral">生成地道单行神评</span>
             </button>
-            <button onclick="shuffleViralComments()" class="py-2.5 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 transition flex items-center gap-1.5" data-i18n-title="btn_shuffle_comments_title" title="换一批神评">
-              <span>🎲</span>
-              <span data-i18n="btn_shuffle">换一批</span>
-            </button>
-            <button onclick="copyDeepSeekPromptForReddit()" class="py-2.5 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 transition flex items-center gap-1.5" data-i18n-title="btn_copy_ds_prompt_title" title="Copy DeepSeek Prompt">
-              <span>🧠</span>
-              <span data-i18n="btn_copy_ds_prompt">复制提示词</span>
-            </button>
+            <div class="grid grid-cols-2 sm:flex sm:items-center gap-2">
+              <button onclick="shuffleViralComments()" class="py-2.5 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 transition flex items-center justify-center gap-1.5" data-i18n-title="btn_shuffle_comments_title" title="换一批神评">
+                <span>🎲</span>
+                <span data-i18n="btn_shuffle">换一批</span>
+              </button>
+              <button onclick="copyDeepSeekPromptForReddit()" class="py-2.5 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 transition flex items-center justify-center gap-1.5" data-i18n-title="btn_copy_ds_prompt_title" title="Copy DeepSeek Prompt">
+                <span>🧠</span>
+                <span data-i18n="btn_copy_ds_prompt">复制提示词</span>
+              </button>
+            </div>
           </div>
         </div>
 
         <!-- Right: Generated Candidate Cards -->
-        <div class="lg:col-span-6 space-y-3">
+        <div class="lg:col-span-6 space-y-3 min-w-0 max-w-full">
           <div class="flex items-center justify-between px-1">
             <h3 class="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 flex items-center gap-2">
               <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
@@ -390,7 +390,7 @@
           </div>
 
           <!-- Result Cards Container -->
-          <div id="viral-results-container" class="space-y-2.5">
+          <div id="viral-results-container" class="space-y-2.5 min-w-0 max-w-full">
             <!-- Initial placeholder rendered by JS -->
           </div>
         </div>
@@ -399,11 +399,11 @@
     </section>
 
     <!-- 2. AUTOMOD SPAM RISK RADAR -->
-    <section id="panel-radar" class="hidden space-y-6">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+    <section id="panel-radar" class="hidden space-y-6 min-w-0 max-w-full">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 min-w-0 max-w-full">
         
         <!-- Left: Input Area & Quick Sanitize Actions -->
-        <div class="lg:col-span-7 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-lg space-y-4">
+        <div class="lg:col-span-7 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-3.5 sm:p-5 shadow-lg space-y-4 min-w-0 max-w-full overflow-hidden">
           <div class="flex flex-wrap items-center justify-between gap-2">
             <h2 class="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 flex items-center gap-2">
               <span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>
@@ -445,7 +445,7 @@
         </div>
 
         <!-- Right: Radar Health Score & Diagnostics -->
-        <div class="lg:col-span-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-lg flex flex-col justify-between space-y-4">
+        <div class="lg:col-span-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-3.5 sm:p-5 shadow-lg flex flex-col justify-between space-y-4 min-w-0 max-w-full overflow-hidden">
           <div>
             <h3 class="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 mb-3" data-i18n="radar_score_title">
               AutoMod 存活率预测
@@ -493,8 +493,8 @@
     </section>
 
     <!-- 3. SUBREDDIT MATRIX DIRECTORY -->
-    <section id="panel-subreddits" class="hidden space-y-6">
-      <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-lg space-y-5">
+    <section id="panel-subreddits" class="hidden space-y-6 min-w-0 max-w-full">
+      <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-3.5 sm:p-5 shadow-lg space-y-5 min-w-0 max-w-full overflow-hidden">
         
         <!-- Controls & Filters -->
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
@@ -511,7 +511,7 @@
             <div class="relative">
               <input type="text" id="sub-search-input" oninput="filterSubreddits()" data-i18n-placeholder="sub_search_placeholder" placeholder="🔍 搜索版块或标签 (如 karma, ai, saas)..." class="w-full sm:w-56 bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-1.5 text-xs font-mono focus:outline-none focus:border-purple-500 transition">
             </div>
-            <div class="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0">
+            <div class="flex items-center gap-1.5 overflow-x-auto whitespace-nowrap pb-1 sm:pb-0 scrollbar-none max-w-full">
               <button onclick="filterSubreddits('all')" id="sub-filter-all" data-i18n="sub_filter_all" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-reddit-orange text-white transition flex-shrink-0">全部</button>
               <button onclick="filterSubreddits('tier0')" id="sub-filter-tier0" data-i18n="sub_filter_tier0" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 transition flex-shrink-0">🐣 0~50 破冰</button>
               <button onclick="filterSubreddits('tier1')" id="sub-filter-tier1" data-i18n="sub_filter_tier1" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 transition flex-shrink-0">🚀 50~200 技术</button>
@@ -538,11 +538,11 @@
     </section>
 
     <!-- 4. INDIE SHOWCASE TITLE CRAFTER & LIVE REDDIT SIMULATOR -->
-    <section id="panel-titles" class="hidden space-y-6">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+    <section id="panel-titles" class="hidden space-y-6 min-w-0 max-w-full">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 min-w-0 max-w-full">
         
         <!-- Left: Tool Inputs & Preset Switchers -->
-        <div class="lg:col-span-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-lg space-y-4">
+        <div class="lg:col-span-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-3.5 sm:p-5 shadow-lg space-y-4 min-w-0 max-w-full overflow-hidden">
           <div class="flex items-center justify-between">
             <h2 class="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 flex items-center gap-2">
               <span class="w-2.5 h-2.5 rounded-full bg-teal-500"></span>
@@ -604,7 +604,7 @@
         </div>
 
         <!-- Right: Live Reddit Post Simulator -->
-        <div class="lg:col-span-7 space-y-4">
+        <div class="lg:col-span-7 space-y-4 min-w-0 max-w-full">
           <div class="flex items-center justify-between">
             <h3 class="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 flex items-center gap-2">
               <span class="w-2.5 h-2.5 rounded-full bg-reddit-orange"></span>
@@ -669,16 +669,18 @@
           </div>
 
           <!-- Bottom Action Buttons -->
-          <div class="flex items-center justify-end gap-2 pt-1">
-            <button onclick="copyCurrentShowcaseTitle()" class="px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 transition flex items-center gap-1.5">
-              <span>📋</span>
-              <span data-i18n="btn_copy_cur_title">复制当前标题</span>
-            </button>
-            <button onclick="copyCurrentShowcaseBody()" class="px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 transition flex items-center gap-1.5">
-              <span>📄</span>
-              <span data-i18n="btn_copy_cur_body">复制当前正文</span>
-            </button>
-            <button onclick="copyCurrentShowcaseFull()" class="px-3.5 py-2 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs shadow-md transition flex items-center gap-1.5">
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-end gap-2 pt-1 min-w-0 max-w-full">
+            <div class="grid grid-cols-2 sm:flex sm:items-center gap-2">
+              <button onclick="copyCurrentShowcaseTitle()" class="px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 transition flex items-center justify-center gap-1.5">
+                <span>📋</span>
+                <span data-i18n="btn_copy_cur_title">复制当前标题</span>
+              </button>
+              <button onclick="copyCurrentShowcaseBody()" class="px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 transition flex items-center justify-center gap-1.5">
+                <span>📄</span>
+                <span data-i18n="btn_copy_cur_body">复制当前正文</span>
+              </button>
+            </div>
+            <button onclick="copyCurrentShowcaseFull()" class="w-full sm:w-auto px-3.5 py-2 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs shadow-md transition flex items-center justify-center gap-1.5">
               <span>🚀</span>
               <span data-i18n="btn_copy_cur_full">复制全部 Markdown</span>
             </button>
@@ -2304,10 +2306,10 @@
         const zhHtml = (currentLang === 'zh' && item.zh) ? `<div class="text-[11px] text-slate-400 dark:text-slate-500 mt-1">${escapeHtml(item.zh)}</div>` : '';
 
         html += `
-          <div onclick="copyViralCandidate(${idx})" id="card-candidate-${idx}" class="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-reddit-orange dark:hover:border-reddit-orange shadow-sm hover:shadow-md transition cursor-pointer group active:scale-[0.99]">
-            <div class="flex items-center justify-between mb-1.5">
-              <span class="text-[10px] font-bold uppercase tracking-wider text-reddit-orange font-mono">${escapeHtml(item.style)}</span>
-              <div class="flex items-center gap-1.5">
+          <div onclick="copyViralCandidate(${idx})" id="card-candidate-${idx}" class="p-3 sm:p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-reddit-orange dark:hover:border-reddit-orange shadow-sm hover:shadow-md transition cursor-pointer group active:scale-[0.99] min-w-0 max-w-full overflow-hidden">
+            <div class="flex flex-wrap sm:flex-nowrap items-center justify-between gap-1.5 mb-1.5 min-w-0">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-reddit-orange font-mono truncate">${escapeHtml(item.style)}</span>
+              <div class="flex items-center gap-1.5 shrink-0 flex-wrap">
                 <span class="text-[10px] font-mono px-1.5 py-0.5 rounded border ${badgeColor}">${words} words (Optimal)</span>
                 <span class="text-[10px] font-mono text-purple-600 dark:text-purple-400 bg-purple-500/10 px-1.5 py-0.5 rounded border border-purple-500/20 font-semibold flex items-center gap-1" title="${currentLang === 'zh' ? '预估高赞数与好评赞率' : 'Estimated upvotes and positive ratio'}">
                   <span class="text-reddit-orange">▲ ${stats.upvotes}</span>
@@ -2315,7 +2317,7 @@
                 </span>
               </div>
             </div>
-            <div class="text-xs sm:text-sm font-semibold text-slate-900 dark:text-white group-hover:text-reddit-orange transition leading-relaxed">
+            <div class="text-xs sm:text-sm font-semibold text-slate-900 dark:text-white group-hover:text-reddit-orange transition leading-relaxed break-words">
               "${escapeHtml(item.text)}"
             </div>
             ${zhHtml}
