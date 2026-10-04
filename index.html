@@ -312,11 +312,8 @@
                 </span>
               </div>
               <div class="flex items-center gap-2">
-                <button onclick="openCreditModal()" class="text-[11px] text-amber-500 hover:text-amber-600 dark:hover:text-amber-400 flex items-center gap-1 transition px-2 py-0.5 rounded-lg hover:bg-amber-500/10 font-mono font-semibold" title="点击查看积分余额与充值">
+                <button onclick="openCreditModal()" class="text-[11px] text-amber-500 hover:text-amber-600 dark:hover:text-amber-400 flex items-center gap-1 transition px-2.5 py-1 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/20 font-mono font-bold" title="点击查看积分余额与充值">
                   <span>⚡</span> <span id="engine-credits-badge">剩余: 5/5 点</span>
-                </button>
-                <button onclick="openApiModal()" class="text-[11px] text-slate-500 hover:text-reddit-orange flex items-center gap-1 transition px-2 py-0.5 rounded-lg hover:bg-slate-200/60 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700" title="自备 API Key 配置 (BYOK)">
-                  <span>⚙️</span> <span data-i18n="btn_api_cfg">自备Key</span>
                 </button>
               </div>
             </div>
@@ -842,56 +839,6 @@
     <span id="toast-text">已复制到剪贴板</span>
   </div>
 
-  <!-- API SETTINGS MODAL -->
-  <div id="api-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4">
-      <div class="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-800">
-        <h3 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
-          <span>⚙️</span> <span data-i18n="modal_api_title">AI 引擎直出配置 (可选)</span>
-        </h3>
-        <button onclick="closeApiModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white text-lg leading-none">&times;</button>
-      </div>
-
-      <div class="text-xs text-slate-500 leading-relaxed" data-i18n="modal_api_desc">
-        默认通过 PaceBowl 官方云端专线出海神评大模型（支持每日积分配额）。高级用户亦可自备 <b>DeepSeek 官方 API</b> 或 <b>SiliconFlow (硅基流动)</b> 私有 Key。私有 Key 仅保存在您本地浏览器的 LocalStorage 中，0 服务端存储，100% 隐私安全。
-      </div>
-
-      <div class="space-y-3">
-        <div>
-          <label class="block text-[11px] font-semibold text-slate-700 dark:text-slate-300 mb-1" data-i18n="lbl_api_provider">API 服务商：</label>
-          <select id="api-provider-select" onchange="onApiProviderChange()" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl p-2.5 text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-reddit-orange">
-            <option value="pacebowl">PaceBowl AI 官方专线 (默认推荐/积分制)</option>
-            <option value="deepseek">DeepSeek 官方 API (api.deepseek.com)</option>
-            <option value="siliconflow">SiliconFlow 硅基流动 (DeepSeek-V3)</option>
-            <option value="custom">自定义兼容 OpenAI 的端点</option>
-          </select>
-        </div>
-
-        <div>
-          <label class="block text-[11px] font-semibold text-slate-700 dark:text-slate-300 mb-1">API Key：</label>
-          <input type="password" id="api-key-input" placeholder="sk-..." class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl p-2.5 text-xs font-mono text-slate-800 dark:text-slate-200 focus:outline-none focus:border-reddit-orange">
-        </div>
-
-        <div>
-          <label class="block text-[11px] font-semibold text-slate-700 dark:text-slate-300 mb-1">API Base URL：</label>
-          <input type="text" id="api-base-input" value="https://reddit.pacebowl.com/api" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl p-2.5 text-xs font-mono text-slate-800 dark:text-slate-200 focus:outline-none focus:border-reddit-orange">
-        </div>
-
-        <div>
-          <label class="block text-[11px] font-semibold text-slate-700 dark:text-slate-300 mb-1">模型代号 (Model ID)：</label>
-          <input type="text" id="api-model-input" value="PaceBowl-AI-Flash" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl p-2.5 text-xs font-mono text-slate-800 dark:text-slate-200 focus:outline-none focus:border-reddit-orange">
-        </div>
-      </div>
-
-      <div class="flex items-center justify-between pt-2">
-        <button onclick="clearApiConfig()" class="text-xs text-rose-500 hover:underline">清除本地 Key</button>
-        <div class="flex items-center gap-2">
-          <button onclick="closeApiModal()" class="px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">取消</button>
-          <button onclick="saveApiConfig()" class="px-4 py-1.5 rounded-xl bg-reddit-orange hover:bg-reddit-hover text-white text-xs font-bold shadow-md transition">保存配置</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- AUTH MODAL (LOGIN / REGISTER) -->
   <div id="auth-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 hidden">
@@ -943,9 +890,7 @@
       </form>
 
       <div class="text-center text-[11px] text-slate-400">
-        <span>已有 Key？支持通过</span>
-        <button onclick="closeAuthModal(); openApiModal();" class="text-reddit-orange hover:underline font-medium">自备 Key (BYOK)</button>
-        <span>直接调用</span>
+        <span>🛡️ PaceBowl AI 官方专线直连 • 免配 Key 极速出词</span>
       </div>
     </div>
   </div>
@@ -1044,11 +989,11 @@
         </div>
       </div>
 
-      <!-- Fallback / BYOK Option Links -->
+      <!-- Footer Note & Account Switch -->
       <div class="pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs">
-        <button onclick="switchToByokFromModal()" class="text-slate-500 hover:text-indigo-500 transition flex items-center gap-1">
-          <span>⚙️</span> <span>自备 API Key 自由使用 (BYOK)</span>
-        </button>
+        <span class="text-slate-400 flex items-center gap-1">
+          <span>🔒</span> <span>Stripe 官方安全结算 • 实时到账</span>
+        </span>
         <button onclick="closeCreditModal(); openAuthModal('login');" class="text-slate-500 hover:text-reddit-orange transition flex items-center gap-1">
           <span>👤</span> <span id="modal-auth-btn-label">切换登录账号</span>
         </button>
@@ -1098,21 +1043,17 @@
         aff_sub: '经过实测验证的开发者与海外高收益闭环',
         lbl_engine_mode: '生成引擎:',
         engine_ai: '🤖 PaceBowl AI 官方出海大模型',
-        btn_api_cfg: '自备Key',
         btn_shuffle: '换一批',
         btn_random_post: '换个热门帖',
         btn_auto_sanitize: '一键净化防吞',
         btn_copy_sanitized: '复制文本',
         simulator_title: 'Reddit 原生发帖预览模拟器',
-        modal_api_title: 'AI 引擎直出配置 (可选)',
-        modal_api_desc: '默认通过 PaceBowl 官方云端专线出海神评大模型（支持每日积分配额）。高级用户亦可自备 DeepSeek 官方 API 或 SiliconFlow (硅基流动) 私有 Key。私有 Key 仅保存在您本地浏览器的 LocalStorage 中，0 服务端存储，100% 隐私安全。',
-        lbl_api_provider: 'API 服务商：',
         toast_copied: '✓ 已复制到剪贴板！可以直接在 Reddit 发出。',
         toast_ds_copied: '✓ DeepSeek 提示词已生成！可直接粘贴至 DeepSeek 官方或子站。',
         toast_gen_success: '✓ 已生成 5 条地道单行神评！点击卡片即可一键复制。',
         toast_ai_success: '✓ 官方大模型已生成 5 条地道神评！已消耗 1 点额度。',
-        toast_quota_exhausted: '⚠️ 今日免费 5 点 AI 额度已用尽，可领兑换码、充值加油包或自备 Key！',
-        toast_ai_fallback: '⚠️ 算力通道响应异常，请稍后重试或使用自备 Key！',
+        toast_quota_exhausted: '⚠️ 今日免费 AI 额度已用尽，可领取兑换码、充值加油包或开通 Pro 会员！',
+        toast_ai_fallback: '⚠️ 算力通道响应超时，请点击重新生成重试！',
         toast_sanitized: '✓ 已自动净化！已剥离高风险外链并优化商业词，存活率 100/100！',
         toast_body_copied: '✓ 已复制合规发帖正文！',
         toast_full_copied: '✓ 已复制完整发帖 Markdown！'
@@ -1134,15 +1075,11 @@
         lbl_select_style: 'Select One-Liner Humor Style:',
         lbl_engine_mode: 'Engine:',
         engine_ai: '🤖 PaceBowl AI Global Model',
-        btn_api_cfg: 'BYOK API Key',
         btn_shuffle: 'Shuffle',
         btn_random_post: 'Random Topic',
         btn_auto_sanitize: 'Auto-Sanitize & Fix',
         btn_copy_sanitized: 'Copy Text',
         simulator_title: 'Live Reddit Post Simulator',
-        modal_api_title: 'AI Direct Engine Configuration (Optional)',
-        modal_api_desc: 'Powered by PaceBowl Official Global AI Model with daily credit quota. Power users can also bring their own DeepSeek or SiliconFlow API Key. Key is stored locally in your browser LocalStorage with zero telemetry.',
-        lbl_api_provider: 'API Provider:',
         btn_generate_viral: 'Generate Native One-Liners',
         btn_copy_ds_prompt: 'Copy Prompt',
         candidates_title: 'High-Upvote Candidates (Click to Copy)',
@@ -1168,8 +1105,8 @@
         toast_ds_copied: '✓ DeepSeek prompt copied! Paste into DeepSeek Studio.',
         toast_gen_success: '✓ Generated 5 native one-liners! Click any card to copy.',
         toast_ai_success: '✓ PaceBowl AI generated 5 native one-liners! 1 credit consumed.',
-        toast_quota_exhausted: '⚠️ Daily 5 free AI credits exhausted! Redeem code, upgrade or use BYOK.',
-        toast_ai_fallback: '⚠️ AI service temporary error, please retry or use your own API Key!',
+        toast_quota_exhausted: '⚠️ Daily free AI credits exhausted! Redeem a code, refill fuel pack or upgrade to Pro.',
+        toast_ai_fallback: '⚠️ AI service response timeout, please click regenerate to retry!',
         toast_sanitized: '✓ Sanitized! Stripped links and promo words, Health is now 100/100!',
         toast_body_copied: '✓ Compliant post body copied!',
         toast_full_copied: '✓ Full markdown post copied!'
@@ -1574,11 +1511,6 @@
       if (modal) modal.classList.add('hidden');
     }
 
-    function switchToByokFromModal() {
-      closeCreditModal();
-      openApiModal();
-    }
-
     const STRIPE_PACK_LINK = 'https://buy.stripe.com/5kQ4gz1Q7fBIcJD7Zd93y01';
     const STRIPE_PRO_LINK = 'https://buy.stripe.com/28E28r1Q72OW6lf7Zd93y02';
 
@@ -1669,90 +1601,22 @@
       }
     }
 
-    // --- API Configuration & BYOK ---
-    function openApiModal() {
-      const modal = document.getElementById('api-modal');
-      if (!modal) return;
-      document.getElementById('api-provider-select').value = localStorage.getItem('reddit_api_provider') || 'pacebowl';
-      document.getElementById('api-key-input').value = localStorage.getItem('reddit_api_key') || '';
-      document.getElementById('api-base-input').value = localStorage.getItem('reddit_api_base') || 'https://reddit.pacebowl.com/api';
-      document.getElementById('api-model-input').value = localStorage.getItem('reddit_api_model') || 'PaceBowl-AI-Flash';
-      modal.classList.remove('hidden');
-    }
-
-    function closeApiModal() {
-      const modal = document.getElementById('api-modal');
-      if (modal) modal.classList.add('hidden');
-    }
-
-    function onApiProviderChange() {
-      const prov = document.getElementById('api-provider-select').value;
-      const baseEl = document.getElementById('api-base-input');
-      const modelEl = document.getElementById('api-model-input');
-      if (prov === 'pacebowl') {
-        baseEl.value = 'https://reddit.pacebowl.com/api';
-        modelEl.value = 'PaceBowl-AI-Flash';
-      } else if (prov === 'deepseek') {
-        baseEl.value = 'https://api.deepseek.com';
-        modelEl.value = 'deepseek-chat';
-      } else if (prov === 'siliconflow') {
-        baseEl.value = 'https://api.siliconflow.cn/v1';
-        modelEl.value = 'deepseek-ai/DeepSeek-V3';
-      }
-    }
-
-    function saveApiConfig() {
-      const prov = document.getElementById('api-provider-select').value;
-      const key = document.getElementById('api-key-input').value.trim();
-      const base = document.getElementById('api-base-input').value.trim();
-      const model = document.getElementById('api-model-input').value.trim();
-
-      localStorage.setItem('reddit_api_provider', prov);
-      localStorage.setItem('reddit_api_key', key);
-      localStorage.setItem('reddit_api_base', base);
-      localStorage.setItem('reddit_api_model', model);
-
-      closeApiModal();
-      showToast('✓ API 配置已保存至本机浏览器！');
-      if (key) {
-        generateViralComments();
-      }
-    }
-
-    function clearApiConfig() {
-      localStorage.removeItem('reddit_api_key');
-      document.getElementById('api-key-input').value = '';
-      showToast('已清除本地存储的私有 API Key');
-    }
-
     // --- Direct LLM Viral Comments Generation ---
     async function fetchAiOneLiners(topic) {
-      const provider = localStorage.getItem('reddit_api_provider') || 'pacebowl';
-      const userKey = (localStorage.getItem('reddit_api_key') || '').trim();
-
-      // If user has not provided their own key, enforce guest or login quota
-      if (!userKey) {
-        if (currentUser) {
-          if (currentUser.credits <= 0) {
-            openCreditModal();
-            showToast('⚠️ 今日 10 点额度已用尽！可充值加油包或开通 Pro 会员。');
-            throw new Error('QUOTA_EXHAUSTED');
-          }
-        } else {
-          const guestQuota = getGuestQuota();
-          if (guestQuota <= 0) {
-            openAuthModal('register');
-            showToast('⚠️ 今日免登录 5 点体验额度已用尽！立即免费登录，每日额度翻倍至 10 点/天！');
-            throw new Error('GUEST_QUOTA_EXHAUSTED');
-          }
+      // Check and enforce guest or login quota
+      if (currentUser) {
+        if (currentUser.credits <= 0) {
+          openCreditModal();
+          showToast('⚠️ 今日 10 点额度已用尽！可充值加油包或开通 Pro 会员。');
+          throw new Error('QUOTA_EXHAUSTED');
         }
-      }
-
-      // If custom provider (siliconflow / deepseek / custom) with user key, call directly
-      if (provider !== 'pacebowl' && userKey) {
-        const apiBase = localStorage.getItem('reddit_api_base') || (provider === 'deepseek' ? 'https://api.deepseek.com' : 'https://api.siliconflow.cn/v1');
-        const model = localStorage.getItem('reddit_api_model') || (provider === 'deepseek' ? 'deepseek-chat' : 'deepseek-ai/DeepSeek-V3');
-        return await fetchDirectOpenAi(apiBase, model, userKey, topic);
+      } else {
+        const guestQuota = getGuestQuota();
+        if (guestQuota <= 0) {
+          openAuthModal('register');
+          showToast('⚠️ 今日免登录 5 点体验额度已用尽！立即免费登录，每日额度翻倍至 10 点/天！');
+          throw new Error('GUEST_QUOTA_EXHAUSTED');
+        }
       }
 
       // PaceBowl Official LLM Proxy (/api/generate)
@@ -1763,8 +1627,6 @@
         },
         body: JSON.stringify({
           topic: topic,
-          apiKey: userKey,
-          provider: provider,
           userEmail: currentUser ? currentUser.email : 'guest'
         })
       });
@@ -1777,64 +1639,15 @@
       const data = await resp.json();
       if (data.candidates && Array.isArray(data.candidates) && data.candidates.length > 0) {
         // Deduct 1 credit if using official quota
-        if (!userKey) {
-          if (currentUser) {
-            currentUser.credits = Math.max(0, (currentUser.credits || 1) - 1);
-            saveUserSession(currentUser);
-          } else {
-            setGuestQuota(getGuestQuota() - 1);
-          }
+        if (currentUser) {
+          currentUser.credits = Math.max(0, (currentUser.credits || 1) - 1);
+          saveUserSession(currentUser);
+        } else {
+          setGuestQuota(getGuestQuota() - 1);
         }
         return data.candidates;
       }
       throw new Error('大模型未能生成有效候选格式');
-    }
-
-    async function fetchDirectOpenAi(apiBase, model, apiKey, topic) {
-      const systemPrompt = `You are an elite Reddit Viral One-Liner Strategist.
-Given a Reddit post title or discussion topic, output 5 ultra-punchy, high-upvote comments following these strict rules:
-1. BREVITY: Strictly UNDER 15 WORDS per comment (mobile readers skip long essays; short punchlines get 10x upvotes).
-2. TONE: Zero AI throat-clearing, zero lecturing, no disclaimers. Authentic Reddit humor and native slang.
-3. ZERO LINKS: Absolutely no external links or hashtags.
-4. Output STRICTLY a valid JSON array of 5 objects, with NO markdown formatting:
-[
-  {"style": "Deadpan Sarcasm", "text": "English one-liner under 15 words", "zh": "地道中文意译"},
-  {"style": "Self-Deprecating", "text": "English one-liner under 15 words", "zh": "地道中文意译"},
-  {"style": "Mic Drop", "text": "English one-liner under 15 words", "zh": "地道中文意译"},
-  {"style": "Hard Truth", "text": "English one-liner under 15 words", "zh": "地道中文意译"},
-  {"style": "Practical Hacker", "text": "English one-liner under 15 words", "zh": "地道中文意译"}
-]`;
-
-      const resp = await fetch(`${apiBase.replace(/\/+$/, '')}/chat/completions`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${apiKey}`
-        },
-        body: JSON.stringify({
-          model: model,
-          messages: [
-            { role: 'system', content: systemPrompt },
-            { role: 'user', content: `Reddit topic: "${topic}"` }
-          ],
-          temperature: 0.85,
-          max_tokens: 600
-        })
-      });
-
-      if (!resp.ok) {
-        const errText = await resp.text();
-        throw new Error(`API error ${resp.status}: ${errText}`);
-      }
-
-      const data = await resp.json();
-      const rawContent = data.choices && data.choices[0] && data.choices[0].message ? data.choices[0].message.content : '';
-      let cleaned = rawContent.trim();
-      const jsonMatch = cleaned.match(/\[[\s\S]*\]/);
-      if (jsonMatch) cleaned = jsonMatch[0];
-      const parsed = JSON.parse(cleaned);
-      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-      throw new Error('Invalid JSON format');
     }
 
     // --- Core Viral Generator ---
@@ -1843,22 +1656,19 @@ Given a Reddit post title or discussion topic, output 5 ultra-punchy, high-upvot
     async function generateViralComments() {
       const topicInput = document.getElementById('viral-topic-input');
       const topic = (topicInput ? topicInput.value.trim() : '') || 'What will you do if your partner cheat on you?';
-      const userKey = (localStorage.getItem('reddit_api_key') || '').trim();
 
       // Check auth & quota before initiating request
-      if (!userKey) {
-        if (currentUser) {
-          if (currentUser.credits <= 0) {
-            openCreditModal();
-            showToast('⚠️ 今日 10 点额度已用尽！可充值加油包或开通 Pro 会员。');
-            return;
-          }
-        } else {
-          if (getGuestQuota() <= 0) {
-            openAuthModal('register');
-            showToast('⚠️ 今日免登录 5 点体验额度已用尽！立即免费登录，每日额度翻倍至 10 点/天！');
-            return;
-          }
+      if (currentUser) {
+        if (currentUser.credits <= 0) {
+          openCreditModal();
+          showToast('⚠️ 今日 10 点额度已用尽！可充值加油包或开通 Pro 会员。');
+          return;
+        }
+      } else {
+        if (getGuestQuota() <= 0) {
+          openAuthModal('register');
+          showToast('⚠️ 今日免登录 5 点体验额度已用尽！立即免费登录，每日额度翻倍至 10 点/天！');
+          return;
         }
       }
 
@@ -1887,7 +1697,7 @@ Given a Reddit post title or discussion topic, output 5 ultra-punchy, high-upvot
         if (err && (err.message === 'GUEST_QUOTA_EXHAUSTED' || err.message === 'QUOTA_EXHAUSTED')) {
           // Modal already opened
         } else {
-          showToast(I18N[currentLang].toast_ai_fallback || '⚠️ 算力通道响应异常，请稍后重试或使用自备 Key！');
+          showToast(I18N[currentLang].toast_ai_fallback || '⚠️ 算力通道响应超时，请点击重新生成重试！');
           renderAiErrorBanner(err.message);
         }
       } finally {
@@ -1907,14 +1717,14 @@ Given a Reddit post title or discussion topic, output 5 ultra-punchy, high-upvot
           <div class="text-2xl">⚠️</div>
           <div class="text-xs font-bold text-slate-800 dark:text-slate-200">大模型通道繁忙或网络响应超时</div>
           <div class="text-[11px] text-slate-500 max-w-sm mx-auto leading-relaxed">
-            ${escapeHtml(msg || '未能成功获取大模型回复')}。您可以直接点击下方按钮重试，或配置自备 Key。
+            ${escapeHtml(msg || '未能成功获取大模型回复')}。您可以直接点击下方按钮重试。
           </div>
           <div class="flex items-center justify-center gap-2 pt-1">
-            <button onclick="generateViralComments()" class="px-3.5 py-1.5 rounded-lg bg-reddit-orange hover:bg-reddit-hover text-white text-xs font-bold transition shadow-sm">
+            <button onclick="generateViralComments()" class="px-4 py-2 rounded-xl bg-reddit-orange hover:bg-reddit-hover text-white text-xs font-bold transition shadow-sm">
               重新生成
             </button>
-            <button onclick="openApiModal()" class="px-3.5 py-1.5 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-medium transition">
-              配置自备 Key
+            <button onclick="openCreditModal()" class="px-3.5 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-medium transition">
+              充值 / 升级 Pro
             </button>
           </div>
         </div>

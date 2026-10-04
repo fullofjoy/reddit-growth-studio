@@ -33,14 +33,13 @@ export const onRequestPost = async (context: { request: Request; env: Env }) => 
     }
 
     const topic = (body.topic || '').trim() || 'What will you do if your partner cheat on you?';
-    const clientKey = (body.apiKey || '').trim();
-    const apiKey = clientKey || context.env.AGNES_API_KEY || DEFAULT_API_KEY;
+    const apiKey = context.env.AGNES_API_KEY || DEFAULT_API_KEY;
 
     if (!apiKey) {
       return new Response(
         JSON.stringify({
           error: 'NO_API_KEY',
-          message: '未检测到可用的大模型额度。请登录账号领取每日 5 点免费额度，或在“自备Key”中配置私有 API Key。',
+          message: '未检测到可用的大模型额度。请登录账号领取每日免费额度，或充值获取出海算力加油包。',
         }),
         { status: 400, headers: corsHeaders }
       );
@@ -80,7 +79,7 @@ Given a Reddit post title or discussion topic, output 5 ultra-punchy, high-upvot
       }),
     });
 
-    if (!resp.ok && apiKey === DEFAULT_API_KEY) {
+    if (!resp.ok) {
       // 1. Try primary endpoint with BACKUP_MODEL (agnes-3.0-flash)
       const modelFallbackResp = await fetch(PRIMARY_ENDPOINT, {
         method: 'POST',
