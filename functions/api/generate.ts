@@ -10,8 +10,10 @@ interface RequestBody {
   provider?: string;
 }
 
-const AGNES_ENDPOINT = 'https://apihub.agnes-ai.com/v1/chat/completions';
-const DEFAULT_MODEL = 'agnes-2.0-flash';
+const PRIMARY_ENDPOINT = 'https://api.agnes-ai.cn/v1/chat/completions';
+const BACKUP_ENDPOINT = 'https://apihub.agnes-ai.com/v1/chat/completions';
+const DEFAULT_MODEL = 'agnes-3.0-flash';
+const DEFAULT_API_KEY = 'sk-4Yj4C0eAtpvaY1kiK7T1mafogRdiOqB2pFQvYGZbJwbRkE1K';
 
 export const onRequestPost = async (context: { request: Request; env: Env }) => {
   const corsHeaders = {
@@ -31,7 +33,7 @@ export const onRequestPost = async (context: { request: Request; env: Env }) => 
 
     const topic = (body.topic || '').trim() || 'What will you do if your partner cheat on you?';
     const clientKey = (body.apiKey || '').trim();
-    const apiKey = clientKey || context.env.AGNES_API_KEY || 'sk-m4ZWPXnPiprv99DnLs62v0LGANSV855EjayDBjpjPGfBtnR7';
+    const apiKey = clientKey || context.env.AGNES_API_KEY || DEFAULT_API_KEY;
 
     if (!apiKey) {
       return new Response(
@@ -58,11 +60,13 @@ Given a Reddit post title or discussion topic, output 5 ultra-punchy, high-upvot
   {"style": "Practical Hacker", "text": "English one-liner under 15 words", "zh": "地道中文意译"}
 ]`;
 
-    const resp = await fetch(AGNES_ENDPOINT, {
+    let resp = await fetch(PRIMARY_ENDPOINT, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${apiKey}`,
+        'Authorization': `Bearer ${apiKey}`,
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36',
+        'Accept': 'application/json, text/plain, */*',
       },
       body: JSON.stringify({
         model: DEFAULT_MODEL,
@@ -74,6 +78,32 @@ Given a Reddit post title or discussion topic, output 5 ultra-punchy, high-upvot
         max_tokens: 600,
       }),
     });
+
+    if (!resp.ok && apiKey === DEFAULT_API_KEY) {
+      // Try backup endpoint
+      const backupResp = await fetch(BACKUP_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`,
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36',
+          'Accept': 'application/json, text/plain, */*',
+        },
+        body: JSON.stringify({
+          model: DEFAULT_MODEL,
+          messages: [
+            { role: 'system', content: systemPrompt },
+            { role: 'user', content: `Reddit topic: "${topic}"` },
+          ],
+          temperature: 0.85,
+          max_tokens: 600,
+        }),
+      }).catch(() => null);
+
+      if (backupResp && backupResp.ok) {
+        resp = backupResp;
+      }
+    }
 
     if (!resp.ok) {
       const errText = await resp.text();
