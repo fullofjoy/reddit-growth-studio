@@ -555,11 +555,11 @@
             <div class="grid grid-cols-2 gap-2">
               <div>
                 <label class="block text-[11px] font-semibold text-slate-600 dark:text-slate-400 mb-1" data-i18n="lbl_tool_name">产品/工具名称：</label>
-                <input type="text" id="title-tool-name" value="DeepSeek Prompt Studio" oninput="generateShowcaseTitles()" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 font-mono text-xs focus:border-teal-500 focus:outline-none">
+                <input type="text" id="title-tool-name" value="QuickMock Studio" placeholder="例如 QuickMock Studio" oninput="generateShowcaseTitles()" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 font-mono text-xs focus:border-teal-500 focus:outline-none">
               </div>
               <div>
-                <label class="block text-[11px] font-semibold text-slate-600 dark:text-slate-400 mb-1">Reddit 账号 ID：</label>
-                <input type="text" id="title-user-name" value="u/AnimusPetStudio2026" oninput="generateShowcaseTitles()" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 font-mono text-xs focus:border-teal-500 focus:outline-none">
+                <label class="block text-[11px] font-semibold text-slate-600 dark:text-slate-400 mb-1" data-i18n="lbl_reddit_id">Reddit 账号 ID：</label>
+                <input type="text" id="title-user-name" value="" placeholder="例如 u/your_username (选填)" oninput="generateShowcaseTitles()" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 font-mono text-xs focus:border-teal-500 focus:outline-none">
               </div>
             </div>
 
@@ -577,12 +577,12 @@
 
             <div>
               <label class="block text-[11px] font-semibold text-slate-600 dark:text-slate-400 mb-1" data-i18n="lbl_tool_pain">解决的核心痛点：</label>
-              <input type="text" id="title-tool-pain" value="bloated prompt engineering tools with server queues, logins, and fees" oninput="generateShowcaseTitles()" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 font-mono text-xs focus:border-teal-500 focus:outline-none">
+              <input type="text" id="title-tool-pain" value="bloated dev tools with server queues, logins, and fees" placeholder="例如 bloated dev tools with server queues, logins, and fees" oninput="generateShowcaseTitles()" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 font-mono text-xs focus:border-teal-500 focus:outline-none">
             </div>
 
             <div>
               <label class="block text-[11px] font-semibold text-slate-600 dark:text-slate-400 mb-1" data-i18n="lbl_tool_usp">核心卖点与亮点：</label>
-              <input type="text" id="title-tool-usp" value="100% client-side, 277 curated agent personas, zero telemetry, MIT open source" oninput="generateShowcaseTitles()" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 font-mono text-xs focus:border-teal-500 focus:outline-none">
+              <input type="text" id="title-tool-usp" value="100% client-side, zero telemetry, instant response, MIT open source" placeholder="例如 100% client-side, zero telemetry, MIT open source" oninput="generateShowcaseTitles()" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 font-mono text-xs focus:border-teal-500 focus:outline-none">
             </div>
 
             <div>
@@ -629,7 +629,7 @@
                     <span id="preview-sub-name" class="font-bold text-slate-900 dark:text-white hover:underline cursor-pointer">r/SideProject</span>
                     <span class="text-slate-400">•</span>
                     <span class="text-slate-500 dark:text-slate-400">Posted by</span>
-                    <span id="preview-user-name" class="font-medium text-slate-600 dark:text-slate-300 hover:underline cursor-pointer">u/AnimusPetStudio2026</span>
+                    <span id="preview-user-name" class="font-medium text-slate-600 dark:text-slate-300 hover:underline cursor-pointer">u/your_username</span>
                     <span class="text-slate-400">2 hours ago</span>
                   </div>
                 </div>
@@ -877,7 +877,7 @@
         </div>
 
         <form onsubmit="submitGoogleFastEmail(event)" class="flex gap-2">
-          <input type="email" id="google-fast-email-input" required placeholder="输入 Gmail 或邮箱，如 hangjiang049@gmail.com" class="flex-1 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-reddit-orange shadow-inner">
+          <input type="email" id="google-fast-email-input" required placeholder="输入 Gmail 或常用邮箱，如 example@gmail.com" class="flex-1 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-reddit-orange shadow-inner">
           <button type="submit" id="btn-google-fast-submit" class="px-4 py-2 rounded-xl bg-gradient-to-r from-reddit-orange to-amber-500 hover:opacity-95 text-white font-bold text-xs shadow-md shrink-0 active:scale-95 transition">
             一键秒登
           </button>
@@ -1073,6 +1073,7 @@
         subreddits_desc: '分阶段精细化运营，在对的版块做对的事',
         title_crafter_title: '独立项目参数设定',
         lbl_tool_name: '产品/工具名称：',
+        lbl_reddit_id: 'Reddit 账号 ID：',
         lbl_tool_pain: '解决的核心痛点：',
         lbl_tool_usp: '核心卖点与亮点：',
         lbl_target_sub: '目标发布版块：',
@@ -1133,6 +1134,7 @@
         subreddits_desc: 'Stage-based roadmaps: do the right action in the right sub',
         title_crafter_title: 'Project Launch Parameters',
         lbl_tool_name: 'Product / Tool Name:',
+        lbl_reddit_id: 'Reddit Username ID:',
         lbl_tool_pain: 'Core Pain Solved:',
         lbl_tool_usp: 'Unique Hook / Selling Points:',
         lbl_target_sub: 'Target Subreddit:',
@@ -2442,10 +2444,14 @@ Strictly follow the [Reddit Viral One-Liner Formula]:
     window.currentShowcaseItems = [];
 
     function generateShowcaseTitles() {
-      const tool = (document.getElementById('title-tool-name')?.value.trim()) || 'DeepSeek Prompt Studio';
-      const username = (document.getElementById('title-user-name')?.value.trim()) || 'u/AnimusPetStudio2026';
-      const pain = (document.getElementById('title-tool-pain')?.value.trim()) || 'bloated prompt tools with server queues and monthly fees';
-      const usp = (document.getElementById('title-tool-usp')?.value.trim()) || '100% client-side, 277 curated agent personas, zero telemetry, MIT open source';
+      const tool = (document.getElementById('title-tool-name')?.value.trim()) || 'QuickMock Studio';
+      const rawUser = document.getElementById('title-user-name')?.value.trim();
+      let username = rawUser || 'u/your_username';
+      if (username && !username.startsWith('u/') && !username.startsWith('r/')) {
+        username = 'u/' + username;
+      }
+      const pain = (document.getElementById('title-tool-pain')?.value.trim()) || 'bloated dev tools with server queues, logins, and fees';
+      const usp = (document.getElementById('title-tool-usp')?.value.trim()) || '100% client-side, zero telemetry, instant response, MIT open source';
       const sub = (document.getElementById('title-target-sub')?.value) || 'r/SideProject';
       const linkStrategy = (document.getElementById('title-link-strategy')?.value) || 'profile';
 
@@ -2619,7 +2625,11 @@ Curious to hear your perspective — are you also feeling fatigued by bloated su
       if (!item) return;
 
       const sub = (document.getElementById('title-target-sub')?.value) || 'r/SideProject';
-      const username = (document.getElementById('title-user-name')?.value.trim()) || 'u/AnimusPetStudio2026';
+      const rawUser = document.getElementById('title-user-name')?.value.trim();
+      let username = rawUser || 'u/your_username';
+      if (username && !username.startsWith('u/') && !username.startsWith('r/')) {
+        username = 'u/' + username;
+      }
 
       const previewSub = document.getElementById('preview-sub-name');
       const previewUser = document.getElementById('preview-user-name');
