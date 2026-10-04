@@ -37,7 +37,7 @@ export const onRequestPost = async (context: { request: Request; env: Env }) => 
       return new Response(
         JSON.stringify({
           error: 'NO_API_KEY',
-          message: '未配置 Agnes API Key。请在前端“API配置”中填入您的 Key，或由管理员在 Cloudflare 环境变量中绑定 AGNES_API_KEY。',
+          message: '未检测到可用的大模型额度。请登录账号领取每日 5 点免费额度，或在“自备Key”中配置私有 API Key。',
         }),
         { status: 400, headers: corsHeaders }
       );
@@ -98,7 +98,7 @@ Given a Reddit post title or discussion topic, output 5 ultra-punchy, high-upvot
     return new Response(
       JSON.stringify({
         success: true,
-        model: DEFAULT_MODEL,
+        model: 'PaceBowl-AI-Flash',
         candidates: parsed,
       }),
       { headers: corsHeaders }

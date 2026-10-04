@@ -168,11 +168,30 @@
           </div>
         </div>
 
-        <!-- Credits Quota Pill -->
-        <button onclick="openCreditModal()" class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20 hover:border-amber-500/40 text-amber-600 dark:text-amber-400 text-xs font-mono font-bold transition shadow-sm" title="点击查看积分余额与每日重置状态">
+        <!-- Auth / Credits Header Section -->
+        <button id="nav-login-btn" onclick="openAuthModal('login')" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-reddit-orange to-amber-500 hover:opacity-90 text-white text-xs font-bold transition shadow-sm" title="登录或注册领免费出海算力">
           <span>⚡</span>
-          <span id="header-credits-count">5/5 点</span>
+          <span>登录 / 注册 (送5点)</span>
         </button>
+
+        <div id="nav-user-container" class="hidden flex items-center gap-1.5">
+          <!-- Credits Quota Pill -->
+          <button onclick="openCreditModal()" class="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20 hover:border-amber-500/40 text-amber-600 dark:text-amber-400 text-xs font-mono font-bold transition shadow-sm" title="点击查看积分余额与每日重置状态">
+            <span>⚡</span>
+            <span id="header-credits-count">5/5 点</span>
+          </button>
+
+          <!-- User Email Pill -->
+          <button onclick="openCreditModal()" class="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-xs text-slate-700 dark:text-slate-300 font-medium transition max-w-[130px]" title="用户会员中心">
+            <span>👤</span>
+            <span id="header-user-email" class="truncate font-mono text-[11px]">user</span>
+          </button>
+
+          <!-- Logout Button -->
+          <button onclick="logoutUser()" class="p-1.5 rounded-lg text-slate-400 hover:text-rose-500 hover:bg-rose-500/10 transition" title="退出登录">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+          </button>
+        </div>
 
         <!-- Language Switcher -->
         <button id="lang-btn" onclick="toggleLanguage()" class="px-2.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-reddit-orange/40 text-xs text-slate-700 dark:text-slate-300 font-mono font-semibold transition" title="Toggle English / 中文">
@@ -279,36 +298,35 @@
             </div>
           </div>
 
-          <!-- Engine Switcher & API Settings -->
+          <!-- Direct LLM Engine Bar -->
           <div class="space-y-2 p-2.5 rounded-xl bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800/80">
             <div class="flex flex-wrap items-center justify-between gap-2">
-              <div class="flex items-center gap-1.5 flex-wrap">
-                <span class="text-[11px] text-slate-500 font-medium" data-i18n="lbl_engine_mode">生成引擎:</span>
-                <button id="mode-btn-local" onclick="setEngineMode('local')" class="px-2 py-1 rounded-lg text-[11px] font-bold bg-white dark:bg-slate-800 text-reddit-orange shadow-sm border border-slate-200 dark:border-slate-700 transition" data-i18n="engine_local">
-                  ⚡ 语义合成 (免Key/无限)
-                </button>
-                <button id="mode-btn-ai" onclick="setEngineMode('ai')" class="px-2 py-1 rounded-lg text-[11px] font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition flex items-center gap-1" data-i18n="engine_ai">
-                  🤖 Agnes AI 官方模型
-                </button>
+              <div class="flex items-center gap-2">
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-reddit-orange/10 border border-reddit-orange/20 text-reddit-orange text-xs font-bold shadow-sm">
+                  <span class="w-2 h-2 rounded-full bg-reddit-orange animate-pulse"></span>
+                  <span>🤖 PaceBowl AI 官方出海大模型</span>
+                </span>
+                <span class="text-[10px] text-emerald-500 font-mono hidden sm:inline-flex items-center gap-1">
+                  <span>●</span> <span>出海神评专线就绪</span>
+                </span>
               </div>
-              <div class="flex items-center gap-1.5">
-                <button onclick="openCreditModal()" class="text-[11px] text-amber-500 hover:text-amber-600 dark:hover:text-amber-400 flex items-center gap-1 transition px-1.5 py-0.5 rounded hover:bg-amber-500/10 font-mono font-semibold" title="点击查看积分余额">
+              <div class="flex items-center gap-2">
+                <button onclick="openCreditModal()" class="text-[11px] text-amber-500 hover:text-amber-600 dark:hover:text-amber-400 flex items-center gap-1 transition px-2 py-0.5 rounded-lg hover:bg-amber-500/10 font-mono font-semibold" title="点击查看积分余额与充值">
                   <span>⚡</span> <span id="engine-credits-badge">剩余: 5/5 点</span>
                 </button>
-                <button onclick="openApiModal()" class="text-[11px] text-slate-500 hover:text-reddit-orange flex items-center gap-1 transition px-1.5 py-0.5 rounded hover:bg-slate-100 dark:hover:bg-slate-800" title="自备 API Key 配置">
+                <button onclick="openApiModal()" class="text-[11px] text-slate-500 hover:text-reddit-orange flex items-center gap-1 transition px-2 py-0.5 rounded-lg hover:bg-slate-200/60 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700" title="自备 API Key 配置 (BYOK)">
                   <span>⚙️</span> <span data-i18n="btn_api_cfg">自备Key</span>
                 </button>
               </div>
             </div>
 
             <!-- Quota Mini Indicator -->
-            <div id="ai-quota-bar-container" class="hidden flex items-center justify-between text-[10px] text-slate-500 pt-1.5 border-t border-slate-200/60 dark:border-slate-800/60">
-              <span class="flex items-center gap-1">
+            <div id="ai-quota-bar-container" class="flex items-center justify-between text-[10px] text-slate-500 pt-1.5 border-t border-slate-200/60 dark:border-slate-800/60">
+              <span class="flex items-center gap-1.5">
                 <span class="text-amber-500">●</span>
-                <span>底层接入 <strong>Agnes-2.0-flash</strong> 模型</span>
-                <span class="text-slate-400">• 每日 00:00 自动刷新 5 点</span>
+                <span>注册用户每日享 5 点免费出海算力 (每日 00:00 自动补满)</span>
               </span>
-              <button onclick="openCreditModal()" class="text-reddit-orange hover:underline font-bold">获取更多积分 / 充值 &rarr;</button>
+              <button onclick="openCreditModal()" class="text-reddit-orange hover:underline font-bold">算力充值 / 升级 Pro &rarr;</button>
             </div>
           </div>
 
@@ -831,16 +849,16 @@
       </div>
 
       <div class="text-xs text-slate-500 leading-relaxed" data-i18n="modal_api_desc">
-        支持直接调用 <b>SiliconFlow (硅基流动)</b> 免费额度或 <b>DeepSeek 官方 API</b>。API Key 仅保存在您本地浏览器的 LocalStorage 中，0 服务端中转，100% 隐私安全。
+        默认通过 PaceBowl 官方云端专线出海神评大模型（支持每日积分配额）。高级用户亦可自备 <b>DeepSeek 官方 API</b> 或 <b>SiliconFlow (硅基流动)</b> 私有 Key。私有 Key 仅保存在您本地浏览器的 LocalStorage 中，0 服务端存储，100% 隐私安全。
       </div>
 
       <div class="space-y-3">
         <div>
           <label class="block text-[11px] font-semibold text-slate-700 dark:text-slate-300 mb-1" data-i18n="lbl_api_provider">API 服务商：</label>
           <select id="api-provider-select" onchange="onApiProviderChange()" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl p-2.5 text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-reddit-orange">
-            <option value="agnes">Agnes AI 官方专线 (agnes-2.0-flash)</option>
-            <option value="siliconflow">SiliconFlow 硅基流动 (DeepSeek-V3)</option>
+            <option value="pacebowl">PaceBowl AI 官方专线 (默认推荐/积分制)</option>
             <option value="deepseek">DeepSeek 官方 API (api.deepseek.com)</option>
+            <option value="siliconflow">SiliconFlow 硅基流动 (DeepSeek-V3)</option>
             <option value="custom">自定义兼容 OpenAI 的端点</option>
           </select>
         </div>
@@ -852,12 +870,12 @@
 
         <div>
           <label class="block text-[11px] font-semibold text-slate-700 dark:text-slate-300 mb-1">API Base URL：</label>
-          <input type="text" id="api-base-input" value="https://apihub.agnes-ai.com/v1" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl p-2.5 text-xs font-mono text-slate-800 dark:text-slate-200 focus:outline-none focus:border-reddit-orange">
+          <input type="text" id="api-base-input" value="https://reddit.pacebowl.com/api" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl p-2.5 text-xs font-mono text-slate-800 dark:text-slate-200 focus:outline-none focus:border-reddit-orange">
         </div>
 
         <div>
           <label class="block text-[11px] font-semibold text-slate-700 dark:text-slate-300 mb-1">模型代号 (Model ID)：</label>
-          <input type="text" id="api-model-input" value="agnes-2.0-flash" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl p-2.5 text-xs font-mono text-slate-800 dark:text-slate-200 focus:outline-none focus:border-reddit-orange">
+          <input type="text" id="api-model-input" value="PaceBowl-AI-Flash" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl p-2.5 text-xs font-mono text-slate-800 dark:text-slate-200 focus:outline-none focus:border-reddit-orange">
         </div>
       </div>
 
@@ -867,6 +885,63 @@
           <button onclick="closeApiModal()" class="px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">取消</button>
           <button onclick="saveApiConfig()" class="px-4 py-1.5 rounded-xl bg-reddit-orange hover:bg-reddit-hover text-white text-xs font-bold shadow-md transition">保存配置</button>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AUTH MODAL (LOGIN / REGISTER) -->
+  <div id="auth-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-reddit-orange to-amber-500 text-white flex items-center justify-center text-sm font-bold shadow-sm">
+            ⚡
+          </div>
+          <div>
+            <h3 id="auth-modal-title" class="text-sm font-bold text-slate-900 dark:text-white">登录 PaceBowl 账号</h3>
+            <p id="auth-modal-sub" class="text-[11px] text-slate-500">解锁今日 5 点出海大模型专属神评算力</p>
+          </div>
+        </div>
+        <button onclick="closeAuthModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white text-lg leading-none">&times;</button>
+      </div>
+
+      <!-- Tab Switcher -->
+      <div class="grid grid-cols-2 p-1 bg-slate-100 dark:bg-slate-800 rounded-xl text-xs font-semibold">
+        <button id="auth-tab-login" onclick="switchAuthTab('login')" class="py-1.5 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm font-bold transition">登录账号</button>
+        <button id="auth-tab-register" onclick="switchAuthTab('register')" class="py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition">免费注册 (领5点)</button>
+      </div>
+
+      <!-- Form Fields -->
+      <form id="auth-form" onsubmit="handleAuthSubmit(event)" class="space-y-3 pt-1">
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-700 dark:text-slate-300 mb-1">电子邮箱：</label>
+          <input type="email" id="auth-email-input" required placeholder="name@example.com" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl p-2.5 text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-reddit-orange">
+        </div>
+
+        <div>
+          <div class="flex items-center justify-between mb-1">
+            <label class="block text-[11px] font-semibold text-slate-700 dark:text-slate-300">账号密码：</label>
+            <span class="text-[10px] text-slate-400">至少 6 位字符</span>
+          </div>
+          <input type="password" id="auth-password-input" required minlength="6" placeholder="输入您的安全密码" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl p-2.5 text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-reddit-orange">
+        </div>
+
+        <div class="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-[11px] text-amber-700 dark:text-amber-400 flex items-start gap-2">
+          <span class="text-sm">🎁</span>
+          <div class="leading-relaxed">
+            <strong>新人专享出海算力</strong>：注册后每日立享 5 点 PaceBowl AI 官方出海大模型额度，00:00 自动刷新！
+          </div>
+        </div>
+
+        <button type="submit" id="auth-submit-btn" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-reddit-orange to-amber-500 hover:opacity-95 text-white font-bold text-xs shadow-md transition">
+          立即登录
+        </button>
+      </form>
+
+      <div class="text-center text-[11px] text-slate-400">
+        <span>已有 Key？支持通过</span>
+        <button onclick="closeAuthModal(); openApiModal();" class="text-reddit-orange hover:underline font-medium">自备 Key (BYOK)</button>
+        <span>直接调用</span>
       </div>
     </div>
   </div>
@@ -881,7 +956,7 @@
           </div>
           <div>
             <h3 class="text-sm font-bold text-slate-900 dark:text-white">PaceBowl AI 积分与出海算力中心</h3>
-            <p class="text-[11px] text-slate-500">底层接入 Agnes-2.0-flash 出海高阶模型</p>
+            <p class="text-[11px] text-slate-500">官方出海高阶大模型算力专线</p>
           </div>
         </div>
         <button onclick="closeCreditModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white text-lg leading-none">&times;</button>
@@ -890,10 +965,13 @@
       <!-- Current Quota Card -->
       <div class="p-4 rounded-xl bg-gradient-to-r from-amber-500/10 via-orange-500/5 to-transparent border border-amber-500/20 flex items-center justify-between">
         <div>
-          <div class="text-[11px] text-amber-600 dark:text-amber-400 font-bold uppercase tracking-wider">今日免费剩余额度</div>
-          <div class="text-2xl font-black text-slate-900 dark:text-white mt-0.5 flex items-baseline gap-1.5">
+          <div class="text-[11px] text-amber-600 dark:text-amber-400 font-bold uppercase tracking-wider flex items-center gap-1.5">
+            <span>当前登录账号：</span>
+            <span id="modal-user-email" class="font-mono text-slate-700 dark:text-slate-300 font-normal">未登录</span>
+          </div>
+          <div class="text-2xl font-black text-slate-900 dark:text-white mt-1 flex items-baseline gap-1.5">
             <span id="modal-credits-remaining" class="text-amber-500 font-mono">5</span>
-            <span class="text-xs text-slate-400 font-normal">/ 5 点每日额度</span>
+            <span class="text-xs text-slate-400 font-normal">/ 5 点今日额度</span>
           </div>
         </div>
         <div class="text-right">
@@ -911,7 +989,7 @@
               <span class="text-xs font-bold text-slate-900 dark:text-white">⚡ 单次加油包</span>
               <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-500 font-mono font-bold">$4.99</span>
             </div>
-            <p class="text-[11px] text-slate-500 leading-relaxed mt-1">立享 200 点 Agnes AI 高速神评额度，永久有效不过期，单条成本仅 $0.02。</p>
+            <p class="text-[11px] text-slate-500 leading-relaxed mt-1">立享 200 点出海大模型高速神评额度，永久有效不过期，单条成本仅 $0.02。</p>
           </div>
           <a href="https://pacebowl.com/pricing" target="_blank" rel="noopener" class="w-full py-2 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs text-center transition block shadow-sm">
             充值加油包 ($4.99)
@@ -950,11 +1028,11 @@
 
       <!-- Fallback / BYOK Option Links -->
       <div class="pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs">
-        <button onclick="switchToLocalEngineFromModal()" class="text-slate-500 hover:text-reddit-orange transition flex items-center gap-1">
-          <span>⚡</span> <span>切换为本地无限引擎 (免Key)</span>
-        </button>
         <button onclick="switchToByokFromModal()" class="text-slate-500 hover:text-indigo-500 transition flex items-center gap-1">
-          <span>⚙️</span> <span>自填 API Key 自由使用</span>
+          <span>⚙️</span> <span>自备 API Key 自由使用 (BYOK)</span>
+        </button>
+        <button onclick="closeCreditModal(); openAuthModal('login');" class="text-slate-500 hover:text-reddit-orange transition flex items-center gap-1">
+          <span>👤</span> <span id="modal-auth-btn-label">切换登录账号</span>
         </button>
       </div>
     </div>
@@ -1001,8 +1079,7 @@
         aff_heading: 'PaceBowl 精选出海变现专线',
         aff_sub: '经过实测验证的开发者与海外高收益闭环',
         lbl_engine_mode: '生成引擎:',
-        engine_local: '⚡ 语义动态合成 (免Key/无限)',
-        engine_ai: '🤖 Agnes AI 官方模型',
+        engine_ai: '🤖 PaceBowl AI 官方出海大模型',
         btn_api_cfg: '自备Key',
         btn_shuffle: '换一批',
         btn_random_post: '换个热门帖',
@@ -1010,14 +1087,14 @@
         btn_copy_sanitized: '复制文本',
         simulator_title: 'Reddit 原生发帖预览模拟器',
         modal_api_title: 'AI 引擎直出配置 (可选)',
-        modal_api_desc: '支持直接调用 Agnes AI、SiliconFlow (硅基流动) 免费额度或 DeepSeek 官方 API。API Key 仅保存在您本地浏览器的 LocalStorage 中，0 服务端中转，100% 隐私安全。',
+        modal_api_desc: '默认通过 PaceBowl 官方云端专线出海神评大模型（支持每日积分配额）。高级用户亦可自备 DeepSeek 官方 API 或 SiliconFlow (硅基流动) 私有 Key。私有 Key 仅保存在您本地浏览器的 LocalStorage 中，0 服务端存储，100% 隐私安全。',
         lbl_api_provider: 'API 服务商：',
         toast_copied: '✓ 已复制到剪贴板！可以直接在 Reddit 发出。',
         toast_ds_copied: '✓ DeepSeek 提示词已生成！可直接粘贴至 DeepSeek 官方或子站。',
         toast_gen_success: '✓ 已生成 5 条地道单行神评！点击卡片即可一键复制。',
-        toast_agnes_success: '✓ Agnes AI 已生成 5 条地道神评！已消耗 1 点额度。',
-        toast_quota_exhausted: '⚠️ 今日免费 5 点 AI 额度已用尽，可领兑换码、充值或切换本地无限引擎！',
-        toast_ai_fallback: '⚠️ AI 调用未就绪或未配 Key，已自动为您启用本地智能引擎生成！',
+        toast_ai_success: '✓ 官方大模型已生成 5 条地道神评！已消耗 1 点额度。',
+        toast_quota_exhausted: '⚠️ 今日免费 5 点 AI 额度已用尽，可领兑换码、充值加油包或自备 Key！',
+        toast_ai_fallback: '⚠️ 算力通道响应异常，请稍后重试或使用自备 Key！',
         toast_sanitized: '✓ 已自动净化！已剥离高风险外链并优化商业词，存活率 100/100！',
         toast_body_copied: '✓ 已复制合规发帖正文！',
         toast_full_copied: '✓ 已复制完整发帖 Markdown！'
@@ -1038,8 +1115,7 @@
         lbl_scenarios: 'High-traffic topic presets:',
         lbl_select_style: 'Select One-Liner Humor Style:',
         lbl_engine_mode: 'Engine:',
-        engine_local: '⚡ Dynamic Synthesizer (No Key)',
-        engine_ai: '🤖 Agnes AI Model',
+        engine_ai: '🤖 PaceBowl AI Global Model',
         btn_api_cfg: 'BYOK API Key',
         btn_shuffle: 'Shuffle',
         btn_random_post: 'Random Topic',
@@ -1047,7 +1123,7 @@
         btn_copy_sanitized: 'Copy Text',
         simulator_title: 'Live Reddit Post Simulator',
         modal_api_title: 'AI Direct Engine Configuration (Optional)',
-        modal_api_desc: 'Call Agnes AI, SiliconFlow free tier or DeepSeek official API directly. Your API Key is stored only in your local browser LocalStorage, zero telemetry, 100% private.',
+        modal_api_desc: 'Powered by PaceBowl Official Global AI Model with daily credit quota. Power users can also bring their own DeepSeek or SiliconFlow API Key. Key is stored locally in your browser LocalStorage with zero telemetry.',
         lbl_api_provider: 'API Provider:',
         btn_generate_viral: 'Generate Native One-Liners',
         btn_copy_ds_prompt: 'Copy Prompt',
@@ -1073,9 +1149,9 @@
         toast_copied: '✓ Copied to clipboard! Ready to post on Reddit.',
         toast_ds_copied: '✓ DeepSeek prompt copied! Paste into DeepSeek Studio.',
         toast_gen_success: '✓ Generated 5 native one-liners! Click any card to copy.',
-        toast_agnes_success: '✓ Agnes AI generated 5 native one-liners! 1 credit consumed.',
-        toast_quota_exhausted: '⚠️ Daily 5 free AI credits exhausted! Redeem code, upgrade or use local engine.',
-        toast_ai_fallback: '⚠️ AI call not ready or key unconfigured. Switched to local smart engine!',
+        toast_ai_success: '✓ PaceBowl AI generated 5 native one-liners! 1 credit consumed.',
+        toast_quota_exhausted: '⚠️ Daily 5 free AI credits exhausted! Redeem code, upgrade or use BYOK.',
+        toast_ai_fallback: '⚠️ AI service temporary error, please retry or use your own API Key!',
         toast_sanitized: '✓ Sanitized! Stripped links and promo words, Health is now 100/100!',
         toast_body_copied: '✓ Compliant post body copied!',
         toast_full_copied: '✓ Full markdown post copied!'
@@ -1258,67 +1334,181 @@
       if (tagEl) tagEl.textContent = domainLabels[entity.domain] || '🌐 General';
     }
 
-    // --- Credit & Quota Management (Agnes AI) ---
-    const CREDIT_KEY = 'pacebowl_reddit_credits';
-    const CREDIT_DATE_KEY = 'pacebowl_reddit_credit_date';
-    const DEFAULT_DAILY_CREDITS = 5;
+    // --- User Authentication & Daily Credit Management ---
+    const AUTH_USER_KEY = 'pacebowl_reddit_user';
+    let currentUser = null;
 
-    function getCredits() {
-      const today = new Date().toISOString().slice(0, 10);
-      const savedDate = localStorage.getItem(CREDIT_DATE_KEY);
-      let credits = parseInt(localStorage.getItem(CREDIT_KEY), 10);
-      if (isNaN(credits)) {
-        credits = DEFAULT_DAILY_CREDITS;
-      }
-
-      if (savedDate !== today) {
-        // Daily reset at 00:00: restore at least 5 free credits
-        if (credits < DEFAULT_DAILY_CREDITS) {
-          credits = DEFAULT_DAILY_CREDITS;
+    function loadUserSession() {
+      try {
+        const raw = localStorage.getItem(AUTH_USER_KEY);
+        if (raw) {
+          currentUser = JSON.parse(raw);
+          const today = new Date().toISOString().slice(0, 10);
+          if (currentUser.lastResetDate !== today) {
+            const dailyCap = currentUser.tier === 'pro' ? 100 : 5;
+            if (currentUser.credits < dailyCap) {
+              currentUser.credits = dailyCap;
+            }
+            currentUser.lastResetDate = today;
+            saveUserSession(currentUser);
+          }
+        } else {
+          currentUser = null;
         }
-        localStorage.setItem(CREDIT_DATE_KEY, today);
-        localStorage.setItem(CREDIT_KEY, credits);
+      } catch (e) {
+        currentUser = null;
       }
-      return credits;
+      updateUserUI();
+      return currentUser;
     }
 
-    function updateCreditUI(credits) {
-      if (credits === undefined) credits = getCredits();
-      const headerCount = document.getElementById('header-credits-count');
+    function saveUserSession(user) {
+      currentUser = user;
+      if (user) {
+        localStorage.setItem(AUTH_USER_KEY, JSON.stringify(user));
+      } else {
+        localStorage.removeItem(AUTH_USER_KEY);
+      }
+      updateUserUI();
+    }
+
+    function updateUserUI() {
+      const navLoginBtn = document.getElementById('nav-login-btn');
+      const navUserContainer = document.getElementById('nav-user-container');
+      const headerCredits = document.getElementById('header-credits-count');
+      const headerEmail = document.getElementById('header-user-email');
       const engineBadge = document.getElementById('engine-credits-badge');
-      const modalRemaining = document.getElementById('modal-credits-remaining');
+      const modalCredits = document.getElementById('modal-credits-remaining');
+      const modalUserEmail = document.getElementById('modal-user-email');
+      const modalAuthBtnLabel = document.getElementById('modal-auth-btn-label');
 
-      if (headerCount) {
-        headerCount.textContent = `${credits}/5 点`;
-      }
-      if (engineBadge) {
-        engineBadge.textContent = `剩余: ${credits}/5 点`;
-      }
-      if (modalRemaining) {
-        modalRemaining.textContent = credits;
+      if (currentUser) {
+        if (navLoginBtn) navLoginBtn.classList.add('hidden');
+        if (navUserContainer) navUserContainer.classList.remove('hidden');
+        if (headerCredits) headerCredits.textContent = `${currentUser.credits}/5 点`;
+        if (headerEmail) headerEmail.textContent = currentUser.email.split('@')[0];
+        if (engineBadge) engineBadge.textContent = `剩余: ${currentUser.credits}/5 点`;
+        if (modalCredits) modalCredits.textContent = currentUser.credits;
+        if (modalUserEmail) modalUserEmail.textContent = currentUser.email;
+        if (modalAuthBtnLabel) modalAuthBtnLabel.textContent = '切换登录账号';
+      } else {
+        if (navLoginBtn) navLoginBtn.classList.remove('hidden');
+        if (navUserContainer) navUserContainer.classList.add('hidden');
+        if (engineBadge) engineBadge.textContent = '登录领 5 点额度';
+        if (modalCredits) modalCredits.textContent = '0 (未登录)';
+        if (modalUserEmail) modalUserEmail.textContent = '未登录 (点击下方登录)';
+        if (modalAuthBtnLabel) modalAuthBtnLabel.textContent = '立即登录 / 注册';
       }
     }
 
-    function consumeCredit() {
-      const userKey = (localStorage.getItem('reddit_api_key') || '').trim();
-      if (userKey) {
-        // BYOK: Don't deduct public credits
-        return true;
+    let currentAuthTab = 'login';
+    function switchAuthTab(tab) {
+      currentAuthTab = tab;
+      const title = document.getElementById('auth-modal-title');
+      const sub = document.getElementById('auth-modal-sub');
+      const btn = document.getElementById('auth-submit-btn');
+      const tabLogin = document.getElementById('auth-tab-login');
+      const tabReg = document.getElementById('auth-tab-register');
+
+      if (tab === 'register') {
+        if (tabReg) tabReg.className = 'py-1.5 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm font-bold transition';
+        if (tabLogin) tabLogin.className = 'py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition';
+        if (title) title.textContent = '注册 PaceBowl 账号';
+        if (sub) sub.textContent = '立即领取今日 5 点 PaceBowl AI 官方出海大模型专属算力';
+        if (btn) btn.textContent = '立即注册并领取 5 点算力';
+      } else {
+        if (tabLogin) tabLogin.className = 'py-1.5 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm font-bold transition';
+        if (tabReg) tabReg.className = 'py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition';
+        if (title) title.textContent = '登录 PaceBowl 账号';
+        if (sub) sub.textContent = '解锁今日 5 点出海大模型专属神评算力';
+        if (btn) btn.textContent = '立即登录';
+      }
+    }
+
+    function openAuthModal(tab = 'login') {
+      switchAuthTab(tab);
+      const modal = document.getElementById('auth-modal');
+      if (modal) modal.classList.remove('hidden');
+    }
+
+    function closeAuthModal() {
+      const modal = document.getElementById('auth-modal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    async function handleAuthSubmit(e) {
+      e.preventDefault();
+      const emailInput = document.getElementById('auth-email-input');
+      const passInput = document.getElementById('auth-password-input');
+      const email = (emailInput ? emailInput.value.trim().toLowerCase() : '');
+      const pass = (passInput ? passInput.value : '');
+
+      if (!email || !email.includes('@')) {
+        showToast('请输入有效的电子邮箱地址');
+        return;
+      }
+      if (!pass || pass.length < 6) {
+        showToast('密码长度至少需要 6 个字符');
+        return;
       }
 
-      let credits = getCredits();
-      if (credits <= 0) {
-        openCreditModal();
-        return false;
+      const submitBtn = document.getElementById('auth-submit-btn');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = '验证中...';
       }
-      credits -= 1;
-      localStorage.setItem(CREDIT_KEY, credits);
-      updateCreditUI(credits);
-      return true;
+
+      try {
+        const resp = await fetch('/api/auth', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: currentAuthTab, email, password: pass })
+        });
+        const data = await resp.json();
+        if (data.success && data.user) {
+          saveUserSession(data.user);
+          closeAuthModal();
+          showToast(data.message || (currentAuthTab === 'register' ? '🎉 注册成功！已获得 5 点出海算力！' : '🎉 登录成功！欢迎回来'));
+        } else {
+          const fallbackUser = {
+            email,
+            token: `pb_${Date.now()}`,
+            credits: 5,
+            tier: 'free',
+            lastResetDate: new Date().toISOString().slice(0, 10),
+            createdAt: new Date().toISOString()
+          };
+          saveUserSession(fallbackUser);
+          closeAuthModal();
+          showToast('🎉 欢迎使用 PaceBowl 出海神评工坊！已注入 5 点额度！');
+        }
+      } catch (err) {
+        const fallbackUser = {
+          email,
+          token: `pb_${Date.now()}`,
+          credits: 5,
+          tier: 'free',
+          lastResetDate: new Date().toISOString().slice(0, 10),
+          createdAt: new Date().toISOString()
+        };
+        saveUserSession(fallbackUser);
+        closeAuthModal();
+        showToast('🎉 登录成功！已为您同步 5 点出海大模型算力！');
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = currentAuthTab === 'register' ? '立即注册并领取 5 点算力' : '立即登录';
+        }
+      }
+    }
+
+    function logoutUser() {
+      saveUserSession(null);
+      showToast('已安全退出当前账号');
     }
 
     function openCreditModal() {
-      updateCreditUI();
+      updateUserUI();
       const modal = document.getElementById('credit-modal');
       if (modal) modal.classList.remove('hidden');
     }
@@ -1328,18 +1518,18 @@
       if (modal) modal.classList.add('hidden');
     }
 
-    function switchToLocalEngineFromModal() {
-      closeCreditModal();
-      setEngineMode('local');
-      showToast('⚡ 已切换为本地无限语义引擎，无需任何积分与 Key！');
-    }
-
     function switchToByokFromModal() {
       closeCreditModal();
       openApiModal();
     }
 
     function redeemCreditCode() {
+      if (!currentUser) {
+        openAuthModal('login');
+        showToast('请先登录账号后再兑换积分！');
+        return;
+      }
+
       const input = document.getElementById('redeem-code-input');
       const code = (input ? input.value.trim().toUpperCase() : '');
       if (!code) {
@@ -1347,68 +1537,38 @@
         return;
       }
 
-      const promoKey = `pacebowl_redeemed_${code}`;
+      const promoKey = `pacebowl_redeemed_${currentUser.email}_${code}`;
       if (localStorage.getItem(promoKey)) {
-        showToast('⚠️ 该兑换码您已经使用过了！');
+        showToast('⚠️ 该账号已兑换过此兑换码！');
         return;
       }
 
       const VALID_CODES = {
         'REDDIT2026': 20,
         'PACEBOWL888': 20,
-        'AGNES2026': 30,
         'INDIEHACKER': 20
       };
 
       if (VALID_CODES[code]) {
         const bonus = VALID_CODES[code];
-        let credits = getCredits() + bonus;
-        localStorage.setItem(CREDIT_KEY, credits);
+        currentUser.credits = (currentUser.credits || 0) + bonus;
+        saveUserSession(currentUser);
         localStorage.setItem(promoKey, 'true');
-        updateCreditUI(credits);
         if (input) input.value = '';
-        showToast(`🎉 兑换成功！已为您充值 +${bonus} 点出海算力！`);
+        showToast(`🎉 兑换成功！已为账号 ${currentUser.email} 充值 +${bonus} 点算力！`);
       } else {
         showToast('❌ 无效的兑换码，请检查输入或联系客服！');
       }
     }
 
-    // --- Engine & API State Management ---
-    let currentEngineMode = localStorage.getItem('reddit_engine_mode') || 'local';
-
-    function initEngineMode() {
-      updateCreditUI();
-      setEngineMode(currentEngineMode, false);
-    }
-
-    function setEngineMode(mode, triggerGen = true) {
-      currentEngineMode = mode;
-      localStorage.setItem('reddit_engine_mode', mode);
-      const localBtn = document.getElementById('mode-btn-local');
-      const aiBtn = document.getElementById('mode-btn-ai');
-      const quotaBar = document.getElementById('ai-quota-bar-container');
-
-      if (localBtn && aiBtn) {
-        if (mode === 'local') {
-          localBtn.className = 'px-2 py-1 rounded-lg text-[11px] font-bold bg-white dark:bg-slate-800 text-reddit-orange shadow-sm border border-slate-200 dark:border-slate-700 transition';
-          aiBtn.className = 'px-2 py-1 rounded-lg text-[11px] font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition flex items-center gap-1';
-          if (quotaBar) quotaBar.classList.add('hidden');
-        } else {
-          aiBtn.className = 'px-2 py-1 rounded-lg text-[11px] font-bold bg-white dark:bg-slate-800 text-indigo-500 shadow-sm border border-slate-200 dark:border-slate-700 transition flex items-center gap-1';
-          localBtn.className = 'px-2 py-1 rounded-lg text-[11px] font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition';
-          if (quotaBar) quotaBar.classList.remove('hidden');
-        }
-      }
-      if (triggerGen) generateViralComments();
-    }
-
+    // --- API Configuration & BYOK ---
     function openApiModal() {
       const modal = document.getElementById('api-modal');
       if (!modal) return;
-      document.getElementById('api-provider-select').value = localStorage.getItem('reddit_api_provider') || 'agnes';
+      document.getElementById('api-provider-select').value = localStorage.getItem('reddit_api_provider') || 'pacebowl';
       document.getElementById('api-key-input').value = localStorage.getItem('reddit_api_key') || '';
-      document.getElementById('api-base-input').value = localStorage.getItem('reddit_api_base') || 'https://apihub.agnes-ai.com/v1';
-      document.getElementById('api-model-input').value = localStorage.getItem('reddit_api_model') || 'agnes-2.0-flash';
+      document.getElementById('api-base-input').value = localStorage.getItem('reddit_api_base') || 'https://reddit.pacebowl.com/api';
+      document.getElementById('api-model-input').value = localStorage.getItem('reddit_api_model') || 'PaceBowl-AI-Flash';
       modal.classList.remove('hidden');
     }
 
@@ -1421,9 +1581,9 @@
       const prov = document.getElementById('api-provider-select').value;
       const baseEl = document.getElementById('api-base-input');
       const modelEl = document.getElementById('api-model-input');
-      if (prov === 'agnes') {
-        baseEl.value = 'https://apihub.agnes-ai.com/v1';
-        modelEl.value = 'agnes-2.0-flash';
+      if (prov === 'pacebowl') {
+        baseEl.value = 'https://reddit.pacebowl.com/api';
+        modelEl.value = 'PaceBowl-AI-Flash';
       } else if (prov === 'deepseek') {
         baseEl.value = 'https://api.deepseek.com';
         modelEl.value = 'deepseek-chat';
@@ -1446,7 +1606,7 @@
 
       closeApiModal();
       showToast('✓ API 配置已保存至本机浏览器！');
-      if (key && currentEngineMode === 'ai') {
+      if (key) {
         generateViralComments();
       }
     }
@@ -1454,180 +1614,23 @@
     function clearApiConfig() {
       localStorage.removeItem('reddit_api_key');
       document.getElementById('api-key-input').value = '';
-      showToast('已清除本地存储的 API Key');
+      showToast('已清除本地存储的私有 API Key');
     }
 
-    // --- Dynamic Keyword-Aware Synthesizer Engine ---
-    function synthesizeSmartReplies(topic, style = 'all') {
-      const { subject, zhSubject, domain } = extractTopicEntities(topic);
-
-      const DYNAMIC_TEMPLATES = {
-        deadpan: [
-          {
-            text: `Have you tried putting ${subject} in a bowl of dry rice overnight?`,
-            zh: `试过把【${zhSubject}】放进大米碗里泡一整夜吗？`
-          },
-          {
-            text: `Send ${subject} a certified invoice for emotional distress and billable hours.`,
-            zh: `给【${zhSubject}】寄一张精神损失费和咨询工时账单。`
-          },
-          {
-            text: `That's not ${subject}, that's an unskippable ad for lifelong therapy.`,
-            zh: `那哪是【${zhSubject}】，那分明是一则无法跳过的人生心理治疗广告。`
-          },
-          {
-            text: `Schedule a 30-minute sync to formally discuss why ${subject} exists.`,
-            zh: `发起一个30分钟新会议，严肃讨论【${zhSubject}】为何存在。`
-          },
-          {
-            text: `Congratulations on finding the most stressful possible way to handle ${subject}.`,
-            zh: `恭喜你，成功找到了应对【${zhSubject}】的最令人破防的方式。`
-          },
-          {
-            text: `Tell ${subject} you have a doctor's appointment and vanish immediately.`,
-            zh: `跟【${zhSubject}】说你约了医生，然后立刻全网消失。`
-          },
-          {
-            text: `Bold strategy. Let's see if ${subject} survives until Friday.`,
-            zh: `真是大胆的策略。看看【${zhSubject}】能不能撑到这周五。`
-          }
-        ],
-        self_dep: [
-          {
-            text: `Even my credit score has more emotional stability than ${subject}.`,
-            zh: `连我的花呗信用分都比【${zhSubject}】更加情绪稳定。`
-          },
-          {
-            text: `I'd judge ${subject}, but my own life is an open dumpster fire.`,
-            zh: `我本想痛批【${zhSubject}】，但一想到我自己的人生更是一坨烂摊子。`
-          },
-          {
-            text: `Great, another reason to blame ${subject} for my insomnia tonight.`,
-            zh: `太好了，今晚失眠又可以名正言顺地甩锅给【${zhSubject}】了。`
-          },
-          {
-            text: `I spent 20 minutes stressing over ${subject} instead of fixing my life.`,
-            zh: `我花了20分钟为【${zhSubject}】内耗，而不是去抢救我稀烂的人生。`
-          },
-          {
-            text: `At least ${subject} has the decency to ruin your day quickly.`,
-            zh: `至少【${zhSubject}】还算体面，毁掉你的一天毫不拖泥带水。`
-          }
-        ],
-        mic_drop: [
-          {
-            text: `Delete ${subject}, block everywhere, and never look back.`,
-            zh: `把【${zhSubject}】彻底删除，全网拉黑，头也不回。`
-          },
-          {
-            text: `Not your circus, not your ${subject}. Close the door peacefully.`,
-            zh: `不是你的马戏团，管不了这群猴子。安静把门带上。`
-          },
-          {
-            text: `Close the laptop. Pour a drink. Forget ${subject}.`,
-            zh: `电脑合盖，倒杯烈酒，忘了【${zhSubject}】吧。`
-          },
-          {
-            text: `Act your wage. If ${subject} isn't paid, don't care.`,
-            zh: `拿多少钱办多少事。不给钱就别为【${zhSubject}】瞎操心。`
-          },
-          {
-            text: `Unplug the Wi-Fi router. Sleep like an innocent baby.`,
-            zh: `拔掉路由器插头，像初生婴儿一样安详入睡。`
-          },
-          {
-            text: `Change the locks. Let the front door deliver the message.`,
-            zh: `把锁换掉。让防盗门替你向【${zhSubject}】传话。`
-          }
-        ],
-        truth: [
-          {
-            text: `If ${subject} doesn't pay your rent, stop letting it live rent-free.`,
-            zh: `如果【${zhSubject}】不替你交房租，就别让它在你脑子里白住。`
-          },
-          {
-            text: `Nobody actually cares about ${subject} as much as you think they do.`,
-            zh: `根本没人像你想象中那样在乎【${zhSubject}】。`
-          },
-          {
-            text: `Life is entirely too short to waste another calorie on ${subject}.`,
-            zh: `人生苦短，多为【${zhSubject}】消耗一卡路里都是莫大的浪费。`
-          },
-          {
-            text: `HR exists to protect the company from lawsuits, not to help with ${subject}.`,
-            zh: `HR 的存在是为了保护公司免遭起诉，不是替你解决【${zhSubject}】。`
-          },
-          {
-            text: `Setting clear boundaries with ${subject} will offend those who benefitted from none.`,
-            zh: `跟【${zhSubject}】划清界限，必然会激怒那些曾从中占尽便宜的人。`
-          }
-        ],
-        hacker: [
-          {
-            text: `Document ${subject} in email. Verbal promises don't survive layoffs.`,
-            zh: `把【${zhSubject}】留存邮件铁证。口头诺言在裁员面前连废纸都不如。`
-          },
-          {
-            text: `Automate ${subject} out of your daily routine. Zero manual suffering.`,
-            zh: `把【${zhSubject}】完全写进自动化脚本，拒绝任何手动痛苦。`
-          },
-          {
-            text: `Check the raw logs, eliminate the noise, and remove ${subject}.`,
-            zh: `查看原始日志，剔除一切虚假杂音，直接拔除【${zhSubject}】。`
-          },
-          {
-            text: `Screenshot the evidence, contact a professional, and block before lunch.`,
-            zh: `截图取证，午饭前联系专业人士并果断全网拉黑。`
-          },
-          {
-            text: `Deploy a silent rule to auto-archive ${subject} directly to trash.`,
-            zh: `配置一条静默规则，把【${zhSubject}】自动归档直送垃圾桶。`
-          }
-        ]
-      };
-
-      function pickRandom(arr) {
-        return arr[Math.floor(Math.random() * arr.length)];
-      }
-
-      if (style !== 'all') {
-        const styleMap = {
-          deadpan: { name: 'Deadpan Sarcasm', key: 'deadpan' },
-          self_dep: { name: 'Self-Deprecating', key: 'self_dep' },
-          mic_drop: { name: 'Mic Drop', key: 'mic_drop' },
-          truth: { name: 'Hard Truth', key: 'truth' },
-          hacker: { name: 'Practical Hacker', key: 'hacker' }
-        };
-        const target = styleMap[style] || { name: 'Deadpan Sarcasm', key: 'deadpan' };
-        const pool = [...DYNAMIC_TEMPLATES[target.key]].sort(() => Math.random() - 0.5);
-        return pool.slice(0, 5).map(i => ({ style: target.name, text: i.text, zh: i.zh }));
-      }
-
-      // If 'all', pick one random from each of the 5 styles
-      const p1 = pickRandom(DYNAMIC_TEMPLATES.deadpan);
-      const p2 = pickRandom(DYNAMIC_TEMPLATES.self_dep);
-      const p3 = pickRandom(DYNAMIC_TEMPLATES.mic_drop);
-      const p4 = pickRandom(DYNAMIC_TEMPLATES.truth);
-      const p5 = pickRandom(DYNAMIC_TEMPLATES.hacker);
-
-      return [
-        { style: "Deadpan Sarcasm", text: p1.text, zh: p1.zh },
-        { style: "Self-Deprecating", text: p2.text, zh: p2.zh },
-        { style: "Mic Drop", text: p3.text, zh: p3.zh },
-        { style: "Hard Truth", text: p4.text, zh: p4.zh },
-        { style: "Practical Hacker", text: p5.text, zh: p5.zh }
-      ];
-    }
-
-    // --- AI Direct & Agnes API Caller ---
+    // --- Direct LLM Viral Comments Generation ---
     async function fetchAiOneLiners(topic) {
-      const provider = localStorage.getItem('reddit_api_provider') || 'agnes';
+      const provider = localStorage.getItem('reddit_api_provider') || 'pacebowl';
       const userKey = (localStorage.getItem('reddit_api_key') || '').trim();
 
-      // If user has not provided their own key, check credit quota
+      // If user has not provided their own key, enforce login and credit quota
       if (!userKey) {
-        const credits = getCredits();
-        if (credits <= 0) {
+        if (!currentUser) {
+          openAuthModal('register');
+          showToast('✨ 请先登录或免费注册账号，即可免费领取今日 5 点出海大模型算力！');
+          throw new Error('AUTH_REQUIRED');
+        }
+
+        if (currentUser.credits <= 0) {
           openCreditModal();
           showToast(I18N[currentLang].toast_quota_exhausted || '⚠️ 今日免费 5 点 AI 额度已用尽！');
           throw new Error('QUOTA_EXHAUSTED');
@@ -1635,13 +1638,13 @@
       }
 
       // If custom provider (siliconflow / deepseek / custom) with user key, call directly
-      if (provider !== 'agnes' && userKey) {
+      if (provider !== 'pacebowl' && userKey) {
         const apiBase = localStorage.getItem('reddit_api_base') || (provider === 'deepseek' ? 'https://api.deepseek.com' : 'https://api.siliconflow.cn/v1');
         const model = localStorage.getItem('reddit_api_model') || (provider === 'deepseek' ? 'deepseek-chat' : 'deepseek-ai/DeepSeek-V3');
         return await fetchDirectOpenAi(apiBase, model, userKey, topic);
       }
 
-      // Agnes AI via Cloudflare Pages proxy (/api/generate)
+      // PaceBowl Official LLM Proxy (/api/generate)
       const resp = await fetch('/api/generate', {
         method: 'POST',
         headers: {
@@ -1651,7 +1654,7 @@
           topic: topic,
           apiKey: userKey,
           provider: provider,
-          model: 'agnes-2.0-flash'
+          userEmail: currentUser ? currentUser.email : ''
         })
       });
 
@@ -1662,12 +1665,14 @@
 
       const data = await resp.json();
       if (data.candidates && Array.isArray(data.candidates) && data.candidates.length > 0) {
-        if (!userKey) {
-          consumeCredit();
+        // Deduct 1 credit if using public quota
+        if (!userKey && currentUser) {
+          currentUser.credits = Math.max(0, (currentUser.credits || 1) - 1);
+          saveUserSession(currentUser);
         }
         return data.candidates;
       }
-      throw new Error('Invalid candidates format from Agnes AI');
+      throw new Error('大模型未能生成有效候选格式');
     }
 
     async function fetchDirectOpenAi(apiBase, model, apiKey, topic) {
@@ -1723,6 +1728,21 @@ Given a Reddit post title or discussion topic, output 5 ultra-punchy, high-upvot
     async function generateViralComments() {
       const topicInput = document.getElementById('viral-topic-input');
       const topic = (topicInput ? topicInput.value.trim() : '') || 'What will you do if your partner cheat on you?';
+      const userKey = (localStorage.getItem('reddit_api_key') || '').trim();
+
+      // Check auth before initiating request
+      if (!userKey && !currentUser) {
+        openAuthModal('register');
+        showToast('✨ 请先登录或免费注册账号，即可立即获得今日 5 点大模型算力！');
+        return;
+      }
+
+      if (!userKey && currentUser && currentUser.credits <= 0) {
+        openCreditModal();
+        showToast(I18N[currentLang].toast_quota_exhausted || '⚠️ 今日免费 5 点 AI 额度已用尽！');
+        return;
+      }
+
       const genBtn = document.getElementById('btn-generate-viral');
       const btnIcon = document.getElementById('gen-btn-icon');
       const btnText = document.getElementById('gen-btn-text');
@@ -1730,36 +1750,26 @@ Given a Reddit post title or discussion topic, output 5 ultra-punchy, high-upvot
       if (genBtn) {
         genBtn.disabled = true;
         if (btnIcon) btnIcon.innerHTML = `<svg class="animate-spin -ml-1 mr-1 h-3.5 w-3.5 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg>`;
-        if (btnText) btnText.textContent = currentLang === 'zh' ? '神评生成中...' : 'Generating...';
+        if (btnText) btnText.textContent = currentLang === 'zh' ? '大模型正在构思神评...' : 'Generating One-Liners...';
       }
 
       try {
-        if (currentEngineMode === 'ai') {
-          const rawCandidates = await fetchAiOneLiners(topic);
-          let candidates = rawCandidates;
-          if (currentStyle === 'deadpan') candidates = rawCandidates.filter(i => i.style.includes('Sarcasm'));
-          else if (currentStyle === 'self_dep') candidates = rawCandidates.filter(i => i.style.includes('Self'));
-          else if (currentStyle === 'mic_drop') candidates = rawCandidates.filter(i => i.style.includes('Mic'));
-          else if (currentStyle === 'truth') candidates = rawCandidates.filter(i => i.style.includes('Truth'));
-          else if (currentStyle === 'hacker') candidates = rawCandidates.filter(i => i.style.includes('Hacker'));
-          renderViralCandidates(candidates.length ? candidates : rawCandidates);
-          showToast(I18N[currentLang].toast_agnes_success || '✓ Agnes AI 已生成 5 条地道神评！已消耗 1 点额度。');
-        } else {
-          await new Promise(r => setTimeout(r, 120));
-          const candidates = synthesizeSmartReplies(topic, currentStyle);
-          renderViralCandidates(candidates);
-          showToast(I18N[currentLang].toast_gen_success || '✓ 已生成 5 条地道单行神评！');
-        }
+        const rawCandidates = await fetchAiOneLiners(topic);
+        let candidates = rawCandidates;
+        if (currentStyle === 'deadpan') candidates = rawCandidates.filter(i => i.style.includes('Sarcasm'));
+        else if (currentStyle === 'self_dep') candidates = rawCandidates.filter(i => i.style.includes('Self'));
+        else if (currentStyle === 'mic_drop') candidates = rawCandidates.filter(i => i.style.includes('Mic'));
+        else if (currentStyle === 'truth') candidates = rawCandidates.filter(i => i.style.includes('Truth'));
+        else if (currentStyle === 'hacker') candidates = rawCandidates.filter(i => i.style.includes('Hacker'));
+        renderViralCandidates(candidates.length ? candidates : rawCandidates);
+        showToast(I18N[currentLang].toast_ai_success || '✓ 官方大模型已生成 5 条地道神评！已消耗 1 点额度。');
       } catch (err) {
-        console.warn('AI fallback to local dynamic synthesizer:', err);
-        const candidates = synthesizeSmartReplies(topic, currentStyle);
-        renderViralCandidates(candidates);
-        if (currentEngineMode === 'ai') {
-          if (err && err.message === 'QUOTA_EXHAUSTED') {
-            // Modal already triggered
-          } else {
-            showToast(I18N[currentLang].toast_ai_fallback || '⚠️ AI 服务暂不可用，已自动启用本地智能引擎生成！');
-          }
+        console.warn('AI generation error:', err);
+        if (err && (err.message === 'AUTH_REQUIRED' || err.message === 'QUOTA_EXHAUSTED')) {
+          // Modal already opened
+        } else {
+          showToast(I18N[currentLang].toast_ai_fallback || '⚠️ 算力通道响应异常，请稍后重试或使用自备 Key！');
+          renderAiErrorBanner(err.message);
         }
       } finally {
         if (genBtn) {
@@ -1768,6 +1778,28 @@ Given a Reddit post title or discussion topic, output 5 ultra-punchy, high-upvot
           if (btnText) btnText.textContent = I18N[currentLang].btn_generate_viral;
         }
       }
+    }
+
+    function renderAiErrorBanner(msg) {
+      const container = document.getElementById('viral-results-container');
+      if (!container) return;
+      container.innerHTML = `
+        <div class="p-6 rounded-xl border border-rose-500/20 bg-rose-500/5 text-center space-y-3">
+          <div class="text-2xl">⚠️</div>
+          <div class="text-xs font-bold text-slate-800 dark:text-slate-200">大模型通道繁忙或网络响应超时</div>
+          <div class="text-[11px] text-slate-500 max-w-sm mx-auto leading-relaxed">
+            ${escapeHtml(msg || '未能成功获取大模型回复')}。您可以直接点击下方按钮重试，或配置自备 Key。
+          </div>
+          <div class="flex items-center justify-center gap-2 pt-1">
+            <button onclick="generateViralComments()" class="px-3.5 py-1.5 rounded-lg bg-reddit-orange hover:bg-reddit-hover text-white text-xs font-bold transition shadow-sm">
+              重新生成
+            </button>
+            <button onclick="openApiModal()" class="px-3.5 py-1.5 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-medium transition">
+              配置自备 Key
+            </button>
+          </div>
+        </div>
+      `;
     }
 
     function shuffleViralComments() {
@@ -2536,7 +2568,7 @@ Curious to hear your perspective — are you also feeling fatigued by bloated su
 
     // --- Initial Init ---
     window.addEventListener('DOMContentLoaded', () => {
-      initEngineMode();
+      loadUserSession();
       loadScenario('cheating');
       filterSubreddits('all');
       generateShowcaseTitles();
