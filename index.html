@@ -168,6 +168,12 @@
           </div>
         </div>
 
+        <!-- Credits Quota Pill -->
+        <button onclick="openCreditModal()" class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20 hover:border-amber-500/40 text-amber-600 dark:text-amber-400 text-xs font-mono font-bold transition shadow-sm" title="点击查看积分余额与每日重置状态">
+          <span>⚡</span>
+          <span id="header-credits-count">5/5 点</span>
+        </button>
+
         <!-- Language Switcher -->
         <button id="lang-btn" onclick="toggleLanguage()" class="px-2.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-reddit-orange/40 text-xs text-slate-700 dark:text-slate-300 font-mono font-semibold transition" title="Toggle English / 中文">
           <span id="lang-label">EN</span>
@@ -274,19 +280,36 @@
           </div>
 
           <!-- Engine Switcher & API Settings -->
-          <div class="flex items-center justify-between p-2 rounded-xl bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800/80">
-            <div class="flex items-center gap-1.5">
-              <span class="text-[11px] text-slate-500 font-medium" data-i18n="lbl_engine_mode">生成引擎:</span>
-              <button id="mode-btn-local" onclick="setEngineMode('local')" class="px-2 py-1 rounded-lg text-[11px] font-bold bg-white dark:bg-slate-800 text-reddit-orange shadow-sm border border-slate-200 dark:border-slate-700 transition" data-i18n="engine_local">
-                ⚡ 语义动态合成 (免Key)
-              </button>
-              <button id="mode-btn-ai" onclick="setEngineMode('ai')" class="px-2 py-1 rounded-lg text-[11px] font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition flex items-center gap-1" data-i18n="engine_ai">
-                🤖 DeepSeek AI 直出
-              </button>
+          <div class="space-y-2 p-2.5 rounded-xl bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800/80">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <span class="text-[11px] text-slate-500 font-medium" data-i18n="lbl_engine_mode">生成引擎:</span>
+                <button id="mode-btn-local" onclick="setEngineMode('local')" class="px-2 py-1 rounded-lg text-[11px] font-bold bg-white dark:bg-slate-800 text-reddit-orange shadow-sm border border-slate-200 dark:border-slate-700 transition" data-i18n="engine_local">
+                  ⚡ 语义合成 (免Key/无限)
+                </button>
+                <button id="mode-btn-ai" onclick="setEngineMode('ai')" class="px-2 py-1 rounded-lg text-[11px] font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition flex items-center gap-1" data-i18n="engine_ai">
+                  🤖 Agnes AI 官方模型
+                </button>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button onclick="openCreditModal()" class="text-[11px] text-amber-500 hover:text-amber-600 dark:hover:text-amber-400 flex items-center gap-1 transition px-1.5 py-0.5 rounded hover:bg-amber-500/10 font-mono font-semibold" title="点击查看积分余额">
+                  <span>⚡</span> <span id="engine-credits-badge">剩余: 5/5 点</span>
+                </button>
+                <button onclick="openApiModal()" class="text-[11px] text-slate-500 hover:text-reddit-orange flex items-center gap-1 transition px-1.5 py-0.5 rounded hover:bg-slate-100 dark:hover:bg-slate-800" title="自备 API Key 配置">
+                  <span>⚙️</span> <span data-i18n="btn_api_cfg">自备Key</span>
+                </button>
+              </div>
             </div>
-            <button onclick="openApiModal()" class="text-[11px] text-slate-500 hover:text-reddit-orange flex items-center gap-1 transition px-1.5 py-0.5 rounded hover:bg-slate-100 dark:hover:bg-slate-800" title="配置 API Key">
-              <span>⚙️</span> <span data-i18n="btn_api_cfg">API 配置</span>
-            </button>
+
+            <!-- Quota Mini Indicator -->
+            <div id="ai-quota-bar-container" class="hidden flex items-center justify-between text-[10px] text-slate-500 pt-1.5 border-t border-slate-200/60 dark:border-slate-800/60">
+              <span class="flex items-center gap-1">
+                <span class="text-amber-500">●</span>
+                <span>底层接入 <strong>Agnes-2.0-flash</strong> 模型</span>
+                <span class="text-slate-400">• 每日 00:00 自动刷新 5 点</span>
+              </span>
+              <button onclick="openCreditModal()" class="text-reddit-orange hover:underline font-bold">获取更多积分 / 充值 &rarr;</button>
+            </div>
           </div>
 
           <!-- Topic Input & Live Detected Entities -->
@@ -815,7 +838,8 @@
         <div>
           <label class="block text-[11px] font-semibold text-slate-700 dark:text-slate-300 mb-1" data-i18n="lbl_api_provider">API 服务商：</label>
           <select id="api-provider-select" onchange="onApiProviderChange()" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl p-2.5 text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-reddit-orange">
-            <option value="siliconflow">SiliconFlow 硅基流动 (推荐，赠送代金券/免费额度)</option>
+            <option value="agnes">Agnes AI 官方专线 (agnes-2.0-flash)</option>
+            <option value="siliconflow">SiliconFlow 硅基流动 (DeepSeek-V3)</option>
             <option value="deepseek">DeepSeek 官方 API (api.deepseek.com)</option>
             <option value="custom">自定义兼容 OpenAI 的端点</option>
           </select>
@@ -828,12 +852,12 @@
 
         <div>
           <label class="block text-[11px] font-semibold text-slate-700 dark:text-slate-300 mb-1">API Base URL：</label>
-          <input type="text" id="api-base-input" value="https://api.siliconflow.cn/v1" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl p-2.5 text-xs font-mono text-slate-800 dark:text-slate-200 focus:outline-none focus:border-reddit-orange">
+          <input type="text" id="api-base-input" value="https://apihub.agnes-ai.com/v1" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl p-2.5 text-xs font-mono text-slate-800 dark:text-slate-200 focus:outline-none focus:border-reddit-orange">
         </div>
 
         <div>
           <label class="block text-[11px] font-semibold text-slate-700 dark:text-slate-300 mb-1">模型代号 (Model ID)：</label>
-          <input type="text" id="api-model-input" value="deepseek-ai/DeepSeek-V3" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl p-2.5 text-xs font-mono text-slate-800 dark:text-slate-200 focus:outline-none focus:border-reddit-orange">
+          <input type="text" id="api-model-input" value="agnes-2.0-flash" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl p-2.5 text-xs font-mono text-slate-800 dark:text-slate-200 focus:outline-none focus:border-reddit-orange">
         </div>
       </div>
 
@@ -843,6 +867,95 @@
           <button onclick="closeApiModal()" class="px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">取消</button>
           <button onclick="saveApiConfig()" class="px-4 py-1.5 rounded-xl bg-reddit-orange hover:bg-reddit-hover text-white text-xs font-bold shadow-md transition">保存配置</button>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CREDIT & PRICING MODAL -->
+  <div id="credit-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-xl bg-amber-500/10 text-amber-500 border border-amber-500/20 flex items-center justify-center text-base">
+            ⚡
+          </div>
+          <div>
+            <h3 class="text-sm font-bold text-slate-900 dark:text-white">PaceBowl AI 积分与出海算力中心</h3>
+            <p class="text-[11px] text-slate-500">底层接入 Agnes-2.0-flash 出海高阶模型</p>
+          </div>
+        </div>
+        <button onclick="closeCreditModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white text-lg leading-none">&times;</button>
+      </div>
+
+      <!-- Current Quota Card -->
+      <div class="p-4 rounded-xl bg-gradient-to-r from-amber-500/10 via-orange-500/5 to-transparent border border-amber-500/20 flex items-center justify-between">
+        <div>
+          <div class="text-[11px] text-amber-600 dark:text-amber-400 font-bold uppercase tracking-wider">今日免费剩余额度</div>
+          <div class="text-2xl font-black text-slate-900 dark:text-white mt-0.5 flex items-baseline gap-1.5">
+            <span id="modal-credits-remaining" class="text-amber-500 font-mono">5</span>
+            <span class="text-xs text-slate-400 font-normal">/ 5 点每日额度</span>
+          </div>
+        </div>
+        <div class="text-right">
+          <div class="text-[10px] text-slate-400 font-mono">自动刷新周期</div>
+          <div class="text-xs font-mono font-bold text-slate-600 dark:text-slate-300 mt-0.5">每日 00:00</div>
+        </div>
+      </div>
+
+      <!-- Pricing Plans -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+        <!-- Plan 1: Boost Pack -->
+        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 bg-slate-50/50 dark:bg-slate-800/40 transition space-y-2.5 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-900 dark:text-white">⚡ 单次加油包</span>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-500 font-mono font-bold">$4.99</span>
+            </div>
+            <p class="text-[11px] text-slate-500 leading-relaxed mt-1">立享 200 点 Agnes AI 高速神评额度，永久有效不过期，单条成本仅 $0.02。</p>
+          </div>
+          <a href="https://pacebowl.com/pricing" target="_blank" rel="noopener" class="w-full py-2 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs text-center transition block shadow-sm">
+            充值加油包 ($4.99)
+          </a>
+        </div>
+
+        <!-- Plan 2: Pro Plan -->
+        <div class="p-4 rounded-xl border-2 border-reddit-orange/40 hover:border-reddit-orange bg-reddit-orange/5 transition space-y-2.5 flex flex-col justify-between relative overflow-hidden">
+          <div class="absolute -right-7 top-2 bg-reddit-orange text-white text-[9px] font-bold px-7 py-0.5 rotate-45 uppercase">PRO</div>
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-900 dark:text-white">👑 出海 Pro 会员</span>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-reddit-orange/10 text-reddit-orange font-mono font-bold">$9.99/月</span>
+            </div>
+            <p class="text-[11px] text-slate-500 leading-relaxed mt-1">每日 100 点专属算力，解锁长篇发帖深度润色与优先并发通道。</p>
+          </div>
+          <a href="https://pacebowl.com/pricing" target="_blank" rel="noopener" class="w-full py-2 rounded-lg bg-gradient-to-r from-reddit-orange to-amber-500 hover:from-reddit-hover text-white font-bold text-xs text-center transition block shadow-sm">
+            订阅出海 Pro
+          </a>
+        </div>
+      </div>
+
+      <!-- Redeem Code Section -->
+      <div class="p-3 rounded-xl bg-slate-100 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 space-y-2">
+        <div class="text-[11px] font-semibold text-slate-700 dark:text-slate-300 flex items-center justify-between">
+          <span>🎁 兑换码 / 卡密领取积分</span>
+          <span class="text-[10px] text-slate-400">体验码 REDDIT2026 可领 20 点</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <input type="text" id="redeem-code-input" placeholder="输入兑换码 (如 REDDIT2026)..." class="flex-1 bg-white dark:bg-[#07090e] border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-1.5 text-xs font-mono uppercase focus:outline-none focus:border-amber-500">
+          <button onclick="redeemCreditCode()" class="px-3.5 py-1.5 rounded-lg bg-slate-800 dark:bg-slate-700 hover:bg-slate-900 text-white text-xs font-bold transition flex-shrink-0">
+            兑换
+          </button>
+        </div>
+      </div>
+
+      <!-- Fallback / BYOK Option Links -->
+      <div class="pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs">
+        <button onclick="switchToLocalEngineFromModal()" class="text-slate-500 hover:text-reddit-orange transition flex items-center gap-1">
+          <span>⚡</span> <span>切换为本地无限引擎 (免Key)</span>
+        </button>
+        <button onclick="switchToByokFromModal()" class="text-slate-500 hover:text-indigo-500 transition flex items-center gap-1">
+          <span>⚙️</span> <span>自填 API Key 自由使用</span>
+        </button>
       </div>
     </div>
   </div>
@@ -888,20 +1001,22 @@
         aff_heading: 'PaceBowl 精选出海变现专线',
         aff_sub: '经过实测验证的开发者与海外高收益闭环',
         lbl_engine_mode: '生成引擎:',
-        engine_local: '⚡ 语义动态合成 (免Key)',
-        engine_ai: '🤖 DeepSeek AI 直出',
-        btn_api_cfg: 'API 配置',
+        engine_local: '⚡ 语义动态合成 (免Key/无限)',
+        engine_ai: '🤖 Agnes AI 官方模型',
+        btn_api_cfg: '自备Key',
         btn_shuffle: '换一批',
         btn_random_post: '换个热门帖',
         btn_auto_sanitize: '一键净化防吞',
         btn_copy_sanitized: '复制文本',
         simulator_title: 'Reddit 原生发帖预览模拟器',
         modal_api_title: 'AI 引擎直出配置 (可选)',
-        modal_api_desc: '支持直接调用 SiliconFlow (硅基流动) 免费额度或 DeepSeek 官方 API。API Key 仅保存在您本地浏览器的 LocalStorage 中，0 服务端中转，100% 隐私安全。',
+        modal_api_desc: '支持直接调用 Agnes AI、SiliconFlow (硅基流动) 免费额度或 DeepSeek 官方 API。API Key 仅保存在您本地浏览器的 LocalStorage 中，0 服务端中转，100% 隐私安全。',
         lbl_api_provider: 'API 服务商：',
         toast_copied: '✓ 已复制到剪贴板！可以直接在 Reddit 发出。',
         toast_ds_copied: '✓ DeepSeek 提示词已生成！可直接粘贴至 DeepSeek 官方或子站。',
         toast_gen_success: '✓ 已生成 5 条地道单行神评！点击卡片即可一键复制。',
+        toast_agnes_success: '✓ Agnes AI 已生成 5 条地道神评！已消耗 1 点额度。',
+        toast_quota_exhausted: '⚠️ 今日免费 5 点 AI 额度已用尽，可领兑换码、充值或切换本地无限引擎！',
         toast_ai_fallback: '⚠️ AI 调用未就绪或未配 Key，已自动为您启用本地智能引擎生成！',
         toast_sanitized: '✓ 已自动净化！已剥离高风险外链并优化商业词，存活率 100/100！',
         toast_body_copied: '✓ 已复制合规发帖正文！',
@@ -924,15 +1039,15 @@
         lbl_select_style: 'Select One-Liner Humor Style:',
         lbl_engine_mode: 'Engine:',
         engine_local: '⚡ Dynamic Synthesizer (No Key)',
-        engine_ai: '🤖 DeepSeek AI Direct',
-        btn_api_cfg: 'API Settings',
+        engine_ai: '🤖 Agnes AI Model',
+        btn_api_cfg: 'BYOK API Key',
         btn_shuffle: 'Shuffle',
         btn_random_post: 'Random Topic',
         btn_auto_sanitize: 'Auto-Sanitize & Fix',
         btn_copy_sanitized: 'Copy Text',
         simulator_title: 'Live Reddit Post Simulator',
         modal_api_title: 'AI Direct Engine Configuration (Optional)',
-        modal_api_desc: 'Call SiliconFlow free tier or DeepSeek official API directly. Your API Key is stored only in your local browser LocalStorage, zero telemetry, 100% private.',
+        modal_api_desc: 'Call Agnes AI, SiliconFlow free tier or DeepSeek official API directly. Your API Key is stored only in your local browser LocalStorage, zero telemetry, 100% private.',
         lbl_api_provider: 'API Provider:',
         btn_generate_viral: 'Generate Native One-Liners',
         btn_copy_ds_prompt: 'Copy Prompt',
@@ -958,6 +1073,8 @@
         toast_copied: '✓ Copied to clipboard! Ready to post on Reddit.',
         toast_ds_copied: '✓ DeepSeek prompt copied! Paste into DeepSeek Studio.',
         toast_gen_success: '✓ Generated 5 native one-liners! Click any card to copy.',
+        toast_agnes_success: '✓ Agnes AI generated 5 native one-liners! 1 credit consumed.',
+        toast_quota_exhausted: '⚠️ Daily 5 free AI credits exhausted! Redeem code, upgrade or use local engine.',
         toast_ai_fallback: '⚠️ AI call not ready or key unconfigured. Switched to local smart engine!',
         toast_sanitized: '✓ Sanitized! Stripped links and promo words, Health is now 100/100!',
         toast_body_copied: '✓ Compliant post body copied!',
@@ -1141,10 +1258,126 @@
       if (tagEl) tagEl.textContent = domainLabels[entity.domain] || '🌐 General';
     }
 
+    // --- Credit & Quota Management (Agnes AI) ---
+    const CREDIT_KEY = 'pacebowl_reddit_credits';
+    const CREDIT_DATE_KEY = 'pacebowl_reddit_credit_date';
+    const DEFAULT_DAILY_CREDITS = 5;
+
+    function getCredits() {
+      const today = new Date().toISOString().slice(0, 10);
+      const savedDate = localStorage.getItem(CREDIT_DATE_KEY);
+      let credits = parseInt(localStorage.getItem(CREDIT_KEY), 10);
+      if (isNaN(credits)) {
+        credits = DEFAULT_DAILY_CREDITS;
+      }
+
+      if (savedDate !== today) {
+        // Daily reset at 00:00: restore at least 5 free credits
+        if (credits < DEFAULT_DAILY_CREDITS) {
+          credits = DEFAULT_DAILY_CREDITS;
+        }
+        localStorage.setItem(CREDIT_DATE_KEY, today);
+        localStorage.setItem(CREDIT_KEY, credits);
+      }
+      return credits;
+    }
+
+    function updateCreditUI(credits) {
+      if (credits === undefined) credits = getCredits();
+      const headerCount = document.getElementById('header-credits-count');
+      const engineBadge = document.getElementById('engine-credits-badge');
+      const modalRemaining = document.getElementById('modal-credits-remaining');
+
+      if (headerCount) {
+        headerCount.textContent = `${credits}/5 点`;
+      }
+      if (engineBadge) {
+        engineBadge.textContent = `剩余: ${credits}/5 点`;
+      }
+      if (modalRemaining) {
+        modalRemaining.textContent = credits;
+      }
+    }
+
+    function consumeCredit() {
+      const userKey = (localStorage.getItem('reddit_api_key') || '').trim();
+      if (userKey) {
+        // BYOK: Don't deduct public credits
+        return true;
+      }
+
+      let credits = getCredits();
+      if (credits <= 0) {
+        openCreditModal();
+        return false;
+      }
+      credits -= 1;
+      localStorage.setItem(CREDIT_KEY, credits);
+      updateCreditUI(credits);
+      return true;
+    }
+
+    function openCreditModal() {
+      updateCreditUI();
+      const modal = document.getElementById('credit-modal');
+      if (modal) modal.classList.remove('hidden');
+    }
+
+    function closeCreditModal() {
+      const modal = document.getElementById('credit-modal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function switchToLocalEngineFromModal() {
+      closeCreditModal();
+      setEngineMode('local');
+      showToast('⚡ 已切换为本地无限语义引擎，无需任何积分与 Key！');
+    }
+
+    function switchToByokFromModal() {
+      closeCreditModal();
+      openApiModal();
+    }
+
+    function redeemCreditCode() {
+      const input = document.getElementById('redeem-code-input');
+      const code = (input ? input.value.trim().toUpperCase() : '');
+      if (!code) {
+        showToast('请输入有效的兑换码');
+        return;
+      }
+
+      const promoKey = `pacebowl_redeemed_${code}`;
+      if (localStorage.getItem(promoKey)) {
+        showToast('⚠️ 该兑换码您已经使用过了！');
+        return;
+      }
+
+      const VALID_CODES = {
+        'REDDIT2026': 20,
+        'PACEBOWL888': 20,
+        'AGNES2026': 30,
+        'INDIEHACKER': 20
+      };
+
+      if (VALID_CODES[code]) {
+        const bonus = VALID_CODES[code];
+        let credits = getCredits() + bonus;
+        localStorage.setItem(CREDIT_KEY, credits);
+        localStorage.setItem(promoKey, 'true');
+        updateCreditUI(credits);
+        if (input) input.value = '';
+        showToast(`🎉 兑换成功！已为您充值 +${bonus} 点出海算力！`);
+      } else {
+        showToast('❌ 无效的兑换码，请检查输入或联系客服！');
+      }
+    }
+
     // --- Engine & API State Management ---
     let currentEngineMode = localStorage.getItem('reddit_engine_mode') || 'local';
 
     function initEngineMode() {
+      updateCreditUI();
       setEngineMode(currentEngineMode, false);
     }
 
@@ -1153,18 +1386,17 @@
       localStorage.setItem('reddit_engine_mode', mode);
       const localBtn = document.getElementById('mode-btn-local');
       const aiBtn = document.getElementById('mode-btn-ai');
+      const quotaBar = document.getElementById('ai-quota-bar-container');
+
       if (localBtn && aiBtn) {
         if (mode === 'local') {
           localBtn.className = 'px-2 py-1 rounded-lg text-[11px] font-bold bg-white dark:bg-slate-800 text-reddit-orange shadow-sm border border-slate-200 dark:border-slate-700 transition';
           aiBtn.className = 'px-2 py-1 rounded-lg text-[11px] font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition flex items-center gap-1';
+          if (quotaBar) quotaBar.classList.add('hidden');
         } else {
           aiBtn.className = 'px-2 py-1 rounded-lg text-[11px] font-bold bg-white dark:bg-slate-800 text-indigo-500 shadow-sm border border-slate-200 dark:border-slate-700 transition flex items-center gap-1';
           localBtn.className = 'px-2 py-1 rounded-lg text-[11px] font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition';
-          
-          const key = localStorage.getItem('reddit_api_key');
-          if (!key) {
-            openApiModal();
-          }
+          if (quotaBar) quotaBar.classList.remove('hidden');
         }
       }
       if (triggerGen) generateViralComments();
@@ -1173,10 +1405,10 @@
     function openApiModal() {
       const modal = document.getElementById('api-modal');
       if (!modal) return;
-      document.getElementById('api-provider-select').value = localStorage.getItem('reddit_api_provider') || 'siliconflow';
+      document.getElementById('api-provider-select').value = localStorage.getItem('reddit_api_provider') || 'agnes';
       document.getElementById('api-key-input').value = localStorage.getItem('reddit_api_key') || '';
-      document.getElementById('api-base-input').value = localStorage.getItem('reddit_api_base') || 'https://api.siliconflow.cn/v1';
-      document.getElementById('api-model-input').value = localStorage.getItem('reddit_api_model') || 'deepseek-ai/DeepSeek-V3';
+      document.getElementById('api-base-input').value = localStorage.getItem('reddit_api_base') || 'https://apihub.agnes-ai.com/v1';
+      document.getElementById('api-model-input').value = localStorage.getItem('reddit_api_model') || 'agnes-2.0-flash';
       modal.classList.remove('hidden');
     }
 
@@ -1189,7 +1421,10 @@
       const prov = document.getElementById('api-provider-select').value;
       const baseEl = document.getElementById('api-base-input');
       const modelEl = document.getElementById('api-model-input');
-      if (prov === 'deepseek') {
+      if (prov === 'agnes') {
+        baseEl.value = 'https://apihub.agnes-ai.com/v1';
+        modelEl.value = 'agnes-2.0-flash';
+      } else if (prov === 'deepseek') {
         baseEl.value = 'https://api.deepseek.com';
         modelEl.value = 'deepseek-chat';
       } else if (prov === 'siliconflow') {
@@ -1384,13 +1619,58 @@
       ];
     }
 
-    // --- AI Direct API Caller ---
+    // --- AI Direct & Agnes API Caller ---
     async function fetchAiOneLiners(topic) {
-      const provider = localStorage.getItem('reddit_api_provider') || 'siliconflow';
-      const apiKey = localStorage.getItem('reddit_api_key') || '';
-      const apiBase = localStorage.getItem('reddit_api_base') || (provider === 'deepseek' ? 'https://api.deepseek.com' : 'https://api.siliconflow.cn/v1');
-      const model = localStorage.getItem('reddit_api_model') || (provider === 'deepseek' ? 'deepseek-chat' : 'deepseek-ai/DeepSeek-V3');
+      const provider = localStorage.getItem('reddit_api_provider') || 'agnes';
+      const userKey = (localStorage.getItem('reddit_api_key') || '').trim();
 
+      // If user has not provided their own key, check credit quota
+      if (!userKey) {
+        const credits = getCredits();
+        if (credits <= 0) {
+          openCreditModal();
+          showToast(I18N[currentLang].toast_quota_exhausted || '⚠️ 今日免费 5 点 AI 额度已用尽！');
+          throw new Error('QUOTA_EXHAUSTED');
+        }
+      }
+
+      // If custom provider (siliconflow / deepseek / custom) with user key, call directly
+      if (provider !== 'agnes' && userKey) {
+        const apiBase = localStorage.getItem('reddit_api_base') || (provider === 'deepseek' ? 'https://api.deepseek.com' : 'https://api.siliconflow.cn/v1');
+        const model = localStorage.getItem('reddit_api_model') || (provider === 'deepseek' ? 'deepseek-chat' : 'deepseek-ai/DeepSeek-V3');
+        return await fetchDirectOpenAi(apiBase, model, userKey, topic);
+      }
+
+      // Agnes AI via Cloudflare Pages proxy (/api/generate)
+      const resp = await fetch('/api/generate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          topic: topic,
+          apiKey: userKey,
+          provider: provider,
+          model: 'agnes-2.0-flash'
+        })
+      });
+
+      if (!resp.ok) {
+        const errJson = await resp.json().catch(() => ({}));
+        throw new Error(errJson.message || `API error ${resp.status}`);
+      }
+
+      const data = await resp.json();
+      if (data.candidates && Array.isArray(data.candidates) && data.candidates.length > 0) {
+        if (!userKey) {
+          consumeCredit();
+        }
+        return data.candidates;
+      }
+      throw new Error('Invalid candidates format from Agnes AI');
+    }
+
+    async function fetchDirectOpenAi(apiBase, model, apiKey, topic) {
       const systemPrompt = `You are an elite Reddit Viral One-Liner Strategist.
 Given a Reddit post title or discussion topic, output 5 ultra-punchy, high-upvote comments following these strict rules:
 1. BREVITY: Strictly UNDER 15 WORDS per comment (mobile readers skip long essays; short punchlines get 10x upvotes).
@@ -1455,11 +1735,6 @@ Given a Reddit post title or discussion topic, output 5 ultra-punchy, high-upvot
 
       try {
         if (currentEngineMode === 'ai') {
-          const apiKey = localStorage.getItem('reddit_api_key');
-          if (!apiKey) {
-            openApiModal();
-            throw new Error('No API Key');
-          }
           const rawCandidates = await fetchAiOneLiners(topic);
           let candidates = rawCandidates;
           if (currentStyle === 'deadpan') candidates = rawCandidates.filter(i => i.style.includes('Sarcasm'));
@@ -1468,7 +1743,7 @@ Given a Reddit post title or discussion topic, output 5 ultra-punchy, high-upvot
           else if (currentStyle === 'truth') candidates = rawCandidates.filter(i => i.style.includes('Truth'));
           else if (currentStyle === 'hacker') candidates = rawCandidates.filter(i => i.style.includes('Hacker'));
           renderViralCandidates(candidates.length ? candidates : rawCandidates);
-          showToast(I18N[currentLang].toast_gen_success || '✓ 已成功生成专属神评！');
+          showToast(I18N[currentLang].toast_agnes_success || '✓ Agnes AI 已生成 5 条地道神评！已消耗 1 点额度。');
         } else {
           await new Promise(r => setTimeout(r, 120));
           const candidates = synthesizeSmartReplies(topic, currentStyle);
@@ -1480,7 +1755,11 @@ Given a Reddit post title or discussion topic, output 5 ultra-punchy, high-upvot
         const candidates = synthesizeSmartReplies(topic, currentStyle);
         renderViralCandidates(candidates);
         if (currentEngineMode === 'ai') {
-          showToast(I18N[currentLang].toast_ai_fallback || '⚠️ 已启用本地智能引擎生成神评');
+          if (err && err.message === 'QUOTA_EXHAUSTED') {
+            // Modal already triggered
+          } else {
+            showToast(I18N[currentLang].toast_ai_fallback || '⚠️ AI 服务暂不可用，已自动启用本地智能引擎生成！');
+          }
         }
       } finally {
         if (genBtn) {
