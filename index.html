@@ -172,27 +172,27 @@
         </div>
 
         <!-- Auth / Credits Header Section -->
-        <button id="nav-login-btn" onclick="openAuthModal('login')" class="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl bg-gradient-to-r from-reddit-orange to-amber-500 hover:opacity-90 text-white text-xs font-bold transition shadow-sm shrink-0" title="登录或注册领免费出海算力">
+        <button id="nav-login-btn" onclick="openAuthModal('login')" class="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl bg-gradient-to-r from-reddit-orange to-amber-500 hover:opacity-90 text-white text-xs font-bold transition shadow-sm shrink-0" data-i18n-title="nav_login_title" title="登录或注册领免费出海算力">
           <span>⚡</span>
-          <span class="hidden sm:inline">登录 / 注册 (送10点)</span>
-          <span class="sm:hidden">登录 (10点)</span>
+          <span class="hidden sm:inline" data-i18n="nav_login_desktop">登录 / 注册 (送10点)</span>
+          <span class="sm:hidden" data-i18n="nav_login_mobile">登录 (10点)</span>
         </button>
 
         <div id="nav-user-container" class="hidden flex items-center gap-1 sm:gap-1.5 shrink-0">
           <!-- Credits Quota Pill -->
-          <button onclick="openCreditModal()" class="flex items-center gap-1 px-2 sm:px-2.5 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20 hover:border-amber-500/40 text-amber-600 dark:text-amber-400 text-xs font-mono font-bold transition shadow-sm" title="点击查看积分余额与每日重置状态">
+          <button onclick="openCreditModal()" class="flex items-center gap-1 px-2 sm:px-2.5 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20 hover:border-amber-500/40 text-amber-600 dark:text-amber-400 text-xs font-mono font-bold transition shadow-sm" data-i18n-title="nav_credits_title" title="点击查看积分余额与每日重置状态">
             <span>⚡</span>
             <span id="header-credits-count">10/10 点</span>
           </button>
 
           <!-- User Email Pill -->
-          <button onclick="openCreditModal()" class="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-xs text-slate-700 dark:text-slate-300 font-medium transition max-w-[150px]" title="用户会员中心">
+          <button onclick="openCreditModal()" class="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-xs text-slate-700 dark:text-slate-300 font-medium transition max-w-[150px]" data-i18n-title="nav_user_title" title="用户会员中心">
             <span id="header-user-avatar" class="flex items-center justify-center">👤</span>
             <span id="header-user-email" class="truncate font-mono text-[11px]">user</span>
           </button>
 
           <!-- Logout Button -->
-          <button onclick="logoutUser()" class="p-1.5 rounded-lg text-slate-400 hover:text-rose-500 hover:bg-rose-500/10 transition" title="退出登录">
+          <button onclick="logoutUser()" class="p-1.5 rounded-lg text-slate-400 hover:text-rose-500 hover:bg-rose-500/10 transition" data-i18n-title="nav_logout_title" title="退出登录">
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
           </button>
         </div>
@@ -277,7 +277,7 @@
             </h2>
             <div class="flex items-center gap-2">
               <span class="text-[11px] font-mono text-emerald-500 bg-emerald-500/10 px-2 py-0.5 rounded-full" data-i18n="rule_15words">严格 &le; 15 词约束</span>
-              <button onclick="pickRandomViralTopic()" class="text-[11px] font-bold text-reddit-orange hover:text-reddit-hover flex items-center gap-1 transition" title="随机抽取真实热门帖">
+              <button onclick="pickRandomViralTopic()" class="text-[11px] font-bold text-reddit-orange hover:text-reddit-hover flex items-center gap-1 transition" data-i18n-title="btn_random_topic_title" title="随机抽取真实热门帖">
                 <span>🎲</span> <span data-i18n="btn_random_post">换个热门帖</span>
               </button>
             </div>
@@ -287,18 +287,18 @@
           <div>
             <div class="text-[11px] text-slate-500 mb-1.5 flex items-center justify-between">
               <span data-i18n="lbl_scenarios">高流量话题预设：</span>
-              <span class="text-[10px] text-slate-400">支持中英文输入，自动识别实体</span>
+              <span class="text-[10px] text-slate-400" data-i18n="lbl_scenarios_tip">支持中英文输入，自动识别实体</span>
             </div>
             <div class="flex items-center gap-1.5 overflow-x-auto whitespace-nowrap pb-1.5 scrollbar-none sm:flex-wrap">
-              <button onclick="loadScenario('cheating')" class="text-[11px] px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition flex-shrink-0">💔 出轨应对</button>
-              <button onclick="loadScenario('cat_zoom')" class="text-[11px] px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition flex-shrink-0">🐱 猫翻屏幕</button>
-              <button onclick="loadScenario('cybertruck')" class="text-[11px] px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition flex-shrink-0">🚗 赛博皮卡</button>
-              <button onclick="loadScenario('roommate')" class="text-[11px] px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition flex-shrink-0">🏠 奇葩室友</button>
-              <button onclick="loadScenario('pretend')" class="text-[11px] px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition flex-shrink-0">💼 装懂职场</button>
-              <button onclick="loadScenario('ai')" class="text-[11px] px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition flex-shrink-0">🤖 AI 程序员</button>
-              <button onclick="loadScenario('under50')" class="text-[11px] px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition flex-shrink-0">💰 50刀好物</button>
-              <button onclick="loadScenario('saas')" class="text-[11px] px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition flex-shrink-0">🚀 独立获客</button>
-              <button onclick="loadScenario('debt')" class="text-[11px] px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition flex-shrink-0">💻 祖传代码</button>
+              <button onclick="loadScenario('cheating')" data-i18n="sc_cheating" class="text-[11px] px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition flex-shrink-0">💔 出轨应对</button>
+              <button onclick="loadScenario('cat_zoom')" data-i18n="sc_cat_zoom" class="text-[11px] px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition flex-shrink-0">🐱 猫翻屏幕</button>
+              <button onclick="loadScenario('cybertruck')" data-i18n="sc_cybertruck" class="text-[11px] px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition flex-shrink-0">🚗 赛博皮卡</button>
+              <button onclick="loadScenario('roommate')" data-i18n="sc_roommate" class="text-[11px] px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition flex-shrink-0">🏠 奇葩室友</button>
+              <button onclick="loadScenario('pretend')" data-i18n="sc_pretend" class="text-[11px] px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition flex-shrink-0">💼 装懂职场</button>
+              <button onclick="loadScenario('ai')" data-i18n="sc_ai" class="text-[11px] px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition flex-shrink-0">🤖 AI 程序员</button>
+              <button onclick="loadScenario('under50')" data-i18n="sc_under50" class="text-[11px] px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition flex-shrink-0">💰 50刀好物</button>
+              <button onclick="loadScenario('saas')" data-i18n="sc_saas" class="text-[11px] px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition flex-shrink-0">🚀 独立获客</button>
+              <button onclick="loadScenario('debt')" data-i18n="sc_debt" class="text-[11px] px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition flex-shrink-0">💻 祖传代码</button>
             </div>
           </div>
 
@@ -308,14 +308,14 @@
               <div class="flex items-center gap-2">
                 <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-reddit-orange/10 border border-reddit-orange/20 text-reddit-orange text-xs font-bold shadow-sm">
                   <span class="w-2 h-2 rounded-full bg-reddit-orange animate-pulse"></span>
-                  <span>🤖 PaceBowl AI 官方出海大模型</span>
+                  <span data-i18n="engine_ai">🤖 PaceBowl AI 官方出海大模型</span>
                 </span>
                 <span class="text-[10px] text-emerald-500 font-mono hidden sm:inline-flex items-center gap-1">
-                  <span>●</span> <span>出海神评专线就绪</span>
+                  <span>●</span> <span data-i18n="engine_ready">出海神评专线就绪</span>
                 </span>
               </div>
               <div class="flex items-center gap-2">
-                <button onclick="openCreditModal()" class="text-[11px] text-amber-500 hover:text-amber-600 dark:hover:text-amber-400 flex items-center gap-1 transition px-2.5 py-1 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/20 font-mono font-bold" title="点击查看积分余额与充值">
+                <button onclick="openCreditModal()" class="text-[11px] text-amber-500 hover:text-amber-600 dark:hover:text-amber-400 flex items-center gap-1 transition px-2.5 py-1 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/20 font-mono font-bold" data-i18n-title="nav_credits_title" title="点击查看积分余额与充值">
                   <span>⚡</span> <span id="engine-credits-badge">剩余: 5/5 点</span>
                 </button>
               </div>
@@ -328,7 +328,7 @@
                 <span id="ai-quota-notice">免登录每日送 5 点，登录立享 10 点/天 (每日 00:00 自动补满)</span>
               </span>
               <button onclick="openCreditModal()" class="text-reddit-orange hover:underline font-bold flex items-center gap-1">
-                <span>算力充值 / 升级 Pro</span>
+                <span data-i18n="btn_topup_pro">算力充值 / 升级 Pro</span>
                 <span>&rarr;</span>
               </button>
             </div>
@@ -336,11 +336,11 @@
 
           <!-- Topic Input & Live Detected Entities -->
           <div class="space-y-1.5">
-            <textarea id="viral-topic-input" rows="3" oninput="updateDetectedEntities()" placeholder="输入目标 Reddit 帖子标题或讨论话题（中英文皆可，例如：My cat knocked over my monitor during a Zoom call with the CEO，或 室友半夜打游戏连麦大叫）" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-xs font-mono text-slate-800 dark:text-slate-200 focus:outline-none focus:border-reddit-orange transition resize-none"></textarea>
+            <textarea id="viral-topic-input" rows="3" oninput="updateDetectedEntities()" data-i18n-placeholder="topic_input_placeholder" placeholder="输入目标 Reddit 帖子标题或讨论话题（中英文皆可，例如：My cat knocked over my monitor during a Zoom call with the CEO，或 室友半夜打游戏连麦大叫）" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-xs font-mono text-slate-800 dark:text-slate-200 focus:outline-none focus:border-reddit-orange transition resize-none"></textarea>
             
             <div id="detected-entities-bar" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 flex items-center justify-between text-[11px]">
               <div class="flex items-center gap-1.5 overflow-hidden truncate">
-                <span class="text-slate-400">🎯 识别实体:</span>
+                <span class="text-slate-400" data-i18n="detected_entities_lbl">🎯 识别实体:</span>
                 <span id="detected-entities-text" class="font-mono text-reddit-orange font-semibold truncate">partner, cheat</span>
               </div>
               <span id="detected-domain-tag" class="px-2 py-0.5 rounded text-[10px] font-mono bg-purple-500/10 text-purple-500 border border-purple-500/20 flex-shrink-0">Dating & Ex</span>
@@ -351,12 +351,12 @@
           <div>
             <label class="block text-[11px] font-semibold text-slate-600 dark:text-slate-400 mb-1.5" data-i18n="lbl_select_style">选择神评风格流派：</label>
             <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
-              <button onclick="selectStyle('all')" id="style-btn-all" class="p-2 rounded-xl border border-reddit-orange/50 bg-reddit-orange/10 text-reddit-orange font-bold text-xs text-center transition">✨ 全部 5 种流派</button>
-              <button onclick="selectStyle('deadpan')" id="style-btn-deadpan" class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs text-center transition">🕶️ 冷面毒舌</button>
-              <button onclick="selectStyle('self_dep')" id="style-btn-self_dep" class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs text-center transition">🤡 自嘲反讽</button>
-              <button onclick="selectStyle('mic_drop')" id="style-btn-mic_drop" class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs text-center transition">⚡ 干净利落</button>
-              <button onclick="selectStyle('truth')" id="style-btn-truth" class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs text-center transition">🧠 人间清醒</button>
-              <button onclick="selectStyle('hacker')" id="style-btn-hacker" class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs text-center transition">🛠️ 极客直给</button>
+              <button onclick="selectStyle('all')" id="style-btn-all" data-i18n="style_all" class="p-2 rounded-xl border border-reddit-orange/50 bg-reddit-orange/10 text-reddit-orange font-bold text-xs text-center transition">✨ 全部 5 种流派</button>
+              <button onclick="selectStyle('deadpan')" id="style-btn-deadpan" data-i18n="style_deadpan" class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs text-center transition">🕶️ 冷面毒舌</button>
+              <button onclick="selectStyle('self_dep')" id="style-btn-self_dep" data-i18n="style_self_dep" class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs text-center transition">🤡 自嘲反讽</button>
+              <button onclick="selectStyle('mic_drop')" id="style-btn-mic_drop" data-i18n="style_mic_drop" class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs text-center transition">⚡ 干净利落</button>
+              <button onclick="selectStyle('truth')" id="style-btn-truth" data-i18n="style_truth" class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs text-center transition">🧠 人间清醒</button>
+              <button onclick="selectStyle('hacker')" id="style-btn-hacker" data-i18n="style_hacker" class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs text-center transition">🛠️ 极客直给</button>
             </div>
           </div>
 
@@ -368,11 +368,11 @@
               <span id="gen-btn-icon">🚀</span>
               <span id="gen-btn-text" data-i18n="btn_generate_viral">生成地道单行神评</span>
             </button>
-            <button onclick="shuffleViralComments()" class="py-2.5 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 transition flex items-center gap-1.5" title="换一批神评">
+            <button onclick="shuffleViralComments()" class="py-2.5 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 transition flex items-center gap-1.5" data-i18n-title="btn_shuffle_comments_title" title="换一批神评">
               <span>🎲</span>
               <span data-i18n="btn_shuffle">换一批</span>
             </button>
-            <button onclick="copyDeepSeekPromptForReddit()" class="py-2.5 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 transition flex items-center gap-1.5" title="Copy DeepSeek Prompt">
+            <button onclick="copyDeepSeekPromptForReddit()" class="py-2.5 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 transition flex items-center gap-1.5" data-i18n-title="btn_copy_ds_prompt_title" title="Copy DeepSeek Prompt">
               <span>🧠</span>
               <span data-i18n="btn_copy_ds_prompt">复制提示词</span>
             </button>
@@ -410,16 +410,16 @@
               <span data-i18n="radar_input_title">待发评论 / 发帖正文风控实时体检</span>
             </h2>
             <div class="flex items-center gap-2 text-xs">
-              <span class="text-slate-400 text-[11px]">测试样本:</span>
-              <button onclick="loadRadarSample('banned')" class="text-[11px] text-rose-500 hover:underline">❌ 必封外链</button>
+              <span class="text-slate-400 text-[11px]" data-i18n="sample_lbl">测试样本:</span>
+              <button onclick="loadRadarSample('banned')" data-i18n="sample_banned" class="text-[11px] text-rose-500 hover:underline">❌ 必封外链</button>
               <span class="text-slate-300 dark:text-slate-700">|</span>
-              <button onclick="loadRadarSample('ai')" class="text-[11px] text-amber-500 hover:underline">⚠️ AI客套</button>
+              <button onclick="loadRadarSample('ai')" data-i18n="sample_ai" class="text-[11px] text-amber-500 hover:underline">⚠️ AI客套</button>
               <span class="text-slate-300 dark:text-slate-700">|</span>
-              <button onclick="loadRadarSample('safe')" class="text-[11px] text-emerald-500 hover:underline">🟢 满分极客</button>
+              <button onclick="loadRadarSample('safe')" data-i18n="sample_safe" class="text-[11px] text-emerald-500 hover:underline">🟢 满分极客</button>
             </div>
           </div>
 
-          <textarea id="radar-input" rows="6" oninput="analyzeRadarText()" placeholder="粘贴你准备发在 Reddit 上的英文评论或帖子草稿。雷达将实时扫描链接、营销词、字符长度与风控风险..." class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-xs font-mono text-slate-800 dark:text-slate-200 focus:outline-none focus:border-indigo-500 transition leading-relaxed"></textarea>
+          <textarea id="radar-input" rows="6" oninput="analyzeRadarText()" data-i18n-placeholder="radar_input_placeholder" placeholder="粘贴你准备发在 Reddit 上的英文评论或帖子草稿。雷达将实时扫描链接、营销词、字符长度与风控风险..." class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-xs font-mono text-slate-800 dark:text-slate-200 focus:outline-none focus:border-indigo-500 transition leading-relaxed"></textarea>
 
           <div class="flex flex-wrap items-center justify-between gap-2 pt-1 border-t border-slate-100 dark:border-slate-800">
             <div class="flex items-center gap-2">
@@ -429,7 +429,7 @@
             
             <!-- Quick Sanitize Buttons -->
             <div class="flex items-center gap-2">
-              <button onclick="autoSanitizeRadarText()" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-sm transition flex items-center gap-1.5" title="一键替换外链为Bio引导，移除营销词">
+              <button onclick="autoSanitizeRadarText()" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-sm transition flex items-center gap-1.5" data-i18n-title="btn_sanitize_title" title="一键替换外链为Bio引导，移除营销词">
                 <span>🪄</span>
                 <span data-i18n="btn_auto_sanitize">一键净化防吞</span>
               </button>
@@ -437,7 +437,7 @@
                 <span>📋</span>
                 <span data-i18n="btn_copy_sanitized">复制文本</span>
               </button>
-              <button onclick="clearRadarText()" class="px-2 py-1.5 text-xs text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition">
+              <button onclick="clearRadarText()" data-i18n="btn_clear" class="px-2 py-1.5 text-xs text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition">
                 清空
               </button>
             </div>
@@ -484,7 +484,7 @@
           </div>
 
           <!-- Golden Rule Reminder -->
-          <div class="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-700 dark:text-amber-400 text-[11px] leading-relaxed">
+          <div class="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-700 dark:text-amber-400 text-[11px] leading-relaxed" data-i18n="radar_golden_rule">
             <span class="font-bold">⚠️ Reddit 铁律：</span>当 Karma &lt; 100 时，若需引流，必须引导看个人主页侧边栏（Social Links），正文内发外链必定秒删！
           </div>
         </div>
@@ -509,13 +509,13 @@
           <!-- Search Input & Tier Buttons -->
           <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
             <div class="relative">
-              <input type="text" id="sub-search-input" oninput="filterSubreddits()" placeholder="🔍 搜索版块或标签 (如 karma, ai, saas)..." class="w-full sm:w-56 bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-1.5 text-xs font-mono focus:outline-none focus:border-purple-500 transition">
+              <input type="text" id="sub-search-input" oninput="filterSubreddits()" data-i18n-placeholder="sub_search_placeholder" placeholder="🔍 搜索版块或标签 (如 karma, ai, saas)..." class="w-full sm:w-56 bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-1.5 text-xs font-mono focus:outline-none focus:border-purple-500 transition">
             </div>
             <div class="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0">
-              <button onclick="filterSubreddits('all')" id="sub-filter-all" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-reddit-orange text-white transition flex-shrink-0">全部</button>
-              <button onclick="filterSubreddits('tier0')" id="sub-filter-tier0" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 transition flex-shrink-0">🐣 0~50 破冰</button>
-              <button onclick="filterSubreddits('tier1')" id="sub-filter-tier1" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 transition flex-shrink-0">🚀 50~200 技术</button>
-              <button onclick="filterSubreddits('tier2')" id="sub-filter-tier2" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 transition flex-shrink-0">💎 200+ 引流</button>
+              <button onclick="filterSubreddits('all')" id="sub-filter-all" data-i18n="sub_filter_all" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-reddit-orange text-white transition flex-shrink-0">全部</button>
+              <button onclick="filterSubreddits('tier0')" id="sub-filter-tier0" data-i18n="sub_filter_tier0" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 transition flex-shrink-0">🐣 0~50 破冰</button>
+              <button onclick="filterSubreddits('tier1')" id="sub-filter-tier1" data-i18n="sub_filter_tier1" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 transition flex-shrink-0">🚀 50~200 技术</button>
+              <button onclick="filterSubreddits('tier2')" id="sub-filter-tier2" data-i18n="sub_filter_tier2" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 transition flex-shrink-0">💎 200+ 引流</button>
             </div>
           </div>
         </div>
@@ -524,7 +524,7 @@
         <div class="p-3.5 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-700 dark:text-purple-300 text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div class="flex items-center gap-2">
             <span class="text-base">💡</span>
-            <span><strong>Reddit 算法秘籍：</strong>千万不要去已满天的 Hot 帖当炮灰！紧盯版块的 <strong>Rising（上升期）</strong> 并在发帖 45 分钟内给出前 3 条神评，帖子爆发后将独吞 80% 赞数！</span>
+            <span data-i18n="sub_algorithm_secret"><strong>Reddit 算法秘籍：</strong>千万不要去已满天的 Hot 帖当炮灰！紧盯版块的 <strong>Rising（上升期）</strong> 并在发帖 45 分钟内给出前 3 条神评，帖子爆发后将独吞 80% 赞数！</span>
           </div>
           <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-purple-500/20 text-purple-600 dark:text-purple-300 font-bold self-start sm:self-auto flex-shrink-0">80% UPVOTE LAW</span>
         </div>
@@ -548,18 +548,18 @@
               <span class="w-2.5 h-2.5 rounded-full bg-teal-500"></span>
               <span data-i18n="title_crafter_title">独立项目参数设定</span>
             </h2>
-            <span class="text-[10px] font-mono text-teal-600 dark:text-teal-400 bg-teal-500/10 px-2 py-0.5 rounded-full">Reddit UI 实时联调</span>
+            <span class="text-[10px] font-mono text-teal-600 dark:text-teal-400 bg-teal-500/10 px-2 py-0.5 rounded-full" data-i18n="crafter_badge">Reddit UI 实时联调</span>
           </div>
 
           <div class="space-y-3 text-xs">
             <div class="grid grid-cols-2 gap-2">
               <div>
                 <label class="block text-[11px] font-semibold text-slate-600 dark:text-slate-400 mb-1" data-i18n="lbl_tool_name">产品/工具名称：</label>
-                <input type="text" id="title-tool-name" value="QuickMock Studio" placeholder="例如 QuickMock Studio" oninput="generateShowcaseTitles()" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 font-mono text-xs focus:border-teal-500 focus:outline-none">
+                <input type="text" id="title-tool-name" value="QuickMock Studio" data-i18n-placeholder="tool_name_placeholder" placeholder="例如 QuickMock Studio" oninput="generateShowcaseTitles()" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 font-mono text-xs focus:border-teal-500 focus:outline-none">
               </div>
               <div>
                 <label class="block text-[11px] font-semibold text-slate-600 dark:text-slate-400 mb-1" data-i18n="lbl_reddit_id">Reddit 账号 ID：</label>
-                <input type="text" id="title-user-name" value="" placeholder="例如 u/your_username (选填)" oninput="generateShowcaseTitles()" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 font-mono text-xs focus:border-teal-500 focus:outline-none">
+                <input type="text" id="title-user-name" value="" data-i18n-placeholder="user_name_placeholder" placeholder="例如 u/your_username (选填)" oninput="generateShowcaseTitles()" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 font-mono text-xs focus:border-teal-500 focus:outline-none">
               </div>
             </div>
 
@@ -577,16 +577,16 @@
 
             <div>
               <label class="block text-[11px] font-semibold text-slate-600 dark:text-slate-400 mb-1" data-i18n="lbl_tool_pain">解决的核心痛点：</label>
-              <input type="text" id="title-tool-pain" value="bloated dev tools with server queues, logins, and fees" placeholder="例如 bloated dev tools with server queues, logins, and fees" oninput="generateShowcaseTitles()" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 font-mono text-xs focus:border-teal-500 focus:outline-none">
+              <input type="text" id="title-tool-pain" value="bloated dev tools with server queues, logins, and fees" data-i18n-placeholder="tool_pain_placeholder" placeholder="例如 bloated dev tools with server queues, logins, and fees" oninput="generateShowcaseTitles()" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 font-mono text-xs focus:border-teal-500 focus:outline-none">
             </div>
 
             <div>
               <label class="block text-[11px] font-semibold text-slate-600 dark:text-slate-400 mb-1" data-i18n="lbl_tool_usp">核心卖点与亮点：</label>
-              <input type="text" id="title-tool-usp" value="100% client-side, zero telemetry, instant response, MIT open source" placeholder="例如 100% client-side, zero telemetry, MIT open source" oninput="generateShowcaseTitles()" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 font-mono text-xs focus:border-teal-500 focus:outline-none">
+              <input type="text" id="title-tool-usp" value="100% client-side, zero telemetry, instant response, MIT open source" data-i18n-placeholder="tool_usp_placeholder" placeholder="例如 100% client-side, zero telemetry, MIT open source" oninput="generateShowcaseTitles()" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 font-mono text-xs focus:border-teal-500 focus:outline-none">
             </div>
 
             <div>
-              <label class="block text-[11px] font-semibold text-slate-600 dark:text-slate-400 mb-1">外链安全指引策略：</label>
+              <label class="block text-[11px] font-semibold text-slate-600 dark:text-slate-400 mb-1" data-i18n="lbl_link_strategy">外链安全指引策略：</label>
               <select id="title-link-strategy" onchange="generateShowcaseTitles()" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 font-mono text-xs focus:border-teal-500 focus:outline-none">
                 <option value="profile">📌 引导看个人主页 Social Links（最安全，100% 避开 AutoMod）</option>
                 <option value="dm">📩 评论区声明“私信即发试用链接”（极高互动率）</option>
@@ -595,7 +595,7 @@
             </div>
 
             <div class="pt-2">
-              <label class="block text-[11px] font-semibold text-slate-600 dark:text-slate-400 mb-1.5">点击切换 6 组发帖角度：</label>
+              <label class="block text-[11px] font-semibold text-slate-600 dark:text-slate-400 mb-1.5" data-i18n="lbl_switch_angles">点击切换 6 组发帖角度：</label>
               <div id="showcase-angles-list" class="space-y-1.5">
                 <!-- Angle selector buttons rendered by JS -->
               </div>
@@ -672,15 +672,15 @@
           <div class="flex items-center justify-end gap-2 pt-1">
             <button onclick="copyCurrentShowcaseTitle()" class="px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 transition flex items-center gap-1.5">
               <span>📋</span>
-              <span>复制当前标题</span>
+              <span data-i18n="btn_copy_cur_title">复制当前标题</span>
             </button>
             <button onclick="copyCurrentShowcaseBody()" class="px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 transition flex items-center gap-1.5">
               <span>📄</span>
-              <span>复制当前正文</span>
+              <span data-i18n="btn_copy_cur_body">复制当前正文</span>
             </button>
             <button onclick="copyCurrentShowcaseFull()" class="px-3.5 py-2 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs shadow-md transition flex items-center gap-1.5">
               <span>🚀</span>
-              <span>复制全部 Markdown</span>
+              <span data-i18n="btn_copy_cur_full">复制全部 Markdown</span>
             </button>
           </div>
         </div>
@@ -704,9 +704,9 @@
           <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 space-y-2">
             <div class="text-xs font-bold text-reddit-orange flex items-center gap-1.5">
               <span>🎯</span>
-              <span>1. 什么是「Reddit 搜索真空期」？</span>
+              <span data-i18n="pb_card1_title">1. 什么是「Reddit 搜索真空期」？</span>
             </div>
-            <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
+            <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed" data-i18n="pb_card1_body">
               当你在 Google 搜一个长尾需求词，搜索结果前两页<strong>全是 Reddit 碎屑贴、Quora 问答或 X 吐槽，没有一个正规产品站</strong>时，这就是最暴利的入场信号！海量老外在搜，却无工具承接。20分钟上线静态工具页直接拦截海量精准流量。
             </p>
           </div>
@@ -715,9 +715,9 @@
           <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 space-y-2">
             <div class="text-xs font-bold text-sky-500 flex items-center gap-1.5">
               <span>⏳</span>
-              <span>2. 4 个月老号的免死金牌</span>
+              <span data-i18n="pb_card2_title">2. 4 个月老号的免死金牌</span>
             </div>
-            <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
+            <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed" data-i18n="pb_card2_body">
               新号注册前 7~30 天是全网 AutoMod 的极度敏感期。拥有 4 个月账龄的账号已经永久避开了新号沙盒。千万不要为了换用户名去开新号，老号哪怕 1 Karma 也是极值钱的信任资产。
             </p>
           </div>
@@ -726,9 +726,9 @@
           <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 space-y-2">
             <div class="text-xs font-bold text-emerald-500 flex items-center gap-1.5">
               <span>⚡</span>
-              <span>3. 15 词神评与手机端算法</span>
+              <span data-i18n="pb_card3_title">3. 15 词神评与手机端算法</span>
             </div>
-            <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
+            <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed" data-i18n="pb_card3_body">
               90% 的 Reddit 用户是手机滑屏。一整段长文会因心智负担过高被无视或当做 AI 废话。8~15 词的冷面毒舌、自嘲反讽，既能让老外秒懂秒笑，又能顺手点赞，是冲刺前 200 Karma 的最快打法。
             </p>
           </div>
@@ -737,9 +737,9 @@
           <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 space-y-2">
             <div class="text-xs font-bold text-purple-500 flex items-center gap-1.5">
               <span>🧘</span>
-              <span>4. 哥飞“网站遗忘法则”</span>
+              <span data-i18n="pb_card4_title">4. 哥飞“网站遗忘法则”</span>
             </div>
-            <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
+            <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed" data-i18n="pb_card4_body">
               做好基础外链和工具上线后，把它忘掉，隔几个月再看。自媒体与出海的真正难处是克服初期“看不到即时正反馈”的心理内耗。每天只花 5 分钟回两条 Rising 帖子，复利自然会爆发。
             </p>
           </div>
@@ -766,10 +766,10 @@
               <span class="text-xs font-bold text-slate-900 dark:text-white group-hover:text-reddit-orange transition">ElevenLabs</span>
               <span class="text-[10px] px-1.5 py-0.5 rounded bg-sky-500/10 text-sky-600 dark:text-sky-400 font-mono">Audio AI</span>
             </div>
-            <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">好莱坞级超逼真 AI 配音与多语种克隆，出海短视频与播客标配。</p>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed" data-i18n="aff_1_desc">好莱坞级超逼真 AI 配音与多语种克隆，出海短视频与播客标配。</p>
           </div>
           <div class="mt-3 text-[11px] font-semibold text-reddit-orange flex items-center gap-1">
-            <span>试用高品质配音</span>
+            <span data-i18n="aff_1_btn">试用高品质配音</span>
             <span>&rarr;</span>
           </div>
         </a>
@@ -781,10 +781,10 @@
               <span class="text-xs font-bold text-slate-900 dark:text-white group-hover:text-reddit-orange transition">Monica AI</span>
               <span class="text-[10px] px-1.5 py-0.5 rounded bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 font-mono">All-in-One</span>
             </div>
-            <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">聚合 DeepSeek-V3/R1、Claude 3.5 与 GPT-4o 的跨平台全能副驾驶。</p>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed" data-i18n="aff_2_desc">聚合 DeepSeek-V3/R1、Claude 3.5 与 GPT-4o 的跨平台全能副驾驶。</p>
           </div>
           <div class="mt-3 text-[11px] font-semibold text-reddit-orange flex items-center gap-1">
-            <span>免费体验全能助手</span>
+            <span data-i18n="aff_2_btn">免费体验全能助手</span>
             <span>&rarr;</span>
           </div>
         </a>
@@ -796,10 +796,10 @@
               <span class="text-xs font-bold text-slate-900 dark:text-white group-hover:text-reddit-orange transition">RunPod GPU</span>
               <span class="text-[10px] px-1.5 py-0.5 rounded bg-purple-500/10 text-purple-600 dark:text-purple-400 font-mono">Cloud GPU</span>
             </div>
-            <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">秒级按需租用 RTX 4090 / A100，零排队运行 ComfyUI 与开源大模型。</p>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed" data-i18n="aff_3_desc">秒级按需租用 RTX 4090 / A100，零排队运行 ComfyUI 与开源大模型。</p>
           </div>
           <div class="mt-3 text-[11px] font-semibold text-reddit-orange flex items-center gap-1">
-            <span>开启云算力</span>
+            <span data-i18n="aff_3_btn">开启云算力</span>
             <span>&rarr;</span>
           </div>
         </a>
@@ -808,13 +808,13 @@
         <a href="/go/sf" target="_blank" rel="noopener" class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 hover:border-reddit-orange transition group flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-2">
-              <span class="text-xs font-bold text-slate-900 dark:text-white group-hover:text-reddit-orange transition">硅基流动</span>
-              <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-mono">2000万 Token</span>
+              <span class="text-xs font-bold text-slate-900 dark:text-white group-hover:text-reddit-orange transition" data-i18n="aff_4_title">硅基流动</span>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-mono" data-i18n="aff_4_badge">2000万 Token</span>
             </div>
-            <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">国内超低延迟免排队 API 专线，支持 DeepSeek-R1 全系列与 FLUX。</p>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed" data-i18n="aff_4_desc">国内超低延迟免排队 API 专线，支持 DeepSeek-R1 全系列与 FLUX。</p>
           </div>
           <div class="mt-3 text-[11px] font-semibold text-reddit-orange flex items-center gap-1">
-            <span>领 2000万 额度</span>
+            <span data-i18n="aff_4_btn">领 2000万 额度</span>
             <span>&rarr;</span>
           </div>
         </a>
@@ -854,8 +854,8 @@
             ⚡
           </div>
           <div>
-            <h3 id="auth-modal-title" class="text-sm font-bold text-slate-900 dark:text-white">登录 / 注册 PaceBowl 账号</h3>
-            <p id="auth-modal-sub" class="text-[11px] text-slate-500">免登录 5 点，登录立享 10 点/天专属出海神评算力</p>
+            <h3 id="auth-modal-title" class="text-sm font-bold text-slate-900 dark:text-white" data-i18n="auth_modal_title">登录 / 注册 PaceBowl 账号</h3>
+            <p id="auth-modal-sub" class="text-[11px] text-slate-500" data-i18n="auth_modal_sub">免登录 5 点，登录立享 10 点/天专属出海神评算力</p>
           </div>
         </div>
         <button onclick="closeAuthModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white text-lg leading-none">&times;</button>
@@ -871,19 +871,19 @@
               <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
               <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
             </svg>
-            <span class="text-xs font-bold text-slate-800 dark:text-slate-200">Google / Gmail 账号一键秒登</span>
+            <span class="text-xs font-bold text-slate-800 dark:text-slate-200" data-i18n="auth_google_quick_login">Google / Gmail 账号一键秒登</span>
           </div>
-          <span class="text-[10px] text-amber-500 font-mono font-bold bg-amber-500/10 px-1.5 py-0.5 rounded border border-amber-500/20">送10点算力</span>
+          <span class="text-[10px] text-amber-500 font-mono font-bold bg-amber-500/10 px-1.5 py-0.5 rounded border border-amber-500/20" data-i18n="auth_bonus_badge">送10点算力</span>
         </div>
 
         <form onsubmit="submitGoogleFastEmail(event)" class="flex gap-2">
-          <input type="email" id="google-fast-email-input" required placeholder="输入 Gmail 或常用邮箱，如 example@gmail.com" class="flex-1 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-reddit-orange shadow-inner">
-          <button type="submit" id="btn-google-fast-submit" class="px-4 py-2 rounded-xl bg-gradient-to-r from-reddit-orange to-amber-500 hover:opacity-95 text-white font-bold text-xs shadow-md shrink-0 active:scale-95 transition">
+          <input type="email" id="google-fast-email-input" required data-i18n-placeholder="auth_google_placeholder" placeholder="输入 Gmail 或常用邮箱，如 example@gmail.com" class="flex-1 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-reddit-orange shadow-inner">
+          <button type="submit" id="btn-google-fast-submit" data-i18n="auth_quick_submit_btn" class="px-4 py-2 rounded-xl bg-gradient-to-r from-reddit-orange to-amber-500 hover:opacity-95 text-white font-bold text-xs shadow-md shrink-0 active:scale-95 transition">
             一键秒登
           </button>
         </form>
 
-        <p class="text-[10px] text-slate-400">
+        <p class="text-[10px] text-slate-400" data-i18n="auth_quick_tip">
           ⚡ 免密极速直连，自动激活今日 10 点专属出海神评大模型算力。
         </p>
       </div>
@@ -891,47 +891,45 @@
       <!-- Divider -->
       <div class="relative flex items-center justify-center my-1">
         <div class="border-t border-slate-200 dark:border-slate-800 w-full"></div>
-        <span class="bg-white dark:bg-slate-900 px-3 text-[10px] text-slate-400 font-medium shrink-0">或使用邮箱密码</span>
+        <span class="bg-white dark:bg-slate-900 px-3 text-[10px] text-slate-400 font-medium shrink-0" data-i18n="auth_or_email_pwd">或使用邮箱密码</span>
         <div class="border-t border-slate-200 dark:border-slate-800 w-full"></div>
       </div>
 
       <!-- Tab Switcher -->
       <div class="grid grid-cols-2 p-1 bg-slate-100 dark:bg-slate-800 rounded-xl text-xs font-semibold">
-        <button id="auth-tab-login" onclick="switchAuthTab('login')" class="py-1.5 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm font-bold transition">登录账号</button>
-        <button id="auth-tab-register" onclick="switchAuthTab('register')" class="py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition">免费注册 (立享10点)</button>
+        <button id="auth-tab-login" onclick="switchAuthTab('login')" data-i18n="auth_tab_login" class="py-1.5 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm font-bold transition">登录账号</button>
+        <button id="auth-tab-register" onclick="switchAuthTab('register')" data-i18n="auth_tab_register" class="py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition">免费注册 (立享10点)</button>
       </div>
 
       <!-- Form Fields -->
       <form id="auth-form" onsubmit="handleAuthSubmit(event)" class="space-y-3 pt-1">
         <div>
-          <label class="block text-[11px] font-semibold text-slate-700 dark:text-slate-300 mb-1">电子邮箱：</label>
-          <input type="email" id="auth-email-input" required placeholder="name@example.com" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl p-2.5 text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-reddit-orange">
+          <label class="block text-[11px] font-semibold text-slate-700 dark:text-slate-300 mb-1" data-i18n="auth_lbl_email">电子邮箱：</label>
+          <input type="email" id="auth-email-input" required data-i18n-placeholder="auth_email_placeholder" placeholder="name@example.com" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl p-2.5 text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-reddit-orange">
         </div>
 
         <div>
           <div class="flex items-center justify-between mb-1">
-            <label class="block text-[11px] font-semibold text-slate-700 dark:text-slate-300">账号密码：</label>
-            <span class="text-[10px] text-slate-400">至少 6 位字符</span>
+            <label class="block text-[11px] font-semibold text-slate-700 dark:text-slate-300" data-i18n="auth_lbl_password">账号密码：</label>
+            <span class="text-[10px] text-slate-400" data-i18n="auth_pwd_min_chars">至少 6 位字符</span>
           </div>
-          <input type="password" id="auth-password-input" required minlength="6" placeholder="输入您的安全密码" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl p-2.5 text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-reddit-orange">
+          <input type="password" id="auth-password-input" required minlength="6" data-i18n-placeholder="auth_pwd_placeholder" placeholder="输入您的安全密码" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl p-2.5 text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-reddit-orange">
         </div>
-
-
 
         <div class="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-[11px] text-amber-700 dark:text-amber-400 flex items-start gap-2">
           <span class="text-sm">🎁</span>
-          <div class="leading-relaxed">
+          <div class="leading-relaxed" data-i18n="auth_promo_box">
             <strong>新人专享出海算力</strong>：免登录每日赠送 5 点，注册登录后立享 10 点/天 PaceBowl AI 官方出海大模型额度，00:00 自动刷新！
           </div>
         </div>
 
-        <button type="submit" id="auth-submit-btn" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-reddit-orange to-amber-500 hover:opacity-95 text-white font-bold text-xs shadow-md transition">
+        <button type="submit" id="auth-submit-btn" data-i18n="auth_submit_login" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-reddit-orange to-amber-500 hover:opacity-95 text-white font-bold text-xs shadow-md transition">
           立即登录
         </button>
       </form>
 
       <div class="text-center text-[11px] text-slate-400">
-        <span>🛡️ PaceBowl AI 官方专线直连 • 免配 Key 极速出词</span>
+        <span data-i18n="auth_footer_note">🛡️ PaceBowl AI 官方专线直连 • 免配 Key 极速出词</span>
       </div>
     </div>
   </div>
@@ -945,8 +943,8 @@
             ⚡
           </div>
           <div>
-            <h3 class="text-sm font-bold text-slate-900 dark:text-white">PaceBowl AI 积分与出海算力中心</h3>
-            <p class="text-[11px] text-slate-500">官方出海高阶大模型算力专线</p>
+            <h3 class="text-sm font-bold text-slate-900 dark:text-white" data-i18n="credit_modal_title">PaceBowl AI 积分与出海算力中心</h3>
+            <p class="text-[11px] text-slate-500" data-i18n="credit_modal_sub">官方出海高阶大模型算力专线</p>
           </div>
         </div>
         <button onclick="closeCreditModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white text-lg leading-none">&times;</button>
@@ -956,12 +954,12 @@
       <div id="modal-guest-upsell-banner" class="hidden p-3.5 rounded-xl bg-gradient-to-r from-reddit-orange/15 to-amber-500/15 border border-reddit-orange/30 flex items-center justify-between gap-3">
         <div>
           <div class="text-xs font-bold text-reddit-orange flex items-center gap-1.5">
-            <span>🎁 免费翻倍特权</span>
-            <span class="text-[10px] px-1.5 py-0.2 bg-reddit-orange text-white rounded font-mono font-bold">10点/天</span>
+            <span data-i18n="credit_guest_upsell_title">🎁 免费翻倍特权</span>
+            <span class="text-[10px] px-1.5 py-0.2 bg-reddit-orange text-white rounded font-mono font-bold" data-i18n="credit_guest_upsell_badge">10点/天</span>
           </div>
-          <p class="text-[11px] text-slate-600 dark:text-slate-300 mt-0.5">游客每日 5 点已用完？免费注册/登录账号，额度立即永久提升至 10 点/天！</p>
+          <p class="text-[11px] text-slate-600 dark:text-slate-300 mt-0.5" data-i18n="credit_guest_upsell_desc">游客每日 5 点已用完？免费注册/登录账号，额度立即永久提升至 10 点/天！</p>
         </div>
-        <button onclick="closeCreditModal(); openAuthModal('register');" class="px-3.5 py-2 rounded-lg bg-reddit-orange hover:bg-reddit-hover text-white text-xs font-bold flex-shrink-0 shadow-sm transition active:scale-95">
+        <button onclick="closeCreditModal(); openAuthModal('register');" class="px-3.5 py-2 rounded-lg bg-reddit-orange hover:bg-reddit-hover text-white text-xs font-bold flex-shrink-0 shadow-sm transition active:scale-95" data-i18n="credit_guest_upsell_btn">
           立即登录翻倍 &rarr;
         </button>
       </div>
@@ -970,7 +968,7 @@
       <div class="p-4 rounded-xl bg-gradient-to-r from-amber-500/10 via-orange-500/5 to-transparent border border-amber-500/20 flex items-center justify-between">
         <div>
           <div class="text-[11px] text-amber-600 dark:text-amber-400 font-bold uppercase tracking-wider flex items-center gap-1.5">
-            <span>当前身份：</span>
+            <span data-i18n="credit_lbl_current_role">当前身份：</span>
             <span id="modal-user-email" class="font-mono text-slate-700 dark:text-slate-300 font-normal">未登录</span>
           </div>
           <div class="text-2xl font-black text-slate-900 dark:text-white mt-1 flex items-baseline gap-1.5">
@@ -979,8 +977,8 @@
           </div>
         </div>
         <div class="text-right">
-          <div class="text-[10px] text-slate-400 font-mono">自动刷新周期</div>
-          <div class="text-xs font-mono font-bold text-slate-600 dark:text-slate-300 mt-0.5">每日 00:00</div>
+          <div class="text-[10px] text-slate-400 font-mono" data-i18n="credit_lbl_reset_cycle">自动刷新周期</div>
+          <div class="text-xs font-mono font-bold text-slate-600 dark:text-slate-300 mt-0.5" data-i18n="credit_reset_time">每日 00:00</div>
         </div>
       </div>
 
@@ -990,12 +988,12 @@
         <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 bg-slate-50/50 dark:bg-slate-800/40 transition space-y-2.5 flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between">
-              <span class="text-xs font-bold text-slate-900 dark:text-white">⚡ 算力加油包</span>
-              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-500 font-mono font-bold">$4.99 (一次性)</span>
+              <span class="text-xs font-bold text-slate-900 dark:text-white" data-i18n="credit_pack_title">⚡ 算力加油包</span>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-500 font-mono font-bold" data-i18n="credit_pack_badge">$4.99 (一次性)</span>
             </div>
-            <p class="text-[11px] text-slate-500 leading-relaxed mt-1">立享 100 点出海大模型专属神评算力，永久有效不过期，单条成本仅 $0.05。</p>
+            <p class="text-[11px] text-slate-500 leading-relaxed mt-1" data-i18n="credit_pack_desc">立享 100 点出海大模型专属神评算力，永久有效不过期，单条成本仅 $0.05。</p>
           </div>
-          <button onclick="checkoutStripe('pack')" class="w-full py-2.5 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs text-center transition flex items-center justify-center gap-1.5 shadow-sm active:scale-95">
+          <button onclick="checkoutStripe('pack')" class="w-full py-2.5 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs text-center transition flex items-center justify-center gap-1.5 shadow-sm active:scale-95" data-i18n="credit_pack_btn">
             <span>充值 100 点 ($4.99)</span>
           </button>
         </div>
@@ -1005,12 +1003,12 @@
           <div class="absolute -right-7 top-2 bg-reddit-orange text-white text-[9px] font-bold px-7 py-0.5 rotate-45 uppercase">PRO</div>
           <div>
             <div class="flex items-center justify-between">
-              <span class="text-xs font-bold text-slate-900 dark:text-white">👑 出海 Pro 会员</span>
-              <span class="text-[10px] px-1.5 py-0.5 rounded bg-reddit-orange/10 text-reddit-orange font-mono font-bold">$9.90/月</span>
+              <span class="text-xs font-bold text-slate-900 dark:text-white" data-i18n="credit_pro_title">👑 出海 Pro 会员</span>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-reddit-orange/10 text-reddit-orange font-mono font-bold" data-i18n="credit_pro_badge">$9.90/月</span>
             </div>
-            <p class="text-[11px] text-slate-500 leading-relaxed mt-1">每日 100 次神评额度 + AutoMod 敏感词深度防吞雷达 + 专线高速并发。</p>
+            <p class="text-[11px] text-slate-500 leading-relaxed mt-1" data-i18n="credit_pro_desc">每日 100 次神评额度 + AutoMod 敏感词深度防吞雷达 + 专线高速并发。</p>
           </div>
-          <button onclick="checkoutStripe('pro')" class="w-full py-2.5 rounded-lg bg-gradient-to-r from-reddit-orange to-amber-500 hover:from-reddit-hover text-white font-bold text-xs text-center transition flex items-center justify-center gap-1.5 shadow-sm active:scale-95">
+          <button onclick="checkoutStripe('pro')" class="w-full py-2.5 rounded-lg bg-gradient-to-r from-reddit-orange to-amber-500 hover:from-reddit-hover text-white font-bold text-xs text-center transition flex items-center justify-center gap-1.5 shadow-sm active:scale-95" data-i18n="credit_pro_btn">
             <span>开通 Pro 会员 ($9.90/月)</span>
           </button>
         </div>
@@ -1019,12 +1017,12 @@
       <!-- Redeem Code Section -->
       <div class="p-3 rounded-xl bg-slate-100 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 space-y-2">
         <div class="text-[11px] font-semibold text-slate-700 dark:text-slate-300 flex items-center justify-between">
-          <span>🎁 兑换码 / 卡密领取积分</span>
-          <span class="text-[10px] text-slate-400">体验码 REDDIT2026 可领 20 点</span>
+          <span data-i18n="credit_redeem_title">🎁 兑换码 / 卡密领取积分</span>
+          <span class="text-[10px] text-slate-400" data-i18n="credit_redeem_tip">体验码 REDDIT2026 可领 20 点</span>
         </div>
         <div class="flex items-center gap-2">
-          <input type="text" id="redeem-code-input" placeholder="输入兑换码 (如 REDDIT2026)..." class="flex-1 bg-white dark:bg-[#07090e] border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-1.5 text-xs font-mono uppercase focus:outline-none focus:border-amber-500">
-          <button onclick="redeemCreditCode()" class="px-3.5 py-1.5 rounded-lg bg-slate-800 dark:bg-slate-700 hover:bg-slate-900 text-white text-xs font-bold transition flex-shrink-0">
+          <input type="text" id="redeem-code-input" data-i18n-placeholder="credit_redeem_placeholder" placeholder="输入兑换码 (如 REDDIT2026)..." class="flex-1 bg-white dark:bg-[#07090e] border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-1.5 text-xs font-mono uppercase focus:outline-none focus:border-amber-500">
+          <button onclick="redeemCreditCode()" data-i18n="credit_redeem_btn" class="px-3.5 py-1.5 rounded-lg bg-slate-800 dark:bg-slate-700 hover:bg-slate-900 text-white text-xs font-bold transition flex-shrink-0">
             兑换
           </button>
         </div>
@@ -1033,10 +1031,10 @@
       <!-- Footer Note & Account Switch -->
       <div class="pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs">
         <span class="text-slate-400 flex items-center gap-1">
-          <span>🔒</span> <span>Stripe 官方安全结算 • 实时到账</span>
+          <span>🔒</span> <span data-i18n="credit_stripe_secure">Stripe 官方安全结算 • 实时到账</span>
         </span>
         <button onclick="closeCreditModal(); openAuthModal('login');" class="text-slate-500 hover:text-reddit-orange transition flex items-center gap-1">
-          <span>👤</span> <span id="modal-auth-btn-label">切换登录账号</span>
+          <span>👤</span> <span id="modal-auth-btn-label" data-i18n="credit_switch_account">切换登录账号</span>
         </button>
       </div>
     </div>
@@ -1049,6 +1047,13 @@
       zh: {
         suite_btn: 'PaceBowl 套件',
         suite_title: 'PaceBowl 生态矩阵',
+        nav_login_desktop: '登录 / 注册 (送10点)',
+        nav_login_mobile: '登录 (10点)',
+        nav_login_title: '登录或注册领免费出海算力',
+        nav_credits_title: '点击查看积分余额与充值',
+        nav_logout_title: '登出当前账号',
+        nav_user_title: '查看当前账号状态与额度',
+
         hero_badge: 'Reddit 极速起号与截流黑客工坊',
         hero_title: '征服 Reddit 算法：15 词单行神评与防吞风控雷达',
         hero_desc: '为独立开发者与出海创作者量身定制。告别 AI 废话与长篇大论，用原生冷面幽默破冰起号，精准规避 AutoMod 封杀，将社区流量转化为真实用户。',
@@ -1057,39 +1062,155 @@
         tab_subreddits: '版块起号图谱',
         tab_titles: '发帖标题工坊',
         tab_playbook: '截流出海心法',
+
         viral_input_title: '目标 Reddit 帖子 / 提问',
         rule_15words: '严格 ≤ 15 词约束',
-        lbl_scenarios: '高流量话题预设：',
-        lbl_select_style: '选择神评风格流派：',
-        btn_generate_viral: '生成地道单行神评',
-        btn_copy_ds_prompt: '复制提示词',
-        candidates_title: '高赞神评候选列表 (点击即复制)',
-        radar_input_title: '待发评论 / 发帖正文风控实时体检',
-        btn_test_sample: '载入被吞测试样本',
-        radar_realtime_tip: '⚡ 实时启发式扫描，零数据上传',
-        radar_score_title: 'AutoMod 存活率预测',
-        radar_diagnostics: '诊断与避坑建议：',
-        subreddits_title: '精选起号与出海版块导航矩阵',
-        subreddits_desc: '分阶段精细化运营，在对的版块做对的事',
-        title_crafter_title: '独立项目参数设定',
-        lbl_tool_name: '产品/工具名称：',
-        lbl_reddit_id: 'Reddit 账号 ID：',
-        lbl_tool_pain: '解决的核心痛点：',
-        lbl_tool_usp: '核心卖点与亮点：',
-        lbl_target_sub: '目标发布版块：',
-        btn_generate_titles: '生成 6 组爆款发帖标题与正文模板',
-        generated_titles_heading: '高转化发帖标题与安全正文模板',
-        playbook_title: '良竹出海“真空截流法”与普通人起号心法全景复盘',
-        playbook_sub: '选择比努力重要 100 倍，快速跑通比完美重要 1000 倍',
-        aff_heading: 'PaceBowl 精选出海变现专线',
-        aff_sub: '经过实测验证的开发者与海外高收益闭环',
-        lbl_engine_mode: '生成引擎:',
-        engine_ai: '🤖 PaceBowl AI 官方出海大模型',
-        btn_shuffle: '换一批',
         btn_random_post: '换个热门帖',
+        lbl_scenarios: '高流量话题预设：',
+        lbl_scenarios_tip: '支持中英文输入，自动识别实体',
+        sc_cheating: '💔 出轨应对',
+        sc_cat_zoom: '🐱 猫翻屏幕',
+        sc_cybertruck: '🚗 赛博皮卡',
+        sc_roommate: '🏠 奇葩室友',
+        sc_pretend: '💼 装懂职场',
+        sc_ai: '🤖 AI 程序员',
+        sc_under50: '💰 50刀好物',
+        sc_saas: '🚀 独立获客',
+        sc_debt: '💻 祖传代码',
+
+        engine_ai: '🤖 PaceBowl AI 官方出海大模型',
+        engine_ready: '出海神评专线就绪',
+        btn_topup_pro: '算力充值 / 升级 Pro',
+        topic_input_placeholder: '输入目标 Reddit 帖子标题或讨论话题（中英文皆可，例如：My cat knocked over my monitor during a Zoom call with the CEO，或 室友半夜打游戏连麦大叫）',
+        detected_entities_lbl: '🎯 识别实体:',
+
+        lbl_select_style: '选择神评风格流派：',
+        style_all: '✨ 全部 5 种流派',
+        style_deadpan: '🕶️ 冷面毒舌',
+        style_self_dep: '🤡 自嘲反讽',
+        style_mic_drop: '⚡ 干净利落',
+        style_truth: '🧠 人间清醒',
+        style_hacker: '🛠️ 极客直给',
+
+        btn_generate_viral: '生成地道单行神评',
+        btn_shuffle: '换一批',
+        btn_copy_ds_prompt: '复制提示词',
+        btn_random_topic_title: '随机抽取真实热门帖',
+        btn_shuffle_comments_title: '换一批神评',
+        btn_copy_ds_prompt_title: '复制 DeepSeek 提示词',
+        btn_sanitize_title: '一键替换外链为Bio引导，移除营销词',
+        candidates_title: '高赞神评候选列表 (点击即复制)',
+
+        radar_input_title: '待发评论 / 发帖正文风控实时体检',
+        sample_lbl: '测试样本:',
+        sample_banned: '❌ 必封外链',
+        sample_ai: '⚠️ AI客套',
+        sample_safe: '🟢 满分极客',
+        radar_input_placeholder: '粘贴你准备发在 Reddit 上的英文评论或帖子草稿。雷达将实时扫描链接、营销词、字符长度与风控风险...',
         btn_auto_sanitize: '一键净化防吞',
         btn_copy_sanitized: '复制文本',
+        btn_clear: '清空',
+        radar_score_title: 'AutoMod 存活率预测',
+        radar_diagnostics: '诊断与避坑建议：',
+        radar_golden_rule: '<span class="font-bold">⚠️ Reddit 铁律：</span>当 Karma < 100 时，若需引流，必须引导看个人主页侧边栏（Social Links），正文内发外链必定秒删！',
+
+        subreddits_title: '精选起号与出海版块导航矩阵',
+        subreddits_desc: '分阶段精细化运营，在对的版块做对的事',
+        sub_search_placeholder: '🔍 搜索版块或标签 (如 karma, ai, saas)...',
+        sub_filter_all: '全部',
+        sub_filter_tier0: '🐣 0~50 破冰',
+        sub_filter_tier1: '🚀 50~200 技术',
+        sub_filter_tier2: '💎 200+ 引流',
+        sub_algorithm_secret: '<strong>Reddit 算法秘籍：</strong>千万不要去已满天的 Hot 帖当炮灰！紧盯版块的 <strong>Rising（上升期）</strong> 并在发帖 45 分钟内给出前 3 条神评，帖子爆发后将独吞 80% 赞数！',
+
+        crafter_badge: '原生社区发帖引擎',
+        title_crafter_title: '独立项目参数设定',
+        lbl_tool_name: '产品/工具名称：',
+        tool_name_placeholder: '例如 QuickMock Studio',
+        lbl_reddit_id: 'Reddit 账号 ID：',
+        user_name_placeholder: '例如 u/your_username (选填)',
+        lbl_target_sub: '目标发布版块：',
+        lbl_tool_pain: '解决的核心痛点：',
+        tool_pain_placeholder: '例如 bloated dev tools with server queues, logins, and fees',
+        lbl_tool_usp: '核心卖点与亮点：',
+        tool_usp_placeholder: '例如 100% client-side, zero telemetry, MIT open source',
+        lbl_link_strategy: '外链安全指引策略：',
+        lbl_switch_angles: '点击切换 6 组发帖角度：',
         simulator_title: 'Reddit 原生发帖预览模拟器',
+        btn_copy_cur_title: '复制当前标题',
+        btn_copy_cur_body: '复制合规正文',
+        btn_copy_cur_full: '复制完整发帖 Markdown',
+        btn_generate_titles: '生成 6 组爆款发帖标题与正文模板',
+        generated_titles_heading: '高转化发帖标题与安全正文模板',
+
+        playbook_title: '良竹出海“真空截流法”与普通人起号心法全景复盘',
+        playbook_sub: '选择比努力重要 100 倍，快速跑通比完美重要 1000 倍',
+        pb_card1_title: '1. 什么是「Reddit 搜索真空期」？',
+        pb_card1_body: '当你在 Google 搜一个长尾需求词，搜索结果前两页<strong>全是 Reddit 碎屑贴、Quora 问答或 X 吐槽，没有一个正规产品站</strong>时，这就是最暴利的入场信号！海量老外在搜，却无工具承接。20分钟上线静态工具页直接拦截海量精准流量。',
+        pb_card2_title: '2. 4 个月老号的免死金牌',
+        pb_card2_body: '新号注册前 7~30 天是全网 AutoMod 的极度敏感期。拥有 4 个月账龄的账号已经永久避开了新号沙盒。千万不要为了换用户名去开新号，老号哪怕 1 Karma 也是极值钱的信任资产。',
+        pb_card3_title: '3. 15 词神评与手机端算法',
+        pb_card3_body: '90% 的 Reddit 用户是手机滑屏。一整段长文会因心智负担过高被无视或当做 AI 废话。8~15 词的冷面毒舌、自嘲反讽，既能让老外秒懂秒笑，又能顺手点赞，是冲刺前 200 Karma 的最快打法。',
+        pb_card4_title: '4. 哥飞“网站遗忘法则”',
+        pb_card4_body: '做好基础外链和工具上线后，把它忘掉，隔几个月再看。自媒体与出海的真正难处是克服初期“看不到即时正反馈”的心理内耗。每天只花 5 分钟回两条 Rising 帖子，复利自然会爆发。',
+
+        aff_heading: 'PaceBowl 精选出海变现专线',
+        aff_sub: '经过实测验证的开发者与海外高收益闭环',
+        aff_1_desc: '好莱坞级超逼真 AI 配音与多语种克隆，出海短视频与播客标配。',
+        aff_1_btn: '试用高品质配音',
+        aff_2_desc: '聚合 DeepSeek-V3/R1、Claude 3.5 与 GPT-4o 的跨平台全能副驾驶。',
+        aff_2_btn: '免费体验全能助手',
+        aff_3_desc: '秒级按需租用 RTX 4090 / A100，零排队运行 ComfyUI 与开源大模型。',
+        aff_3_btn: '开启云算力',
+        aff_4_title: '硅基流动',
+        aff_4_badge: '2000万 Token',
+        aff_4_desc: '国内超低延迟免排队 API 专线，支持 DeepSeek-R1 全系列与 FLUX。',
+        aff_4_btn: '领 2000万 额度',
+
+        auth_modal_title: '登录 / 注册 PaceBowl 账号',
+        auth_modal_sub: '免登录 5 点，登录立享 10 点/天专属出海神评算力',
+        auth_google_quick_login: 'Google / Gmail 账号一键秒登',
+        auth_bonus_badge: '送10点算力',
+        auth_google_placeholder: '输入 Gmail 或常用邮箱，如 example@gmail.com',
+        auth_quick_submit_btn: '一键秒登',
+        auth_quick_tip: '⚡ 免密极速直连，自动激活今日 10 点专属出海神评大模型算力。',
+        auth_or_email_pwd: '或使用邮箱密码',
+        auth_tab_login: '登录账号',
+        auth_tab_register: '免费注册 (立享10点)',
+        auth_lbl_email: '电子邮箱：',
+        auth_email_placeholder: 'name@example.com',
+        auth_lbl_password: '账号密码：',
+        auth_pwd_min_chars: '至少 6 位字符',
+        auth_pwd_placeholder: '输入您的安全密码',
+        auth_promo_box: '<strong>新人专享出海算力</strong>：免登录每日赠送 5 点，注册登录后立享 10 点/天 PaceBowl AI 官方出海大模型额度，00:00 自动刷新！',
+        auth_submit_login: '立即登录',
+        auth_submit_register: '立即注册立享 10 点算力',
+        auth_footer_note: '🛡️ PaceBowl AI 官方专线直连 • 免配 Key 极速出词',
+
+        credit_modal_title: 'PaceBowl AI 积分与出海算力中心',
+        credit_modal_sub: '官方出海高阶大模型算力专线',
+        credit_guest_upsell_title: '🎁 免费翻倍特权',
+        credit_guest_upsell_badge: '10点/天',
+        credit_guest_upsell_desc: '游客每日 5 点已用完？免费注册/登录账号，额度立即永久提升至 10 点/天！',
+        credit_guest_upsell_btn: '立即登录翻倍 →',
+        credit_lbl_current_role: '当前身份：',
+        credit_lbl_reset_cycle: '自动刷新周期',
+        credit_reset_time: '每日 00:00',
+        credit_pack_title: '⚡ 算力加油包',
+        credit_pack_badge: '$4.99 (一次性)',
+        credit_pack_desc: '立享 100 点出海大模型专属神评算力，永久有效不过期，单条成本仅 $0.05。',
+        credit_pack_btn: '充值 100 点 ($4.99)',
+        credit_pro_title: '👑 出海 Pro 会员',
+        credit_pro_badge: '$9.90/月',
+        credit_pro_desc: '每日 100 次神评额度 + AutoMod 敏感词深度防吞雷达 + 专线高速并发。',
+        credit_pro_btn: '开通 Pro 会员 ($9.90/月)',
+        credit_redeem_title: '🎁 兑换码 / 卡密领取积分',
+        credit_redeem_tip: '体验码 REDDIT2026 可领 20 点',
+        credit_redeem_placeholder: '输入兑换码 (如 REDDIT2026)...',
+        credit_redeem_btn: '兑换',
+        credit_stripe_secure: 'Stripe 官方安全结算 • 实时到账',
+        credit_switch_account: '切换登录账号',
+
         toast_copied: '✓ 已复制到剪贴板！可以直接在 Reddit 发出。',
         toast_ds_copied: '✓ DeepSeek 提示词已生成！可直接粘贴至 DeepSeek 官方或子站。',
         toast_gen_success: '✓ 已生成 5 条地道单行神评！点击卡片即可一键复制。',
@@ -1103,6 +1224,13 @@
       en: {
         suite_btn: 'PaceBowl Suite',
         suite_title: 'PaceBowl Ecosystem',
+        nav_login_desktop: 'Log In / Register (+10 Pts)',
+        nav_login_mobile: 'Log In (10 Pts)',
+        nav_login_title: 'Log in or sign up to claim AI credits',
+        nav_credits_title: 'Click to view credit balance and top up',
+        nav_logout_title: 'Log out of current account',
+        nav_user_title: 'View account status and quota',
+
         hero_badge: 'Reddit Karma Acceleration & Traffic Hacker',
         hero_title: 'Master Reddit: 15-Word Viral One-Liners & AutoMod Radar',
         hero_desc: 'Crafted for indie hackers & builders. Ditch AI fluff and long essays. Farm initial karma with deadpan native wit, bypass AutoMod filters, and convert community views into real users.',
@@ -1111,39 +1239,155 @@
         tab_subreddits: 'Subreddit Matrix',
         tab_titles: 'Post Title Crafter',
         tab_playbook: 'Traffic Playbook',
+
         viral_input_title: 'Target Reddit Post / Question',
         rule_15words: 'Strictly ≤ 15 Words',
-        lbl_scenarios: 'High-traffic topic presets:',
-        lbl_select_style: 'Select One-Liner Humor Style:',
-        lbl_engine_mode: 'Engine:',
-        engine_ai: '🤖 PaceBowl AI Global Model',
-        btn_shuffle: 'Shuffle',
         btn_random_post: 'Random Topic',
+        lbl_scenarios: 'High-traffic topic presets:',
+        lbl_scenarios_tip: 'Supports EN & ZH input, auto entity extraction',
+        sc_cheating: '💔 Cheating Response',
+        sc_cat_zoom: '🐱 Cat Hits Monitor',
+        sc_cybertruck: '🚗 Cybertruck Roast',
+        sc_roommate: '🏠 Roommate at 2 AM',
+        sc_pretend: '💼 Pretending at Work',
+        sc_ai: '🤖 AI Replacing Juniors',
+        sc_under50: '💰 Under $50 Buy',
+        sc_saas: '🚀 First 100 Customers',
+        sc_debt: '💻 Legacy Codebase',
+
+        engine_ai: '🤖 PaceBowl AI Global Model',
+        engine_ready: 'Viral Dedicated Pipe Ready',
+        btn_topup_pro: 'Refill Credits / Go Pro',
+        topic_input_placeholder: 'Enter target Reddit post title or topic (e.g., My cat knocked over my monitor during a Zoom call with the CEO)...',
+        detected_entities_lbl: '🎯 Detected Topic:',
+
+        lbl_select_style: 'Select One-Liner Humor Style:',
+        style_all: '✨ All 5 Styles',
+        style_deadpan: '🕶️ Deadpan Sarcasm',
+        style_self_dep: '🤡 Self-Deprecating',
+        style_mic_drop: '⚡ Mic Drop',
+        style_truth: '🧠 Hard Truth',
+        style_hacker: '🛠️ Practical Hacker',
+
+        btn_generate_viral: 'Generate Native One-Liners',
+        btn_shuffle: 'Shuffle',
+        btn_copy_ds_prompt: 'Copy Prompt',
+        btn_random_topic_title: 'Pick random trending Reddit post',
+        btn_shuffle_comments_title: 'Shuffle viral comments',
+        btn_copy_ds_prompt_title: 'Copy DeepSeek prompt',
+        btn_sanitize_title: 'Auto-sanitize: replace links with bio mention, remove sales words',
+        candidates_title: 'High-Upvote Candidates (Click to Copy)',
+
+        radar_input_title: 'Real-time Spam & AutoMod Radar Check',
+        sample_lbl: 'Test Samples:',
+        sample_banned: '❌ Banned Links',
+        sample_ai: '⚠️ AI Fluff',
+        sample_safe: '🟢 100/100 Safe Geek',
+        radar_input_placeholder: 'Paste your Reddit draft comment or post here. The radar scans for raw links, spam keywords, mobile readability, and AutoMod triggers in real-time...',
         btn_auto_sanitize: 'Auto-Sanitize & Fix',
         btn_copy_sanitized: 'Copy Text',
-        simulator_title: 'Live Reddit Post Simulator',
-        btn_generate_viral: 'Generate Native One-Liners',
-        btn_copy_ds_prompt: 'Copy Prompt',
-        candidates_title: 'High-Upvote Candidates (Click to Copy)',
-        radar_input_title: 'Real-time Spam & AutoMod Radar Check',
-        btn_test_sample: 'Load Sample Banned Post',
-        radar_realtime_tip: '⚡ Real-time client-side heuristic scan',
+        btn_clear: 'Clear',
         radar_score_title: 'AutoMod Survival Probability',
         radar_diagnostics: 'Diagnostics & Actionable Fixes:',
+        radar_golden_rule: '<span class="font-bold">⚠️ Reddit Golden Rule:</span> When Karma < 100, NEVER put direct links in post or comment bodies. Direct readers to your Reddit profile bio Social Links!',
+
         subreddits_title: 'Curated Subreddit Directory & Rules Matrix',
         subreddits_desc: 'Stage-based roadmaps: do the right action in the right sub',
+        sub_search_placeholder: '🔍 Search subreddit, rules or tags (e.g., karma, ai, saas)...',
+        sub_filter_all: 'All',
+        sub_filter_tier0: '🐣 0~50 Break-in',
+        sub_filter_tier1: '🚀 50~200 Niche',
+        sub_filter_tier2: '💎 200+ Traffic',
+        sub_algorithm_secret: '<strong>Reddit Algorithm Secret:</strong> Avoid crowded Hot threads! Monitor the <strong>Rising</strong> tab and post within the first 45 minutes to claim top 3 comment spots and capture 80% of karma when the post trends!',
+
+        crafter_badge: 'Organic Community Launch Engine',
         title_crafter_title: 'Project Launch Parameters',
         lbl_tool_name: 'Product / Tool Name:',
+        tool_name_placeholder: 'e.g., QuickMock Studio',
         lbl_reddit_id: 'Reddit Username ID:',
-        lbl_tool_pain: 'Core Pain Solved:',
-        lbl_tool_usp: 'Unique Hook / Selling Points:',
+        user_name_placeholder: 'e.g., u/your_username (optional)',
         lbl_target_sub: 'Target Subreddit:',
+        lbl_tool_pain: 'Core Pain Solved:',
+        tool_pain_placeholder: 'e.g., bloated dev tools with server queues, logins, and fees',
+        lbl_tool_usp: 'Unique Hook / Selling Points:',
+        tool_usp_placeholder: 'e.g., 100% client-side, zero telemetry, MIT open source',
+        lbl_link_strategy: 'Link Safety Strategy:',
+        lbl_switch_angles: 'Select from 6 High-Converting Angles:',
+        simulator_title: 'Live Reddit Post Simulator',
+        btn_copy_cur_title: 'Copy Current Title',
+        btn_copy_cur_body: 'Copy Safe Body',
+        btn_copy_cur_full: 'Copy Full Markdown Post',
         btn_generate_titles: 'Generate 6 High-Converting Post Sets',
         generated_titles_heading: 'High-Converting Titles & Safe Body Templates',
+
         playbook_title: 'Reddit Vacuum Interception & Creator Mindset Playbook',
         playbook_sub: 'Selection beats effort 100x; shipping fast beats perfection 1000x',
+        pb_card1_title: '1. What is the "Reddit Search Vacuum"?',
+        pb_card1_body: 'When you search a long-tail intent on Google and the top 2 pages of results are <strong>all Reddit threads, Quora Q&As, or X complaints with zero dedicated product sites</strong>, that is the most profitable entry signal! High global demand with no software answering it. Launching a 20-minute static utility page intercepts massive qualified organic traffic.',
+        pb_card2_title: '2. The "Immunity Pass" of a 4-Month Account',
+        pb_card2_body: 'The first 7–30 days of a fresh account is AutoMod\'s most paranoid window across all subreddits. An account aged 4+ months permanently bypasses the new-account sandbox. Never start a new handle just for a fresh username; an aged account with even 1 Karma is an invaluable trust asset.',
+        pb_card3_title: '3. 15-Word Punchlines & Mobile Feed Algorithms',
+        pb_card3_body: '90% of Reddit users browse on mobile feeds. Heavy walls of text create cognitive overload and get ignored or flagged as AI noise. Deadpan sarcasm and self-deprecating wit under 8–15 words make users laugh instantly and upvote without friction—the fastest path to 200+ Karma.',
+        pb_card4_title: '4. The "Website Forgetfulness Rule"',
+        pb_card4_body: 'After publishing basic backlinks and shipping your tool, forget about it and check back months later. The hardest part of solo building is overcoming the early anxiety of zero immediate feedback. Spending just 5 minutes a day replying to 2 Rising threads builds explosive compounding karma over time.',
+
         aff_heading: 'PaceBowl Curated AI Power Stack',
         aff_sub: 'Battle-tested high-yield monetization routes for indie builders',
+        aff_1_desc: 'Hollywood-grade photorealistic AI voice generation and voice cloning for video and podcast workflows.',
+        aff_1_btn: 'Try High-Fidelity Audio',
+        aff_2_desc: 'All-in-one desktop AI copilot powering DeepSeek-V3/R1, Claude 3.5, and GPT-4o.',
+        aff_2_btn: 'Try Monica Copilot Free',
+        aff_3_desc: 'On-demand serverless RTX 4090 / A100 GPUs with zero queueing for ComfyUI and open models.',
+        aff_3_btn: 'Launch Cloud GPU',
+        aff_4_title: 'SiliconFlow API',
+        aff_4_badge: '20M Free Tokens',
+        aff_4_desc: 'Ultra-low latency inference gateway supporting DeepSeek-R1 full suite, FLUX, and Qwen.',
+        aff_4_btn: 'Claim 20M Free Tokens',
+
+        auth_modal_title: 'Log In / Sign Up for PaceBowl',
+        auth_modal_sub: '5 free daily credits for guests; get 10 credits/day on login',
+        auth_google_quick_login: 'Google / Gmail 1-Click Fast Login',
+        auth_bonus_badge: '+10 Credits',
+        auth_google_placeholder: 'Enter Gmail or email, e.g. example@gmail.com',
+        auth_quick_submit_btn: '1-Click Login',
+        auth_quick_tip: '⚡ Passwordless fast access. Instantly unlocks today\'s 10 dedicated AI credits.',
+        auth_or_email_pwd: 'Or use email & password',
+        auth_tab_login: 'Log In',
+        auth_tab_register: 'Sign Up (+10 Credits)',
+        auth_lbl_email: 'Email Address:',
+        auth_email_placeholder: 'name@example.com',
+        auth_lbl_password: 'Password:',
+        auth_pwd_min_chars: 'At least 6 chars',
+        auth_pwd_placeholder: 'Enter your secure password',
+        auth_promo_box: '<strong>New User AI Credits</strong>: 5 free credits daily without login. Register to unlock 10 credits/day automatically refilled at 00:00 UTC!',
+        auth_submit_login: 'Log In Now',
+        auth_submit_register: 'Register & Claim 10 Credits',
+        auth_footer_note: '🛡️ PaceBowl AI Dedicated Pipeline • Zero Setup Required',
+
+        credit_modal_title: 'PaceBowl AI Credits & Computing Center',
+        credit_modal_sub: 'Official dedicated high-tier LLM inference pipeline',
+        credit_guest_upsell_title: '🎁 Free Double Credit Perk',
+        credit_guest_upsell_badge: '10 pts/day',
+        credit_guest_upsell_desc: 'Guest 5 daily credits used up? Register a free account to permanently double your daily allowance to 10/day!',
+        credit_guest_upsell_btn: 'Log In to Double Allowance →',
+        credit_lbl_current_role: 'Identity:',
+        credit_lbl_reset_cycle: 'Reset Cycle',
+        credit_reset_time: 'Daily 00:00 UTC',
+        credit_pack_title: '⚡ Computing Boost Pack',
+        credit_pack_badge: '$4.99 (One-time)',
+        credit_pack_desc: 'Instantly get 100 non-expiring AI credits for high-tier models. Only $0.05 per viral generation.',
+        credit_pack_btn: 'Get 100 Credits ($4.99)',
+        credit_pro_title: '👑 Global Pro Member',
+        credit_pro_badge: '$9.90/month',
+        credit_pro_desc: '100 credits daily + deep AutoMod risk radar bypass + priority high-speed concurrency.',
+        credit_pro_btn: 'Upgrade to Pro ($9.90/mo)',
+        credit_redeem_title: '🎁 Redeem Promo Code',
+        credit_redeem_tip: 'Try promo code REDDIT2026 for 20 credits',
+        credit_redeem_placeholder: 'Enter promo code (e.g. REDDIT2026)...',
+        credit_redeem_btn: 'Redeem',
+        credit_stripe_secure: 'Official Stripe Secure Checkout • Instant Delivery',
+        credit_switch_account: 'Switch Account',
+
         toast_copied: '✓ Copied to clipboard! Ready to post on Reddit.',
         toast_ds_copied: '✓ DeepSeek prompt copied! Paste into DeepSeek Studio.',
         toast_gen_success: '✓ Generated 5 native one-liners! Click any card to copy.',
@@ -1368,7 +1612,9 @@
       
       const textEl = document.getElementById('detected-entities-text');
       const tagEl = document.getElementById('detected-domain-tag');
-      if (textEl) textEl.textContent = `${entity.subject} (${entity.zhSubject})`;
+      if (textEl) {
+        textEl.textContent = currentLang === 'zh' ? `${entity.subject} (${entity.zhSubject})` : entity.subject;
+      }
       
       const domainLabels = {
         dating: '💔 Dating & Ex',
@@ -1458,12 +1704,14 @@
       const modalAuthBtnLabel = document.getElementById('modal-auth-btn-label');
       const guestUpsellBanner = document.getElementById('modal-guest-upsell-banner');
       const aiQuotaNotice = document.getElementById('ai-quota-notice');
+      const isZh = currentLang === 'zh';
+      const ptsUnit = isZh ? '点' : 'pts';
 
       if (currentUser) {
         const maxCap = currentUser.tier === 'pro' ? 100 : 10;
         if (navLoginBtn) navLoginBtn.classList.add('hidden');
         if (navUserContainer) navUserContainer.classList.remove('hidden');
-        if (headerCredits) headerCredits.textContent = `${currentUser.credits}/${maxCap} 点`;
+        if (headerCredits) headerCredits.textContent = `${currentUser.credits}/${maxCap} ${ptsUnit}`;
         if (headerEmail) headerEmail.textContent = currentUser.name || currentUser.email.split('@')[0];
         if (headerAvatar) {
           if (currentUser.picture) {
@@ -1472,27 +1720,31 @@
             headerAvatar.textContent = '👤';
           }
         }
-        if (engineBadge) engineBadge.textContent = `剩余: ${currentUser.credits}/${maxCap} 点`;
+        if (engineBadge) engineBadge.textContent = isZh ? `剩余: ${currentUser.credits}/${maxCap} 点` : `Remaining: ${currentUser.credits}/${maxCap} pts`;
         if (modalCredits) modalCredits.textContent = currentUser.credits;
-        if (modalTotalCredits) modalTotalCredits.textContent = `/ ${maxCap} 点今日额度`;
+        if (modalTotalCredits) modalTotalCredits.textContent = isZh ? `/ ${maxCap} 点今日额度` : `/ ${maxCap} daily credits`;
         if (modalUserEmail) modalUserEmail.textContent = currentUser.email + (currentUser.tier === 'pro' ? ' (👑 Pro)' : '');
-        if (modalAuthBtnLabel) modalAuthBtnLabel.textContent = '切换登录账号';
+        if (modalAuthBtnLabel) modalAuthBtnLabel.textContent = isZh ? '切换登录账号' : 'Switch Account';
         if (guestUpsellBanner) guestUpsellBanner.classList.add('hidden');
-        if (aiQuotaNotice) aiQuotaNotice.textContent = `已登录尊享 ${maxCap} 点/天官方出海算力 (每日 00:00 自动补满)`;
+        if (aiQuotaNotice) aiQuotaNotice.textContent = isZh ? `已登录尊享 ${maxCap} 点/天官方出海算力 (每日 00:00 自动补满)` : `Logged in: ${maxCap} pts/day official AI quota (resets daily 00:00 UTC)`;
       } else {
         const guestQuota = getGuestQuota();
         if (navLoginBtn) {
           navLoginBtn.classList.remove('hidden');
-          navLoginBtn.innerHTML = `<span>⚡</span><span>免登录 ${guestQuota}/5 点</span><span class="ml-1 px-1.5 py-0.5 bg-white/20 rounded-md font-bold text-[10px] hidden sm:inline">登录翻倍(10点)</span>`;
+          if (isZh) {
+            navLoginBtn.innerHTML = `<span>⚡</span><span>免登录 ${guestQuota}/5 点</span><span class="ml-1 px-1.5 py-0.5 bg-white/20 rounded-md font-bold text-[10px] hidden sm:inline">登录翻倍(10点)</span>`;
+          } else {
+            navLoginBtn.innerHTML = `<span>⚡</span><span>Free ${guestQuota}/5 pts</span><span class="ml-1 px-1.5 py-0.5 bg-white/20 rounded-md font-bold text-[10px] hidden sm:inline">2x on Login (10 pts)</span>`;
+          }
         }
         if (navUserContainer) navUserContainer.classList.add('hidden');
-        if (engineBadge) engineBadge.textContent = `免登录: ${guestQuota}/5 点 (登录翻倍)`;
+        if (engineBadge) engineBadge.textContent = isZh ? `免登录: ${guestQuota}/5 点 (登录翻倍)` : `Guest: ${guestQuota}/5 pts (2x on login)`;
         if (modalCredits) modalCredits.textContent = guestQuota;
-        if (modalTotalCredits) modalTotalCredits.textContent = `/ 5 点游客体验额度`;
-        if (modalUserEmail) modalUserEmail.textContent = '未登录游客 (建议登录升级)';
-        if (modalAuthBtnLabel) modalAuthBtnLabel.textContent = '立即登录 / 注册';
+        if (modalTotalCredits) modalTotalCredits.textContent = isZh ? `/ 5 点游客体验额度` : `/ 5 guest trial credits`;
+        if (modalUserEmail) modalUserEmail.textContent = isZh ? '未登录游客 (建议登录升级)' : 'Guest (Sign up to double)';
+        if (modalAuthBtnLabel) modalAuthBtnLabel.textContent = isZh ? '立即登录 / 注册' : 'Log In / Sign Up';
         if (guestUpsellBanner) guestUpsellBanner.classList.remove('hidden');
-        if (aiQuotaNotice) aiQuotaNotice.textContent = '免登录每日送 5 点，登录立享 10 点/天 (每日 00:00 自动补满)';
+        if (aiQuotaNotice) aiQuotaNotice.textContent = isZh ? '免登录每日送 5 点，登录立享 10 点/天 (每日 00:00 自动补满)' : '5 free credits daily for guests, 10/day on login (resets 00:00 UTC)';
       }
     }
 
@@ -1630,19 +1882,20 @@
       const btn = document.getElementById('auth-submit-btn');
       const tabLogin = document.getElementById('auth-tab-login');
       const tabReg = document.getElementById('auth-tab-register');
+      const isZh = currentLang === 'zh';
 
       if (tab === 'register') {
         if (tabReg) tabReg.className = 'py-1.5 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm font-bold transition';
         if (tabLogin) tabLogin.className = 'py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition';
-        if (title) title.textContent = '注册 PaceBowl 账号';
-        if (sub) sub.textContent = '立即升级今日 10 点专属出海算力（免登录仅 5 点，登录立享翻倍！）';
-        if (btn) btn.textContent = '立即注册立享 10 点算力';
+        if (title) title.textContent = isZh ? '注册 PaceBowl 账号' : 'Sign Up for PaceBowl';
+        if (sub) sub.textContent = isZh ? '立即升级今日 10 点专属出海算力（免登录仅 5 点，登录立享翻倍！）' : 'Get 10 daily AI credits (guests have 5, double on sign up!)';
+        if (btn) btn.textContent = isZh ? '立即注册立享 10 点算力' : 'Register & Claim 10 Credits';
       } else {
         if (tabLogin) tabLogin.className = 'py-1.5 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm font-bold transition';
         if (tabReg) tabReg.className = 'py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition';
-        if (title) title.textContent = '登录 PaceBowl 账号';
-        if (sub) sub.textContent = '登录立享今日 10 点出海大模型专属神评算力';
-        if (btn) btn.textContent = '立即登录';
+        if (title) title.textContent = isZh ? '登录 PaceBowl 账号' : 'Log In to PaceBowl';
+        if (sub) sub.textContent = isZh ? '登录立享今日 10 点出海大模型专属神评算力' : 'Log in to enjoy 10 dedicated daily AI credits';
+        if (btn) btn.textContent = isZh ? '立即登录' : 'Log In Now';
       }
     }
 
@@ -2036,7 +2289,8 @@
 
       if (!container) return;
       if (!list || list.length === 0) {
-        container.innerHTML = `<div class="p-6 text-center text-slate-400 text-xs">暂无候选评论，请在左侧输入话题并点击生成。</div>`;
+        const emptyMsg = currentLang === 'zh' ? '暂无候选评论，请在左侧输入话题并点击生成。' : 'No candidates yet. Enter a topic on the left and click Generate.';
+        container.innerHTML = `<div class="p-6 text-center text-slate-400 text-xs">${emptyMsg}</div>`;
         return;
       }
 
@@ -2046,6 +2300,8 @@
         const badgeColor = words <= 15 ? 'text-emerald-500 bg-emerald-500/10 border-emerald-500/20' : 'text-amber-500 bg-amber-500/10 border-amber-500/20';
         const stats = getCandidateUpvoteStats(item, idx);
         const rateLabel = currentLang === 'zh' ? '赞率' : 'upvote';
+        const copyPromptLabel = currentLang === 'zh' ? '点击一键复制' : 'Click to copy';
+        const zhHtml = (currentLang === 'zh' && item.zh) ? `<div class="text-[11px] text-slate-400 dark:text-slate-500 mt-1">${escapeHtml(item.zh)}</div>` : '';
 
         html += `
           <div onclick="copyViralCandidate(${idx})" id="card-candidate-${idx}" class="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-reddit-orange dark:hover:border-reddit-orange shadow-sm hover:shadow-md transition cursor-pointer group active:scale-[0.99]">
@@ -2053,7 +2309,7 @@
               <span class="text-[10px] font-bold uppercase tracking-wider text-reddit-orange font-mono">${escapeHtml(item.style)}</span>
               <div class="flex items-center gap-1.5">
                 <span class="text-[10px] font-mono px-1.5 py-0.5 rounded border ${badgeColor}">${words} words (Optimal)</span>
-                <span class="text-[10px] font-mono text-purple-600 dark:text-purple-400 bg-purple-500/10 px-1.5 py-0.5 rounded border border-purple-500/20 font-semibold flex items-center gap-1" title="预估高赞数与好评赞率">
+                <span class="text-[10px] font-mono text-purple-600 dark:text-purple-400 bg-purple-500/10 px-1.5 py-0.5 rounded border border-purple-500/20 font-semibold flex items-center gap-1" title="${currentLang === 'zh' ? '预估高赞数与好评赞率' : 'Estimated upvotes and positive ratio'}">
                   <span class="text-reddit-orange">▲ ${stats.upvotes}</span>
                   <span class="text-purple-500/80">(${stats.rate}% ${rateLabel})</span>
                 </span>
@@ -2062,11 +2318,9 @@
             <div class="text-xs sm:text-sm font-semibold text-slate-900 dark:text-white group-hover:text-reddit-orange transition leading-relaxed">
               "${escapeHtml(item.text)}"
             </div>
-            <div class="text-[11px] text-slate-400 dark:text-slate-500 mt-1">
-              ${escapeHtml(item.zh)}
-            </div>
+            ${zhHtml}
             <div class="mt-2 pt-2 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-[10px] text-slate-400">
-              <span class="flex items-center gap-1"><span id="copy-icon-${idx}">👆</span> <span id="copy-label-${idx}">点击一键复制</span></span>
+              <span class="flex items-center gap-1"><span id="copy-icon-${idx}">👆</span> <span id="copy-label-${idx}">${copyPromptLabel}</span></span>
               <span class="opacity-0 group-hover:opacity-100 text-reddit-orange font-semibold transition">Copy & Post &rarr;</span>
             </div>
           </div>
@@ -2084,10 +2338,10 @@
       const label = document.getElementById('copy-label-' + idx);
       const icon = document.getElementById('copy-icon-' + idx);
       if (label && icon) {
-        label.textContent = '已复制！';
+        label.textContent = currentLang === 'zh' ? '已复制！' : 'Copied!';
         icon.textContent = '✓';
         setTimeout(() => {
-          label.textContent = '点击一键复制';
+          label.textContent = currentLang === 'zh' ? '点击一键复制' : 'Click to copy';
           icon.textContent = '👆';
         }, 1500);
       }
@@ -2141,15 +2395,16 @@ Strictly follow the [Reddit Viral One-Liner Formula]:
         }
       }
 
+      const isZh = currentLang === 'zh';
       if (!text.trim()) {
         if (scoreNum) scoreNum.textContent = '100';
         if (scoreBadge) scoreBadge.className = 'w-16 h-16 rounded-2xl bg-emerald-500/10 border-2 border-emerald-500 flex flex-col items-center justify-center font-mono';
         if (statusText) {
-          statusText.textContent = '🟢 极度安全 (Safe to Post)';
+          statusText.textContent = isZh ? '🟢 极度安全 (Safe to Post)' : '🟢 Safe to Post';
           statusText.className = 'font-bold text-sm text-emerald-500';
         }
-        if (statusSub) statusSub.textContent = '输入文本即可实时诊断风控风险。';
-        if (issuesList) issuesList.innerHTML = `<li class="text-slate-400">等待输入...</li>`;
+        if (statusSub) statusSub.textContent = isZh ? '输入文本即可实时诊断风控风险。' : 'Type or paste draft text to diagnose AutoMod risks.';
+        if (issuesList) issuesList.innerHTML = `<li class="text-slate-400">${isZh ? '等待输入...' : 'Awaiting input...'}</li>`;
         return;
       }
 
@@ -2162,8 +2417,8 @@ Strictly follow the [Reddit Viral One-Liner Formula]:
         score -= 50;
         issues.push({
           type: 'danger',
-          msg: '包含外链或域名后缀！对于低 Karma 账号，AutoMod 几乎 100% 秒删并标记为垃圾内容！',
-          fix: '点击【一键净化防吞】按钮，自动转换为合规的个人主页引流引导。'
+          msg: isZh ? '包含外链或域名后缀！对于低 Karma 账号，AutoMod 几乎 100% 秒删并标记为垃圾内容！' : 'Contains raw link or domain! For accounts under 100 Karma, AutoMod almost 100% deletes posts with external links.',
+          fix: isZh ? '点击【一键净化防吞】按钮，自动转换为合规的个人主页引流引导。' : 'Click "Auto-Sanitize & Fix" to replace with a safe bio reference.'
         });
       }
 
@@ -2173,8 +2428,8 @@ Strictly follow the [Reddit Viral One-Liner Formula]:
         score -= 25;
         issues.push({
           type: 'warning',
-          msg: '触发自卖自夸/营销关键词（如 check out my / buy now 等），容易招致老外集体踩帖 (Downvote)。',
-          fix: '点击【一键净化防吞】改为极客分享口吻（如：“Built this as a side project”）。'
+          msg: isZh ? '触发自卖自夸/营销关键词（如 check out my / buy now 等），容易招致老外集体踩帖 (Downvote)。' : 'Triggers self-promotional marketing keywords (e.g., check out my / buy now), inviting heavy community downvotes.',
+          fix: isZh ? '点击【一键净化防吞】改为极客分享口吻（如：“Built this as a side project”）。' : 'Click "Auto-Sanitize & Fix" to soften tone to organic builder voice.'
         });
       }
 
@@ -2183,8 +2438,8 @@ Strictly follow the [Reddit Viral One-Liner Formula]:
         score -= 15;
         issues.push({
           type: 'warning',
-          msg: `长度过长 (${words} 词)！在非深度故事版块，长段落常被手机端用户当做 AI 废话直接滑走。`,
-          fix: '精炼至 15 个词以内，提炼出 1 句核心毒舌/幽默梗。'
+          msg: isZh ? `长度过长 (${words} 词)！在非深度故事版块，长段落常被手机端用户当做 AI 废话直接滑走。` : `Too long (${words} words)! On mobile, long paragraphs look like AI fluff and get skipped over.`,
+          fix: isZh ? '精炼至 15 个词以内，提炼出 1 句核心毒舌/幽默梗。' : 'Condense into under 15 words with a punchy core hook.'
         });
       }
 
@@ -2194,8 +2449,8 @@ Strictly follow the [Reddit Viral One-Liner Formula]:
         score -= 20;
         issues.push({
           type: 'danger',
-          msg: '检出浓重 AI 腔调（如“As an AI / While it is important”等客套开场词）。',
-          fix: '点击【一键净化防吞】一键去除开场客套废话。'
+          msg: isZh ? '检出浓重 AI 腔调（如“As an AI / While it is important”等客套开场词）。' : 'Heavy AI throat-clearing detected (e.g. "As an AI...", "While it is important...").',
+          fix: isZh ? '点击【一键净化防吞】一键去除开场客套废话。' : 'Click "Auto-Sanitize & Fix" to strip out polite disclaimers.'
         });
       }
 
@@ -2205,24 +2460,24 @@ Strictly follow the [Reddit Viral One-Liner Formula]:
       if (score >= 85) {
         if (scoreBadge) scoreBadge.className = 'w-16 h-16 rounded-2xl bg-emerald-500/10 border-2 border-emerald-500 flex flex-col items-center justify-center font-mono';
         if (statusText) {
-          statusText.textContent = '🟢 极度安全 (Safe to Post)';
+          statusText.textContent = isZh ? '🟢 极度安全 (Safe to Post)' : '🟢 Safe to Post';
           statusText.className = 'font-bold text-sm text-emerald-500';
         }
-        if (statusSub) statusSub.textContent = '未检出高危风控特征，极大概率正常展示并收获高赞。';
+        if (statusSub) statusSub.textContent = isZh ? '未检出高危风控特征，极大概率正常展示并收获高赞。' : 'No high-risk triggers detected. High probability of safe posting & upvotes.';
       } else if (score >= 60) {
         if (scoreBadge) scoreBadge.className = 'w-16 h-16 rounded-2xl bg-amber-500/10 border-2 border-amber-500 flex flex-col items-center justify-center font-mono';
         if (statusText) {
-          statusText.textContent = '🟡 中度风险 (Moderate Caution)';
+          statusText.textContent = isZh ? '🟡 中度风险 (Moderate Caution)' : '🟡 Moderate Caution';
           statusText.className = 'font-bold text-sm text-amber-500';
         }
-        if (statusSub) statusSub.textContent = '存在部分容易引起反感或轻度风控的词汇，建议根据下方提示微调。';
+        if (statusSub) statusSub.textContent = isZh ? '存在部分容易引起反感或轻度风控的词汇，建议根据下方提示微调。' : 'Contains potential spam triggers or wordiness. Minor adjustments recommended.';
       } else {
         if (scoreBadge) scoreBadge.className = 'w-16 h-16 rounded-2xl bg-rose-500/10 border-2 border-rose-500 flex flex-col items-center justify-center font-mono';
         if (statusText) {
-          statusText.textContent = '🔴 高危秒吞 (Spam Filter Trigger)';
+          statusText.textContent = isZh ? '🔴 高危秒吞 (Spam Filter Trigger)' : '🔴 Spam Filter Trigger';
           statusText.className = 'font-bold text-sm text-rose-500';
         }
-        if (statusSub) statusSub.textContent = '100% 触发 Reddit 全局防垃圾机器人，发帖必被封杀！';
+        if (statusSub) statusSub.textContent = isZh ? '100% 触发 Reddit 全局防垃圾机器人，发帖必被封杀！' : 'High probability of triggering Reddit AutoMod filters. Do not post as-is.';
       }
 
       let issuesHtml = '';
@@ -2230,19 +2485,20 @@ Strictly follow the [Reddit Viral One-Liner Formula]:
         issuesHtml = `
           <li class="flex items-center gap-2 text-emerald-500">
             <span>✓</span>
-            <span>完美避开所有风控陷阱，符合原生老油条回帖特征！</span>
+            <span>${isZh ? '完美避开所有风控陷阱，符合原生老油条回帖特征！' : 'Passed all heuristic checks. Completely mimics organic native redditor comments!'}</span>
           </li>
         `;
       } else {
         issues.forEach(i => {
           const color = i.type === 'danger' ? 'text-rose-500' : 'text-amber-500';
+          const fixLabel = isZh ? '👉 修复建议：' : '👉 Fix Suggestion: ';
           issuesHtml += `
             <li class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
               <div class="font-bold ${color} flex items-center gap-1">
                 <span>${i.type === 'danger' ? '❌' : '⚠️'}</span>
                 <span>${escapeHtml(i.msg)}</span>
               </div>
-              <div class="text-slate-500 dark:text-slate-400 mt-1 pl-4">👉 修复建议：${escapeHtml(i.fix)}</div>
+              <div class="text-slate-500 dark:text-slate-400 mt-1 pl-4">${fixLabel}${escapeHtml(i.fix)}</div>
             </li>
           `;
         });
@@ -2256,7 +2512,7 @@ Strictly follow the [Reddit Viral One-Liner Formula]:
       if (!input) return;
       let text = input.value || '';
       if (!text.trim()) {
-        showToast('请先输入待检测的文本！');
+        showToast(currentLang === 'zh' ? '请先输入待检测的文本！' : 'Please enter text to test first!');
         return;
       }
 
@@ -2289,17 +2545,17 @@ Strictly follow the [Reddit Viral One-Liner Formula]:
       input.value = text;
 
       analyzeRadarText();
-      showToast(I18N[currentLang].toast_sanitized || '✓ 已自动净化！存活率已提升至 100/100，可放心复制！');
+      showToast(I18N[currentLang].toast_sanitized || '✓ 已自动净化！已剥离高风险外链并优化商业词，存活率 100/100！');
     }
 
     function copySanitizedText() {
       const input = document.getElementById('radar-input');
       const text = input ? input.value.trim() : '';
       if (!text) {
-        showToast('文本为空');
+        showToast(currentLang === 'zh' ? '文本为空' : 'Text is empty');
         return;
       }
-      copyText(text, '✓ 已复制净化后的安全文本！');
+      copyText(text, currentLang === 'zh' ? '✓ 已复制净化后的安全文本！' : '✓ Sanitized text copied!');
     }
 
     function clearRadarText() {
@@ -2326,20 +2582,174 @@ Strictly follow the [Reddit Viral One-Liner Formula]:
 
     // --- Subreddits Matrix ---
     const SUBREDDITS = [
-      { name: "r/AskReddit", tier: "tier0", members: "45M", minKarma: "0", ageRule: "0-1天可评", sort: "Rising (上升期)", rule: "纯文字幽默/真实回答，严禁发外链", hotness: "🔥 全球最高流量" },
-      { name: "r/NoStupidQuestions", tier: "tier0", members: "4.8M", minKarma: "0", ageRule: "无门槛", sort: "Rising / New", rule: "认真做友好科普，禁止讽刺", hotness: "💡 极易获真诚赞" },
-      { name: "r/aww", tier: "tier0", members: "36M", minKarma: "0", ageRule: "无门槛", sort: "Rising", rule: "萌宠夸赞短句，严禁引流", hotness: "🐾 0门槛破冰" },
-      { name: "r/mildlyinteresting", tier: "tier0", members: "23M", minKarma: "0", ageRule: "无门槛", sort: "Rising", rule: "单行自嘲神评，点赞极快", hotness: "⚡ 秒破10赞" },
-      { name: "r/me_irl", tier: "tier0", members: "7M", minKarma: "0", ageRule: "无门槛", sort: "Rising", rule: "真实自黑与当代打工人梗", hotness: "😂 纯老外自嘲文化" },
-
-      { name: "r/ChatGPT", tier: "tier1", members: "6.2M", minKarma: "50+", ageRule: "7天+", sort: "Hot / Rising", rule: "允许技术讨论，发帖须带准确标签", hotness: "🤖 AI 核心风暴眼" },
-      { name: "r/Cursor", tier: "tier1", members: "120K", minKarma: "20+", ageRule: "无严格限制", sort: "New", rule: "帮别人解决 .cursorrules 报错，极受尊敬", hotness: "💻 程序员垂直高净值" },
-      { name: "r/StableDiffusion", tier: "tier1", members: "650K", minKarma: "50+", ageRule: "14天+", sort: "Rising", rule: "ComfyUI 工作流分享，需附参数", hotness: "🎨 图像极客社群" },
-      { name: "r/LocalLLaMA", tier: "tier1", members: "380K", minKarma: "50+", ageRule: "7天+", sort: "New / Hot", rule: "开源大模型推理，技术深度要求高", hotness: "🧠 硬核开源技术" },
-
-      { name: "r/SideProject", tier: "tier2", members: "250K", minKarma: "100+", ageRule: "30天+", sort: "Top (周)", rule: "允许个人独立项目展示，需强调 Free / Open Source", hotness: "🚀 独立出海第一站" },
-      { name: "r/indiehackers", tier: "tier2", members: "110K", minKarma: "100+", ageRule: "30天+", sort: "Hot", rule: "分享真实数据与收入复盘，极度讨厌虚假吹捧", hotness: "💰 商业闭环探讨" },
-      { name: "r/webdev", tier: "tier2", members: "2.4M", minKarma: "150+", ageRule: "30天+", sort: "Saturday Showoff", rule: "仅限周六 Showoff Saturday 专帖自荐", hotness: "🛡️ 版规极严" }
+      {
+        name: "r/AskReddit",
+        tier: "tier0",
+        members: "45M",
+        minKarma: "0",
+        ageRule: "0-1天可评",
+        ageRule_en: "0-1 day",
+        sort: "Rising (上升期)",
+        sort_en: "Rising",
+        rule: "纯文字幽默/真实回答，严禁发外链",
+        rule_en: "Text-only humor or authentic answers. Strictly zero links.",
+        hotness: "🔥 全球最高流量",
+        hotness_en: "🔥 Highest Global Traffic"
+      },
+      {
+        name: "r/NoStupidQuestions",
+        tier: "tier0",
+        members: "4.8M",
+        minKarma: "0",
+        ageRule: "无门槛",
+        ageRule_en: "No requirement",
+        sort: "Rising / New",
+        sort_en: "Rising / New",
+        rule: "认真做友好科普，禁止讽刺",
+        rule_en: "Friendly informative answers only. Zero snark.",
+        hotness: "💡 极易获真诚赞",
+        hotness_en: "💡 Easy Genuine Upvotes"
+      },
+      {
+        name: "r/aww",
+        tier: "tier0",
+        members: "36M",
+        minKarma: "0",
+        ageRule: "无门槛",
+        ageRule_en: "No requirement",
+        sort: "Rising",
+        sort_en: "Rising",
+        rule: "萌宠夸赞短句，严禁引流",
+        rule_en: "Wholesome cute pet comments. Zero promo.",
+        hotness: "🐾 0门槛破冰",
+        hotness_en: "🐾 Zero-Barrier Icebreaker"
+      },
+      {
+        name: "r/mildlyinteresting",
+        tier: "tier0",
+        members: "23M",
+        minKarma: "0",
+        ageRule: "无门槛",
+        ageRule_en: "No requirement",
+        sort: "Rising",
+        sort_en: "Rising",
+        rule: "单行自嘲神评，点赞极快",
+        rule_en: "One-line witty deadpan punchlines. Rapid upvotes.",
+        hotness: "⚡ 秒破10赞",
+        hotness_en: "⚡ Rapid Karma Spikes"
+      },
+      {
+        name: "r/me_irl",
+        tier: "tier0",
+        members: "7M",
+        minKarma: "0",
+        ageRule: "无门槛",
+        ageRule_en: "No requirement",
+        sort: "Rising",
+        sort_en: "Rising",
+        rule: "真实自黑与当代打工人梗",
+        rule_en: "Relatable self-deprecating irony & office humor.",
+        hotness: "😂 纯老外自嘲文化",
+        hotness_en: "😂 Native Meme Culture"
+      },
+      {
+        name: "r/ChatGPT",
+        tier: "tier1",
+        members: "6.2M",
+        minKarma: "50+",
+        ageRule: "7天+",
+        ageRule_en: "7+ days",
+        sort: "Hot / Rising",
+        sort_en: "Hot / Rising",
+        rule: "允许技术讨论，发帖须带准确标签",
+        rule_en: "Technical AI discussions allowed; accurate post flairs required.",
+        hotness: "🤖 AI 核心风暴眼",
+        hotness_en: "🤖 Epicenter of AI Buzz"
+      },
+      {
+        name: "r/Cursor",
+        tier: "tier1",
+        members: "120K",
+        minKarma: "20+",
+        ageRule: "无严格限制",
+        ageRule_en: "Low barrier",
+        sort: "New",
+        sort_en: "New",
+        rule: "帮别人解决 .cursorrules 报错，极受尊敬",
+        rule_en: "Solve .cursorrules or IDE config issues for instant respect.",
+        hotness: "💻 程序员垂直高净值",
+        hotness_en: "💻 High-Intent Dev Community"
+      },
+      {
+        name: "r/StableDiffusion",
+        tier: "tier1",
+        members: "650K",
+        minKarma: "50+",
+        ageRule: "14天+",
+        ageRule_en: "14+ days",
+        sort: "Rising",
+        sort_en: "Rising",
+        rule: "ComfyUI 工作流分享，需附参数",
+        rule_en: "ComfyUI workflow sharing; prompt & gen parameters required.",
+        hotness: "🎨 图像极客社群",
+        hotness_en: "🎨 Image Geek Community"
+      },
+      {
+        name: "r/LocalLLaMA",
+        tier: "tier1",
+        members: "380K",
+        minKarma: "50+",
+        ageRule: "7天+",
+        ageRule_en: "7+ days",
+        sort: "New / Hot",
+        sort_en: "New / Hot",
+        rule: "开源大模型推理，技术深度要求高",
+        rule_en: "Open-source LLM inference; high technical rigor required.",
+        hotness: "🧠 硬核开源技术",
+        hotness_en: "🧠 Hardcore Open-Source Tech"
+      },
+      {
+        name: "r/SideProject",
+        tier: "tier2",
+        members: "250K",
+        minKarma: "100+",
+        ageRule: "30天+",
+        ageRule_en: "30+ days",
+        sort: "Top (周)",
+        sort_en: "Top (Weekly)",
+        rule: "允许个人独立项目展示，需强调 Free / Open Source",
+        rule_en: "Personal indie projects allowed; highlight Free / Open Source aspects.",
+        hotness: "🚀 独立出海第一站",
+        hotness_en: "🚀 Top Indie Launchpad"
+      },
+      {
+        name: "r/indiehackers",
+        tier: "tier2",
+        members: "110K",
+        minKarma: "100+",
+        ageRule: "30天+",
+        ageRule_en: "30+ days",
+        sort: "Hot",
+        sort_en: "Hot",
+        rule: "分享真实数据与收入复盘，极度讨厌虚假吹捧",
+        rule_en: "Share authentic metrics & lessons; no hollow self-congratulations.",
+        hotness: "💰 商业闭环探讨",
+        hotness_en: "💰 Revenue & Business Strategy"
+      },
+      {
+        name: "r/webdev",
+        tier: "tier2",
+        members: "2.4M",
+        minKarma: "150+",
+        ageRule: "30天+",
+        ageRule_en: "30+ days",
+        sort: "Saturday Showoff",
+        sort_en: "Saturday Showoff",
+        rule: "仅限周六 Showoff Saturday 专帖自荐",
+        rule_en: "Showoffs strictly restricted to Saturday megathreads.",
+        hotness: "🛡️ 版规极严",
+        hotness_en: "🛡️ Strict Moderation"
+      }
     ];
 
     window.currentSubTier = 'all';
@@ -2375,28 +2785,38 @@ Strictly follow the [Reddit Viral One-Liner Formula]:
         filtered = filtered.filter(s => 
           s.name.toLowerCase().includes(query) ||
           s.rule.toLowerCase().includes(query) ||
-          s.hotness.toLowerCase().includes(query)
+          (s.rule_en && s.rule_en.toLowerCase().includes(query)) ||
+          s.hotness.toLowerCase().includes(query) ||
+          (s.hotness_en && s.hotness_en.toLowerCase().includes(query))
         );
       }
 
       if (filtered.length === 0) {
-        grid.innerHTML = `<div class="col-span-full p-8 text-center text-slate-400 text-xs">未找到匹配的版块，请尝试搜索其它关键词。</div>`;
+        const emptyMsg = currentLang === 'zh' ? '未找到匹配的版块，请尝试搜索其它关键词。' : 'No matching subreddits found. Try another search term.';
+        grid.innerHTML = `<div class="col-span-full p-8 text-center text-slate-400 text-xs">${emptyMsg}</div>`;
         return;
       }
 
       let html = '';
       filtered.forEach(sub => {
         let tagColor = 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20';
-        let tierLabel = '🐣 0~50 破冰';
+        let tierLabel = currentLang === 'zh' ? '🐣 0~50 破冰' : '🐣 0~50 Break-in';
         if (sub.tier === 'tier1') {
           tagColor = 'bg-sky-500/10 text-sky-500 border-sky-500/20';
-          tierLabel = '🚀 50~200 垂直';
+          tierLabel = currentLang === 'zh' ? '🚀 50~200 垂直' : '🚀 50~200 Niche';
         } else if (sub.tier === 'tier2') {
           tagColor = 'bg-purple-500/10 text-purple-500 border-purple-500/20';
-          tierLabel = '💎 200+ 引流';
+          tierLabel = currentLang === 'zh' ? '💎 200+ 引流' : '💎 200+ Traffic';
         }
 
         const rawSubName = sub.name.replace(/^r\//, '');
+        const hotnessText = currentLang === 'zh' ? sub.hotness : (sub.hotness_en || sub.hotness);
+        const ruleText = currentLang === 'zh' ? sub.rule : (sub.rule_en || sub.rule);
+        const sortText = currentLang === 'zh' ? sub.sort : (sub.sort_en || sub.sort);
+        const ruleLabel = currentLang === 'zh' ? '版规要点：' : 'Rule Highlights: ';
+        const karmaLabel = currentLang === 'zh' ? '门槛:' : 'Req:';
+        const timingLabel = currentLang === 'zh' ? '推荐时机:' : 'Timing:';
+        const catchRisingText = currentLang === 'zh' ? '⚡ 截流 Rising' : '⚡ Catch Rising';
 
         html += `
           <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 flex flex-col justify-between space-y-3 shadow-sm hover:border-reddit-orange/50 transition">
@@ -2409,25 +2829,25 @@ Strictly follow the [Reddit Viral One-Liner Formula]:
                 </a>
                 <span class="text-[10px] font-mono px-2 py-0.5 rounded-full border ${tagColor}">${tierLabel}</span>
               </div>
-              <div class="text-[11px] text-slate-500 mb-2">${sub.members} Members • ${sub.hotness}</div>
+              <div class="text-[11px] text-slate-500 mb-2">${sub.members} Members • ${hotnessText}</div>
               <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
-                <strong>版规要点：</strong>${sub.rule}
+                <strong>${ruleLabel}</strong>${ruleText}
               </p>
             </div>
 
             <div class="space-y-2 pt-2 border-t border-slate-200 dark:border-slate-700/60">
               <div class="flex items-center justify-between text-[10px] text-slate-400 font-mono">
-                <span>门槛: ${sub.minKarma} Karma</span>
-                <span>推荐时机: ${sub.sort}</span>
+                <span>${karmaLabel} ${sub.minKarma} Karma</span>
+                <span>${timingLabel} ${sortText}</span>
               </div>
               <div class="flex items-center gap-1.5 pt-1">
-                <a href="https://www.reddit.com/r/${rawSubName}/rising/" target="_blank" rel="noopener" class="flex-1 py-1 text-center rounded-lg bg-reddit-orange/10 hover:bg-reddit-orange text-reddit-orange hover:text-white text-[10px] font-bold transition" title="去 Rising 版块抢前 3 热评">
-                  ⚡ 截流 Rising
+                <a href="https://www.reddit.com/r/${rawSubName}/rising/" target="_blank" rel="noopener" class="flex-1 py-1 text-center rounded-lg bg-reddit-orange/10 hover:bg-reddit-orange text-reddit-orange hover:text-white text-[10px] font-bold transition" title="Go to Rising tab to catch early comments">
+                  ${catchRisingText}
                 </a>
-                <a href="https://www.reddit.com/r/${rawSubName}/new/" target="_blank" rel="noopener" class="px-2 py-1 text-center rounded-lg bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-300 text-[10px] font-semibold transition" title="最新首评">
+                <a href="https://www.reddit.com/r/${rawSubName}/new/" target="_blank" rel="noopener" class="px-2 py-1 text-center rounded-lg bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-300 text-[10px] font-semibold transition" title="New submissions">
                   🆕 New
                 </a>
-                <a href="https://www.reddit.com/r/${rawSubName}/hot/" target="_blank" rel="noopener" class="px-2 py-1 text-center rounded-lg bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-300 text-[10px] font-semibold transition" title="看热门风向">
+                <a href="https://www.reddit.com/r/${rawSubName}/hot/" target="_blank" rel="noopener" class="px-2 py-1 text-center rounded-lg bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-300 text-[10px] font-semibold transition" title="Hot discussions">
                   🔥 Hot
                 </a>
               </div>
@@ -2467,7 +2887,9 @@ Strictly follow the [Reddit Viral One-Liner Formula]:
       const postSets = [
         {
           id: 0,
-          tag: "💡 痛点逆袭故事流",
+          tag_zh: "💡 痛点逆袭故事流",
+          tag_en: "💡 Problem-to-Solution Story",
+          tag: currentLang === 'zh' ? "💡 痛点逆袭故事流" : "💡 Problem-to-Solution Story",
           title: `I got tired of ${pain}, so I spent the weekend building a 100% free client-side tool (Open Source)`,
           flair: "🛠️ Showcase",
           body: `Hey ${sub},
@@ -2485,7 +2907,9 @@ Would genuinely love your brutal feedback, bug reports, or feature ideas in the 
         },
         {
           id: 1,
-          tag: "🔥 跪求狠喷 MVP 流",
+          tag_zh: "🔥 跪求狠喷 MVP 流",
+          tag_en: "🔥 Brutal MVP Roast",
+          tag: currentLang === 'zh' ? "🔥 跪求狠喷 MVP 流" : "🔥 Brutal MVP Roast",
           title: `Please brutally roast my weekend project: ${tool} — featuring ${usp}. Don't hold back.`,
           flair: "🔥 Feedback / Roast",
           body: `Hey everyone,
@@ -2503,7 +2927,9 @@ Roast away. My ego is ready!`
         },
         {
           id: 2,
-          tag: "📊 数据复盘冷启动流",
+          tag_zh: "📊 数据复盘冷启动流",
+          tag_en: "📊 Zero-Cost Case Study",
+          tag: currentLang === 'zh' ? "📊 数据复盘冷启动流" : "📊 Zero-Cost Case Study",
           title: `How I built ${tool} to solve ${pain} without spending a dime on marketing (Architecture Breakdown)`,
           flair: "📊 Case Study",
           body: `Hey ${sub},
@@ -2521,7 +2947,9 @@ Happy to answer any technical questions about the architecture or deployment in 
         },
         {
           id: 3,
-          tag: "🎁 100% 免费开源福利流",
+          tag_zh: "🎁 100% 免费开源福利流",
+          tag_en: "🎁 100% Free Open Resource",
+          tag: currentLang === 'zh' ? "🎁 100% 免费开源福利流" : "🎁 100% Free Open Resource",
           title: `Showcase: ${tool} — ${usp} without subscriptions or telemetry bloat`,
           flair: "🎁 Free Resource",
           body: `Hey guys,
@@ -2541,7 +2969,9 @@ Hope this saves you time. Feedback and PRs are always welcome!`
         },
         {
           id: 4,
-          tag: "⚡ 极客架构 $0 成本流",
+          tag_zh: "⚡ 极客架构 $0 成本流",
+          tag_en: "⚡ $0 Zero-Server Tech Stack",
+          tag: currentLang === 'zh' ? "⚡ 极客架构 $0 成本流" : "⚡ $0 Zero-Server Tech Stack",
           title: `TIL you don't need a heavy backend for ${pain}. Here's how I engineered ${tool} with 0 running costs:`,
           flair: "💻 Technical",
           body: `Hey developers,
@@ -2562,7 +2992,9 @@ Let me know what you think of this zero-server architectural approach!`
         },
         {
           id: 5,
-          tag: "🥊 行业痛陈反常规流",
+          tag_zh: "🥊 行业痛陈反常规流",
+          tag_en: "🥊 Industry Anti-Trend Rant",
+          tag: currentLang === 'zh' ? "🥊 行业痛陈反常规流" : "🥊 Industry Anti-Trend Rant",
           title: `Why does nobody talk about how ${pain} can be solved completely in the browser? Built a zero-cost fix:`,
           flair: "💡 Discussion",
           body: `Hey ${sub},
@@ -2598,14 +3030,19 @@ Curious to hear your perspective — are you also feeling fatigued by bloated su
           ? 'bg-teal-500/10 border-teal-500 text-teal-600 dark:text-teal-400 font-bold'
           : 'bg-slate-50 dark:bg-[#07090e] border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:border-slate-400';
 
+        const tagText = currentLang === 'zh' ? (item.tag_zh || item.tag) : (item.tag_en || item.tag);
+        const activeBadgeText = isSelected
+          ? (currentLang === 'zh' ? '● 预览中' : '● Active')
+          : (currentLang === 'zh' ? '预览 →' : 'Preview →');
+
         html += `
           <button onclick="selectShowcaseAngle(${idx})" class="w-full text-left p-2.5 rounded-xl border text-xs transition flex items-center justify-between ${activeClass}">
             <div class="truncate mr-2">
-              <span class="font-bold">${item.tag}</span>
+              <span class="font-bold">${tagText}</span>
               <div class="text-[11px] text-slate-400 truncate mt-0.5 font-normal">"${item.title}"</div>
             </div>
             <span class="text-[10px] font-mono flex-shrink-0 ${isSelected ? 'text-teal-500 font-bold' : 'text-slate-400'}">
-              ${isSelected ? '● 预览中' : '预览 →'}
+              ${activeBadgeText}
             </span>
           </button>
         `;
@@ -2653,7 +3090,7 @@ Curious to hear your perspective — are you also feeling fatigued by bloated su
     function copyCurrentShowcaseTitle() {
       const item = window.currentShowcaseItems[window.selectedShowcaseIndex] || window.currentShowcaseItems[0];
       if (!item) return;
-      copyText(item.title, '✓ 当前发帖标题已复制！');
+      copyText(item.title, currentLang === 'zh' ? '✓ 当前发帖标题已复制！' : '✓ Post title copied!');
     }
 
     function copyCurrentShowcaseBody() {
@@ -2667,6 +3104,44 @@ Curious to hear your perspective — are you also feeling fatigued by bloated su
       if (!item) return;
       const full = `**Title:** ${item.title}\n\n**Subreddit:** ${document.getElementById('title-target-sub')?.value || 'r/SideProject'}\n\n**Post Body:**\n${item.body}`;
       copyText(full, I18N[currentLang].toast_full_copied || '✓ 已复制完整发帖 Markdown！');
+    }
+
+    function updateCrafterSelectOptions() {
+      const subSelect = document.getElementById('title-target-sub');
+      if (subSelect) {
+        const currentVal = subSelect.value || 'r/SideProject';
+        const subOptions = currentLang === 'zh' ? [
+          { val: 'r/SideProject', text: 'r/SideProject (最友好的自荐版块)' },
+          { val: 'r/indiehackers', text: 'r/indiehackers (独立开发与变现探讨)' },
+          { val: 'r/webdev', text: 'r/webdev (技术实现与架构讨论)' },
+          { val: 'r/ChatGPT', text: 'r/ChatGPT (AI 用户泛流量)' },
+          { val: 'r/Cursor', text: 'r/Cursor (AI 代码开发者)' },
+          { val: 'r/SaaS', text: 'r/SaaS (软件商业化)' }
+        ] : [
+          { val: 'r/SideProject', text: 'r/SideProject (Most friendly self-promo sub)' },
+          { val: 'r/indiehackers', text: 'r/indiehackers (Indie hacking & monetization)' },
+          { val: 'r/webdev', text: 'r/webdev (Tech implementation & web architecture)' },
+          { val: 'r/ChatGPT', text: 'r/ChatGPT (Broad AI user base)' },
+          { val: 'r/Cursor', text: 'r/Cursor (AI coding & dev tools)' },
+          { val: 'r/SaaS', text: 'r/SaaS (Software commercialization)' }
+        ];
+        subSelect.innerHTML = subOptions.map(o => `<option value="${o.val}" ${o.val === currentVal ? 'selected' : ''}>${o.text}</option>`).join('');
+      }
+
+      const stratSelect = document.getElementById('title-link-strategy');
+      if (stratSelect) {
+        const currentVal = stratSelect.value || 'profile';
+        const stratOptions = currentLang === 'zh' ? [
+          { val: 'profile', text: '📌 引导看个人主页 Social Links（最安全，100% 避开 AutoMod）' },
+          { val: 'dm', text: '📩 评论区声明“私信即发试用链接”（极高互动率）' },
+          { val: 'comment', text: '💬 评论区首楼由小号/自己后发外链（常规防吞策略）' }
+        ] : [
+          { val: 'profile', text: '📌 Pin link in Reddit Profile Bio / Social Links (Safest, 100% AutoMod-safe)' },
+          { val: 'dm', text: '📩 Ask users to comment or DM for access link (Highest engagement)' },
+          { val: 'comment', text: '💬 Post direct link in first comment below (Standard bypass strategy)' }
+        ];
+        stratSelect.innerHTML = stratOptions.map(o => `<option value="${o.val}" ${o.val === currentVal ? 'selected' : ''}>${o.text}</option>`).join('');
+      }
     }
 
     // --- Helpers ---
@@ -2695,7 +3170,7 @@ Curious to hear your perspective — are you also feeling fatigued by bloated su
         document.execCommand('copy');
         showToast(msg || I18N[currentLang].toast_copied);
       } catch (err) {
-        showToast('请手动复制选中内容');
+        showToast(currentLang === 'zh' ? '请手动复制选中内容' : 'Please copy text manually');
       }
       document.body.removeChild(ta);
     }
@@ -2744,8 +3219,7 @@ Curious to hear your perspective — are you also feeling fatigued by bloated su
       document.cookie = `pacebowl-theme=${newTheme}; path=/; domain=.pacebowl.com; max-age=31536000; SameSite=Lax`;
     }
 
-    function toggleLanguage() {
-      currentLang = currentLang === 'zh' ? 'en' : 'zh';
+    function applyCurrentLanguage() {
       const label = document.getElementById('lang-label');
       if (label) label.textContent = currentLang === 'zh' ? 'EN' : '中';
       
@@ -2756,7 +3230,36 @@ Curious to hear your perspective — are you also feeling fatigued by bloated su
         }
       });
 
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (I18N[currentLang] && I18N[currentLang][key]) {
+          el.placeholder = I18N[currentLang][key];
+        }
+      });
+
+      document.querySelectorAll('[data-i18n-title]').forEach(el => {
+        const key = el.getAttribute('data-i18n-title');
+        if (I18N[currentLang] && I18N[currentLang][key]) {
+          el.title = I18N[currentLang][key];
+        }
+      });
+
+      updateCrafterSelectOptions();
       applyStyleFilter();
+      filterSubreddits(window.currentSubTier || 'all');
+      generateShowcaseTitles();
+      analyzeRadarText();
+      updateUserUI();
+      updateDetectedEntities();
+      switchAuthTab(currentAuthTab || 'login');
+
+      document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en';
+      localStorage.setItem('pacebowl-lang', currentLang);
+    }
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'zh' ? 'en' : 'zh';
+      applyCurrentLanguage();
     }
 
     // --- PaceBowl Suite Dropdown (Touch & Hover Friendly) ---
@@ -2803,13 +3306,15 @@ Curious to hear your perspective — are you also feeling fatigued by bloated su
 
     // --- Initial Init ---
     window.addEventListener('DOMContentLoaded', () => {
+      const savedLang = localStorage.getItem('pacebowl-lang');
+      if (savedLang === 'en' || savedLang === 'zh') {
+        currentLang = savedLang;
+      }
+
       loadUserSession();
       checkPaymentReturn();
       loadScenario('cheating', false);
-      renderViralCandidates(DEFAULT_DEMO_CANDIDATES);
-      filterSubreddits('all');
-      generateShowcaseTitles();
-      analyzeRadarText();
+      applyCurrentLanguage();
 
       // Set initial theme icons
       if (document.documentElement.classList.contains('dark')) {
