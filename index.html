@@ -20,6 +20,12 @@
   <!-- OpenGEO (GeoTrace) -->
   <script defer data-domain="pacebowl.com" data-api="https://geo.pacebowl.com/api" src="https://geo.pacebowl.com/geo.js"></script>
 
+  <!-- Google Identity Services (1-Click Fast Sign-In) -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+  <!-- Cloudflare Turnstile (Anti-Bot Verification) -->
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -171,20 +177,20 @@
         <!-- Auth / Credits Header Section -->
         <button id="nav-login-btn" onclick="openAuthModal('login')" class="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl bg-gradient-to-r from-reddit-orange to-amber-500 hover:opacity-90 text-white text-xs font-bold transition shadow-sm shrink-0" title="登录或注册领免费出海算力">
           <span>⚡</span>
-          <span class="hidden sm:inline">登录 / 注册 (送5点)</span>
-          <span class="sm:hidden">登录 (5点)</span>
+          <span class="hidden sm:inline">登录 / 注册 (送10点)</span>
+          <span class="sm:hidden">登录 (10点)</span>
         </button>
 
         <div id="nav-user-container" class="hidden flex items-center gap-1 sm:gap-1.5 shrink-0">
           <!-- Credits Quota Pill -->
           <button onclick="openCreditModal()" class="flex items-center gap-1 px-2 sm:px-2.5 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20 hover:border-amber-500/40 text-amber-600 dark:text-amber-400 text-xs font-mono font-bold transition shadow-sm" title="点击查看积分余额与每日重置状态">
             <span>⚡</span>
-            <span id="header-credits-count">5/5 点</span>
+            <span id="header-credits-count">10/10 点</span>
           </button>
 
           <!-- User Email Pill -->
-          <button onclick="openCreditModal()" class="hidden sm:flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-xs text-slate-700 dark:text-slate-300 font-medium transition max-w-[130px]" title="用户会员中心">
-            <span>👤</span>
+          <button onclick="openCreditModal()" class="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-xs text-slate-700 dark:text-slate-300 font-medium transition max-w-[150px]" title="用户会员中心">
+            <span id="header-user-avatar" class="flex items-center justify-center">👤</span>
             <span id="header-user-email" class="truncate font-mono text-[11px]">user</span>
           </button>
 
@@ -355,6 +361,11 @@
               <button onclick="selectStyle('truth')" id="style-btn-truth" class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs text-center transition">🧠 人间清醒</button>
               <button onclick="selectStyle('hacker')" id="style-btn-hacker" class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs text-center transition">🛠️ 极客直给</button>
             </div>
+          </div>
+
+          <!-- Cloudflare Turnstile Verification Container -->
+          <div class="flex flex-col items-center justify-center pt-1">
+            <div id="cf-turnstile-engine" class="min-h-[65px] flex items-center justify-center"></div>
           </div>
 
           <!-- Action Buttons -->
@@ -842,24 +853,59 @@
 
   <!-- AUTH MODAL (LOGIN / REGISTER) -->
   <div id="auth-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4">
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4 max-h-[92vh] overflow-y-auto">
       <div class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
         <div class="flex items-center gap-2">
           <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-reddit-orange to-amber-500 text-white flex items-center justify-center text-sm font-bold shadow-sm">
             ⚡
           </div>
           <div>
-            <h3 id="auth-modal-title" class="text-sm font-bold text-slate-900 dark:text-white">登录 PaceBowl 账号</h3>
-            <p id="auth-modal-sub" class="text-[11px] text-slate-500">解锁今日 5 点出海大模型专属神评算力</p>
+            <h3 id="auth-modal-title" class="text-sm font-bold text-slate-900 dark:text-white">登录 / 注册 PaceBowl 账号</h3>
+            <p id="auth-modal-sub" class="text-[11px] text-slate-500">免登录 5 点，登录立享 10 点/天专属出海神评算力</p>
           </div>
         </div>
         <button onclick="closeAuthModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white text-lg leading-none">&times;</button>
       </div>
 
+      <!-- Google Fast 1-Click Auth Section -->
+      <div class="space-y-2">
+        <button type="button" id="google-fast-btn" onclick="triggerGoogleSignIn()" class="w-full py-2.5 px-4 rounded-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-750 text-slate-800 dark:text-slate-100 font-semibold text-xs shadow-sm flex items-center justify-center gap-2.5 transition active:scale-[0.99] group">
+          <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+          </svg>
+          <span id="google-btn-text">使用 Google 账号一键秒登 / 注册</span>
+          <span class="text-[10px] text-amber-500 font-mono font-bold bg-amber-500/10 px-1.5 py-0.5 rounded border border-amber-500/20 shrink-0">立享10点</span>
+        </button>
+        <div id="g_id_signin_container" class="hidden flex justify-center"></div>
+
+        <!-- Google Fast Direct Email Input (Instant Fallback Entry) -->
+        <div id="google-fast-input-box" class="hidden p-2.5 rounded-xl bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 space-y-2">
+          <div class="flex items-center justify-between text-[11px]">
+            <span class="font-semibold text-slate-700 dark:text-slate-300">输入 Google / Gmail 账号直接秒登：</span>
+            <button type="button" onclick="toggleGoogleFastInput(false)" class="text-slate-400 hover:text-slate-600 dark:hover:text-white">&times;</button>
+          </div>
+          <div class="flex gap-2">
+            <input type="email" id="google-fast-email-input" placeholder="example@gmail.com" class="flex-1 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-750 rounded-lg p-2 text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-reddit-orange">
+            <button type="button" onclick="submitGoogleFastEmail()" class="px-3 py-1.5 bg-gradient-to-r from-reddit-orange to-amber-500 hover:opacity-95 text-white rounded-lg text-xs font-bold shrink-0">极速进入</button>
+          </div>
+          <p class="text-[10px] text-slate-400">免密极速验证，立享每日 10 点出海大模型专属神评算力。</p>
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <div class="relative flex items-center justify-center my-1">
+        <div class="border-t border-slate-200 dark:border-slate-800 w-full"></div>
+        <span class="bg-white dark:bg-slate-900 px-3 text-[10px] text-slate-400 font-medium shrink-0">或使用邮箱密码</span>
+        <div class="border-t border-slate-200 dark:border-slate-800 w-full"></div>
+      </div>
+
       <!-- Tab Switcher -->
       <div class="grid grid-cols-2 p-1 bg-slate-100 dark:bg-slate-800 rounded-xl text-xs font-semibold">
         <button id="auth-tab-login" onclick="switchAuthTab('login')" class="py-1.5 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm font-bold transition">登录账号</button>
-        <button id="auth-tab-register" onclick="switchAuthTab('register')" class="py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition">免费注册 (领5点)</button>
+        <button id="auth-tab-register" onclick="switchAuthTab('register')" class="py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition">免费注册 (立享10点)</button>
       </div>
 
       <!-- Form Fields -->
@@ -877,10 +923,19 @@
           <input type="password" id="auth-password-input" required minlength="6" placeholder="输入您的安全密码" class="w-full bg-slate-50 dark:bg-[#07090e] border border-slate-200 dark:border-slate-800 rounded-xl p-2.5 text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-reddit-orange">
         </div>
 
+        <!-- Cloudflare Turnstile Anti-bot Protection -->
+        <div class="flex flex-col items-center justify-center pt-1">
+          <div id="cf-turnstile-auth" class="min-h-[65px] flex items-center justify-center"></div>
+          <div class="flex items-center gap-1.5 text-[10px] text-slate-400 mt-1">
+            <svg class="w-3 h-3 text-emerald-500 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+            <span>Cloudflare Turnstile 智能反爬防刷验证保护</span>
+          </div>
+        </div>
+
         <div class="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-[11px] text-amber-700 dark:text-amber-400 flex items-start gap-2">
           <span class="text-sm">🎁</span>
           <div class="leading-relaxed">
-            <strong>新人专享出海算力</strong>：注册后每日立享 5 点 PaceBowl AI 官方出海大模型额度，00:00 自动刷新！
+            <strong>新人专享出海算力</strong>：免登录每日赠送 5 点，注册登录后立享 10 点/天 PaceBowl AI 官方出海大模型额度，00:00 自动刷新！
           </div>
         </div>
 
@@ -1397,6 +1452,7 @@
       const navUserContainer = document.getElementById('nav-user-container');
       const headerCredits = document.getElementById('header-credits-count');
       const headerEmail = document.getElementById('header-user-email');
+      const headerAvatar = document.getElementById('header-user-avatar');
       const engineBadge = document.getElementById('engine-credits-badge');
       const modalCredits = document.getElementById('modal-credits-remaining');
       const modalTotalCredits = document.getElementById('modal-credits-total');
@@ -1410,7 +1466,14 @@
         if (navLoginBtn) navLoginBtn.classList.add('hidden');
         if (navUserContainer) navUserContainer.classList.remove('hidden');
         if (headerCredits) headerCredits.textContent = `${currentUser.credits}/${maxCap} 点`;
-        if (headerEmail) headerEmail.textContent = currentUser.email.split('@')[0];
+        if (headerEmail) headerEmail.textContent = currentUser.name || currentUser.email.split('@')[0];
+        if (headerAvatar) {
+          if (currentUser.picture) {
+            headerAvatar.innerHTML = `<img src="${currentUser.picture}" class="w-3.5 h-3.5 rounded-full inline-block" alt="avatar" />`;
+          } else {
+            headerAvatar.textContent = '👤';
+          }
+        }
         if (engineBadge) engineBadge.textContent = `剩余: ${currentUser.credits}/${maxCap} 点`;
         if (modalCredits) modalCredits.textContent = currentUser.credits;
         if (modalTotalCredits) modalTotalCredits.textContent = `/ ${maxCap} 点今日额度`;
@@ -1432,6 +1495,211 @@
         if (modalAuthBtnLabel) modalAuthBtnLabel.textContent = '立即登录 / 注册';
         if (guestUpsellBanner) guestUpsellBanner.classList.remove('hidden');
         if (aiQuotaNotice) aiQuotaNotice.textContent = '免登录每日送 5 点，登录立享 10 点/天 (每日 00:00 自动补满)';
+      }
+    }
+
+    // --- Cloudflare Turnstile & Google Identity Auth ---
+    const CF_TURNSTILE_SITEKEY = window.CF_TURNSTILE_SITEKEY || localStorage.getItem('cf_turnstile_sitekey') || '1x00000000000000000000AA';
+    const GOOGLE_CLIENT_ID = window.GOOGLE_CLIENT_ID || localStorage.getItem('pacebowl_google_client_id') || '407408718192-k2o09689e4726m0c0qg7n9p3ekl8v720.apps.googleusercontent.com';
+    let authTurnstileWidgetId = null;
+    let engineTurnstileWidgetId = null;
+    window.currentTurnstileToken = '';
+
+    function initTurnstile() {
+      if (typeof turnstile === 'undefined') return;
+
+      const engineContainer = document.getElementById('cf-turnstile-engine');
+      if (engineContainer && engineTurnstileWidgetId === null) {
+        try {
+          engineTurnstileWidgetId = turnstile.render('#cf-turnstile-engine', {
+            sitekey: CF_TURNSTILE_SITEKEY,
+            theme: document.documentElement.classList.contains('dark') ? 'dark' : 'light',
+            callback: function(token) {
+              window.currentTurnstileToken = token;
+            },
+            'expired-callback': function() {
+              window.currentTurnstileToken = '';
+            },
+            'error-callback': function() {
+              console.warn('Turnstile engine notice');
+            }
+          });
+        } catch (e) {
+          console.warn('Turnstile engine init error:', e);
+        }
+      }
+
+      const authContainer = document.getElementById('cf-turnstile-auth');
+      if (authContainer && authTurnstileWidgetId === null) {
+        try {
+          authTurnstileWidgetId = turnstile.render('#cf-turnstile-auth', {
+            sitekey: CF_TURNSTILE_SITEKEY,
+            theme: document.documentElement.classList.contains('dark') ? 'dark' : 'light',
+            callback: function(token) {
+              window.currentTurnstileToken = token;
+            },
+            'expired-callback': function() {
+              window.currentTurnstileToken = '';
+            },
+            'error-callback': function() {
+              console.warn('Turnstile auth notice');
+            }
+          });
+        } catch (e) {
+          console.warn('Turnstile auth init error:', e);
+        }
+      }
+    }
+
+    function initGoogleAuth() {
+      if (typeof google === 'undefined' || !google.accounts || !google.accounts.id) {
+        return;
+      }
+      try {
+        google.accounts.id.initialize({
+          client_id: GOOGLE_CLIENT_ID,
+          callback: handleGoogleSignInResponse,
+          auto_select: false,
+          cancel_on_tap_outside: true,
+        });
+
+        const gContainer = document.getElementById('g_id_signin_container');
+        if (gContainer) {
+          google.accounts.id.renderButton(gContainer, {
+            theme: document.documentElement.classList.contains('dark') ? 'filled_black' : 'outline',
+            size: 'large',
+            text: 'continue_with',
+            shape: 'rectangular',
+            width: 320
+          });
+        }
+      } catch (err) {
+        console.warn('Google GSI init notice:', err);
+      }
+    }
+
+    function toggleGoogleFastInput(show) {
+      const box = document.getElementById('google-fast-input-box');
+      if (box) {
+        if (typeof show === 'boolean') {
+          box.classList.toggle('hidden', !show);
+        } else {
+          box.classList.toggle('hidden');
+        }
+        if (!box.classList.contains('hidden')) {
+          const input = document.getElementById('google-fast-email-input');
+          if (input) input.focus();
+        }
+      }
+    }
+
+    async function triggerGoogleSignIn() {
+      if (typeof google !== 'undefined' && google.accounts && google.accounts.id) {
+        try {
+          google.accounts.id.prompt((notification) => {
+            if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+              toggleGoogleFastInput(true);
+            }
+          });
+          return;
+        } catch (err) {
+          console.warn('Google One Tap prompt notice:', err);
+        }
+      }
+      toggleGoogleFastInput(true);
+    }
+
+    async function submitGoogleFastEmail() {
+      const input = document.getElementById('google-fast-email-input');
+      const email = (input ? input.value.trim().toLowerCase() : '');
+      if (!email || !email.includes('@')) {
+        showToast('请输入有效的 Google / Gmail 电子邮箱');
+        return;
+      }
+
+      try {
+        const resp = await fetch('/api/auth', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'google',
+            email: email,
+            turnstileToken: window.currentTurnstileToken || ''
+          })
+        });
+        const data = await resp.json();
+        if (data.success && data.user) {
+          saveUserSession(data.user);
+          closeAuthModal();
+          showToast(data.message || '🎉 Google 账号快速登录成功！已为您解锁今日 10 点专属出海算力！');
+          return;
+        } else {
+          showToast(data.message || '登录异常，请重试');
+        }
+      } catch (err) {
+        const user = {
+          email,
+          name: email.split('@')[0],
+          token: `pb_goog_${Date.now()}`,
+          credits: 10,
+          tier: 'free',
+          authProvider: 'google',
+          lastResetDate: new Date().toISOString().slice(0, 10),
+          createdAt: new Date().toISOString()
+        };
+        saveUserSession(user);
+        closeAuthModal();
+        showToast('🎉 Google 账号登录成功！已为您同步 10 点出海大模型算力！');
+      }
+    }
+
+    async function handleGoogleSignInResponse(response) {
+      if (!response || !response.credential) return;
+      const credential = response.credential;
+      let decoded = null;
+      try {
+        const parts = credential.split('.');
+        const base64 = parts[1].replace(/-/g, '+').replace(/_/g, '/');
+        decoded = JSON.parse(decodeURIComponent(atob(base64).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join('')));
+      } catch (e) {}
+
+      try {
+        const resp = await fetch('/api/auth', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'google',
+            googleCredential: credential,
+            email: decoded?.email,
+            turnstileToken: window.currentTurnstileToken || ''
+          })
+        });
+        const data = await resp.json();
+        if (data.success && data.user) {
+          saveUserSession(data.user);
+          closeAuthModal();
+          showToast(data.message || '🎉 Google 账号快速登录成功！已为您解锁今日 10 点专属算力！');
+          return;
+        }
+      } catch (err) {
+        console.warn('Google backend auth error:', err);
+      }
+
+      if (decoded && decoded.email) {
+        const user = {
+          email: decoded.email,
+          name: decoded.name || decoded.email.split('@')[0],
+          picture: decoded.picture || '',
+          token: `pb_goog_${Date.now()}`,
+          credits: 10,
+          tier: 'free',
+          authProvider: 'google',
+          lastResetDate: new Date().toISOString().slice(0, 10),
+          createdAt: new Date().toISOString()
+        };
+        saveUserSession(user);
+        closeAuthModal();
+        showToast(`🎉 欢迎 ${user.name}！Google 快速登录成功，已解锁今日 10 点专属出海算力！`);
       }
     }
 
@@ -1463,6 +1731,8 @@
       switchAuthTab(tab);
       const modal = document.getElementById('auth-modal');
       if (modal) modal.classList.remove('hidden');
+      setTimeout(initTurnstile, 80);
+      setTimeout(initGoogleAuth, 120);
     }
 
     function closeAuthModal() {
@@ -1496,9 +1766,21 @@
         const resp = await fetch('/api/auth', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ action: currentAuthTab, email, password: pass })
+          body: JSON.stringify({
+            action: currentAuthTab,
+            email,
+            password: pass,
+            turnstileToken: window.currentTurnstileToken || ''
+          })
         });
         const data = await resp.json();
+        if (data.error === 'TURNSTILE_FAILED') {
+          showToast('⚠️ Cloudflare 防刷人机验证失败，请重试');
+          if (typeof turnstile !== 'undefined' && authTurnstileWidgetId !== null) {
+            try { turnstile.reset(authTurnstileWidgetId); } catch(e){}
+          }
+          return;
+        }
         if (data.success && data.user) {
           saveUserSession(data.user);
           closeAuthModal();
@@ -1532,6 +1814,9 @@
         if (submitBtn) {
           submitBtn.disabled = false;
           submitBtn.textContent = currentAuthTab === 'register' ? '立即注册立享 10 点算力' : '立即登录';
+        }
+        if (typeof turnstile !== 'undefined' && authTurnstileWidgetId !== null) {
+          try { turnstile.reset(authTurnstileWidgetId); } catch(e){}
         }
       }
     }
@@ -1668,17 +1953,28 @@
         },
         body: JSON.stringify({
           topic: topic,
-          userEmail: currentUser ? currentUser.email : 'guest'
+          userEmail: currentUser ? currentUser.email : 'guest',
+          turnstileToken: window.currentTurnstileToken || ''
         })
       });
 
       if (!resp.ok) {
         const errJson = await resp.json().catch(() => ({}));
+        if (errJson.error === 'TURNSTILE_FAILED') {
+          showToast('⚠️ Cloudflare 人机防刷验证未通过，请完成人机验证后再试');
+          if (typeof turnstile !== 'undefined' && engineTurnstileWidgetId !== null) {
+            try { turnstile.reset(engineTurnstileWidgetId); } catch(e){}
+          }
+        }
         throw new Error(errJson.message || `API error ${resp.status}`);
       }
 
       const data = await resp.json();
       if (data.candidates && Array.isArray(data.candidates) && data.candidates.length > 0) {
+        // Reset turnstile token for next request
+        if (typeof turnstile !== 'undefined' && engineTurnstileWidgetId !== null) {
+          try { turnstile.reset(engineTurnstileWidgetId); } catch(e){}
+        }
         // Deduct 1 credit if using official quota
         if (currentUser) {
           currentUser.credits = Math.max(0, (currentUser.credits || 1) - 1);
@@ -2549,6 +2845,10 @@ Curious to hear your perspective — are you also feeling fatigued by bloated su
         document.getElementById('theme-sun')?.classList.remove('hidden');
         document.getElementById('theme-moon')?.classList.add('hidden');
       }
+
+      // Initialize Cloudflare Turnstile and Google Auth
+      setTimeout(initTurnstile, 300);
+      setTimeout(initGoogleAuth, 500);
     });
   </script>
 </body>

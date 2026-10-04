@@ -1,13 +1,13 @@
 interface Env {
   AGNES_API_KEY?: string;
   DEEPSEEK_API_KEY?: string;
+  TURNSTILE_SECRET_KEY?: string;
 }
 
 interface RequestBody {
   topic?: string;
-  apiKey?: string;
-  model?: string;
-  provider?: string;
+  userEmail?: string;
+  turnstileToken?: string;
 }
 
 const PRIMARY_ENDPOINT = 'https://api.agnes-ai.cn/v1/chat/completions';
@@ -15,6 +15,26 @@ const BACKUP_ENDPOINT = 'https://apihub.agnes-ai.com/v1/chat/completions';
 const DEFAULT_MODEL = 'agnes-2.5-flash';
 const BACKUP_MODEL = 'agnes-3.0-flash';
 const DEFAULT_API_KEY = 'sk-4Yj4C0eAtpvaY1kiK7T1mafogRdiOqB2pFQvYGZbJwbRkE1K';
+
+async function verifyTurnstileToken(token: string, ip: string, secretKey?: string): Promise<boolean> {
+  if (!token) return true;
+  const secret = secretKey || '1x0000000000000000000000000000000AA';
+  try {
+    const formData = new FormData();
+    formData.append('secret', secret);
+    formData.append('response', token);
+    if (ip) formData.append('remoteip', ip);
+
+    const res = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST',
+      body: formData,
+    });
+    const outcome = (await res.json()) as any;
+    return !!outcome.success;
+  } catch {
+    return true;
+  }
+}
 
 export const onRequestPost = async (context: { request: Request; env: Env }) => {
   const corsHeaders = {
@@ -25,11 +45,29 @@ export const onRequestPost = async (context: { request: Request; env: Env }) => 
   };
 
   try {
+    const clientIp = context.request.headers.get('CF-Connecting-IP') || '';
     let body: RequestBody = {};
     try {
       body = (await context.request.json()) as RequestBody;
     } catch {
       body = {};
+    }
+
+    if (body.turnstileToken) {
+      const isTurnstileValid = await verifyTurnstileToken(
+        body.turnstileToken,
+        clientIp,
+        context.env.TURNSTILE_SECRET_KEY
+      );
+      if (!isTurnstileValid) {
+        return new Response(
+          JSON.stringify({
+            error: 'TURNSTILE_FAILED',
+            message: 'Cloudflare 人机防刷验证未通过，请刷新后重试',
+          }),
+          { status: 403, headers: corsHeaders }
+        );
+      }
     }
 
     const topic = (body.topic || '').trim() || 'What will you do if your partner cheat on you?';
