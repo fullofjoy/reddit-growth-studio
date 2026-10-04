@@ -12,7 +12,8 @@ interface RequestBody {
 
 const PRIMARY_ENDPOINT = 'https://api.agnes-ai.cn/v1/chat/completions';
 const BACKUP_ENDPOINT = 'https://apihub.agnes-ai.com/v1/chat/completions';
-const DEFAULT_MODEL = 'agnes-3.0-flash';
+const DEFAULT_MODEL = 'agnes-2.5-flash';
+const BACKUP_MODEL = 'agnes-3.0-flash';
 const DEFAULT_API_KEY = 'sk-4Yj4C0eAtpvaY1kiK7T1mafogRdiOqB2pFQvYGZbJwbRkE1K';
 
 export const onRequestPost = async (context: { request: Request; env: Env }) => {
@@ -80,8 +81,8 @@ Given a Reddit post title or discussion topic, output 5 ultra-punchy, high-upvot
     });
 
     if (!resp.ok && apiKey === DEFAULT_API_KEY) {
-      // Try backup endpoint
-      const backupResp = await fetch(BACKUP_ENDPOINT, {
+      // 1. Try primary endpoint with BACKUP_MODEL (agnes-3.0-flash)
+      const modelFallbackResp = await fetch(PRIMARY_ENDPOINT, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -90,7 +91,7 @@ Given a Reddit post title or discussion topic, output 5 ultra-punchy, high-upvot
           'Accept': 'application/json, text/plain, */*',
         },
         body: JSON.stringify({
-          model: DEFAULT_MODEL,
+          model: BACKUP_MODEL,
           messages: [
             { role: 'system', content: systemPrompt },
             { role: 'user', content: `Reddit topic: "${topic}"` },
@@ -100,8 +101,32 @@ Given a Reddit post title or discussion topic, output 5 ultra-punchy, high-upvot
         }),
       }).catch(() => null);
 
-      if (backupResp && backupResp.ok) {
-        resp = backupResp;
+      if (modelFallbackResp && modelFallbackResp.ok) {
+        resp = modelFallbackResp;
+      } else {
+        // 2. Try BACKUP_ENDPOINT
+        const backupResp = await fetch(BACKUP_ENDPOINT, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${apiKey}`,
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36',
+            'Accept': 'application/json, text/plain, */*',
+          },
+          body: JSON.stringify({
+            model: DEFAULT_MODEL,
+            messages: [
+              { role: 'system', content: systemPrompt },
+              { role: 'user', content: `Reddit topic: "${topic}"` },
+            ],
+            temperature: 0.85,
+            max_tokens: 600,
+          }),
+        }).catch(() => null);
+
+        if (backupResp && backupResp.ok) {
+          resp = backupResp;
+        }
       }
     }
 
