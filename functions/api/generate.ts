@@ -25,13 +25,13 @@ const DEFAULT_API_KEY = 'sk-4Yj4C0eAtpvaY1kiK7T1mafogRdiOqB2pFQvYGZbJwbRkE1K';
 // --- Semantic Domain & Fallback Synthesizer ---
 function detectTopicDomain(topic: string): string {
   const t = (topic || '').toLowerCase();
-  if (/cheat|partner|ex|girlfriend|boyfriend|tinder|breakup|marriage|divorce|出轨|伴侣|对象|恋爱|分手|结婚|渣男|渣女/.test(t)) return 'dating';
-  if (/work|job|boss|interview|salary|layoff|manager|agile|overtime|burnout|slack|zoom|职场|老板|同事|加班|内卷|工资|薪水|离职|面试/.test(t)) return 'work';
-  if (/code|python|rust|javascript|react|ai|replace|junior|senior|dev|bug|docker|github|deploy|程序员|代码|架构|报错|开发|祖传/.test(t)) return 'dev';
-  if (/saas|mrr|stripe|launch|first 100|marketing|indie|product|users|client|独立开发|获客|推广|出海|出单|转化|变现/.test(t)) return 'saas';
-  if (/money|dollar|\$50|purchase|cheap|expensive|cost|budget|crypto|stock|invest|省钱|花钱|购买|投资|物有所值|平替/.test(t)) return 'money';
-  if (/video|youtube|tiktok|reel|stream|vlog|watch|click away|thumbnail|creator|视频|油管|短视频|播客|博主|完播/.test(t)) return 'video';
-  if (/game|gaming|steam|ps5|xbox|nintendo|gamer|play|游戏|主机|排位|联机|网游/.test(t)) return 'gaming';
+  if (/cheat|partner|ex|girlfriend|boyfriend|tinder|breakup|marriage|divorce|date|dating|husband|wife|relationship|crush|出轨|伴侣|对象|恋爱|分手|结婚|渣男|渣女|相亲/.test(t)) return 'dating';
+  if (/work|job|boss|interview|salary|layoff|manager|agile|overtime|burnout|slack|zoom|meeting|standup|jira|scrum|sprint|career|coworker|colleague|office|hire|hiring|quit|职场|老板|同事|加班|内卷|工资|薪水|离职|面试|开会|汇报/.test(t)) return 'work';
+  if (/code|python|rust|javascript|react|ai|replace|junior|senior|dev|bug|docker|github|deploy|program|engineer|pr|commit|repo|coder|software|terminal|linux|git|程序员|代码|架构|报错|开发|祖传|修bug|提pr|编程/.test(t)) return 'dev';
+  if (/video|youtube|tiktok|reel|stream|vlog|watch|click away|thumbnail|creator|channel|sponsor|sub|intro|outro|视频|油管|短视频|播客|博主|完播|切片/.test(t)) return 'video';
+  if (/game|gaming|steam|ps5|xbox|nintendo|gamer|play|rpg|mmo|multiplayer|gacha|boss fight|patch|游戏|主机|排位|联机|网游|抽卡/.test(t)) return 'gaming';
+  if (/saas|mrr|stripe|launch|first 100|marketing|indie|product|users|client|landing page|traffic|seo|独立开发|获客|推广|出海|出单|转化|变现|站长/.test(t)) return 'saas';
+  if (/money|dollar|\$50|purchase|cheap|expensive|cost|budget|crypto|stock|invest|price|pay|afford|rich|poor|bank|省钱|花钱|购买|投资|物有所值|平替|理财|股市/.test(t)) return 'money';
   return 'general';
 }
 
