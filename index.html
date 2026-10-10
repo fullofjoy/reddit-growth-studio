@@ -1720,6 +1720,7 @@
       if (/game|gaming|steam|ps5|xbox|nintendo|gamer|play|rpg|mmo|multiplayer|gacha|boss fight|patch|游戏|主机|排位|联机|网游|抽卡/.test(t)) return 'gaming';
       if (/saas|mrr|stripe|launch|first 100|marketing|indie|product|users|client|landing page|traffic|seo|独立开发|获客|推广|出海|出单|转化|变现|站长/.test(t)) return 'saas';
       if (/money|dollar|\$50|purchase|cheap|expensive|cost|budget|crypto|stock|invest|price|pay|afford|rich|poor|bank|省钱|花钱|购买|投资|物有所值|平替|理财|股市/.test(t)) return 'money';
+      if (/parent|mom|dad|mother|father|family|relative|kid|child|teen|grow up|childhood|strict|judgmental|toxic parent|in-law|原生家庭|父母|爸妈|母亲|父亲|亲戚|长辈|孩子|小孩|家教/.test(t)) return 'family';
       if (/8d|music|audio|headphone|sound|song|earbud|音乐|耳机|音质|旋律/.test(t)) return 'music';
       if (/pretend|habit|sleep|advice|procrastinat|regret|burnout|routine|习惯|拖延|熬夜|自律|建议|人生/.test(t)) return 'habits';
       return 'general';
@@ -1742,11 +1743,17 @@
         if (/打游戏|连麦/.test(raw)) return { subject: 'midnight gaming', zhSubject: '深夜打游戏', domain: 'general' };
         if (/获客|出海|付费/.test(raw)) return { subject: 'paying customers', zhSubject: '付费客户', domain: 'saas' };
         if (/买房|买车|花钱|省钱/.test(raw)) return { subject: 'this purchase', zhSubject: '这笔开销', domain: 'money' };
+        if (/父母|爸妈|母亲|父亲|长辈|家庭/.test(raw)) return { subject: 'parents & family', zhSubject: '父母与原生家庭', domain: 'family' };
+        if (/视频|油管|博主|完播/.test(raw)) return { subject: 'video creator', zhSubject: '视频与博主', domain: 'video' };
+        if (/游戏|主机|排位|抽卡/.test(raw)) return { subject: 'gaming', zhSubject: '游戏竞技', domain: 'gaming' };
         return { subject: 'this situation', zhSubject: '这个局面', domain: domain };
       }
 
       // English extraction: check for specific multi-word entities
       const lower = raw.toLowerCase();
+      if (lower.includes('parent') || lower.includes('mom') || lower.includes('dad') || lower.includes('family')) return { subject: 'judgmental parents', zhSubject: '父母与家庭关系', domain: 'family' };
+      if (lower.includes('video') || lower.includes('youtube') || lower.includes('thumbnail')) return { subject: 'video content', zhSubject: '视频体验', domain: 'video' };
+      if (lower.includes('game') || lower.includes('gaming') || lower.includes('steam')) return { subject: 'video games', zhSubject: '电子游戏', domain: 'gaming' };
       if (lower.includes('cybertruck')) return { subject: 'the Cybertruck', zhSubject: '赛博皮卡', domain: 'general' };
       if (lower.includes('cat') && (lower.includes('monitor') || lower.includes('zoom'))) return { subject: 'the cat', zhSubject: '那只猫', domain: 'general' };
       if (lower.includes('roommate')) return { subject: 'your roommate', zhSubject: '你室友', domain: 'general' };
@@ -1765,8 +1772,10 @@
       const tokens = clean.split(/\s+/).filter(Boolean);
       const stopWords = new Set([
         'what', 'will', 'you', 'do', 'if', 'your', 'my', 'the', 'a', 'an', 'is', 'are', 'was', 'were', 'how', 'why',
+        'who', 'has', 'have', 'had', 'having', 'where', 'when', 'which', 'whom', 'whose', 'there', 'their', 'here',
         'does', 'did', 'should', 'could', 'would', 'to', 'in', 'on', 'at', 'for', 'with', 'about', 'that', 'this',
-        'someone', 'something', 'everyone', 'anyone', 'people', 'nobody', 'actually', 'genuinely', 'can', 'of', 'and', 'or', 'so'
+        'someone', 'something', 'everyone', 'anyone', 'people', 'nobody', 'actually', 'genuinely', 'can', 'of', 'and', 'or', 'so',
+        'get', 'got', 'like', 'just', 'any', 'some'
       ]);
 
       const candidates = tokens.filter(t => !stopWords.has(t) && t.length > 2);
@@ -1793,11 +1802,14 @@
       
       const domainLabels = {
         dating: '💔 Dating & Ex',
+        family: '🏠 Family & Parents',
         work: '💼 Work & Office',
         dev: '💻 Dev & Engineering',
+        video: '🎬 Video & Media',
+        gaming: '🎮 Gaming & Esports',
         saas: '🚀 Indie & SaaS',
         money: '💰 Money & Finance',
-        music: '🎧 Audio & Media',
+        music: '🎧 Audio & Music',
         habits: '🧠 Habits & Life',
         general: '🌐 General Discussion'
       };
@@ -2528,10 +2540,47 @@
             rate: randRate(88, 92),
           },
         ],
-        general: [
+        family: [
           {
             style: 'Deadpan Sarcasm',
-            text: 'Nothing screams confidence like nodding along while understanding literally zero percent.',
+            text: 'My parents judge my breathing rhythm and wonder why I visit once a year.',
+            zh: '我爸妈连我的呼吸节奏都能挑出刺，还纳闷我为什么一年才回家一次。',
+            upvotes: randUpvote(3.2, 4.8),
+            rate: randRate(96, 99),
+          },
+          {
+            style: 'Self-Deprecating',
+            text: 'At this point, my primary role in family dinners is being the cautionary tale.',
+            zh: '事到如今，我出席家庭聚餐的最大作用就是充当反面教材。',
+            upvotes: randUpvote(1.6, 2.7),
+            rate: randRate(91, 95),
+          },
+          {
+            style: 'Mic Drop',
+            text: 'They didn’t want a child, they wanted an unpaid brand ambassador for their ego.',
+            zh: '他们要的根本不是孩子，而是一个能无偿为他们虚荣心代言的品牌大使。',
+            upvotes: randUpvote(4.1, 5.9),
+            rate: randRate(97, 99),
+          },
+          {
+            style: 'Hard Truth',
+            text: 'Judgmental parents will audit every single choice you make except their own parenting.',
+            zh: '爱审判的父母会挑剔你人生的每一个选择，唯独对自己的育儿方式盲目自信。',
+            upvotes: randUpvote(2.4, 3.8),
+            rate: randRate(94, 98),
+          },
+          {
+            style: 'Practical Hacker',
+            text: 'Grey-rock method: nod politely, give one-word answers, live 500 miles away.',
+            zh: '终极防御法则：礼貌微笑、单字回复、然后把家安在五百公里外。',
+            upvotes: randUpvote(1.5, 2.3),
+            rate: randRate(90, 94),
+          },
+        ],
+        habits: [
+          {
+            style: 'Deadpan Sarcasm',
+            text: 'Nothing screams peak adult confidence like nodding along while understanding literally zero percent.',
             zh: '没有什么比全程胸有成竹地点头、实则半个字都没听懂更能展现成年人的自信了。',
             upvotes: randUpvote(2.6, 4.0),
             rate: randRate(94, 98),
@@ -2562,6 +2611,43 @@
             text: 'Say "Let me check my calendar" instead of saying yes immediately. Buys instant peace of mind.',
             zh: '永远用“我先查下日程”代替脱口而出的答应，瞬间为你买回无限后悔权。',
             upvotes: randUpvote(1.2, 1.8),
+            rate: randRate(89, 93),
+          },
+        ],
+        general: [
+          {
+            style: 'Deadpan Sarcasm',
+            text: 'My entire life strategy is waiting for someone else to make the first mistake.',
+            zh: '我所有的核心生存策略，就是安安静静等别人先犯第一个错误。',
+            upvotes: randUpvote(2.8, 4.2),
+            rate: randRate(94, 98),
+          },
+          {
+            style: 'Self-Deprecating',
+            text: 'I told myself I would handle this with maturity. Anyway, I stayed in bed for three days.',
+            zh: '我曾信誓旦旦要成熟理智地面对这件事，结果在床上自闭躺了整整三天。',
+            upvotes: randUpvote(1.7, 2.6),
+            rate: randRate(91, 95),
+          },
+          {
+            style: 'Mic Drop',
+            text: 'Never take criticism from someone you would never ask for advice.',
+            zh: '永远别把那些你根本不会向其请教的人的所谓批评放在心上。',
+            upvotes: randUpvote(3.9, 5.5),
+            rate: randRate(97, 99),
+          },
+          {
+            style: 'Hard Truth',
+            text: 'The loudest person in the room is usually the one with the least to say.',
+            zh: '全场叫嚣得最大声的那个人，脑子里往往最空无一物。',
+            upvotes: randUpvote(2.2, 3.3),
+            rate: randRate(93, 97),
+          },
+          {
+            style: 'Practical Hacker',
+            text: 'Sleep on it for 24 hours. 80% of life emergencies solve themselves or cease to matter.',
+            zh: '先睡满24小时再做决定，80%的人生火警都会自行熄灭或变得无足轻重。',
+            upvotes: randUpvote(1.4, 2.1),
             rate: randRate(89, 93),
           },
         ],

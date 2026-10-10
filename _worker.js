@@ -125,7 +125,6 @@ var onRequestOptions = /* @__PURE__ */ __name(async () => {
 // api/generate.ts
 var PRIMARY_ENDPOINT = "https://api.agnes-ai.cn/v1/chat/completions";
 var DEFAULT_MODEL = "agnes-2.5-flash";
-var BACKUP_MODEL = "agnes-3.0-flash";
 var DEFAULT_API_KEY = "sk-4Yj4C0eAtpvaY1kiK7T1mafogRdiOqB2pFQvYGZbJwbRkE1K";
 function detectTopicDomain(topic) {
   const t = (topic || "").toLowerCase();
@@ -136,6 +135,8 @@ function detectTopicDomain(topic) {
   if (/game|gaming|steam|ps5|xbox|nintendo|gamer|play|rpg|mmo|multiplayer|gacha|boss fight|patch|游戏|主机|排位|联机|网游|抽卡/.test(t)) return "gaming";
   if (/saas|mrr|stripe|launch|first 100|marketing|indie|product|users|client|landing page|traffic|seo|独立开发|获客|推广|出海|出单|转化|变现|站长/.test(t)) return "saas";
   if (/money|dollar|\$50|purchase|cheap|expensive|cost|budget|crypto|stock|invest|price|pay|afford|rich|poor|bank|省钱|花钱|购买|投资|物有所值|平替|理财|股市/.test(t)) return "money";
+  if (/parent|mom|dad|mother|father|family|relative|kid|child|teen|grow up|childhood|strict|judgmental|toxic parent|in-law|原生家庭|父母|爸妈|母亲|父亲|亲戚|长辈|孩子|小孩|家教/.test(t)) return "family";
+  if (/pretend|habit|sleep|advice|procrastinat|regret|burnout|routine|习惯|拖延|熬夜|自律|建议|人生/.test(t)) return "habits";
   return "general";
 }
 __name(detectTopicDomain, "detectTopicDomain");
@@ -403,10 +404,47 @@ function generateEdgeSynthesizedCandidates(topic) {
         rate: randRate(88, 92)
       }
     ],
-    general: [
+    family: [
       {
         style: "Deadpan Sarcasm",
-        text: "Nothing screams confidence like nodding along while understanding literally zero percent.",
+        text: "My parents judge my breathing rhythm and wonder why I visit once a year.",
+        zh: "\u6211\u7238\u5988\u8FDE\u6211\u7684\u547C\u5438\u8282\u594F\u90FD\u80FD\u6311\u51FA\u523A\uFF0C\u8FD8\u7EB3\u95F7\u6211\u4E3A\u4EC0\u4E48\u4E00\u5E74\u624D\u56DE\u5BB6\u4E00\u6B21\u3002",
+        upvotes: randUpvote(3.2, 4.8),
+        rate: randRate(96, 99)
+      },
+      {
+        style: "Self-Deprecating",
+        text: "At this point, my primary role in family dinners is being the cautionary tale.",
+        zh: "\u4E8B\u5230\u5982\u4ECA\uFF0C\u6211\u51FA\u5E2D\u5BB6\u5EAD\u805A\u9910\u7684\u6700\u5927\u4F5C\u7528\u5C31\u662F\u5145\u5F53\u53CD\u9762\u6559\u6750\u3002",
+        upvotes: randUpvote(1.6, 2.7),
+        rate: randRate(91, 95)
+      },
+      {
+        style: "Mic Drop",
+        text: "They didn\u2019t want a child, they wanted an unpaid brand ambassador for their ego.",
+        zh: "\u4ED6\u4EEC\u8981\u7684\u6839\u672C\u4E0D\u662F\u5B69\u5B50\uFF0C\u800C\u662F\u4E00\u4E2A\u80FD\u65E0\u507F\u4E3A\u4ED6\u4EEC\u865A\u8363\u5FC3\u4EE3\u8A00\u7684\u54C1\u724C\u5927\u4F7F\u3002",
+        upvotes: randUpvote(4.1, 5.9),
+        rate: randRate(97, 99)
+      },
+      {
+        style: "Hard Truth",
+        text: "Judgmental parents will audit every single choice you make except their own parenting.",
+        zh: "\u7231\u5BA1\u5224\u7684\u7236\u6BCD\u4F1A\u6311\u5254\u4F60\u4EBA\u751F\u7684\u6BCF\u4E00\u4E2A\u9009\u62E9\uFF0C\u552F\u72EC\u5BF9\u81EA\u5DF1\u7684\u80B2\u513F\u65B9\u5F0F\u76F2\u76EE\u81EA\u4FE1\u3002",
+        upvotes: randUpvote(2.4, 3.8),
+        rate: randRate(94, 98)
+      },
+      {
+        style: "Practical Hacker",
+        text: "Grey-rock method: nod politely, give one-word answers, live 500 miles away.",
+        zh: "\u7EC8\u6781\u9632\u5FA1\u6CD5\u5219\uFF1A\u793C\u8C8C\u5FAE\u7B11\u3001\u5355\u5B57\u56DE\u590D\u3001\u7136\u540E\u628A\u5BB6\u5B89\u5728\u4E94\u767E\u516C\u91CC\u5916\u3002",
+        upvotes: randUpvote(1.5, 2.3),
+        rate: randRate(90, 94)
+      }
+    ],
+    habits: [
+      {
+        style: "Deadpan Sarcasm",
+        text: "Nothing screams peak adult confidence like nodding along while understanding literally zero percent.",
         zh: "\u6CA1\u6709\u4EC0\u4E48\u6BD4\u5168\u7A0B\u80F8\u6709\u6210\u7AF9\u5730\u70B9\u5934\u3001\u5B9E\u5219\u534A\u4E2A\u5B57\u90FD\u6CA1\u542C\u61C2\u66F4\u80FD\u5C55\u73B0\u6210\u5E74\u4EBA\u7684\u81EA\u4FE1\u4E86\u3002",
         upvotes: randUpvote(2.6, 4),
         rate: randRate(94, 98)
@@ -437,6 +475,43 @@ function generateEdgeSynthesizedCandidates(topic) {
         text: 'Say "Let me check my calendar" instead of saying yes immediately. Buys instant peace of mind.',
         zh: "\u6C38\u8FDC\u7528\u201C\u6211\u5148\u67E5\u4E0B\u65E5\u7A0B\u201D\u4EE3\u66FF\u8131\u53E3\u800C\u51FA\u7684\u7B54\u5E94\uFF0C\u77AC\u95F4\u4E3A\u4F60\u4E70\u56DE\u65E0\u9650\u540E\u6094\u6743\u3002",
         upvotes: randUpvote(1.2, 1.8),
+        rate: randRate(89, 93)
+      }
+    ],
+    general: [
+      {
+        style: "Deadpan Sarcasm",
+        text: "My entire life strategy is waiting for someone else to make the first mistake.",
+        zh: "\u6211\u6240\u6709\u7684\u6838\u5FC3\u751F\u5B58\u7B56\u7565\uFF0C\u5C31\u662F\u5B89\u5B89\u9759\u9759\u7B49\u522B\u4EBA\u5148\u72AF\u7B2C\u4E00\u4E2A\u9519\u8BEF\u3002",
+        upvotes: randUpvote(2.8, 4.2),
+        rate: randRate(94, 98)
+      },
+      {
+        style: "Self-Deprecating",
+        text: "I told myself I would handle this with maturity. Anyway, I stayed in bed for three days.",
+        zh: "\u6211\u66FE\u4FE1\u8A93\u65E6\u65E6\u8981\u6210\u719F\u7406\u667A\u5730\u9762\u5BF9\u8FD9\u4EF6\u4E8B\uFF0C\u7ED3\u679C\u5728\u5E8A\u4E0A\u81EA\u95ED\u8EBA\u4E86\u6574\u6574\u4E09\u5929\u3002",
+        upvotes: randUpvote(1.7, 2.6),
+        rate: randRate(91, 95)
+      },
+      {
+        style: "Mic Drop",
+        text: "Never take criticism from someone you would never ask for advice.",
+        zh: "\u6C38\u8FDC\u522B\u628A\u90A3\u4E9B\u4F60\u6839\u672C\u4E0D\u4F1A\u5411\u5176\u8BF7\u6559\u7684\u4EBA\u7684\u6240\u8C13\u6279\u8BC4\u653E\u5728\u5FC3\u4E0A\u3002",
+        upvotes: randUpvote(3.9, 5.5),
+        rate: randRate(97, 99)
+      },
+      {
+        style: "Hard Truth",
+        text: "The loudest person in the room is usually the one with the least to say.",
+        zh: "\u5168\u573A\u53EB\u56A3\u5F97\u6700\u5927\u58F0\u7684\u90A3\u4E2A\u4EBA\uFF0C\u8111\u5B50\u91CC\u5F80\u5F80\u6700\u7A7A\u65E0\u4E00\u7269\u3002",
+        upvotes: randUpvote(2.2, 3.3),
+        rate: randRate(93, 97)
+      },
+      {
+        style: "Practical Hacker",
+        text: "Sleep on it for 24 hours. 80% of life emergencies solve themselves or cease to matter.",
+        zh: "\u5148\u7761\u6EE124\u5C0F\u65F6\u518D\u505A\u51B3\u5B9A\uFF0C80%\u7684\u4EBA\u751F\u706B\u8B66\u90FD\u4F1A\u81EA\u884C\u7184\u706D\u6216\u53D8\u5F97\u65E0\u8DB3\u8F7B\u91CD\u3002",
+        upvotes: randUpvote(1.4, 2.1),
         rate: randRate(89, 93)
       }
     ]
@@ -477,10 +552,37 @@ Given a Reddit post title or discussion topic, output 5 ultra-punchy, high-upvot
     let candidateList = null;
     let modelName = "PaceBowl-Edge-Flash";
     let upstreamStatus = null;
-    if (apiKey) {
+    if (context.env.AI && typeof context.env.AI.run === "function") {
+      try {
+        const aiResp = await context.env.AI.run("@cf/meta/llama-3.1-8b-instruct-fast", {
+          messages: [
+            { role: "system", content: systemPrompt },
+            { role: "user", content: `Reddit topic: "${topic}"` }
+          ],
+          max_tokens: 600
+        });
+        const raw = aiResp?.response || aiResp?.choices?.[0]?.message?.content || aiResp || "";
+        const rawText = typeof raw === "string" ? raw : JSON.stringify(raw);
+        const match2 = rawText.match(/\[[\s\S]*\]/);
+        if (match2) {
+          let jsonStr = match2[0].trim().replace(/,\s*([\]}])/g, "$1");
+          try {
+            const parsed = JSON.parse(jsonStr);
+            if (Array.isArray(parsed) && parsed.length > 0) {
+              candidateList = parsed;
+              modelName = "PaceBowl-Cloudflare-AI";
+            }
+          } catch {
+          }
+        }
+      } catch (cfAiErr) {
+        upstreamStatus = `CF_AI_ERR:${cfAiErr?.message || String(cfAiErr)}`;
+      }
+    }
+    if (!candidateList && apiKey) {
       const callLlm = /* @__PURE__ */ __name(async (model) => {
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 12e3);
+        const timeoutId = setTimeout(() => controller.abort(), 8e3);
         try {
           const res = await fetch(PRIMARY_ENDPOINT, {
             method: "POST",
@@ -503,19 +605,17 @@ Given a Reddit post title or discussion topic, output 5 ultra-punchy, high-upvot
           });
           clearTimeout(timeoutId);
           if (!res.ok) {
-            upstreamStatus = `HTTP_${res.status}`;
+            const errText = await res.text().catch(() => "");
+            upstreamStatus = (upstreamStatus ? upstreamStatus + " | " : "") + `HTTP_${res.status}:${errText.slice(0, 100)}`;
           }
           return res;
         } catch (err) {
           clearTimeout(timeoutId);
-          upstreamStatus = err?.name === "AbortError" ? "TIMEOUT_12S" : err?.message || "FETCH_FAILED";
+          upstreamStatus = (upstreamStatus ? upstreamStatus + " | " : "") + (err?.name === "AbortError" ? "TIMEOUT_8S" : err?.message || "FETCH_FAILED");
           return null;
         }
       }, "callLlm");
-      let resp = await callLlm(DEFAULT_MODEL);
-      if (!resp || !resp.ok) {
-        resp = await callLlm(BACKUP_MODEL);
-      }
+      const resp = await callLlm(DEFAULT_MODEL);
       if (resp && resp.ok) {
         try {
           const data = await resp.json();
@@ -529,29 +629,8 @@ Given a Reddit post title or discussion topic, output 5 ultra-punchy, high-upvot
             modelName = "PaceBowl-AI-Flash";
           }
         } catch (err) {
-          upstreamStatus = "JSON_PARSE_ERROR";
+          upstreamStatus = (upstreamStatus ? upstreamStatus + " | " : "") + "JSON_PARSE_ERROR";
         }
-      }
-    }
-    if (!candidateList && context.env.AI && typeof context.env.AI.run === "function") {
-      try {
-        const aiResp = await context.env.AI.run("@cf/meta/llama-3.1-8b-instruct", {
-          messages: [
-            { role: "system", content: systemPrompt },
-            { role: "user", content: `Reddit topic: "${topic}"` }
-          ],
-          max_tokens: 600
-        });
-        const rawText = aiResp?.response || "";
-        const match2 = rawText.match(/\[[\s\S]*\]/);
-        if (match2) {
-          const parsed = JSON.parse(match2[0]);
-          if (Array.isArray(parsed) && parsed.length > 0) {
-            candidateList = parsed;
-            modelName = "PaceBowl-Cloudflare-AI";
-          }
-        }
-      } catch {
       }
     }
     if (!candidateList || candidateList.length === 0) {
@@ -589,7 +668,7 @@ var onRequestOptions2 = /* @__PURE__ */ __name(async () => {
   });
 }, "onRequestOptions");
 
-// ../.wrangler/tmp/pages-YMRc5z/functionsRoutes-0.6237155113121982.mjs
+// ../.wrangler/tmp/pages-Djh4QP/functionsRoutes-0.9183186828305616.mjs
 var routes = [
   {
     routePath: "/api/auth",

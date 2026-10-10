@@ -32,6 +32,8 @@ function detectTopicDomain(topic: string): string {
   if (/game|gaming|steam|ps5|xbox|nintendo|gamer|play|rpg|mmo|multiplayer|gacha|boss fight|patch|游戏|主机|排位|联机|网游|抽卡/.test(t)) return 'gaming';
   if (/saas|mrr|stripe|launch|first 100|marketing|indie|product|users|client|landing page|traffic|seo|独立开发|获客|推广|出海|出单|转化|变现|站长/.test(t)) return 'saas';
   if (/money|dollar|\$50|purchase|cheap|expensive|cost|budget|crypto|stock|invest|price|pay|afford|rich|poor|bank|省钱|花钱|购买|投资|物有所值|平替|理财|股市/.test(t)) return 'money';
+  if (/parent|mom|dad|mother|father|family|relative|kid|child|teen|grow up|childhood|strict|judgmental|toxic parent|in-law|原生家庭|父母|爸妈|母亲|父亲|亲戚|长辈|孩子|小孩|家教/.test(t)) return 'family';
+  if (/pretend|habit|sleep|advice|procrastinat|regret|burnout|routine|习惯|拖延|熬夜|自律|建议|人生/.test(t)) return 'habits';
   return 'general';
 }
 
@@ -300,10 +302,47 @@ function generateEdgeSynthesizedCandidates(topic: string): Candidate[] {
         rate: randRate(88, 92),
       },
     ],
-    general: [
+    family: [
       {
         style: 'Deadpan Sarcasm',
-        text: 'Nothing screams confidence like nodding along while understanding literally zero percent.',
+        text: 'My parents judge my breathing rhythm and wonder why I visit once a year.',
+        zh: '我爸妈连我的呼吸节奏都能挑出刺，还纳闷我为什么一年才回家一次。',
+        upvotes: randUpvote(3.2, 4.8),
+        rate: randRate(96, 99),
+      },
+      {
+        style: 'Self-Deprecating',
+        text: 'At this point, my primary role in family dinners is being the cautionary tale.',
+        zh: '事到如今，我出席家庭聚餐的最大作用就是充当反面教材。',
+        upvotes: randUpvote(1.6, 2.7),
+        rate: randRate(91, 95),
+      },
+      {
+        style: 'Mic Drop',
+        text: 'They didn’t want a child, they wanted an unpaid brand ambassador for their ego.',
+        zh: '他们要的根本不是孩子，而是一个能无偿为他们虚荣心代言的品牌大使。',
+        upvotes: randUpvote(4.1, 5.9),
+        rate: randRate(97, 99),
+      },
+      {
+        style: 'Hard Truth',
+        text: 'Judgmental parents will audit every single choice you make except their own parenting.',
+        zh: '爱审判的父母会挑剔你人生的每一个选择，唯独对自己的育儿方式盲目自信。',
+        upvotes: randUpvote(2.4, 3.8),
+        rate: randRate(94, 98),
+      },
+      {
+        style: 'Practical Hacker',
+        text: 'Grey-rock method: nod politely, give one-word answers, live 500 miles away.',
+        zh: '终极防御法则：礼貌微笑、单字回复、然后把家安在五百公里外。',
+        upvotes: randUpvote(1.5, 2.3),
+        rate: randRate(90, 94),
+      },
+    ],
+    habits: [
+      {
+        style: 'Deadpan Sarcasm',
+        text: 'Nothing screams peak adult confidence like nodding along while understanding literally zero percent.',
         zh: '没有什么比全程胸有成竹地点头、实则半个字都没听懂更能展现成年人的自信了。',
         upvotes: randUpvote(2.6, 4.0),
         rate: randRate(94, 98),
@@ -334,6 +373,43 @@ function generateEdgeSynthesizedCandidates(topic: string): Candidate[] {
         text: 'Say "Let me check my calendar" instead of saying yes immediately. Buys instant peace of mind.',
         zh: '永远用“我先查下日程”代替脱口而出的答应，瞬间为你买回无限后悔权。',
         upvotes: randUpvote(1.2, 1.8),
+        rate: randRate(89, 93),
+      },
+    ],
+    general: [
+      {
+        style: 'Deadpan Sarcasm',
+        text: 'My entire life strategy is waiting for someone else to make the first mistake.',
+        zh: '我所有的核心生存策略，就是安安静静等别人先犯第一个错误。',
+        upvotes: randUpvote(2.8, 4.2),
+        rate: randRate(94, 98),
+      },
+      {
+        style: 'Self-Deprecating',
+        text: 'I told myself I would handle this with maturity. Anyway, I stayed in bed for three days.',
+        zh: '我曾信誓旦旦要成熟理智地面对这件事，结果在床上自闭躺了整整三天。',
+        upvotes: randUpvote(1.7, 2.6),
+        rate: randRate(91, 95),
+      },
+      {
+        style: 'Mic Drop',
+        text: 'Never take criticism from someone you would never ask for advice.',
+        zh: '永远别把那些你根本不会向其请教的人的所谓批评放在心上。',
+        upvotes: randUpvote(3.9, 5.5),
+        rate: randRate(97, 99),
+      },
+      {
+        style: 'Hard Truth',
+        text: 'The loudest person in the room is usually the one with the least to say.',
+        zh: '全场叫嚣得最大声的那个人，脑子里往往最空无一物。',
+        upvotes: randUpvote(2.2, 3.3),
+        rate: randRate(93, 97),
+      },
+      {
+        style: 'Practical Hacker',
+        text: 'Sleep on it for 24 hours. 80% of life emergencies solve themselves or cease to matter.',
+        zh: '先睡满24小时再做决定，80%的人生火警都会自行熄灭或变得无足轻重。',
+        upvotes: randUpvote(1.4, 2.1),
         rate: randRate(89, 93),
       },
     ],
@@ -380,12 +456,41 @@ Given a Reddit post title or discussion topic, output 5 ultra-punchy, high-upvot
     let modelName = 'PaceBowl-Edge-Flash';
     let upstreamStatus: any = null;
 
-    // 1. Try Primary LLM with clean, standard API headers (avoid bot-impersonation triggers)
-    if (apiKey) {
+    // 1. Try Cloudflare Workers AI FIRST (Zero-Latency, No CF 1015 Error, Native Edge)
+    if (context.env.AI && typeof context.env.AI.run === 'function') {
+      try {
+        const aiResp = await context.env.AI.run('@cf/meta/llama-3.1-8b-instruct-fast', {
+          messages: [
+            { role: 'system', content: systemPrompt },
+            { role: 'user', content: `Reddit topic: "${topic}"` },
+          ],
+          max_tokens: 600,
+        });
+        const raw = aiResp?.response || aiResp?.choices?.[0]?.message?.content || aiResp || '';
+        const rawText = typeof raw === 'string' ? raw : JSON.stringify(raw);
+        const match = rawText.match(/\[[\s\S]*\]/);
+        if (match) {
+          let jsonStr = match[0].trim().replace(/,\s*([\]}])/g, '$1');
+          try {
+            const parsed = JSON.parse(jsonStr);
+            if (Array.isArray(parsed) && parsed.length > 0) {
+              candidateList = parsed;
+              modelName = 'PaceBowl-Cloudflare-AI';
+            }
+          } catch {
+            // Relaxed parser failed, let fallback take over
+          }
+        }
+      } catch (cfAiErr: any) {
+        upstreamStatus = `CF_AI_ERR:${cfAiErr?.message || String(cfAiErr)}`;
+      }
+    }
 
+    // 2. Try Primary External LLM if CF AI didn't produce candidates
+    if (!candidateList && apiKey) {
       const callLlm = async (model: string) => {
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 12000);
+        const timeoutId = setTimeout(() => controller.abort(), 8000);
         try {
           const res = await fetch(PRIMARY_ENDPOINT, {
             method: 'POST',
@@ -408,23 +513,18 @@ Given a Reddit post title or discussion topic, output 5 ultra-punchy, high-upvot
           });
           clearTimeout(timeoutId);
           if (!res.ok) {
-            upstreamStatus = `HTTP_${res.status}`;
+            const errText = await res.text().catch(() => '');
+            upstreamStatus = (upstreamStatus ? upstreamStatus + ' | ' : '') + `HTTP_${res.status}:${errText.slice(0, 100)}`;
           }
           return res;
         } catch (err: any) {
           clearTimeout(timeoutId);
-          upstreamStatus = err?.name === 'AbortError' ? 'TIMEOUT_12S' : (err?.message || 'FETCH_FAILED');
+          upstreamStatus = (upstreamStatus ? upstreamStatus + ' | ' : '') + (err?.name === 'AbortError' ? 'TIMEOUT_8S' : (err?.message || 'FETCH_FAILED'));
           return null;
         }
       };
 
-      let resp = await callLlm(DEFAULT_MODEL);
-
-      // If rate limited (1015 / 429) or non-200, try backup model
-      if (!resp || !resp.ok) {
-        resp = await callLlm(BACKUP_MODEL);
-      }
-
+      const resp = await callLlm(DEFAULT_MODEL);
       if (resp && resp.ok) {
         try {
           const data = (await resp.json()) as any;
@@ -438,32 +538,8 @@ Given a Reddit post title or discussion topic, output 5 ultra-punchy, high-upvot
             modelName = 'PaceBowl-AI-Flash';
           }
         } catch (err: any) {
-          upstreamStatus = 'JSON_PARSE_ERROR';
+          upstreamStatus = (upstreamStatus ? upstreamStatus + ' | ' : '') + 'JSON_PARSE_ERROR';
         }
-      }
-    }
-
-    // 2. Try Cloudflare Workers AI if bound and primary failed
-    if (!candidateList && context.env.AI && typeof context.env.AI.run === 'function') {
-      try {
-        const aiResp = await context.env.AI.run('@cf/meta/llama-3.1-8b-instruct', {
-          messages: [
-            { role: 'system', content: systemPrompt },
-            { role: 'user', content: `Reddit topic: "${topic}"` },
-          ],
-          max_tokens: 600,
-        });
-        const rawText = aiResp?.response || '';
-        const match = rawText.match(/\[[\s\S]*\]/);
-        if (match) {
-          const parsed = JSON.parse(match[0]);
-          if (Array.isArray(parsed) && parsed.length > 0) {
-            candidateList = parsed;
-            modelName = 'PaceBowl-Cloudflare-AI';
-          }
-        }
-      } catch {
-        // Fall through to resilient generator
       }
     }
 
