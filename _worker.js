@@ -1,9 +1,7 @@
 var __defProp = Object.defineProperty;
 var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
 
-// _worker.js
-var __defProp2 = Object.defineProperty;
-var __name2 = /* @__PURE__ */ __name((target, value) => __defProp2(target, "name", { value, configurable: true }), "__name");
+// api/auth.ts
 function decodeJwtPayload(jwt) {
   try {
     const parts = jwt.split(".");
@@ -19,8 +17,7 @@ function decodeJwtPayload(jwt) {
   }
 }
 __name(decodeJwtPayload, "decodeJwtPayload");
-__name2(decodeJwtPayload, "decodeJwtPayload");
-var onRequestPost = /* @__PURE__ */ __name2(async (context) => {
+var onRequestPost = /* @__PURE__ */ __name(async (context) => {
   const corsHeaders = {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
@@ -115,7 +112,7 @@ var onRequestPost = /* @__PURE__ */ __name2(async (context) => {
     );
   }
 }, "onRequestPost");
-var onRequestOptions = /* @__PURE__ */ __name2(async () => {
+var onRequestOptions = /* @__PURE__ */ __name(async () => {
   return new Response(null, {
     headers: {
       "Access-Control-Allow-Origin": "*",
@@ -124,6 +121,8 @@ var onRequestOptions = /* @__PURE__ */ __name2(async () => {
     }
   });
 }, "onRequestOptions");
+
+// api/generate.ts
 var PRIMARY_ENDPOINT = "https://api.agnes-ai.cn/v1/chat/completions";
 var DEFAULT_MODEL = "agnes-2.5-flash";
 var BACKUP_MODEL = "agnes-3.0-flash";
@@ -135,14 +134,15 @@ function detectTopicDomain(topic) {
   if (/code|python|rust|javascript|react|ai|replace|junior|senior|dev|bug|docker|github|deploy|程序员|代码|架构|报错|开发|祖传/.test(t)) return "dev";
   if (/saas|mrr|stripe|launch|first 100|marketing|indie|product|users|client|独立开发|获客|推广|出海|出单|转化|变现/.test(t)) return "saas";
   if (/money|dollar|\$50|purchase|cheap|expensive|cost|budget|crypto|stock|invest|省钱|花钱|购买|投资|物有所值|平替/.test(t)) return "money";
+  if (/video|youtube|tiktok|reel|stream|vlog|watch|click away|thumbnail|creator|视频|油管|短视频|播客|博主|完播/.test(t)) return "video";
+  if (/game|gaming|steam|ps5|xbox|nintendo|gamer|play|游戏|主机|排位|联机|网游/.test(t)) return "gaming";
   return "general";
 }
 __name(detectTopicDomain, "detectTopicDomain");
-__name2(detectTopicDomain, "detectTopicDomain");
 function generateEdgeSynthesizedCandidates(topic) {
   const domain = detectTopicDomain(topic);
-  const randUpvote = /* @__PURE__ */ __name2((minK, maxK) => (Math.random() * (maxK - minK) + minK).toFixed(1) + "k", "randUpvote");
-  const randRate = /* @__PURE__ */ __name2((minRate, maxRate) => Math.floor(Math.random() * (maxRate - minRate + 1)) + minRate, "randRate");
+  const randUpvote = /* @__PURE__ */ __name((minK, maxK) => (Math.random() * (maxK - minK) + minK).toFixed(1) + "k", "randUpvote");
+  const randRate = /* @__PURE__ */ __name((minRate, maxRate) => Math.floor(Math.random() * (maxRate - minRate + 1)) + minRate, "randRate");
   const POOLS = {
     dating: [
       {
@@ -329,6 +329,80 @@ function generateEdgeSynthesizedCandidates(topic) {
         rate: randRate(89, 93)
       }
     ],
+    video: [
+      {
+        style: "Deadpan Sarcasm",
+        text: "A 45-second animated logo intro with dubstep music.",
+        zh: "\u5F00\u5934\u90A3\u6BB545\u79D2\u5E26\u7535\u97F3\u8F70\u70B8\u7684\u70AB\u91773D\u52A8\u6001LOGO\u3002",
+        upvotes: randUpvote(2.9, 4.6),
+        rate: randRate(95, 99)
+      },
+      {
+        style: "Self-Deprecating",
+        text: 'Saying "leave a comment below" before giving me any reason to care.',
+        zh: "\u8FD8\u6CA1\u7ED9\u51FA\u4E00\u53E5\u5E72\u8D27\uFF0C\u5C31\u6025\u7740\u8BA9\u6211\u201C\u5728\u8BC4\u8BBA\u533A\u7559\u4E0B\u4F60\u7684\u770B\u6CD5\u201D\u3002",
+        upvotes: randUpvote(1.5, 2.5),
+        rate: randRate(92, 96)
+      },
+      {
+        style: "Mic Drop",
+        text: "Unskippable 30-second double ads on an 18-second clip.",
+        zh: "\u770B\u4E2A18\u79D2\u7684\u77ED\u89C6\u9891\uFF0C\u5148\u7ED9\u6211\u585E\u4E24\u6761\u8DF3\u4E0D\u6389\u768430\u79D2\u8D34\u7247\u5E7F\u544A\u3002",
+        upvotes: randUpvote(3.9, 5.8),
+        rate: randRate(97, 99)
+      },
+      {
+        style: "Hard Truth",
+        text: "The title asks a question and the video spends 12 minutes rambling without answering it.",
+        zh: "\u6807\u9898\u660E\u660E\u629B\u4E86\u4E2A\u7591\u95EE\uFF0C\u89C6\u9891\u5E9F\u8BDD\u4E8612\u5206\u949F\u4E5F\u6CA1\u7ED9\u51FA\u7B54\u6848\u3002",
+        upvotes: randUpvote(2.1, 3.4),
+        rate: randRate(94, 98)
+      },
+      {
+        style: "Practical Hacker",
+        text: "Clickbait thumbnail with fake red arrows pointing at absolutely nothing.",
+        zh: "\u5C01\u9762\u56FE\u4E0A\u753B\u7740\u5938\u5F20\u7684\u7EA2\u5708\u548C\u7BAD\u5934\uFF0C\u70B9\u8FDB\u53BB\u53D1\u73B0\u5565\u4E5F\u6CA1\u6709\u3002",
+        upvotes: randUpvote(1.2, 1.9),
+        rate: randRate(89, 93)
+      }
+    ],
+    gaming: [
+      {
+        style: "Deadpan Sarcasm",
+        text: "Game looks incredible until you realize it is pre-rendered CGI with zero actual gameplay.",
+        zh: "\u5BA3\u4F20\u7247\u7F8E\u5982\u5929\u4ED9\uFF0C\u70B9\u8FDB\u53BB\u53D1\u73B0\u5168\u662F\u4E00\u79D2\u5B9E\u9645\u753B\u9762\u90FD\u6CA1\u6709\u7684\u9884\u6E32\u67D3CG\u3002",
+        upvotes: randUpvote(2.8, 4.3),
+        rate: randRate(95, 99)
+      },
+      {
+        style: "Self-Deprecating",
+        text: "Spending 3 hours in character customization just to wear a full-face helmet 5 minutes later.",
+        zh: "\u634F\u8138\u634F\u4E86\u6574\u65743\u5C0F\u65F6\uFF0C\u8FDB\u6E38\u620F5\u5206\u949F\u5C31\u6234\u4E0A\u4E86\u5168\u5C01\u95ED\u5F0F\u5934\u76D4\u3002",
+        upvotes: randUpvote(1.7, 2.6),
+        rate: randRate(91, 95)
+      },
+      {
+        style: "Mic Drop",
+        text: 'Selling a $70 beta test and calling it "Live Service".',
+        zh: "\u5356\u774070\u5200\u7684\u534A\u6210\u54C1\u516C\u6D4B\u5305\uFF0C\u5634\u91CC\u8FD8\u7BA1\u8FD9\u53EB\u201C\u957F\u671F\u8FD0\u8425\u670D\u52A1\u578B\u6E38\u620F\u201D\u3002",
+        upvotes: randUpvote(3.7, 5.5),
+        rate: randRate(97, 99)
+      },
+      {
+        style: "Hard Truth",
+        text: "The battle pass has 100 tiers and 98 of them are recolored profile banners.",
+        zh: "\u5B63\u7968\u8DB3\u8DB3100\u7EA7\uFF0C\u5176\u4E2D98\u7EA7\u90FD\u662F\u6362\u76AE\u5934\u50CF\u6846\u548C\u8D34\u7EB8\u3002",
+        upvotes: randUpvote(2, 3.2),
+        rate: randRate(93, 97)
+      },
+      {
+        style: "Practical Hacker",
+        text: "Wait 6 months after launch: half price, fully patched, and all DLC included.",
+        zh: "\u53D1\u552E\u534A\u5E74\u540E\u518D\u4E70\uFF1A\u6253\u5BF9\u6298\u3001\u4FEE\u590D\u6240\u6709\u6076\u6027BUG\u3001\u751A\u81F3\u5168DLC\u6253\u5305\u3002",
+        upvotes: randUpvote(1.3, 2.1),
+        rate: randRate(88, 92)
+      }
+    ],
     general: [
       {
         style: "Deadpan Sarcasm",
@@ -370,8 +444,7 @@ function generateEdgeSynthesizedCandidates(topic) {
   return POOLS[domain] || POOLS.general;
 }
 __name(generateEdgeSynthesizedCandidates, "generateEdgeSynthesizedCandidates");
-__name2(generateEdgeSynthesizedCandidates, "generateEdgeSynthesizedCandidates");
-var onRequestPost2 = /* @__PURE__ */ __name2(async (context) => {
+var onRequestPost2 = /* @__PURE__ */ __name(async (context) => {
   const corsHeaders = {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
@@ -403,10 +476,11 @@ Given a Reddit post title or discussion topic, output 5 ultra-punchy, high-upvot
 ]`;
     let candidateList = null;
     let modelName = "PaceBowl-Edge-Flash";
+    let upstreamStatus = null;
     if (apiKey) {
-      const callLlm = /* @__PURE__ */ __name2(async (model) => {
+      const callLlm = /* @__PURE__ */ __name(async (model) => {
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 7e3);
+        const timeoutId = setTimeout(() => controller.abort(), 12e3);
         try {
           const res = await fetch(PRIMARY_ENDPOINT, {
             method: "POST",
@@ -414,7 +488,8 @@ Given a Reddit post title or discussion topic, output 5 ultra-punchy, high-upvot
             headers: {
               "Content-Type": "application/json",
               "Authorization": `Bearer ${apiKey}`,
-              "Accept": "application/json"
+              "Accept": "application/json",
+              "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) PaceBowl/2.0"
             },
             body: JSON.stringify({
               model,
@@ -427,9 +502,13 @@ Given a Reddit post title or discussion topic, output 5 ultra-punchy, high-upvot
             })
           });
           clearTimeout(timeoutId);
+          if (!res.ok) {
+            upstreamStatus = `HTTP_${res.status}`;
+          }
           return res;
-        } catch {
+        } catch (err) {
           clearTimeout(timeoutId);
+          upstreamStatus = err?.name === "AbortError" ? "TIMEOUT_12S" : err?.message || "FETCH_FAILED";
           return null;
         }
       }, "callLlm");
@@ -449,7 +528,8 @@ Given a Reddit post title or discussion topic, output 5 ultra-punchy, high-upvot
             candidateList = parsed;
             modelName = "PaceBowl-AI-Flash";
           }
-        } catch {
+        } catch (err) {
+          upstreamStatus = "JSON_PARSE_ERROR";
         }
       }
     }
@@ -482,6 +562,7 @@ Given a Reddit post title or discussion topic, output 5 ultra-punchy, high-upvot
       JSON.stringify({
         success: true,
         model: modelName,
+        upstreamStatus,
         candidates: candidateList
       }),
       { status: 200, headers: corsHeaders }
@@ -498,7 +579,7 @@ Given a Reddit post title or discussion topic, output 5 ultra-punchy, high-upvot
     );
   }
 }, "onRequestPost");
-var onRequestOptions2 = /* @__PURE__ */ __name2(async () => {
+var onRequestOptions2 = /* @__PURE__ */ __name(async () => {
   return new Response(null, {
     headers: {
       "Access-Control-Allow-Origin": "*",
@@ -507,6 +588,8 @@ var onRequestOptions2 = /* @__PURE__ */ __name2(async () => {
     }
   });
 }, "onRequestOptions");
+
+// ../.wrangler/tmp/pages-m1kyQC/functionsRoutes-0.8022984986164534.mjs
 var routes = [
   {
     routePath: "/api/auth",
@@ -537,6 +620,8 @@ var routes = [
     modules: [onRequestPost2]
   }
 ];
+
+// C:/Users/m8oo/AppData/Roaming/npm/node_modules/wrangler/node_modules/path-to-regexp/dist.es2015/index.js
 function lexer(str) {
   var tokens = [];
   var i = 0;
@@ -621,7 +706,6 @@ function lexer(str) {
   return tokens;
 }
 __name(lexer, "lexer");
-__name2(lexer, "lexer");
 function parse(str, options) {
   if (options === void 0) {
     options = {};
@@ -632,18 +716,18 @@ function parse(str, options) {
   var key = 0;
   var i = 0;
   var path = "";
-  var tryConsume = /* @__PURE__ */ __name2(function(type) {
+  var tryConsume = /* @__PURE__ */ __name(function(type) {
     if (i < tokens.length && tokens[i].type === type)
       return tokens[i++].value;
   }, "tryConsume");
-  var mustConsume = /* @__PURE__ */ __name2(function(type) {
+  var mustConsume = /* @__PURE__ */ __name(function(type) {
     var value2 = tryConsume(type);
     if (value2 !== void 0)
       return value2;
     var _a2 = tokens[i], nextType = _a2.type, index = _a2.index;
     throw new TypeError("Unexpected ".concat(nextType, " at ").concat(index, ", expected ").concat(type));
   }, "mustConsume");
-  var consumeText = /* @__PURE__ */ __name2(function() {
+  var consumeText = /* @__PURE__ */ __name(function() {
     var result2 = "";
     var value2;
     while (value2 = tryConsume("CHAR") || tryConsume("ESCAPED_CHAR")) {
@@ -651,7 +735,7 @@ function parse(str, options) {
     }
     return result2;
   }, "consumeText");
-  var isSafe = /* @__PURE__ */ __name2(function(value2) {
+  var isSafe = /* @__PURE__ */ __name(function(value2) {
     for (var _i = 0, delimiter_1 = delimiter; _i < delimiter_1.length; _i++) {
       var char2 = delimiter_1[_i];
       if (value2.indexOf(char2) > -1)
@@ -659,7 +743,7 @@ function parse(str, options) {
     }
     return false;
   }, "isSafe");
-  var safePattern = /* @__PURE__ */ __name2(function(prefix2) {
+  var safePattern = /* @__PURE__ */ __name(function(prefix2) {
     var prev = result[result.length - 1];
     var prevText = prefix2 || (prev && typeof prev === "string" ? prev : "");
     if (prev && !prevText) {
@@ -722,14 +806,12 @@ function parse(str, options) {
   return result;
 }
 __name(parse, "parse");
-__name2(parse, "parse");
 function match(str, options) {
   var keys = [];
   var re = pathToRegexp(str, keys, options);
   return regexpToFunction(re, keys, options);
 }
 __name(match, "match");
-__name2(match, "match");
 function regexpToFunction(re, keys, options) {
   if (options === void 0) {
     options = {};
@@ -743,7 +825,7 @@ function regexpToFunction(re, keys, options) {
       return false;
     var path = m[0], index = m.index;
     var params = /* @__PURE__ */ Object.create(null);
-    var _loop_1 = /* @__PURE__ */ __name2(function(i2) {
+    var _loop_1 = /* @__PURE__ */ __name(function(i2) {
       if (m[i2] === void 0)
         return "continue";
       var key = keys[i2 - 1];
@@ -762,17 +844,14 @@ function regexpToFunction(re, keys, options) {
   };
 }
 __name(regexpToFunction, "regexpToFunction");
-__name2(regexpToFunction, "regexpToFunction");
 function escapeString(str) {
   return str.replace(/([.+*?=^!:${}()[\]|/\\])/g, "\\$1");
 }
 __name(escapeString, "escapeString");
-__name2(escapeString, "escapeString");
 function flags(options) {
   return options && options.sensitive ? "" : "i";
 }
 __name(flags, "flags");
-__name2(flags, "flags");
 function regexpToRegexp(path, keys) {
   if (!keys)
     return path;
@@ -793,7 +872,6 @@ function regexpToRegexp(path, keys) {
   return path;
 }
 __name(regexpToRegexp, "regexpToRegexp");
-__name2(regexpToRegexp, "regexpToRegexp");
 function arrayToRegexp(paths, keys, options) {
   var parts = paths.map(function(path) {
     return pathToRegexp(path, keys, options).source;
@@ -801,12 +879,10 @@ function arrayToRegexp(paths, keys, options) {
   return new RegExp("(?:".concat(parts.join("|"), ")"), flags(options));
 }
 __name(arrayToRegexp, "arrayToRegexp");
-__name2(arrayToRegexp, "arrayToRegexp");
 function stringToRegexp(path, keys, options) {
   return tokensToRegexp(parse(path, options), keys, options);
 }
 __name(stringToRegexp, "stringToRegexp");
-__name2(stringToRegexp, "stringToRegexp");
 function tokensToRegexp(tokens, keys, options) {
   if (options === void 0) {
     options = {};
@@ -862,7 +938,6 @@ function tokensToRegexp(tokens, keys, options) {
   return new RegExp(route, flags(options));
 }
 __name(tokensToRegexp, "tokensToRegexp");
-__name2(tokensToRegexp, "tokensToRegexp");
 function pathToRegexp(path, keys, options) {
   if (path instanceof RegExp)
     return regexpToRegexp(path, keys);
@@ -871,7 +946,8 @@ function pathToRegexp(path, keys, options) {
   return stringToRegexp(path, keys, options);
 }
 __name(pathToRegexp, "pathToRegexp");
-__name2(pathToRegexp, "pathToRegexp");
+
+// C:/Users/m8oo/AppData/Roaming/npm/node_modules/wrangler/templates/pages-template-worker.ts
 var escapeRegex = /[.+?^${}()|[\]\\]/g;
 function* executeRequest(request) {
   const requestPath = new URL(request.url).pathname;
@@ -922,14 +998,13 @@ function* executeRequest(request) {
   }
 }
 __name(executeRequest, "executeRequest");
-__name2(executeRequest, "executeRequest");
 var pages_template_worker_default = {
   async fetch(originalRequest, env, workerContext) {
     let request = originalRequest;
     const handlerIterator = executeRequest(request);
     let data = {};
     let isFailOpen = false;
-    const next = /* @__PURE__ */ __name2(async (input, init) => {
+    const next = /* @__PURE__ */ __name(async (input, init) => {
       if (input !== void 0) {
         let url = input;
         if (typeof input === "string") {
@@ -956,7 +1031,7 @@ var pages_template_worker_default = {
           },
           env,
           waitUntil: workerContext.waitUntil.bind(workerContext),
-          passThroughOnException: /* @__PURE__ */ __name2(() => {
+          passThroughOnException: /* @__PURE__ */ __name(() => {
             isFailOpen = true;
           }, "passThroughOnException")
         };
@@ -984,7 +1059,7 @@ var pages_template_worker_default = {
     }
   }
 };
-var cloneResponse = /* @__PURE__ */ __name2((response) => (
+var cloneResponse = /* @__PURE__ */ __name((response) => (
   // https://fetch.spec.whatwg.org/#null-body-status
   new Response(
     [101, 204, 205, 304].includes(response.status) ? null : response.body,

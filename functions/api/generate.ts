@@ -378,12 +378,14 @@ Given a Reddit post title or discussion topic, output 5 ultra-punchy, high-upvot
 
     let candidateList: Candidate[] | null = null;
     let modelName = 'PaceBowl-Edge-Flash';
+    let upstreamStatus: any = null;
 
     // 1. Try Primary LLM with clean, standard API headers (avoid bot-impersonation triggers)
     if (apiKey) {
+
       const callLlm = async (model: string) => {
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 7000);
+        const timeoutId = setTimeout(() => controller.abort(), 12000);
         try {
           const res = await fetch(PRIMARY_ENDPOINT, {
             method: 'POST',
@@ -392,6 +394,7 @@ Given a Reddit post title or discussion topic, output 5 ultra-punchy, high-upvot
               'Content-Type': 'application/json',
               'Authorization': `Bearer ${apiKey}`,
               'Accept': 'application/json',
+              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) PaceBowl/2.0',
             },
             body: JSON.stringify({
               model: model,
@@ -404,9 +407,13 @@ Given a Reddit post title or discussion topic, output 5 ultra-punchy, high-upvot
             }),
           });
           clearTimeout(timeoutId);
+          if (!res.ok) {
+            upstreamStatus = `HTTP_${res.status}`;
+          }
           return res;
-        } catch {
+        } catch (err: any) {
           clearTimeout(timeoutId);
+          upstreamStatus = err?.name === 'AbortError' ? 'TIMEOUT_12S' : (err?.message || 'FETCH_FAILED');
           return null;
         }
       };
@@ -430,8 +437,8 @@ Given a Reddit post title or discussion topic, output 5 ultra-punchy, high-upvot
             candidateList = parsed;
             modelName = 'PaceBowl-AI-Flash';
           }
-        } catch {
-          // JSON parsing failed, will fallback to resilient generator
+        } catch (err: any) {
+          upstreamStatus = 'JSON_PARSE_ERROR';
         }
       }
     }
@@ -471,6 +478,7 @@ Given a Reddit post title or discussion topic, output 5 ultra-punchy, high-upvot
       JSON.stringify({
         success: true,
         model: modelName,
+        upstreamStatus,
         candidates: candidateList,
       }),
       { status: 200, headers: corsHeaders }
