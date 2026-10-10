@@ -30,6 +30,8 @@ function detectTopicDomain(topic: string): string {
   if (/code|python|rust|javascript|react|ai|replace|junior|senior|dev|bug|docker|github|deploy|程序员|代码|架构|报错|开发|祖传/.test(t)) return 'dev';
   if (/saas|mrr|stripe|launch|first 100|marketing|indie|product|users|client|独立开发|获客|推广|出海|出单|转化|变现/.test(t)) return 'saas';
   if (/money|dollar|\$50|purchase|cheap|expensive|cost|budget|crypto|stock|invest|省钱|花钱|购买|投资|物有所值|平替/.test(t)) return 'money';
+  if (/video|youtube|tiktok|reel|stream|vlog|watch|click away|thumbnail|creator|视频|油管|短视频|播客|博主|完播/.test(t)) return 'video';
+  if (/game|gaming|steam|ps5|xbox|nintendo|gamer|play|游戏|主机|排位|联机|网游/.test(t)) return 'gaming';
   return 'general';
 }
 
@@ -222,6 +224,80 @@ function generateEdgeSynthesizedCandidates(topic: string): Candidate[] {
         zh: '扔进购物车强制冷却48小时，85%的冲动消费欲望都会自动烟消云散。',
         upvotes: randUpvote(1.1, 1.7),
         rate: randRate(89, 93),
+      },
+    ],
+    video: [
+      {
+        style: 'Deadpan Sarcasm',
+        text: 'A 45-second animated logo intro with dubstep music.',
+        zh: '开头那段45秒带电音轰炸的炫酷3D动态LOGO。',
+        upvotes: randUpvote(2.9, 4.6),
+        rate: randRate(95, 99),
+      },
+      {
+        style: 'Self-Deprecating',
+        text: 'Saying "leave a comment below" before giving me any reason to care.',
+        zh: '还没给出一句干货，就急着让我“在评论区留下你的看法”。',
+        upvotes: randUpvote(1.5, 2.5),
+        rate: randRate(92, 96),
+      },
+      {
+        style: 'Mic Drop',
+        text: 'Unskippable 30-second double ads on an 18-second clip.',
+        zh: '看个18秒的短视频，先给我塞两条跳不掉的30秒贴片广告。',
+        upvotes: randUpvote(3.9, 5.8),
+        rate: randRate(97, 99),
+      },
+      {
+        style: 'Hard Truth',
+        text: 'The title asks a question and the video spends 12 minutes rambling without answering it.',
+        zh: '标题明明抛了个疑问，视频废话了12分钟也没给出答案。',
+        upvotes: randUpvote(2.1, 3.4),
+        rate: randRate(94, 98),
+      },
+      {
+        style: 'Practical Hacker',
+        text: 'Clickbait thumbnail with fake red arrows pointing at absolutely nothing.',
+        zh: '封面图上画着夸张的红圈和箭头，点进去发现啥也没有。',
+        upvotes: randUpvote(1.2, 1.9),
+        rate: randRate(89, 93),
+      },
+    ],
+    gaming: [
+      {
+        style: 'Deadpan Sarcasm',
+        text: 'Game looks incredible until you realize it is pre-rendered CGI with zero actual gameplay.',
+        zh: '宣传片美如天仙，点进去发现全是一秒实际画面都没有的预渲染CG。',
+        upvotes: randUpvote(2.8, 4.3),
+        rate: randRate(95, 99),
+      },
+      {
+        style: 'Self-Deprecating',
+        text: 'Spending 3 hours in character customization just to wear a full-face helmet 5 minutes later.',
+        zh: '捏脸捏了整整3小时，进游戏5分钟就戴上了全封闭式头盔。',
+        upvotes: randUpvote(1.7, 2.6),
+        rate: randRate(91, 95),
+      },
+      {
+        style: 'Mic Drop',
+        text: 'Selling a $70 beta test and calling it "Live Service".',
+        zh: '卖着70刀的半成品公测包，嘴里还管这叫“长期运营服务型游戏”。',
+        upvotes: randUpvote(3.7, 5.5),
+        rate: randRate(97, 99),
+      },
+      {
+        style: 'Hard Truth',
+        text: 'The battle pass has 100 tiers and 98 of them are recolored profile banners.',
+        zh: '季票足足100级，其中98级都是换皮头像框和贴纸。',
+        upvotes: randUpvote(2.0, 3.2),
+        rate: randRate(93, 97),
+      },
+      {
+        style: 'Practical Hacker',
+        text: 'Wait 6 months after launch: half price, fully patched, and all DLC included.',
+        zh: '发售半年后再买：打对折、修复所有恶性BUG、甚至全DLC打包。',
+        upvotes: randUpvote(1.3, 2.1),
+        rate: randRate(88, 92),
       },
     ],
     general: [
